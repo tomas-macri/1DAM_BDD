@@ -1,0 +1,11 @@
+IF (DEMANDA == ALTA)
+
+
+
+
+
+IF (DEMANDA == BAJA) THEN (Decision == No hacer nada)
+
+IF (DEMANDA == BAJA) THEN (Decision == Publicidad
+	d
+	d
