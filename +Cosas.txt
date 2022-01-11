@@ -1,21 +1,26 @@
 SEDE: 
 - CODIGO
-- Calle
-- Numero
-- CP
+- DIRECCION
+	- Calle
+	- Numero
+	- Codigo postal
 - POBLACION
+- PROVINCIA
 - TAMANO(M2) 
+- TELEFONO
 
-/* TELEFONO */
 
 
 PROVEEDORES:
 - CODIGO
 - NOMBRE
 - DIRECCION
+	- Calle
+	- Numero
+	- Codigo postal
 - POBLACION
-- CANT_SEDES_SUM
-- 
+- PROVINCIA
+- TELEFONO
 
 
 
