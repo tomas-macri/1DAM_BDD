@@ -1,4 +1,4 @@
-
+rem
 CREATE TABLE DEPART (
  DEPT_NO  NUMBER(2) primary key,
  DNOMBRE  VARCHAR2(14), 
