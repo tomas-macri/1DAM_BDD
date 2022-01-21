@@ -1,0 +1,464 @@
+SQL> rem hoja de ejercicios tabla emple
+SQL> set pagesize 150
+SQL> set linesize 150
+SQL> 
+SQL> 
+SQL> rem 1§.-Sacar el contenido de la tabla EMPLE
+SQL> 
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                 
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                 
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                 
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                 
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                 
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                 
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                 
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                 
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                 
+      7788 GIL        ANALISTA         7566 09/11/81     390000                    20                                                                 
+      7839 REY        PRESIDENTE            17/11/81      50000                    10                                                                 
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                 
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                 
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                 
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                    20                                                                 
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                    10                                                                 
+
+14 filas seleccionadas.
+
+SQL> rem 2§.-Sacar el numero de departamento, nombre y oficio de todos los empleados
+SQL> 
+SQL> select dept_no, apellido nombre, oficio from emple;
+
+   DEPT_NO NOMBRE     OFICIO                                                                                                                          
+---------- ---------- ----------                                                                                                                      
+        20 SµNCHEZ    EMPLEADO                                                                                                                        
+        30 ARROYO     VENDEDOR                                                                                                                        
+        30 SALA       VENDEDOR                                                                                                                        
+        20 JIMÔNEZ    DIRECTOR                                                                                                                        
+        30 MARTÖN     VENDEDOR                                                                                                                        
+        30 NEGRO      DIRECTOR                                                                                                                        
+        10 CEREZO     DIRECTOR                                                                                                                        
+        20 GIL        ANALISTA                                                                                                                        
+        10 REY        PRESIDENTE                                                                                                                      
+        30 TOVAR      VENDEDOR                                                                                                                        
+        20 ALONSO     EMPLEADO                                                                                                                        
+        30 JIMENO     EMPLEADO                                                                                                                        
+        20 FERNµNDEZ  ANALISTA                                                                                                                        
+        10 MU¥OZ      EMPLEADO                                                                                                                        
+
+14 filas seleccionadas.
+
+SQL> rem 3§.-Seleccionar el nombre y salario de todos los empleados de la tabla
+SQL> 
+SQL> select apellido nombre, salrio from emple;
+select apellido nombre, salrio from emple
+                        *
+ERROR en línea 1:
+ORA-00904: "SALRIO": identificador no válido 
+
+
+SQL> select apellido nombre, salario from emple;
+
+NOMBRE        SALARIO                                                                                                                                 
+---------- ----------                                                                                                                                 
+SµNCHEZ        104000                                                                                                                                 
+ARROYO         208000                                                                                                                                 
+SALA           162500                                                                                                                                 
+JIMÔNEZ        386750                                                                                                                                 
+MARTÖN         162500                                                                                                                                 
+NEGRO          370500                                                                                                                                 
+CEREZO         318500                                                                                                                                 
+GIL            390000                                                                                                                                 
+REY             50000                                                                                                                                 
+TOVAR          195000                                                                                                                                 
+ALONSO         143000                                                                                                                                 
+JIMENO         123500                                                                                                                                 
+FERNµNDEZ      390000                                                                                                                                 
+MU¥OZ          169000                                                                                                                                 
+
+14 filas seleccionadas.
+
+SQL> rem 4§.-Seleccionar los distintos tipos de empleo de toda la tabla
+SQL> 
+SQL> select distinct oficio from emple;
+
+OFICIO                                                                                                                                                
+----------                                                                                                                                            
+PRESIDENTE                                                                                                                                            
+EMPLEADO                                                                                                                                              
+VENDEDOR                                                                                                                                              
+ANALISTA                                                                                                                                              
+DIRECTOR                                                                                                                                              
+
+SQL> rem 5§.-Seleccionar los diferentes empleos para cada departamento
+SQL> select distinct oficio, dept_no from emple;
+
+OFICIO        DEPT_NO                                                                                                                                 
+---------- ----------                                                                                                                                 
+DIRECTOR           30                                                                                                                                 
+EMPLEADO           20                                                                                                                                 
+DIRECTOR           20                                                                                                                                 
+VENDEDOR           30                                                                                                                                 
+EMPLEADO           30                                                                                                                                 
+EMPLEADO           10                                                                                                                                 
+ANALISTA           20                                                                                                                                 
+PRESIDENTE         10                                                                                                                                 
+DIRECTOR           10                                                                                                                                 
+
+9 filas seleccionadas.
+
+SQL> select distinct oficio, dept_no from emple order by dept_no;
+
+OFICIO        DEPT_NO                                                                                                                                 
+---------- ----------                                                                                                                                 
+DIRECTOR           10                                                                                                                                 
+EMPLEADO           10                                                                                                                                 
+PRESIDENTE         10                                                                                                                                 
+ANALISTA           20                                                                                                                                 
+DIRECTOR           20                                                                                                                                 
+EMPLEADO           20                                                                                                                                 
+DIRECTOR           30                                                                                                                                 
+EMPLEADO           30                                                                                                                                 
+VENDEDOR           30                                                                                                                                 
+
+9 filas seleccionadas.
+
+SQL> rem 6§.-Seleccionar todos los datos de los que sean directores
+SQL> select * from emple where oficio='DIRECTOR';
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                 
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                 
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                 
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                 
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                 
+
+SQL> rem 7§.-Seleccionar los nombres y salarios de los empleados del departamento 20
+SQL> 
+SQL> select apellido nombre, salario from emple where dept_no = 20;
+
+NOMBRE        SALARIO                                                                                                                                 
+---------- ----------                                                                                                                                 
+SµNCHEZ        104000                                                                                                                                 
+JIMÔNEZ        386750                                                                                                                                 
+GIL            390000                                                                                                                                 
+ALONSO         143000                                                                                                                                 
+FERNµNDEZ      390000                                                                                                                                 
+
+SQL> 
+SQL> rem 8§.-Selecionar los nombres, oficios, salarios y retenci¢n del 13% solo de los
+SQL> rem   EMPLEADOS de la tabla
+SQL> 
+SQL> select apellido nombre, oficio, salario, salario*0.13 retencion_del_13% from emple where oficio = 'EMPLEADO';
+select apellido nombre, oficio, salario, salario*0.13 retencion_del_13% from emple where oficio = 'EMPLEADO'
+                                                                      *
+ERROR en línea 1:
+ORA-00911: carácter no válido 
+
+
+SQL> select apellido nombre, oficio, salario, salario*0.13 retencion_del_13 from emple where oficio = 'EMPLEADO';
+
+NOMBRE     OFICIO        SALARIO RETENCION_DEL_13                                                                                                     
+---------- ---------- ---------- ----------------                                                                                                     
+SµNCHEZ    EMPLEADO       104000            13520                                                                                                     
+ALONSO     EMPLEADO       143000            18590                                                                                                     
+JIMENO     EMPLEADO       123500            16055                                                                                                     
+MU¥OZ      EMPLEADO       169000            21970                                                                                                     
+
+SQL> rem 9§.-Selecionar los nombres, el mensaje "tiene un salario de " y salario de
+SQL>     de los directores de la tabla
+SP2-0734: inicio "de los dir..." de comando desconocido - resto de la línea ignorado.
+SQL> rem 9§.-Selecionar los nombres, el mensaje "tiene un salario de " y salario de
+SQL>     de los directores de la tabla
+SP2-0734: inicio "de los dir..." de comando desconocido - resto de la línea ignorado.
+SQL> 
+SQL> 
+SQL> select apellido += 'tiene un salario de' nombre, salario from emple where oficio='DIRECTOR';
+select apellido += 'tiene un salario de' nombre, salario from emple where oficio='DIRECTOR'
+                 *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select apellido + 'tiene un salario de' nombre, salario from emple where oficio='DIRECTOR';
+select apellido + 'tiene un salario de' nombre, salario from emple where oficio='DIRECTOR'
+       *
+ERROR en línea 1:
+ORA-01722: número no válido 
+
+
+SQL> select apellido nombre, salario tiene_un_salario_de from emple where oficio='DIRECTOR';
+
+NOMBRE     TIENE_UN_SALARIO_DE                                                                                                                        
+---------- -------------------                                                                                                                        
+JIMÔNEZ                 386750                                                                                                                        
+NEGRO                   370500                                                                                                                        
+CEREZO                  318500                                                                                                                        
+
+SQL> 
+SQL> rem 10§.-Selecionar los nombres y trabajo de los que no tengan por oficio EMPLEADO
+SQL> 
+SQL> select apellido nombre, oficio from emple where oficio<>'EMPLEADO';
+
+NOMBRE     OFICIO                                                                                                                                     
+---------- ----------                                                                                                                                 
+ARROYO     VENDEDOR                                                                                                                                   
+SALA       VENDEDOR                                                                                                                                   
+JIMÔNEZ    DIRECTOR                                                                                                                                   
+MARTÖN     VENDEDOR                                                                                                                                   
+NEGRO      DIRECTOR                                                                                                                                   
+CEREZO     DIRECTOR                                                                                                                                   
+GIL        ANALISTA                                                                                                                                   
+REY        PRESIDENTE                                                                                                                                 
+TOVAR      VENDEDOR                                                                                                                                   
+FERNµNDEZ  ANALISTA                                                                                                                                   
+
+10 filas seleccionadas.
+
+SQL> rem 11§.-Seleccionar los nombres, salario y oficio de las personas que ganen mas
+SQL> rem     de 100000 pts y su oficio sea vendedor
+SQL> 
+SQL> select apellido nombre, salario, oficio from emple where salario > 100000 and oficio = 'VENDEDOR';
+
+NOMBRE        SALARIO OFICIO                                                                                                                          
+---------- ---------- ----------                                                                                                                      
+ARROYO         208000 VENDEDOR                                                                                                                        
+SALA           162500 VENDEDOR                                                                                                                        
+MARTÖN         162500 VENDEDOR                                                                                                                        
+TOVAR          195000 VENDEDOR                                                                                                                        
+
+SQL> rem 12§.-Seleccionar los nombres, salario y departamento de las personas que ganen
+SQL>      mas de 100000 pts o su departamento sea 10.
+SP2-0734: inicio "mas de 100..." de comando desconocido - resto de la línea ignorado.
+SQL> select apellido nombre, salario, dept_no from emple where salario > 100000 or dept_no = 10;
+
+NOMBRE        SALARIO    DEPT_NO                                                                                                                      
+---------- ---------- ----------                                                                                                                      
+SµNCHEZ        104000         20                                                                                                                      
+ARROYO         208000         30                                                                                                                      
+SALA           162500         30                                                                                                                      
+JIMÔNEZ        386750         20                                                                                                                      
+MARTÖN         162500         30                                                                                                                      
+NEGRO          370500         30                                                                                                                      
+CEREZO         318500         10                                                                                                                      
+GIL            390000         20                                                                                                                      
+REY             50000         10                                                                                                                      
+TOVAR          195000         30                                                                                                                      
+ALONSO         143000         20                                                                                                                      
+JIMENO         123500         30                                                                                                                      
+FERNµNDEZ      390000         20                                                                                                                      
+MU¥OZ          169000         10                                                                                                                      
+
+14 filas seleccionadas.
+
+SQL> rem prueba traigo todo
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                 
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                 
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                 
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                 
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                 
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                 
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                 
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                 
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                 
+      7788 GIL        ANALISTA         7566 09/11/81     390000                    20                                                                 
+      7839 REY        PRESIDENTE            17/11/81      50000                    10                                                                 
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                 
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                 
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                 
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                    20                                                                 
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                    10                                                                 
+
+14 filas seleccionadas.
+
+SQL> select apellido nombre, salario, dept_no from emple where salario > 105000 or dept_no = 10;
+
+NOMBRE        SALARIO    DEPT_NO                                                                                                                      
+---------- ---------- ----------                                                                                                                      
+ARROYO         208000         30                                                                                                                      
+SALA           162500         30                                                                                                                      
+JIMÔNEZ        386750         20                                                                                                                      
+MARTÖN         162500         30                                                                                                                      
+NEGRO          370500         30                                                                                                                      
+CEREZO         318500         10                                                                                                                      
+GIL            390000         20                                                                                                                      
+REY             50000         10                                                                                                                      
+TOVAR          195000         30                                                                                                                      
+ALONSO         143000         20                                                                                                                      
+JIMENO         123500         30                                                                                                                      
+FERNµNDEZ      390000         20                                                                                                                      
+MU¥OZ          169000         10                                                                                                                      
+
+13 filas seleccionadas.
+
+SQL> rem 13§.-Seleccionar los nombres, oficio y n£mero de departamento de los empleados
+SQL>      que sean analistas o que sean directores y del departamento n§ 10
+SP2-0734: inicio "que sean a..." de comando desconocido - resto de la línea ignorado.
+SQL> 
+SQL> select apellido nombre, oficio, dept_no from emple where oficio = 'ANALISTA' or (oficio = 'DIRECTOR' and dept_no = 10);
+
+NOMBRE     OFICIO        DEPT_NO                                                                                                                      
+---------- ---------- ----------                                                                                                                      
+CEREZO     DIRECTOR           10                                                                                                                      
+GIL        ANALISTA           20                                                                                                                      
+FERNµNDEZ  ANALISTA           20                                                                                                                      
+
+SQL> rem 14§.-Seleccionar los nombres, oficios y n£mero de departamento de los emplea-
+>      dos que sean analistas o directores y su departamento sea el 10
+SQL> select apellido nombre, oficio, dept_no from emple where (oficio = 'analista' or oficio = 'director') and dept_no = 10;
+
+ninguna fila seleccionada
+
+SQL> select apellido nombre, oficio, dept_no from emple where (oficio = 'ANALISTA' or oficio = 'DIRECTOR') and dept_no = 10;
+
+NOMBRE     OFICIO        DEPT_NO                                                                                                                      
+---------- ---------- ----------                                                                                                                      
+CEREZO     DIRECTOR           10                                                                                                                      
+
+SQL> select apellido nombre, oficio, dept_no from emple where oficio = 'ANALISTA' or oficio = 'DIRECTOR' and dept_no = 10;
+
+NOMBRE     OFICIO        DEPT_NO                                                                                                                      
+---------- ---------- ----------                                                                                                                      
+CEREZO     DIRECTOR           10                                                                                                                      
+GIL        ANALISTA           20                                                                                                                      
+FERNµNDEZ  ANALISTA           20                                                                                                                      
+
+SQL> REM CUIDADO CON LOS PARENTESIS
+SQL> 
+SQL> 16§.-Seleccionar el apellido, oficio y salario de los analistas, directores
+SP2-0734: inicio "16§.-Selec..." de comando desconocido - resto de la línea ignorado.
+SQL>      y presidente
+SP2-0734: inicio "y presiden..." de comando desconocido - resto de la línea ignorado.
+SQL> select apellido, oficio, salario from emple where oficio in ('ANALISTA', 'DIRECTOR','PRESIDENTE');
+
+APELLIDO   OFICIO        SALARIO                                                                                                                      
+---------- ---------- ----------                                                                                                                      
+JIMÔNEZ    DIRECTOR       386750                                                                                                                      
+NEGRO      DIRECTOR       370500                                                                                                                      
+CEREZO     DIRECTOR       318500                                                                                                                      
+GIL        ANALISTA       390000                                                                                                                      
+REY        PRESIDENTE      50000                                                                                                                      
+FERNµNDEZ  ANALISTA       390000                                                                                                                      
+
+6 filas seleccionadas.
+
+SQL> 17§.-Seleccionar el apellido, oficio y salario de los que no sean analistas,
+SP2-0734: inicio "17§.-Selec..." de comando desconocido - resto de la línea ignorado.
+SQL>      ni directores, ni el presidente
+SP2-0734: inicio "ni directo..." de comando desconocido - resto de la línea ignorado.
+SQL> REM 17§.-Seleccionar el apellido, oficio y salario de los que no sean analistas,
+SQL>      ni directores, ni el presidente
+SP2-0734: inicio "ni directo..." de comando desconocido - resto de la línea ignorado.
+SQL> select apellido, oficio, salario from emple where oficio not in ('ANALISTA', 'DIRECTOR','PRESIDENTE');
+
+APELLIDO   OFICIO        SALARIO                                                                                                                      
+---------- ---------- ----------                                                                                                                      
+SµNCHEZ    EMPLEADO       104000                                                                                                                      
+ARROYO     VENDEDOR       208000                                                                                                                      
+SALA       VENDEDOR       162500                                                                                                                      
+MARTÖN     VENDEDOR       162500                                                                                                                      
+TOVAR      VENDEDOR       195000                                                                                                                      
+ALONSO     EMPLEADO       143000                                                                                                                      
+JIMENO     EMPLEADO       123500                                                                                                                      
+MU¥OZ      EMPLEADO       169000                                                                                                                      
+
+8 filas seleccionadas.
+
+SQL> rem 18§.-Seleccionar los nombres y comisiones de los empleados que no tienen co-
+>      misiones (es nula)
+SQL> 
+SQL> select apellido nombre, comision from emple where comision is null;
+
+NOMBRE       COMISION                                                                                                                                 
+---------- ----------                                                                                                                                 
+SµNCHEZ                                                                                                                                               
+JIMÔNEZ                                                                                                                                               
+NEGRO                                                                                                                                                 
+CEREZO                                                                                                                                                
+GIL                                                                                                                                                   
+REY                                                                                                                                                   
+ALONSO                                                                                                                                                
+JIMENO                                                                                                                                                
+FERNµNDEZ                                                                                                                                             
+MU¥OZ                                                                                                                                                 
+
+10 filas seleccionadas.
+
+SQL> rem 19§.-Seleccionar los nombres y comisiones de los empleados que si tienen co-
+>      misiones
+SQL> select apellido nombre, comision from emple where comision is not null;
+
+NOMBRE       COMISION                                                                                                                                 
+---------- ----------                                                                                                                                 
+ARROYO          39000                                                                                                                                 
+SALA            65000                                                                                                                                 
+MARTÖN         182000                                                                                                                                 
+TOVAR               0                                                                                                                                 
+
+SQL> rem 20§.-Seleccionar los n£meros de departamento, nombres y salarios de los que
+SQL>      su salario sea menor ¢ igual a 150000, 200000
+SP2-0734: inicio "su salario..." de comando desconocido - resto de la línea ignorado.
+SQL> 
+SQL> select dept_no, apellido nombre, salario from emple where salario <= 150000;
+
+   DEPT_NO NOMBRE        SALARIO                                                                                                                      
+---------- ---------- ----------                                                                                                                      
+        20 SµNCHEZ        104000                                                                                                                      
+        10 REY             50000                                                                                                                      
+        20 ALONSO         143000                                                                                                                      
+        30 JIMENO         123500                                                                                                                      
+
+SQL> select dept_no, apellido nombre, salario from emple where salario <= 50000;
+
+   DEPT_NO NOMBRE        SALARIO                                                                                                                      
+---------- ---------- ----------                                                                                                                      
+        10 REY             50000                                                                                                                      
+
+SQL> 
+SQL> 21§.-Seleccionar los nombres y salarios de los empleados que su nombre empiece
+SP2-0734: inicio "21§.-Selec..." de comando desconocido - resto de la línea ignorado.
+SQL>      por A
+SP2-0042: comando desconocido "por A" - resto de la línea ignorado.
+SQL> select apellido nombre, salario from emple where apellido like 'A'%;
+select apellido nombre, salario from emple where apellido like 'A'%
+                                                                  *
+ERROR en línea 1:
+ORA-00911: carácter no válido 
+
+
+SQL> select apellido nombre, salario from emple where apellido like 'A%';
+
+NOMBRE        SALARIO                                                                                                                                 
+---------- ----------                                                                                                                                 
+ARROYO         208000                                                                                                                                 
+ALONSO         143000                                                                                                                                 
+
+SQL> 22§.-Seleccionar los nombres y SALARIOS de los empleados que la tercera letra
+SP2-0734: inicio "22§.-Selec..." de comando desconocido - resto de la línea ignorado.
+SQL>      de su nombre sea R
+SP2-0734: inicio "de su nomb..." de comando desconocido - resto de la línea ignorado.
+SQL> select apellido nombre, salario from emple where apellido like '__R%';
+
+NOMBRE        SALARIO                                                                                                                                 
+---------- ----------                                                                                                                                 
+ARROYO         208000                                                                                                                                 
+MARTÖN         162500                                                                                                                                 
+CEREZO         318500                                                                                                                                 
+FERNµNDEZ      390000                                                                                                                                 
+
+SQL> rem 23§.- Seleccionar los nombres y salarios de los empleados que su nombre tenga
+SQL>      una E y una O en alguna parte
+SP2-0734: inicio "una E y un..." de comando desconocido - resto de la línea ignorado.
+SQL> select apellido nombre, salario from emple where apellido like '%E%O%';
+
+NOMBRE        SALARIO                                                                                                                                 
+---------- ----------                                                                                                                                 
+NEGRO          370500                                                                                                                                 
+CEREZO         318500                                                                                                                                 
+JIMENO         123500                                                                                                                                 
+
+SQL> rem terminado
+SQL> rem terminadooooooooooooooooo
+SQL> spool off
