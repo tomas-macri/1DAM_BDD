@@ -195,7 +195,7 @@ SQL> select * from depart;
         40 PRODUCCIàN     BILBAO                                                                                                                                                                                                                                                                            
 
 SQL> REM 2.- A partir de la tabla emple, visualizar el n£mero de venderores del departamentos 'VENTAS';
-SQL> select count(*) from emple where oficio='VENDEDORES' AND dept_no=(select dept_no from depart where dnombre='VENTAS');
+SQL> select count(*) from emple where oficio='VENDEDORES' AND dept_no=(select dept_no from depart where dnombre='VENTAS'); //VENDEDOR ACA Y FUNCIONABA
 
   COUNT(*)                                                                                                                                                                                                                                                                                                  
 ----------                                                                                                                                                                                                                                                                                                  

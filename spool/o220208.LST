@@ -1,0 +1,412 @@
+SQL> rem REM 3.- Partiendo de la tabla EMPLE, visualizar por cada oficio de los empleados del departamento 'VENTAS' la suma de salarios.
+SQL> rem es el tercer coso del coso
+SQL> select distinct oficio, SUM(SALARIO) Suma_salario from emple where dept_no = (select dept_no from depart where dnombre='VENTAS') group by oficio;
+
+OFICIO     SUMA_SALARIO                                                         
+---------- ------------                                                         
+VENDEDOR         728000                                                         
+EMPLEADO         123500                                                         
+DIRECTOR         370500                                                         
+
+SQL> select oficio, SUM(SALARIO) Suma_salario from emple where dept_no = (select dept_no from depart where dnombre='VENTAS') group by oficio;
+
+OFICIO     SUMA_SALARIO                                                         
+---------- ------------                                                         
+VENDEDOR         728000                                                         
+EMPLEADO         123500                                                         
+DIRECTOR         370500                                                         
+
+SQL> rem coso 2 del coso
+SQL> REM 12.- Visualizar los nombres de asignaturas que no tengan suspensos.
+SQL> 
+SQL> desc asignaturas
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ COD                                       NOT NULL NUMBER(2)
+ NOMBRE                                             VARCHAR2(25)
+
+SQL> desc notas
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ DNI                                       NOT NULL VARCHAR2(10)
+ COD                                       NOT NULL NUMBER(2)
+ NOTA                                               NUMBER(2)
+
+SQL> select * from asignaturas;
+
+ninguna fila seleccionada
+
+SQL> rem hay que cargarlas
+SQL> INSERT INTO ASIGNATURAS VALUES (1,'Prog. Leng. Estr.');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (2,'Sist. Inform ticos');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (3,'An lisis');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (4,'FOL');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (5,'RET');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (6,'Entornos Gr ficos');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (7,'Aplic. Entornos 4¦Gen');
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO ALUMNOS VALUES
+  2  ('12344345','Alcalde Garc¡a, Elena', 'C/Las Matas, 24','Madrid','917766545');
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO ALUMNOS VALUES
+  2  ('4448242','Cerrato Vela, Luis', 'C/Mina 28 - 3A', 'Madrid','916566545');
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO ALUMNOS VALUES
+  2  ('56882942','D¡az Fern ndez, Mar¡a', 'C/Luis Vives 25', 'M¢stoles','915577545');
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO NOTAS VALUES('12344345', 1,6);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('12344345', 2,5);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('12344345', 3,6);
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO NOTAS VALUES('4448242', 4,6);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('4448242', 5,8);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('4448242', 6,4);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('4448242', 7,5);
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO NOTAS VALUES('56882942', 4,8);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('56882942', 5,7);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('56882942', 6,8);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('56882942', 7,9);
+
+1 fila creada.
+
+SQL> rem REM 12.- Visualizar los nombres de asignaturas que no tengan suspensos.
+SQL> 
+SQL> select nombre from asignaturas, notas where nota between 5 and 10;
+
+NOMBRE                                                                          
+-------------------------                                                       
+Prog. Leng. Estr.                                                               
+Prog. Leng. Estr.                                                               
+Prog. Leng. Estr.                                                               
+Prog. Leng. Estr.                                                               
+Prog. Leng. Estr.                                                               
+Prog. Leng. Estr.                                                               
+Prog. Leng. Estr.                                                               
+Prog. Leng. Estr.                                                               
+Prog. Leng. Estr.                                                               
+Prog. Leng. Estr.                                                               
+Sist. Inform ticos                                                              
+
+NOMBRE                                                                          
+-------------------------                                                       
+Sist. Inform ticos                                                              
+Sist. Inform ticos                                                              
+Sist. Inform ticos                                                              
+Sist. Inform ticos                                                              
+Sist. Inform ticos                                                              
+Sist. Inform ticos                                                              
+Sist. Inform ticos                                                              
+Sist. Inform ticos                                                              
+Sist. Inform ticos                                                              
+An lisis                                                                        
+An lisis                                                                        
+
+NOMBRE                                                                          
+-------------------------                                                       
+An lisis                                                                        
+An lisis                                                                        
+An lisis                                                                        
+An lisis                                                                        
+An lisis                                                                        
+An lisis                                                                        
+An lisis                                                                        
+An lisis                                                                        
+FOL                                                                             
+FOL                                                                             
+FOL                                                                             
+
+NOMBRE                                                                          
+-------------------------                                                       
+FOL                                                                             
+FOL                                                                             
+FOL                                                                             
+FOL                                                                             
+FOL                                                                             
+FOL                                                                             
+FOL                                                                             
+RET                                                                             
+RET                                                                             
+RET                                                                             
+RET                                                                             
+
+NOMBRE                                                                          
+-------------------------                                                       
+RET                                                                             
+RET                                                                             
+RET                                                                             
+RET                                                                             
+RET                                                                             
+RET                                                                             
+Entornos Gr ficos                                                               
+Entornos Gr ficos                                                               
+Entornos Gr ficos                                                               
+Entornos Gr ficos                                                               
+Entornos Gr ficos                                                               
+
+NOMBRE                                                                          
+-------------------------                                                       
+Entornos Gr ficos                                                               
+Entornos Gr ficos                                                               
+Entornos Gr ficos                                                               
+Entornos Gr ficos                                                               
+Entornos Gr ficos                                                               
+Aplic. Entornos 4¦Gen                                                           
+Aplic. Entornos 4¦Gen                                                           
+Aplic. Entornos 4¦Gen                                                           
+Aplic. Entornos 4¦Gen                                                           
+Aplic. Entornos 4¦Gen                                                           
+Aplic. Entornos 4¦Gen                                                           
+
+NOMBRE                                                                          
+-------------------------                                                       
+Aplic. Entornos 4¦Gen                                                           
+Aplic. Entornos 4¦Gen                                                           
+Aplic. Entornos 4¦Gen                                                           
+Aplic. Entornos 4¦Gen                                                           
+
+70 filas seleccionadas.
+
+SQL> desc asignaturas
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ COD                                       NOT NULL NUMBER(2)
+ NOMBRE                                             VARCHAR2(25)
+
+SQL> desc notas
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ DNI                                       NOT NULL VARCHAR2(10)
+ COD                                       NOT NULL NUMBER(2)
+ NOTA                                               NUMBER(2)
+
+SQL> select nombre from asignaturas, notas where nots between 5 and 10 and asignaturas.cod=notas.cod;
+select nombre from asignaturas, notas where nots between 5 and 10 and asignaturas.cod=notas.cod
+                                            *
+ERROR en línea 1:
+ORA-00904: "NOTS": identificador no válido 
+
+
+SQL> select nombre from asignaturas, notas where notas between 5 and 10 and asignaturas.cod=notas.cod;
+select nombre from asignaturas, notas where notas between 5 and 10 and asignaturas.cod=notas.cod
+                                            *
+ERROR en línea 1:
+ORA-00904: "NOTAS": identificador no válido 
+
+
+SQL> select nombre from asignaturas, notas where notas between 5 and 10 and asignaturas.cod=notas.cod;
+select nombre from asignaturas, notas where notas between 5 and 10 and asignaturas.cod=notas.cod
+                                            *
+ERROR en línea 1:
+ORA-00904: "NOTAS": identificador no válido 
+
+
+SQL> rem bueno se intento
+SQL> 
+SQL> 
+SQL> rem
+SQL> REM111.- Visualizar los nombres de los alumnos que tengan una nota entre 7 y 8 en la asignatura de FOL.
+SQL> desc alumnos
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ DNI                                       NOT NULL VARCHAR2(10)
+ APENOM                                             VARCHAR2(30)
+ DIREC                                              VARCHAR2(30)
+ POBLA                                              VARCHAR2(15)
+ TELEF                                              VARCHAR2(10)
+
+SQL> desc asignaturas
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ COD                                       NOT NULL NUMBER(2)
+ NOMBRE                                             VARCHAR2(25)
+
+SQL> desc notas
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ DNI                                       NOT NULL VARCHAR2(10)
+ COD                                       NOT NULL NUMBER(2)
+ NOTA                                               NUMBER(2)
+
+SQL> select apenom, nombre, nota from alumnos, asignaturas, notas where nombre='FOL' and nota between 7 and 8 and asignaturas.cod=notas.cod and notas.dni=alumnos.dni;
+
+APENOM                         NOMBRE                          NOTA             
+------------------------------ ------------------------- ----------             
+D¡az Fern ndez, Mar¡a          FOL                                8             
+
+SQL> rem se pueden poner alias a las tablas
+SQL> select apenom, nombre, nota from alumnos alu, asignaturas asi, notas not where nombre='FOL' and nota between 7 and 8 and asi.cod=not.cod and not.dni=alu.dni;
+select apenom, nombre, nota from alumnos alu, asignaturas asi, notas not where nombre='FOL' and nota between 7 and 8 and asi.cod=not.cod and not.dni=alu.dni
+                                                                     *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> select apenom, nombre, nota from alumnos alu, asignaturas asi, notas where nombre='FOL' and nota between 7 and 8 and asi.cod=notas.cod and notas.dni=alu.dni;
+
+APENOM                         NOMBRE                          NOTA             
+------------------------------ ------------------------- ----------             
+D¡az Fern ndez, Mar¡a          FOL                                8             
+
+SQL> rem REM 4.- Obtener el nombre de alumno, su asignatura y su nota.
+SQL> select apenom, nombre, nota from alumno, asignaturas asi y notas where asi.cod=notas.cod and notas.dni=alumno.dni;
+select apenom, nombre, nota from alumno, asignaturas asi y notas where asi.cod=notas.cod and notas.dni=alumno.dni
+                                                         *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> select apenom, nombre, nota from alumno, asignaturas asi, notas where asi.cod=notas.cod and notas.dni=alumno.dni;
+select apenom, nombre, nota from alumno, asignaturas asi, notas where asi.cod=notas.cod and notas.dni=alumno.dni
+                                 *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+SQL> select apenom, nombre, nota from alumnos, asignaturas asi, notas where asi.cod=notas.cod and notas.dni=alumnos.dni;
+
+APENOM                         NOMBRE                          NOTA             
+------------------------------ ------------------------- ----------             
+Alcalde Garc¡a, Elena          Prog. Leng. Estr.                  6             
+Alcalde Garc¡a, Elena          Sist. Inform ticos                 5             
+Alcalde Garc¡a, Elena          An lisis                           6             
+D¡az Fern ndez, Mar¡a          FOL                                8             
+Cerrato Vela, Luis             FOL                                6             
+D¡az Fern ndez, Mar¡a          RET                                7             
+Cerrato Vela, Luis             RET                                8             
+D¡az Fern ndez, Mar¡a          Entornos Gr ficos                  8             
+Cerrato Vela, Luis             Entornos Gr ficos                  4             
+D¡az Fern ndez, Mar¡a          Aplic. Entornos 4¦Gen              9             
+Cerrato Vela, Luis             Aplic. Entornos 4¦Gen              5             
+
+11 filas seleccionadas.
+
+SQL> rem coso 3 punto 1
+SQL> REM 1.- Visualizar los departamentos en los que el salario medio es mayor o igual que la media de todos los salarios;
+SQL> 
+SQL> select dnombre, avg(salario) from depart dep, emple where dep.dept_no=emple.dept_no group by dnombre having avg(salario)>avg(salario);
+
+ninguna fila seleccionada
+
+SQL> select dnombre, avg(salario) from depart dep, emple where dep.dept_no=emple.dept_no group by dnombre having avg(salario)>=(select avg(salario) from emple);
+
+DNOMBRE        AVG(SALARIO)                                                     
+-------------- ------------                                                     
+INVESTIGACIàN        282750                                                     
+
+SQL> REM 3.- Partiendo de la tabla EMPLE, visualizar por cada oficio de los empleados del departamento 'VENTAS' la suma de salarios.
+SQL> 
+SQL> sleect oficio, sum(salario) from emple where dept_no in (select dept_no from depart where dnombre = 'VENTAS') group by oficio;
+SP2-0734: inicio "sleect ofi..." de comando desconocido - resto de la línea ignorado.
+SQL> select oficio, sum(salario) from emple where dept_no in (select dept_no from depart where dnombre = 'VENTAS') group by oficio;
+
+OFICIO     SUM(SALARIO)                                                         
+---------- ------------                                                         
+VENDEDOR         728000                                                         
+EMPLEADO         123500                                                         
+DIRECTOR         370500                                                         
+
+SQL> REM 4.- seleccionar aquellos pedidos de la tabla EMPLE cuyo salario sea igual a la media de su salario en su departamento.
+SQL>   select * from emple where salario = (select avg(salario) from emple group by dept_no);
+  select * from emple where salario = (select avg(salario) from emple group by dept_no)
+                                       *
+ERROR en línea 1:
+ORA-01427: la subconsulta de una sola fila devuelve más de una fila 
+
+
+SQL>   select * from emple where salario in (select avg(salario) from emple group by dept_no);
+
+ninguna fila seleccionada
+
+SQL> select count(*) from emple group by dept_no having oficio='EMPLEADO';
+select count(*) from emple group by dept_no having oficio='EMPLEADO'
+                                                   *
+ERROR en línea 1:
+ORA-00979: no es una expresión GROUP BY 
+
+
+SQL> select dept_no, count(*) from emple group by dept_no having oficio='EMPLEADO';
+select dept_no, count(*) from emple group by dept_no having oficio='EMPLEADO'
+                                                            *
+ERROR en línea 1:
+ORA-00979: no es una expresión GROUP BY 
+
+
+SQL> select dept_no, count(*) from emple where oficio='EMPLEADO' group by dept_no;
+
+   DEPT_NO   COUNT(*)                                                           
+---------- ----------                                                           
+        30          1                                                           
+        20          2                                                           
+        10          1                                                           
+
+SQL> rem fin
+SQL> rem fin
+SQL> rem fin
+SQL> rem fin
+SQL> rem fin
+SQL> rem fin
+SQL> rem fin
+SQL> rem fin
+SQL> rem fin
+SQL> spool off
