@@ -1,0 +1,69 @@
+SQL> rem Se desea llevar un control acerca de la provisi¢n de distintos productos a las distintas sedes de FIT & US.- De cada sede se almacenar  su ID, su tama¤o (en m2), su tel‚fono, su direcci¢n (la cual est  compuesta poruna calle, un n£mero y un c¢digo postal).- Cada sede estar  ubicada en una poblaci¢n las cuales pueden poseer una o m s de las mismas (solo se almacenar  la poblaci¢n si hay al menos una sede de FIT & US en ella).- De cada poblaci¢n nos interesa saber su ID, su nombre, la cantidad de habitantes y la extensi¢n de la misma (en km2).- A su vez, cada poblaci¢n se encontrar  en una provincia la cual se identifica con su nombre y se almacenan la cantidad de habitantes y su extensi¢n (en km2)- De los proveedores nos interesa saber su ID, nombre, tel‚fono y direcci¢n (la cual, al igual que las sedes, est  compuesta por una calle, un n£mero y un c¢digo postal). Tambien se desea saber en que provincia est  ubicado dicho proveedor (cada provincia puede o no tener proveedores y todos los proveedores estar n ubicados en una sola provincia).- Los productos pueden ser £nicamente de uno de estos tres tipos: M quinas, Accesorios o Merchandising. De todos los productos almacenaremos su ID, su coste por unidad, su nombre y una descripci¢n detallada del mismo.- Adem s, todos los accesorios tendr n un color y podr n ser (o no) mancuernas o esterillas. De las mancuernas se almacenar  su peso y de las esterillas su ancho y su largo.- Los productos de merchandising ser n obligatoriamente de la marca FIT & US o de empresas asociadas.- Las m quinas podr n ser (o no) bicicletas o cintas de correr. En caso de que sean bicicletas se guardar  su estilo (el¡pticas, reclinadas o de spinning) y en caso de que sea una cinta se guardar  el largo y el ancho de la misma).- Se desea saber los proveedores que surten a las distintas sedes y que productos proporcionan a la misma. Adem s, se desea saber si el producto es proporcionado de forma exclusiva por el proveedor.
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> set linesize 300
+SQL> set pagesize 300
+SQL> 
+SQL> rem creacion de tablas
+SQL> 
+SQL> rem tabla Provincias
+SQL> 
+SQL> 
+SQL> CREATE TABLE PROVINCIAS (
+  2  N_PROVINCIA VARCHAR2(20) primary key,
+  3  EXT_PROV NUMBER(5),
+  4  HAB_PROV NUMBER(7)
+  5  );
+
+Tabla creada.
+
+SQL> INSERT INTO PROVINCIAS VALUES ('MURCIA', 11313, 1516055);
+
+1 fila creada.
+
+SQL> INSERT INTO PROVINCIAS VALUES ('MADRID', 8030, 6661949);
+
+1 fila creada.
+
+SQL> INSERT INTO PROVINCIAS VALUES ('BARCELONA', 7726, 5664579);
+
+1 fila creada.
+
+SQL> INSERT INTO PROVINCIAS VALUES ('VALLADOLID', 8111, 520385);
+
+1 fila creada.
+
+SQL> INSERT INTO PROVINCIAS VALUES ('SEVILLA', 14036, 688711);
+
+1 fila creada.
+
+SQL> REM ASI QUEDA LA TABLA PROVINCIAS
+SQL> SELECT * FROM PROVINCIAS;
+
+N_PROVINCIA            EXT_PROV   HAB_PROV                                                                                                                                                                                                                                                                  
+-------------------- ---------- ----------                                                                                                                                                                                                                                                                  
+MURCIA                    11313    1516055                                                                                                                                                                                                                                                                  
+MADRID                     8030    6661949                                                                                                                                                                                                                                                                  
+BARCELONA                  7726    5664579                                                                                                                                                                                                                                                                  
+VALLADOLID                 8111     520385                                                                                                                                                                                                                                                                  
+SEVILLA                   14036     688711                                                                                                                                                                                                                                                                  
+
+SQL> 
+SQL> 
+SQL> 
+SQL> REM TABLA POBLACIONES
+SQL> 
+SQL> CREATE TABLE POBLACIONES (
+  2  ID_POB NUMBER(5) primary key,
+  3  NOMB_POB VARCHAR2(35),
+  4  HAB_POB NUMBER(7),
+  5  EXT_POB NUMBER(3)
+  6  );
+
+Tabla creada.
+
+SQL> REM CREAR CAMPOS POBLACIONES
+SQL> 
+SQL> SPOOL OFF
