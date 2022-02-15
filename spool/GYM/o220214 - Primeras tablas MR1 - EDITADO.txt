@@ -67,3 +67,47 @@ Tabla creada.
 SQL> REM CREAR CAMPOS POBLACIONES
 SQL> 
 SQL> SPOOL OFF
+
+15/02
+
+SQL> rem ayer creamos la tabla poblaciones pero esta vacia
+SQL> REM TABLA POBLACIONES
+SQL> CREATE TABLE POBLACIONES (
+  2  ID_POB NUMBER(5) primary key,
+  3  NOMB_POB VARCHAR2(35),
+  4  HAB_POB NUMBER(7),
+  5  EXT_POB NUMBER(3),
+  6  N_PROVINCIAS VARCHAR2(20),
+  7  foreign key (N_PROVINCIAS) references provincias
+  8  );
+
+Tabla creada.
+
+SQL> REM TABLA POBLACIONES
+SQL> 
+SQL> INSERT INTO POBLACIONES VALUES (0001, 'MADRID', 3305408, 604, 'MADRID');
+
+1 fila creada.
+
+SQL> INSERT INTO POBLACIONES VALUES (0002, 'ARANJUEZ', 59833, 201, 'MADRID');
+
+1 fila creada.
+
+SQL> INSERT INTO POBLACIONES VALUES (0003, 'CARTAGENA', 213943, 558, 'MURCIA');
+
+1 fila creada.
+
+SQL> INSERT INTO POBLACIONES VALUES (0003, 'MURCIA', 447182, 881, 'MURCIA');
+INSERT INTO POBLACIONES VALUES (0003, 'MURCIA', 447182, 881, 'MURCIA')
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004011) violada 
+
+
+SQL> INSERT INTO POBLACIONES VALUES (0004, 'MURCIA', 447182, 881, 'MURCIA');
+
+1 fila creada.
+
+SQL> rem cargadas algunas poblaciones de comunidades quedan barcelona, sevilla y vallaolid
+SQL> spool off
+
