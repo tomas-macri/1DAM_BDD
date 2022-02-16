@@ -1,0 +1,49 @@
+SEDE: 
+- CODIGO
+- DIRECCION
+	- Calle
+	- Numero
+	- Codigo postal
+- POBLACION
+- PROVINCIA
+- TAMANO(M2) 
+- TELEFONO
+
+
+
+PROVEEDORES:
+- CODIGO
+- NOMBRE
+- DIRECCION
+	- Calle
+	- Numero
+	- Codigo postal
+- POBLACION
+- PROVINCIA
+- TELEFONO
+
+
+
+
+
+
+
+
+
+	PRODUCTOS--> tipo
+MERCH	MAQUINAS	ACCESORIOS
+
+
+
+
+
+	MERCH
+FIT&US		BRANDS
+
+
+	MAQUINAS
+MODELO······
+
+		ACCESORIOS	
+
+MANCUERNAS	PELOTAS		STEP

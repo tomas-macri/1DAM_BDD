@@ -1,0 +1,218 @@
+SQL> rem enunciado global completo
+SQL> rem tercera coso
+SQL> rem REM 2.- A partir de la tabla emple, visualizar el n£mero de venderores del departamentos 'VENTAS';
+SQL> 
+SQL> select count(*) "cant emples de ventas" from emple where dept_no = (select dept_no where nombre = 'VENTAS');
+select count(*) "cant emples de ventas" from emple where dept_no = (select dept_no where nombre = 'VENTAS')
+                                                                                   *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> select count(*) "cant emples de ventas" from emple where dept_no = (select dept_no from depart where nombre = 'VENTAS');
+select count(*) "cant emples de ventas" from emple where dept_no = (select dept_no from depart where nombre = 'VENTAS')
+                                                                                                     *
+ERROR en línea 1:
+ORA-00904: "NOMBRE": identificador no válido 
+
+
+SQL> desc depart
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ DEPT_NO                                   NOT NULL NUMBER(2)
+ DNOMBRE                                            VARCHAR2(14)
+ LOC                                                VARCHAR2(14)
+
+SQL> select count(*) "cant emples de ventas" from emple where dept_no = (select dept_no from depart where dnombre = 'VENTAS');
+
+cant emples de ventas                                                           
+---------------------                                                           
+                    6                                                           
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem ahora marina
+SQL> 
+SQL> 
+SQL> REM 2.- A partir de la tabla emple, visualizar el n£mero de venderores del departamentos 'VENTAS';
+SQL> 
+SQL> desc emple
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                    NOT NULL NUMBER(4)
+ APELLIDO                                           VARCHAR2(10)
+ OFICIO                                             VARCHAR2(10)
+ DIR                                                NUMBER(4)
+ FECHA_ALT                                          DATE
+ SALARIO                                            NUMBER(10)
+ COMISION                                           NUMBER(10)
+ DEPT_NO                                            NUMBER(2)
+
+SQL> select * fom emple
+  2  ;
+select * fom emple
+         *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                 
+        20                                                                      
+                                                                                
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000      
+        30                                                                      
+                                                                                
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000      
+        30                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                 
+        20                                                                      
+                                                                                
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000      
+        30                                                                      
+                                                                                
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                 
+        30                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                 
+        10                                                                      
+                                                                                
+      7788 GIL        ANALISTA         7566 09/11/81     390000                 
+        20                                                                      
+                                                                                
+      7839 REY        PRESIDENTE            17/11/81      50000                 
+        10                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0      
+        30                                                                      
+                                                                                
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                 
+        20                                                                      
+                                                                                
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                 
+        30                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                 
+        20                                                                      
+                                                                                
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                 
+        10                                                                      
+                                                                                
+
+14 filas seleccionadas.
+
+SQL> set linesize 300
+SQL> set pagesize 300
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                       
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                       
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                                                                                                                                                                       
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                                                                                                                                                                       
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                                                                                                                                                                       
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                                                                                                                                                                       
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                       
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                                                                                                                                                                       
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                                                                                                                                                                       
+      7788 GIL        ANALISTA         7566 09/11/81     390000                    20                                                                                                                                                                                                                       
+      7839 REY        PRESIDENTE            17/11/81      50000                    10                                                                                                                                                                                                                       
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                                                                                                                                                                       
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                                                                                                                                                                       
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                                                                                                                                                                       
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                    20                                                                                                                                                                                                                       
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                    10                                                                                                                                                                                                                       
+
+14 filas seleccionadas.
+
+SQL> REM 2.- A partir de la tabla emple, visualizar el n£mero de venderores del departamentos 'VENTAS';
+SQL> desc depart
+ Nombre                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ DEPT_NO                                                                                                                                                                       NOT NULL NUMBER(2)
+ DNOMBRE                                                                                                                                                                                VARCHAR2(14)
+ LOC                                                                                                                                                                                    VARCHAR2(14)
+
+SQL> select * from depart;
+
+   DEPT_NO DNOMBRE        LOC                                                                                                                                                                                                                                                                               
+---------- -------------- --------------                                                                                                                                                                                                                                                                    
+        10 CONTABILIDAD   SEVILLA                                                                                                                                                                                                                                                                           
+        20 INVESTIGACIàN  MADRID                                                                                                                                                                                                                                                                            
+        30 VENTAS         BARCELONA                                                                                                                                                                                                                                                                         
+        40 PRODUCCIàN     BILBAO                                                                                                                                                                                                                                                                            
+
+SQL> REM 2.- A partir de la tabla emple, visualizar el n£mero de venderores del departamentos 'VENTAS';
+SQL> select count(*) from emple where oficio='VENDEDORES' AND dept_no=(select dept_no from depart where dnombre='VENTAS'); //VENDEDOR ACA Y FUNCIONABA
+
+  COUNT(*)                                                                                                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                  
+         0                                                                                                                                                                                                                                                                                                  
+
+SQL> select count(*) from emple where oficio='VENDEDORES' AND dept_no=(select dept_no from depart where dnombre='VENTAS')
+  2  ;
+
+  COUNT(*)                                                                                                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                  
+         0                                                                                                                                                                                                                                                                                                  
+
+SQL> select count(*) from emple where dept_no=(select dept_no from depart where dnombre='VENTAS')
+  2  ;
+
+  COUNT(*)                                                                                                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                  
+         6                                                                                                                                                                                                                                                                                                  
+
+SQL> spool offff

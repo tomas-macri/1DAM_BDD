@@ -1,0 +1,169 @@
+SQL> select distinct oficio from emple;
+
+OFICIO                                                                                                                                                                                                                                                                                                      
+----------                                                                                                                                                                                                                                                                                                  
+PRESIDENTE                                                                                                                                                                                                                                                                                                  
+EMPLEADO                                                                                                                                                                                                                                                                                                    
+VENDEDOR                                                                                                                                                                                                                                                                                                    
+ANALISTA                                                                                                                                                                                                                                                                                                    
+DIRECTOR                                                                                                                                                                                                                                                                                                    
+
+SQL> rem el distinct es para no traer duplicados
+SQL> select dept_no from emple;
+
+   DEPT_NO                                                                                                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                  
+        20                                                                                                                                                                                                                                                                                                  
+        30                                                                                                                                                                                                                                                                                                  
+        30                                                                                                                                                                                                                                                                                                  
+        20                                                                                                                                                                                                                                                                                                  
+        30                                                                                                                                                                                                                                                                                                  
+        30                                                                                                                                                                                                                                                                                                  
+        10                                                                                                                                                                                                                                                                                                  
+        20                                                                                                                                                                                                                                                                                                  
+        10                                                                                                                                                                                                                                                                                                  
+        30                                                                                                                                                                                                                                                                                                  
+        20                                                                                                                                                                                                                                                                                                  
+        30                                                                                                                                                                                                                                                                                                  
+        20                                                                                                                                                                                                                                                                                                  
+        10                                                                                                                                                                                                                                                                                                  
+
+14 filas seleccionadas.
+
+SQL> select distinct dept_no from emple;
+
+   DEPT_NO                                                                                                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                  
+        30                                                                                                                                                                                                                                                                                                  
+        20                                                                                                                                                                                                                                                                                                  
+        10                                                                                                                                                                                                                                                                                                  
+
+SQL> select distinct dept_no from emple order by dept_no;
+
+   DEPT_NO                                                                                                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                  
+        10                                                                                                                                                                                                                                                                                                  
+        20                                                                                                                                                                                                                                                                                                  
+        30                                                                                                                                                                                                                                                                                                  
+
+SQL> select distinct dept_no from emple order by dept_no desc;
+
+   DEPT_NO                                                                                                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                  
+        30                                                                                                                                                                                                                                                                                                  
+        20                                                                                                                                                                                                                                                                                                  
+        10                                                                                                                                                                                                                                                                                                  
+
+SQL> select distinct dept_no, apellido from emple order by dept_no, apellido desc;
+
+   DEPT_NO APELLIDO                                                                                                                                                                                                                                                                                         
+---------- ----------                                                                                                                                                                                                                                                                                       
+        10 REY                                                                                                                                                                                                                                                                                              
+        10 MU¥OZ                                                                                                                                                                                                                                                                                            
+        10 CEREZO                                                                                                                                                                                                                                                                                           
+        20 SµNCHEZ                                                                                                                                                                                                                                                                                          
+        20 JIMÔNEZ                                                                                                                                                                                                                                                                                          
+        20 GIL                                                                                                                                                                                                                                                                                              
+        20 FERNµNDEZ                                                                                                                                                                                                                                                                                        
+        20 ALONSO                                                                                                                                                                                                                                                                                           
+        30 TOVAR                                                                                                                                                                                                                                                                                            
+        30 SALA                                                                                                                                                                                                                                                                                             
+        30 NEGRO                                                                                                                                                                                                                                                                                            
+        30 MARTÖN                                                                                                                                                                                                                                                                                           
+        30 JIMENO                                                                                                                                                                                                                                                                                           
+        30 ARROYO                                                                                                                                                                                                                                                                                           
+
+14 filas seleccionadas.
+
+SQL> desc emple;
+ Nombre                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ EMP_NO                                                                                                                                                                        NOT NULL NUMBER(4)
+ APELLIDO                                                                                                                                                                               VARCHAR2(10)
+ OFICIO                                                                                                                                                                                 VARCHAR2(10)
+ DIR                                                                                                                                                                                    NUMBER(4)
+ FECHA_ALT                                                                                                                                                                              DATE
+ SALARIO                                                                                                                                                                                NUMBER(10)
+ COMISION                                                                                                                                                                               NUMBER(10)
+ DEPT_NO                                                                                                                                                                                NUMBER(2)
+
+SQL> select distinct dept_no, apellido from emple where salario > 200000 order by dept_no, apellido desc;
+
+   DEPT_NO APELLIDO                                                                                                                                                                                                                                                                                         
+---------- ----------                                                                                                                                                                                                                                                                                       
+        10 CEREZO                                                                                                                                                                                                                                                                                           
+        20 JIMÔNEZ                                                                                                                                                                                                                                                                                          
+        20 GIL                                                                                                                                                                                                                                                                                              
+        20 FERNµNDEZ                                                                                                                                                                                                                                                                                        
+        30 NEGRO                                                                                                                                                                                                                                                                                            
+        30 ARROYO                                                                                                                                                                                                                                                                                           
+
+6 filas seleccionadas.
+
+SQL> rem el !=
+SQL> select * from emple where dept_no <> 10;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                       
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                       
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                                                                                                                                                                       
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                                                                                                                                                                       
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                                                                                                                                                                       
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                                                                                                                                                                       
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                       
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                                                                                                                                                                       
+      7788 GIL        ANALISTA         7566 09/11/81     390000                    20                                                                                                                                                                                                                       
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                                                                                                                                                                       
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                                                                                                                                                                       
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                                                                                                                                                                       
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                    20                                                                                                                                                                                                                       
+
+11 filas seleccionadas.
+
+SQL> rem hoja de ejercicios de sql
+SQL> rem hoja de ejercicios sql
+SQL> rem la hoja va en otro spool
+SQL> rem like e in
+SQL> select * from emple where oficio in ("empleado", "vendedor");
+select * from emple where oficio in ("empleado", "vendedor")
+                                                 *
+ERROR en línea 1:
+ORA-00904: "vendedor": identificador no válido 
+
+
+SQL> select * from emple where oficio in ('empleado', 'vendedor');
+
+ninguna fila seleccionada
+
+SQL> select * from emple where oficio in ('EMPLEADO', 'VENDEDOR');
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                       
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                       
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                                                                                                                                                                       
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                                                                                                                                                                       
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                                                                                                                                                                       
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                       
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                                                                                                                                                                       
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                                                                                                                                                                       
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                                                                                                                                                                       
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                    10                                                                                                                                                                                                                       
+
+8 filas seleccionadas.
+
+SQL> REM EL LIKE ESTA EN LA DIAPO 44 DEL POWER
+SQL> select avg(salario) promedio_salario, min(salario) salario_minimo, max(salario) salario_maximo from emple;
+
+PROMEDIO_SALARIO SALARIO_MINIMO SALARIO_MAXIMO                                                                                                                                                                                                                                                              
+---------------- -------------- --------------                                                                                                                                                                                                                                                              
+      226660,714          50000         390000                                                                                                                                                                                                                                                              
+
+SQL> rem funciones aritmeticas hay avg, min, max, count
+SQL> rem tambien esta la funcion sum
+SQL> select avg(apellido) from emple;
+select avg(apellido) from emple
+           *
+ERROR en línea 1:
+ORA-01722: número no válido 
+
+
+SQL> rem cambio de archivo
+SQL> spool off

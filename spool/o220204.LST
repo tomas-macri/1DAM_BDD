@@ -1,0 +1,600 @@
+SQL> rem hoja de ejercicios sql 2
+SQL> rem hoja de ejercicios sql 2
+SQL> rem hoja de ejercicios sql 2
+SQL> rem hoja de ejercicios sql 2
+SQL> rem hoja de ejercicios sql 2
+SQL> 
+SQL> 24§.-Sacar los nombres salarios y fechas de alta de los vendedores y direc-
+>      tores ordenados en orden ascendente de empleo y descendente de fecha de
+SP2-0734: inicio "24§.-Sacar..." de comando desconocido - resto de la línea ignorado.
+SQL>      alta
+SP2-0042: comando desconocido "alta" - resto de la línea ignorado.
+SQL> rem 24§.-Sacar los nombres salarios y fechas de alta de los vendedores y direc-
+>      tores ordenados en orden ascendente de empleo y descendente de fecha de
+SQL>      alta
+SP2-0042: comando desconocido "alta" - resto de la línea ignorado.
+SQL> desc emple
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                    NOT NULL NUMBER(4)
+ APELLIDO                                           VARCHAR2(10)
+ OFICIO                                             VARCHAR2(10)
+ DIR                                                NUMBER(4)
+ FECHA_ALT                                          DATE
+ SALARIO                                            NUMBER(10)
+ COMISION                                           NUMBER(10)
+ DEPT_NO                                            NUMBER(2)
+
+SQL> set pagesize 300
+SQL> set linesize 300
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                       
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                       
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                                                                                                                                                                       
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                                                                                                                                                                       
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                                                                                                                                                                       
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                                                                                                                                                                       
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                       
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                                                                                                                                                                       
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                                                                                                                                                                       
+      7788 GIL        ANALISTA         7566 09/11/81     390000                    20                                                                                                                                                                                                                       
+      7839 REY        PRESIDENTE            17/11/81      50000                    10                                                                                                                                                                                                                       
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                                                                                                                                                                       
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                                                                                                                                                                       
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                                                                                                                                                                       
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                    20                                                                                                                                                                                                                       
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                    10                                                                                                                                                                                                                       
+
+14 filas seleccionadas.
+
+SQL> 24§.-Sacar los nombres salarios y fechas de alta de los vendedores y direc-
+>      tores ordenados en orden ascendente de empleo y descendente de fecha de
+SP2-0734: inicio "24§.-Sacar..." de comando desconocido - resto de la línea ignorado.
+SQL>      alta
+SP2-0042: comando desconocido "alta" - resto de la línea ignorado.
+SQL> 
+SQL> select apellido nombre, salario, fecha_alt fecha from emple where oficio='VENDEDOR' OR oficio='DIRECTOR' ORDER BY OFICIO ASC AND FECHA_ALT DESC;
+select apellido nombre, salario, fecha_alt fecha from emple where oficio='VENDEDOR' OR oficio='DIRECTOR' ORDER BY OFICIO ASC AND FECHA_ALT DESC
+                                                                                                                             *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> select apellido nombre, salario, fecha_alt fecha from emple where oficio='VENDEDOR' OR oficio='DIRECTOR' ORDER BY OFICIO ASC AND ORDER BY FECHA_ALT DESC;
+select apellido nombre, salario, fecha_alt fecha from emple where oficio='VENDEDOR' OR oficio='DIRECTOR' ORDER BY OFICIO ASC AND ORDER BY FECHA_ALT DESC
+                                                                                                                             *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> select apellido nombre, salario, fecha_alt fecha from emple where oficio='VENDEDOR' OR oficio='DIRECTOR' ORDER BY OFICIO ASC ORDER BY FECHA_ALT DESC;
+select apellido nombre, salario, fecha_alt fecha from emple where oficio='VENDEDOR' OR oficio='DIRECTOR' ORDER BY OFICIO ASC ORDER BY FECHA_ALT DESC
+                                                                                                                             *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> select apellido nombre, salario, fecha_alt fecha from emple where oficio='VENDEDOR' OR oficio='DIRECTOR' ORDER BY OFICIO ASC, FECHA_ALT DESC;
+
+NOMBRE        SALARIO FECHA                                                                                                                                                                                                                                                                                 
+---------- ---------- --------                                                                                                                                                                                                                                                                              
+CEREZO         318500 09/06/81                                                                                                                                                                                                                                                                              
+NEGRO          370500 01/05/81                                                                                                                                                                                                                                                                              
+JIMÔNEZ        386750 02/04/81                                                                                                                                                                                                                                                                              
+MARTÖN         162500 29/09/81                                                                                                                                                                                                                                                                              
+TOVAR          195000 08/09/81                                                                                                                                                                                                                                                                              
+SALA           162500 22/02/81                                                                                                                                                                                                                                                                              
+ARROYO         208000 20/02/80                                                                                                                                                                                                                                                                              
+
+7 filas seleccionadas.
+
+SQL> select apellido nombre, salario, oficio, fecha_alt fecha from emple where oficio='VENDEDOR' OR oficio='DIRECTOR' ORDER BY OFICIO ASC, FECHA_ALT DESC;
+
+NOMBRE        SALARIO OFICIO     FECHA                                                                                                                                                                                                                                                                      
+---------- ---------- ---------- --------                                                                                                                                                                                                                                                                   
+CEREZO         318500 DIRECTOR   09/06/81                                                                                                                                                                                                                                                                   
+NEGRO          370500 DIRECTOR   01/05/81                                                                                                                                                                                                                                                                   
+JIMÔNEZ        386750 DIRECTOR   02/04/81                                                                                                                                                                                                                                                                   
+MARTÖN         162500 VENDEDOR   29/09/81                                                                                                                                                                                                                                                                   
+TOVAR          195000 VENDEDOR   08/09/81                                                                                                                                                                                                                                                                   
+SALA           162500 VENDEDOR   22/02/81                                                                                                                                                                                                                                                                   
+ARROYO         208000 VENDEDOR   20/02/80                                                                                                                                                                                                                                                                   
+
+7 filas seleccionadas.
+
+SQL> rem 25§.-Sacar los nombres salarios y fechas de alta de los vendedores y  direc-
+>      tores ordenados en orden ascendente de empleo y descendente de fecha de
+SQL>      alta PERO USANDO POSICION
+SP2-0734: inicio "alta PERO ..." de comando desconocido - resto de la línea ignorado.
+SQL> rem respuesta
+SQL> rem 26§.-Sacar el sueldo y fecha de alta de aquellos que su salario sea mayor de
+SQL>      200000 pts ordenados por el campo APELLIDO utilizando un alias para tabla
+SQL>      con el que despu‚s nos referimos a sus campos y alias para las cabeceras
+SP2-0734: inicio "con el que..." de comando desconocido - resto de la línea ignorado.
+SQL> select salario sueldo, fecha_alt fecha, from emple pp where salario>200000 order by apellido;
+select salario sueldo, fecha_alt fecha, from emple pp where salario>200000 order by apellido
+                                        *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select salario sueldo, fecha_alt fecha from emple pp where salario>200000 order by apellido;
+
+    SUELDO FECHA                                                                                                                                                                                                                                                                                            
+---------- --------                                                                                                                                                                                                                                                                                         
+    208000 20/02/80                                                                                                                                                                                                                                                                                         
+    318500 09/06/81                                                                                                                                                                                                                                                                                         
+    390000 03/12/81                                                                                                                                                                                                                                                                                         
+    390000 09/11/81                                                                                                                                                                                                                                                                                         
+    386750 02/04/81                                                                                                                                                                                                                                                                                         
+    370500 01/05/81                                                                                                                                                                                                                                                                                         
+
+6 filas seleccionadas.
+
+SQL> select salario sueldo, fecha_alt fecha, apelis from emple pp where salario>200000 order by apellido;
+select salario sueldo, fecha_alt fecha, apelis from emple pp where salario>200000 order by apellido
+                                        *
+ERROR en línea 1:
+ORA-00904: "APELIS": identificador no válido 
+
+
+SQL> select salario sueldo, fecha_alt fecha, apellido nombre from emple pp where salario>200000 order by apellido;
+
+    SUELDO FECHA    NOMBRE                                                                                                                                                                                                                                                                                  
+---------- -------- ----------                                                                                                                                                                                                                                                                              
+    208000 20/02/80 ARROYO                                                                                                                                                                                                                                                                                  
+    318500 09/06/81 CEREZO                                                                                                                                                                                                                                                                                  
+    390000 03/12/81 FERNµNDEZ                                                                                                                                                                                                                                                                               
+    390000 09/11/81 GIL                                                                                                                                                                                                                                                                                     
+    386750 02/04/81 JIMÔNEZ                                                                                                                                                                                                                                                                                 
+    370500 01/05/81 NEGRO                                                                                                                                                                                                                                                                                   
+
+6 filas seleccionadas.
+
+SQL> REM 3.- Obtener el departamento de los empleados con el mismo oficio y el salario de GIL.
+SQL> aqaaaaaaaaaaaaaaAAAAAaaAAAAAAAAAAAAREM 3.- Obtener el departamento de los empleados con el mismo oficio y el salario de GIL.AAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaa
+SP2-0734: inicio "aqaaaaaaaa..." de comando desconocido - resto de la línea ignorado.
+SQL> REM 3.- Obtener el departamento de los empleados con el mismo oficio y el salario de GIL.
+SQL> select dept_no departamentito from emple where oficio=(select oficio where apellido='GIL')
+  2  ;
+select dept_no departamentito from emple where oficio=(select oficio where apellido='GIL')
+                                                                     *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> select dept_no departamentito, apellido nombre from emple where oficio=(select oficio from emple where apellido='GIL') AND salario=(select salario from emple where apellido='GIL')
+  2  ;
+
+DEPARTAMENTITO NOMBRE                                                                                                                                                                                                                                                                                       
+-------------- ----------                                                                                                                                                                                                                                                                                   
+            20 GIL                                                                                                                                                                                                                                                                                          
+            20 FERNµNDEZ                                                                                                                                                                                                                                                                                    
+
+SQL> rem sacar el mas joven y el mas viej
+SQL> select apellido nombre, fecha_alt fecha from emple where MIN(fecha_alt) OR MAX(fecha_alt);
+select apellido nombre, fecha_alt fecha from emple where MIN(fecha_alt) OR MAX(fecha_alt)
+                                                         *
+ERROR en línea 1:
+ORA-00934: función de grupo no permitida aquí 
+
+
+SQL> select apellido nombre, MIN(fecha_alt), MAX(fecha_alt) from emple;
+select apellido nombre, MIN(fecha_alt), MAX(fecha_alt) from emple
+       *
+ERROR en línea 1:
+ORA-00937: la función de grupo no es de grupo único 
+
+
+SQL> select MIN(fecha_alt), MAX(fecha_alt) from emple;
+
+MIN(FECH MAX(FECH                                                                                                                                                                                                                                                                                           
+-------- --------                                                                                                                                                                                                                                                                                           
+20/02/80 23/01/82                                                                                                                                                                                                                                                                                           
+
+SQL> select apellido nombre, MIN(fecha_alt), MAX(fecha_alt) from emple where fecha_alt=(select MIN(fecha_alt) from emple) OR fecha_alt=(select MAX(fecha_alt) from emple);
+select apellido nombre, MIN(fecha_alt), MAX(fecha_alt) from emple where fecha_alt=(select MIN(fecha_alt) from emple) OR fecha_alt=(select MAX(fecha_alt) from emple)
+       *
+ERROR en línea 1:
+ORA-00937: la función de grupo no es de grupo único 
+
+
+SQL> select apellido nombre, MIN(fecha_alt) from emple where fecha_alt=(select MIN(fecha_alt) from emple);
+select apellido nombre, MIN(fecha_alt) from emple where fecha_alt=(select MIN(fecha_alt) from emple)
+       *
+ERROR en línea 1:
+ORA-00937: la función de grupo no es de grupo único 
+
+
+SQL> select apellido from emple where fecha_alt=(select MIN(fecha_alt) from emple);
+
+APELLIDO                                                                                                                                                                                                                                                                                                    
+----------                                                                                                                                                                                                                                                                                                  
+ARROYO                                                                                                                                                                                                                                                                                                      
+
+SQL> select apellido, fecha_alt from emple where fecha_alt=(select MIN(fecha_alt) from emple);
+
+APELLIDO   FECHA_AL                                                                                                                                                                                                                                                                                         
+---------- --------                                                                                                                                                                                                                                                                                         
+ARROYO     20/02/80                                                                                                                                                                                                                                                                                         
+
+SQL> select apellido nombre, fecha_alt fecha from emple where fecha_alt=(select MIN(fecha_alt) from emple) OR fecha_alt=(select MAX(fecha_alt) from emple);
+
+NOMBRE     FECHA                                                                                                                                                                                                                                                                                            
+---------- --------                                                                                                                                                                                                                                                                                         
+ARROYO     20/02/80                                                                                                                                                                                                                                                                                         
+MU¥OZ      23/01/82                                                                                                                                                                                                                                                                                         
+
+SQL> rem descansito
+SQL> rem REM 8.- Mostrar los empleados (nombre, oficio ,salario y fecha de alta) que desempe¤en el mismo oficio que JIMENEZ o que tengan el salario mayor o igual a FERNANDEZ.
+SQL> 
+SQL> 
+SQL> select apellido nombre, oficio, salario, fecha_alt fecha from emple where oficio=(select oficio from emple where apellido='JIMENEZ') OR salario>=(select salario from emple where apellido='FERNANDEZ');
+
+ninguna fila seleccionada
+
+SQL> select apellido nombre, oficio, salario, fecha_alt fecha from emple where oficio=(select oficio from emple where apellido='JIMENEZ') OR salario<=(select salario from emple where apellido='FERNANDEZ');
+
+ninguna fila seleccionada
+
+SQL> select apellido nombre, oficio, salario, fecha_alt fecha from emple where oficio='(select oficio from emple where apellido='JIMENEZ')' OR salario<=(select salario from emple where apellido='FERNANDEZ');
+select apellido nombre, oficio, salario, fecha_alt fecha from emple where oficio='(select oficio from emple where apellido='JIMENEZ')' OR salario<=(select salario from emple where apellido='FERNANDEZ')
+                                                                                                                            *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> select apellido nombre, oficio, salario, fecha_alt fecha from emple where oficio=(select oficio from emple where apellido='JIMENEZ') AND salario<=(select salario from emple where apellido='FERNANDEZ');
+
+ninguna fila seleccionada
+
+SQL> select * from emple:
+  2  ;
+select * from emple:
+                   *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                       
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                       
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                                                                                                                                                                       
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                                                                                                                                                                       
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                                                                                                                                                                       
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                                                                                                                                                                       
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                       
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                                                                                                                                                                       
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                                                                                                                                                                       
+      7788 GIL        ANALISTA         7566 09/11/81     390000                    20                                                                                                                                                                                                                       
+      7839 REY        PRESIDENTE            17/11/81      50000                    10                                                                                                                                                                                                                       
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                                                                                                                                                                       
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                                                                                                                                                                       
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                                                                                                                                                                       
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                    20                                                                                                                                                                                                                       
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                    10                                                                                                                                                                                                                       
+
+14 filas seleccionadas.
+
+SQL> select apellido nombre, oficio, salario, fecha_alt fecha from emple where oficio=(select oficio from emple where apellido='JIMÔNEZ') AND salario<=(select salario from emple where apellido='FERNµNDEZ');
+
+NOMBRE     OFICIO        SALARIO FECHA                                                                                                                                                                                                                                                                      
+---------- ---------- ---------- --------                                                                                                                                                                                                                                                                   
+JIMÔNEZ    DIRECTOR       386750 02/04/81                                                                                                                                                                                                                                                                   
+NEGRO      DIRECTOR       370500 01/05/81                                                                                                                                                                                                                                                                   
+CEREZO     DIRECTOR       318500 09/06/81                                                                                                                                                                                                                                                                   
+
+SQL> select apellido nombre, oficio, salario, fecha_alt fecha from emple where oficio=(select oficio from emple where apellido='JIMÔNEZ') OR salario>=(select salario from emple where apellido='FERNµNDEZ');
+
+NOMBRE     OFICIO        SALARIO FECHA                                                                                                                                                                                                                                                                      
+---------- ---------- ---------- --------                                                                                                                                                                                                                                                                   
+JIMÔNEZ    DIRECTOR       386750 02/04/81                                                                                                                                                                                                                                                                   
+NEGRO      DIRECTOR       370500 01/05/81                                                                                                                                                                                                                                                                   
+CEREZO     DIRECTOR       318500 09/06/81                                                                                                                                                                                                                                                                   
+GIL        ANALISTA       390000 09/11/81                                                                                                                                                                                                                                                                   
+FERNµNDEZ  ANALISTA       390000 03/12/81                                                                                                                                                                                                                                                                   
+
+SQL> SELECT TABLE_NAME FROM USER_TABLES;
+
+TABLE_NAME                                                                                                                                                                                                                                                                                                  
+------------------------------                                                                                                                                                                                                                                                                              
+DEPART                                                                                                                                                                                                                                                                                                      
+EMPLE                                                                                                                                                                                                                                                                                                       
+KK                                                                                                                                                                                                                                                                                                          
+MEABURRO                                                                                                                                                                                                                                                                                                    
+LIBRERIA                                                                                                                                                                                                                                                                                                    
+ALUMNOS                                                                                                                                                                                                                                                                                                     
+ASIGNATURAS                                                                                                                                                                                                                                                                                                 
+NOTAS                                                                                                                                                                                                                                                                                                       
+PERSONAS                                                                                                                                                                                                                                                                                                    
+ALUMNOS2                                                                                                                                                                                                                                                                                                    
+
+10 filas seleccionadas.
+
+SQL> desc asignaturas
+ Nombre                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ COD                                                                                                                                                                           NOT NULL NUMBER(2)
+ NOMBRE                                                                                                                                                                                 VARCHAR2(25)
+
+SQL> desc notas
+ Nombre                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ DNI                                                                                                                                                                           NOT NULL VARCHAR2(10)
+ COD                                                                                                                                                                           NOT NULL NUMBER(2)
+ NOTA                                                                                                                                                                                   NUMBER(2)
+
+SQL> desc personas
+ Nombre                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ COD_HOSPITAL                                                                                                                                                                           NUMBER(38)
+ DNI                                                                                                                                                                           NOT NULL NUMBER(38)
+ APELLIDOS                                                                                                                                                                              VARCHAR2(50)
+ FUNCION                                                                                                                                                                                VARCHAR2(30)
+ SALARIO                                                                                                                                                                                NUMBER(38)
+ LOCALIDAD                                                                                                                                                                              VARCHAR2(20)
+
+SQL> desc alumnos
+ Nombre                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ DNI                                                                                                                                                                           NOT NULL VARCHAR2(10)
+ APENOM                                                                                                                                                                                 VARCHAR2(30)
+ DIREC                                                                                                                                                                                  VARCHAR2(30)
+ POBLA                                                                                                                                                                                  VARCHAR2(15)
+ TELEF                                                                                                                                                                                  VARCHAR2(10)
+
+SQL> DROP TABLE ALUMNOS cascade constraints;
+
+Tabla borrada.
+
+SQL> 
+SQL> CREATE TABLE ALUMNOS
+  2  (
+  3    DNI VARCHAR2(10) NOT NULL,
+  4    APENOM VARCHAR2(30),
+  5    DIREC VARCHAR2(30),
+  6    POBLA  VARCHAR2(15),
+  7    TELEF  VARCHAR2(10)
+  8  );
+
+Tabla creada.
+
+SQL> DROP TABLE ASIGNATURAS cascade constraints;
+
+Tabla borrada.
+
+SQL> 
+SQL> CREATE TABLE ASIGNATURAS
+  2  (
+  3    COD NUMBER(2) NOT NULL,
+  4    NOMBRE VARCHAR2(25)
+  5  );
+
+Tabla creada.
+
+SQL> 
+SQL> DROP TABLE NOTAS cascade constraints;
+
+Tabla borrada.
+
+SQL> 
+SQL> CREATE TABLE NOTAS
+  2  (
+  3    DNI VARCHAR2(10) NOT NULL,
+  4    COD NUMBER(2) NOT NULL,
+  5    NOTA NUMBER(2)
+  6  );
+
+Tabla creada.
+
+SQL> 
+SQL> INSERT INTO ASIGNATURAS VALUES (1,'Prog. Leng. Estr.');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (2,'Sist. Inform ticos');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (3,'An lisis');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (4,'FOL');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (5,'RET');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (6,'Entornos Gr ficos');
+
+1 fila creada.
+
+SQL> INSERT INTO ASIGNATURAS VALUES (7,'Aplic. Entornos 4¦Gen');
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO ALUMNOS VALUES
+  2  ('12344345','Alcalde Garc¡a, Elena', 'C/Las Matas, 24','Madrid','917766545');
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO ALUMNOS VALUES
+  2  ('4448242','Cerrato Vela, Luis', 'C/Mina 28 - 3A', 'Madrid','916566545');
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO ALUMNOS VALUES
+  2  ('56882942','D¡az Fern ndez, Mar¡a', 'C/Luis Vives 25', 'M¢stoles','915577545');
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO NOTAS VALUES('12344345', 1,6);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('12344345', 2,5);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('12344345', 3,6);
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO NOTAS VALUES('4448242', 4,6);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('4448242', 5,8);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('4448242', 6,4);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('4448242', 7,5);
+
+1 fila creada.
+
+SQL> 
+SQL> INSERT INTO NOTAS VALUES('56882942', 4,8);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('56882942', 5,7);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('56882942', 6,8);
+
+1 fila creada.
+
+SQL> INSERT INTO NOTAS VALUES('56882942', 7,9);
+
+1 fila creada.
+
+SQL> desc
+Sintaxis: DESCRIBE [esquema.]objeto[@enlace_bd]
+SQL> desc notas
+ Nombre                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ DNI                                                                                                                                                                           NOT NULL VARCHAR2(10)
+ COD                                                                                                                                                                           NOT NULL NUMBER(2)
+ NOTA                                                                                                                                                                                   NUMBER(2)
+
+SQL> desc asignaturas
+ Nombre                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ COD                                                                                                                                                                           NOT NULL NUMBER(2)
+ NOMBRE                                                                                                                                                                                 VARCHAR2(25)
+
+SQL> rem
+SQL> REM 111.- Visualizar los nombres de los alumnos que tengan una nota entre 7 y 8 en la asignatura de FOL.
+SQL> desc alumnos
+ Nombre                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ DNI                                                                                                                                                                           NOT NULL VARCHAR2(10)
+ APENOM                                                                                                                                                                                 VARCHAR2(30)
+ DIREC                                                                                                                                                                                  VARCHAR2(30)
+ POBLA                                                                                                                                                                                  VARCHAR2(15)
+ TELEF                                                                                                                                                                                  VARCHAR2(10)
+
+SQL> ;
+  1* INSERT INTO NOTAS VALUES('56882942', 7,9)
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 111.- Visualizar los nombres de los alumnos que tengan una nota entre 7 y 8 en la asignatura de FOL.
+SQL> 
+SQL> select * from notas;
+
+DNI               COD       NOTA                                                                                                                                                                                                                                                                            
+---------- ---------- ----------                                                                                                                                                                                                                                                                            
+12344345            1          6                                                                                                                                                                                                                                                                            
+12344345            2          5                                                                                                                                                                                                                                                                            
+12344345            3          6                                                                                                                                                                                                                                                                            
+4448242             4          6                                                                                                                                                                                                                                                                            
+4448242             5          8                                                                                                                                                                                                                                                                            
+4448242             6          4                                                                                                                                                                                                                                                                            
+4448242             7          5                                                                                                                                                                                                                                                                            
+56882942            4          8                                                                                                                                                                                                                                                                            
+56882942            5          7                                                                                                                                                                                                                                                                            
+56882942            6          8                                                                                                                                                                                                                                                                            
+56882942            7          9                                                                                                                                                                                                                                                                            
+
+11 filas seleccionadas.
+
+SQL> select dni from notas where nota between 6 and 8 and cod=5;
+
+DNI                                                                                                                                                                                                                                                                                                         
+----------                                                                                                                                                                                                                                                                                                  
+4448242                                                                                                                                                                                                                                                                                                     
+56882942                                                                                                                                                                                                                                                                                                    
+
+SQL> select dni from notas where nota between 6 and 8 and cod=(select cod from asignaturas whw;
+select dni from notas where nota between 6 and 8 and cod=(select cod from asignaturas whw
+                                                          *
+ERROR en línea 1:
+ORA-00921: fin inesperado de un comando SQL 
+
+
+SQL> select dni from notas where nota between 6 and 8 and cod=(select cod from asignaturas where nombre='FOL');
+
+DNI                                                                                                                                                                                                                                                                                                         
+----------                                                                                                                                                                                                                                                                                                  
+4448242                                                                                                                                                                                                                                                                                                     
+56882942                                                                                                                                                                                                                                                                                                    
+
+SQL> select * from asignaturas;
+
+       COD NOMBRE                                                                                                                                                                                                                                                                                           
+---------- -------------------------                                                                                                                                                                                                                                                                        
+         1 Prog. Leng. Estr.                                                                                                                                                                                                                                                                                
+         2 Sist. Inform ticos                                                                                                                                                                                                                                                                               
+         3 An lisis                                                                                                                                                                                                                                                                                         
+         4 FOL                                                                                                                                                                                                                                                                                              
+         5 RET                                                                                                                                                                                                                                                                                              
+         6 Entornos Gr ficos                                                                                                                                                                                                                                                                                
+         7 Aplic. Entornos 4¦Gen                                                                                                                                                                                                                                                                            
+
+7 filas seleccionadas.
+
+SQL> rem
+SQL> 
+SQL> 
+SQL> rem el ejercicio 3 de gil se puede hacer asi tambien
+SQL> select dept_no, apellido nombre, salario from emple where (oficio, salario) = (select oficio, salario from emple);
+select dept_no, apellido nombre, salario from emple where (oficio, salario) = (select oficio, salario from emple)
+                                                                               *
+ERROR en línea 1:
+ORA-01427: la subconsulta de una sola fila devuelve más de una fila 
+
+
+SQL> select dept_no, apellido nombre, salario from emple where oficio, salario = (select oficio, salario from emple);
+select dept_no, apellido nombre, salario from emple where oficio, salario = (select oficio, salario from emple)
+                                                                *
+ERROR en línea 1:
+ORA-00920: operador relacional no válido 
+
+
+SQL> select dept_no, apellido nombre, salario from emple where (oficio, salario) = (select oficio, salario from emple where apellido='GIL');
+
+   DEPT_NO NOMBRE        SALARIO                                                                                                                                                                                                                                                                            
+---------- ---------- ----------                                                                                                                                                                                                                                                                            
+        20 GIL            390000                                                                                                                                                                                                                                                                            
+        20 FERNµNDEZ      390000                                                                                                                                                                                                                                                                            
+
+SQL> rem
+SQL> 
+SQL> spool off

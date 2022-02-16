@@ -1,0 +1,110 @@
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                 
+        20                                                                      
+                                                                                
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000      
+        30                                                                      
+                                                                                
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000      
+        30                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                 
+        20                                                                      
+                                                                                
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000      
+        30                                                                      
+                                                                                
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                 
+        30                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                 
+        10                                                                      
+                                                                                
+      7788 GIL        ANALISTA         7566 09/11/81     390000                 
+        20                                                                      
+                                                                                
+      7839 REY        PRESIDENTE            17/11/81      50000                 
+        10                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0      
+        30                                                                      
+                                                                                
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                 
+        20                                                                      
+                                                                                
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                 
+        30                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                 
+        20                                                                      
+                                                                                
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                 
+        10                                                                      
+                                                                                
+
+14 filas seleccionadas.
+
+SQL> set pagesize 150
+SQL> set linesize 150
+SQL> select * from kk
+  2  ;
+
+NOMBRE                EDAD                                                                                                                            
+--------------- ----------                                                                                                                            
+prueba                  15                                                                                                                            
+tomas                   20                                                                                                                            
+alfonso                 19                                                                                                                            
+marina                  21                                                                                                                            
+made                    20                                                                                                                            
+paula                   20                                                                                                                            
+
+6 filas seleccionadas.
+
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                 
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                 
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                 
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                 
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                 
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                 
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                 
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                 
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                 
+      7788 GIL        ANALISTA         7566 09/11/81     390000                    20                                                                 
+      7839 REY        PRESIDENTE            17/11/81      50000                    10                                                                 
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                 
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                 
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                 
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                    20                                                                 
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                    10                                                                 
+
+14 filas seleccionadas.
+
+SQL> rem esta es la continuacion, ahora funciona
+SQL> spool off

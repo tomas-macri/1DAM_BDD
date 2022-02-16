@@ -1,0 +1,74 @@
+SQL> create table kk (nombre VARCHAR(15), edad NUMBER(2));
+
+Tabla creada.
+
+SQL> delete table kk
+  2  
+SQL> 
+SQL> delete table kk;
+delete table kk
+       *
+ERROR en línea 1:
+ORA-00903: nombre de tabla no válido 
+
+
+SQL> delete table kk ;
+delete table kk 
+       *
+ERROR en línea 1:
+ORA-00903: nombre de tabla no válido 
+
+
+SQL> ls
+SP2-0042: comando desconocido "ls" - resto de la línea ignorado.
+SQL> clear
+SQL> desc kk
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ NOMBRE                                             VARCHAR2(15)
+ EDAD                                               NUMBER(2)
+
+SQL> rem los comentarios son con losing my religion
+SQL> insert into kk nombre=prueba, edad=15;
+insert into kk nombre=prueba, edad=15
+                     *
+ERROR en línea 1:
+ORA-00926: falta la palabra clave VALUES 
+
+
+SQL> insert into kk VALUES nombre=prueba, edad=15;
+insert into kk VALUES nombre=prueba, edad=15
+                            *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> desc kk
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ NOMBRE                                             VARCHAR2(15)
+ EDAD                                               NUMBER(2)
+
+SQL> select * from kk
+  2  ;
+
+ninguna fila seleccionada
+
+SQL> select * from kk
+  2  ;
+
+ninguna fila seleccionada
+
+SQL> select * from kk;
+
+ninguna fila seleccionada
+
+SQL> insert into kk (NOMBRE, EDAD) VALUES (prueba, 16);
+insert into kk (NOMBRE, EDAD) VALUES (prueba, 16)
+                                      *
+ERROR en línea 1:
+ORA-00984: columna no permitida aquí 
+
+
+SQL> clear
+SQL> spool off

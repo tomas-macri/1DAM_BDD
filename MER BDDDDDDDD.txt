@@ -1,0 +1,41 @@
+MER del funcionamiento de una sede del gimnasio
+- Cada sede tendrá una cantidad de socios los cuales participarán de clases dada por profesores.
+- Los profesores pueden ser de 3 tipos: spinning, zumba y maquinas 
+- Solamente habrá clases de spinning y zumba 
+- En cada sede habrá un departamento de equipos y mantenimiento el cual estará compuesto por 
+empleados los cuales serán personal de limpieza o técnico.
+- Tambien habrá un departamento de RRHH cuyos empleados podrán ser Recepcionistas y/o empleado de RRHH (!arco)
+- Todos los departamentos se reportarán con el director de la sede en reuniones.
+
+SOCIOS
+asistir
+
+CLASES
+asistir
+
+
+PROFESORES --> ... spin ... zumba ... maquinas 
+prof--> 3 clases --> SER JEFE
+asistir
+reportarse
+
+EQUIPOS --> ... limpieza ... tecnico
+reportarse
+
+RR.HH --> ..Recepcionista ..Empleado !arco
+reportarse
+
+DIRECTOR
+reportarse
+
+
+
+
+
+
+
+
+
+//MER del funcionamiento de las finanzas de la empresa
+
+ 

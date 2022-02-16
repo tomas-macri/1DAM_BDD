@@ -1,0 +1,214 @@
+SQL> rem creo que emple no guardo nada
+SQL> select table_name from user_tables;
+
+TABLE_NAME                                                                      
+------------------------------                                                  
+DEPART                                                                          
+KK                                                                              
+EMPLE                                                                           
+
+SQL> select * from emple;
+
+ninguna fila seleccionada
+
+SQL> INSERT INTO EMPLE VALUES (7369,'SµNCHEZ','EMPLEADO',7902,'17/12/1980',104000,NULL,20);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7499,'ARROYO','VENDEDOR',7698,'20/02/1980',208000,39000,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7521,'SALA','VENDEDOR',7698,'22/02/1981',162500,65000,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7566,'JIMÔNEZ','DIRECTOR',7839,'02/04/1981',386750,NULL,20);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7654,'MARTÖN','VENDEDOR',7698,'29/09/1981',162500,182000,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7698,'NEGRO','DIRECTOR',7839,'01/05/1981',370500,NULL,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7782,'CEREZO','DIRECTOR',7839,'09/06/1981',318500,NULL,10);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7788,'GIL','ANALISTA',7566,'09/11/1981',390000,NULL,20);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7839,'REY','PRESIDENTE',NULL,'17/11/1981',50000,NULL,10);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7844,'TOVAR','VENDEDOR',7698,'08/09/1981',195000,0,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7876,'ALONSO','EMPLEADO',7788,'23/09/1981',143000,NULL,20);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7900,'JIMENO','EMPLEADO',7698,'03/12/1981',123500,NULL,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7902,'FERNµNDEZ','ANALISTA',7566,'03/12/1981',390000,NULL,20);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7934,'MU¥OZ','EMPLEADO',7782,'23/01/1982',169000,NULL,10);
+
+1 fila creada.
+
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                 
+        20                                                                      
+                                                                                
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000      
+        30                                                                      
+                                                                                
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000      
+        30                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                 
+        20                                                                      
+                                                                                
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000      
+        30                                                                      
+                                                                                
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                 
+        30                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                 
+        10                                                                      
+                                                                                
+      7788 GIL        ANALISTA         7566 09/11/81     390000                 
+        20                                                                      
+                                                                                
+      7839 REY        PRESIDENTE            17/11/81      50000                 
+        10                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0      
+        30                                                                      
+                                                                                
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                 
+        20                                                                      
+                                                                                
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                 
+        30                                                                      
+                                                                                
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                 
+        20                                                                      
+                                                                                
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                 
+        10                                                                      
+                                                                                
+
+14 filas seleccionadas.
+
+SQL> set pagesize 150
+SQL> set linesize 150
+SQL> select * from depart;
+
+   DEPT_NO DNOMBRE        LOC                                                                                                                         
+---------- -------------- --------------                                                                                                              
+        10 CONTABILIDAD   SEVILLA                                                                                                                     
+        20 INVESTIGACIàN  MADRID                                                                                                                      
+        30 VENTAS         BARCELONA                                                                                                                   
+        40 PRODUCCIàN     BILBAO                                                                                                                      
+
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                 
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                 
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                 
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                 
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                 
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                 
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                 
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                 
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                 
+      7788 GIL        ANALISTA         7566 09/11/81     390000                    20                                                                 
+      7839 REY        PRESIDENTE            17/11/81      50000                    10                                                                 
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                 
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                 
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                 
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                    20                                                                 
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                    10                                                                 
+
+14 filas seleccionadas.
+
+SQL> desc kk
+ Nombre                                                                              ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ NOMBRE                                                                                       VARCHAR2(15)
+ EDAD                                                                                         NUMBER(2)
+
+SQL> insert into kk values ('tomas', 20);
+
+1 fila creada.
+
+SQL> insert into kk values ('alfonso', 19);
+
+1 fila creada.
+
+SQL> insert into kk values ('marina', 21);
+
+1 fila creada.
+
+SQL> insert into kk values ('made', 20);
+
+1 fila creada.
+
+SQL> insert into kk values ('paula', 20);
+
+1 fila creada.
+
+SQL> select * from kk;
+
+NOMBRE                EDAD                                                                                                                            
+--------------- ----------                                                                                                                            
+prueba                  15                                                                                                                            
+tomas                   20                                                                                                                            
+alfonso                 19                                                                                                                            
+marina                  21                                                                                                                            
+made                    20                                                                                                                            
+paula                   20                                                                                                                            
+
+6 filas seleccionadas.
+
+SQL> rem hubo quilombo con los permisos
+SQL> rem desconecto empiezo otro spool
+SQL> spool off

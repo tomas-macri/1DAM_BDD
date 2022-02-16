@@ -1,0 +1,390 @@
+SQL> rem me quede en libreria con sus ciudades
+SQL> rem asi quedaba
+SQL> select * from libreria;
+
+TEMA            E EJEMPLARES CIUDAD                                             
+--------------- - ---------- --------------------                               
+Inform tica     A         15 Madrid                                             
+Econom¡a        A         10 Cuenca                                             
+Deportes        B          8 Cuenca                                             
+Filosof¡a       C          7 Madrid                                             
+Dibujo          C         10 Barcelona                                          
+Medicina        C         16 Cuenca                                             
+Biolog¡a        A         11 Cuenca                                             
+Geolog¡a        D          7 Cuenca                                             
+Sociedad        D          9 Madrid                                             
+Labores         B         20 Cuenca                                             
+Jardiner¡a      E          6 Barcelona                                          
+
+11 filas seleccionadas.
+
+SQL> seect * from kk;
+SP2-0734: inicio "seect * fr..." de comando desconocido - resto de la línea ignorado.
+SQL> select * from kk;
+
+NOMBRE                EDAD        DNI                                           
+--------------- ---------- ----------                                           
+thor                    42                                                      
+tony                    45   43082463                                           
+steve                   99                                                      
+
+SQL> desc emple
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                    NOT NULL NUMBER(4)
+ APELLIDO                                           VARCHAR2(10)
+ OFICIO                                             VARCHAR2(10)
+ DIR                                                NUMBER(4)
+ FECHA_ALT                                          DATE
+ SALARIO                                            NUMBER(10)
+ COMISION                                           NUMBER(10)
+ DEPT_NO                                            NUMBER(2)
+
+SQL> select apellido, oficio from emple;
+
+APELLIDO   OFICIO                                                               
+---------- ----------                                                           
+SµNCHEZ    EMPLEADO                                                             
+ARROYO     VENDEDOR                                                             
+SALA       VENDEDOR                                                             
+JIMÔNEZ    DIRECTOR                                                             
+MARTÖN     VENDEDOR                                                             
+NEGRO      DIRECTOR                                                             
+CEREZO     DIRECTOR                                                             
+GIL        ANALISTA                                                             
+REY        PRESIDENTE                                                           
+TOVAR      VENDEDOR                                                             
+ALONSO     EMPLEADO                                                             
+
+APELLIDO   OFICIO                                                               
+---------- ----------                                                           
+JIMENO     EMPLEADO                                                             
+FERNµNDEZ  ANALISTA                                                             
+MU¥OZ      EMPLEADO                                                             
+
+14 filas seleccionadas.
+
+SQL> set pagesize 300
+SQL> set linesize 300
+SQL> select apellido, oficio from emple;
+
+APELLIDO   OFICIO                                                                                                                                                                                                                                                                                           
+---------- ----------                                                                                                                                                                                                                                                                                       
+SµNCHEZ    EMPLEADO                                                                                                                                                                                                                                                                                         
+ARROYO     VENDEDOR                                                                                                                                                                                                                                                                                         
+SALA       VENDEDOR                                                                                                                                                                                                                                                                                         
+JIMÔNEZ    DIRECTOR                                                                                                                                                                                                                                                                                         
+MARTÖN     VENDEDOR                                                                                                                                                                                                                                                                                         
+NEGRO      DIRECTOR                                                                                                                                                                                                                                                                                         
+CEREZO     DIRECTOR                                                                                                                                                                                                                                                                                         
+GIL        ANALISTA                                                                                                                                                                                                                                                                                         
+REY        PRESIDENTE                                                                                                                                                                                                                                                                                       
+TOVAR      VENDEDOR                                                                                                                                                                                                                                                                                         
+ALONSO     EMPLEADO                                                                                                                                                                                                                                                                                         
+JIMENO     EMPLEADO                                                                                                                                                                                                                                                                                         
+FERNµNDEZ  ANALISTA                                                                                                                                                                                                                                                                                         
+MU¥OZ      EMPLEADO                                                                                                                                                                                                                                                                                         
+
+14 filas seleccionadas.
+
+SQL> select apellido and salrio from emple;
+select apellido and salrio from emple
+                *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> select apellido, salrio from emple;
+select apellido, salrio from emple
+                 *
+ERROR en línea 1:
+ORA-00904: "SALRIO": identificador no válido 
+
+
+SQL> select apellido, salario from emple;
+
+APELLIDO      SALARIO                                                                                                                                                                                                                                                                                       
+---------- ----------                                                                                                                                                                                                                                                                                       
+SµNCHEZ        104000                                                                                                                                                                                                                                                                                       
+ARROYO         208000                                                                                                                                                                                                                                                                                       
+SALA           162500                                                                                                                                                                                                                                                                                       
+JIMÔNEZ        386750                                                                                                                                                                                                                                                                                       
+MARTÖN         162500                                                                                                                                                                                                                                                                                       
+NEGRO          370500                                                                                                                                                                                                                                                                                       
+CEREZO         318500                                                                                                                                                                                                                                                                                       
+GIL            390000                                                                                                                                                                                                                                                                                       
+REY             50000                                                                                                                                                                                                                                                                                       
+TOVAR          195000                                                                                                                                                                                                                                                                                       
+ALONSO         143000                                                                                                                                                                                                                                                                                       
+JIMENO         123500                                                                                                                                                                                                                                                                                       
+FERNµNDEZ      390000                                                                                                                                                                                                                                                                                       
+MU¥OZ          169000                                                                                                                                                                                                                                                                                       
+
+14 filas seleccionadas.
+
+SQL> rem esto es no recuperar todos los atributos de una tabla
+SQL> select salario, apellido order by salario;
+select salario, apellido order by salario
+                         *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> select salario, apellido from emple order by salario asc;
+
+   SALARIO APELLIDO                                                                                                                                                                                                                                                                                         
+---------- ----------                                                                                                                                                                                                                                                                                       
+     50000 REY                                                                                                                                                                                                                                                                                              
+    104000 SµNCHEZ                                                                                                                                                                                                                                                                                          
+    123500 JIMENO                                                                                                                                                                                                                                                                                           
+    143000 ALONSO                                                                                                                                                                                                                                                                                           
+    162500 SALA                                                                                                                                                                                                                                                                                             
+    162500 MARTÖN                                                                                                                                                                                                                                                                                           
+    169000 MU¥OZ                                                                                                                                                                                                                                                                                            
+    195000 TOVAR                                                                                                                                                                                                                                                                                            
+    208000 ARROYO                                                                                                                                                                                                                                                                                           
+    318500 CEREZO                                                                                                                                                                                                                                                                                           
+    370500 NEGRO                                                                                                                                                                                                                                                                                            
+    386750 JIMÔNEZ                                                                                                                                                                                                                                                                                          
+    390000 FERNµNDEZ                                                                                                                                                                                                                                                                                        
+    390000 GIL                                                                                                                                                                                                                                                                                              
+
+14 filas seleccionadas.
+
+SQL> rem hay que sacar el apellido, el salrio y el salario+= 0.1*salario
+SQL> select salario, apellido, salario + (salario*0.1) from emple;
+
+   SALARIO APELLIDO   SALARIO+(SALARIO*0.1)                                                                                                                                                                                                                                                                 
+---------- ---------- ---------------------                                                                                                                                                                                                                                                                 
+    104000 SµNCHEZ                   114400                                                                                                                                                                                                                                                                 
+    208000 ARROYO                    228800                                                                                                                                                                                                                                                                 
+    162500 SALA                      178750                                                                                                                                                                                                                                                                 
+    386750 JIMÔNEZ                   425425                                                                                                                                                                                                                                                                 
+    162500 MARTÖN                    178750                                                                                                                                                                                                                                                                 
+    370500 NEGRO                     407550                                                                                                                                                                                                                                                                 
+    318500 CEREZO                    350350                                                                                                                                                                                                                                                                 
+    390000 GIL                       429000                                                                                                                                                                                                                                                                 
+     50000 REY                        55000                                                                                                                                                                                                                                                                 
+    195000 TOVAR                     214500                                                                                                                                                                                                                                                                 
+    143000 ALONSO                    157300                                                                                                                                                                                                                                                                 
+    123500 JIMENO                    135850                                                                                                                                                                                                                                                                 
+    390000 FERNµNDEZ                 429000                                                                                                                                                                                                                                                                 
+    169000 MU¥OZ                     185900                                                                                                                                                                                                                                                                 
+
+14 filas seleccionadas.
+
+SQL> select table_name from user_tables;
+
+TABLE_NAME                                                                                                                                                                                                                                                                                                  
+------------------------------                                                                                                                                                                                                                                                                              
+DEPART                                                                                                                                                                                                                                                                                                      
+EMPLE                                                                                                                                                                                                                                                                                                       
+KK                                                                                                                                                                                                                                                                                                          
+MEABURRO                                                                                                                                                                                                                                                                                                    
+LIBRERIA                                                                                                                                                                                                                                                                                                    
+ALUMNOS                                                                                                                                                                                                                                                                                                     
+ASIGNATURAS                                                                                                                                                                                                                                                                                                 
+NOTAS                                                                                                                                                                                                                                                                                                       
+
+8 filas seleccionadas.
+
+SQL> rem lo mismo pero que el nombre de la columna sea incremento
+SQL> select salario, apellido, salario + (salario*0.1) incremento from emple;
+
+   SALARIO APELLIDO   INCREMENTO                                                                                                                                                                                                                                                                            
+---------- ---------- ----------                                                                                                                                                                                                                                                                            
+    104000 SµNCHEZ        114400                                                                                                                                                                                                                                                                            
+    208000 ARROYO         228800                                                                                                                                                                                                                                                                            
+    162500 SALA           178750                                                                                                                                                                                                                                                                            
+    386750 JIMÔNEZ        425425                                                                                                                                                                                                                                                                            
+    162500 MARTÖN         178750                                                                                                                                                                                                                                                                            
+    370500 NEGRO          407550                                                                                                                                                                                                                                                                            
+    318500 CEREZO         350350                                                                                                                                                                                                                                                                            
+    390000 GIL            429000                                                                                                                                                                                                                                                                            
+     50000 REY             55000                                                                                                                                                                                                                                                                            
+    195000 TOVAR          214500                                                                                                                                                                                                                                                                            
+    143000 ALONSO         157300                                                                                                                                                                                                                                                                            
+    123500 JIMENO         135850                                                                                                                                                                                                                                                                            
+    390000 FERNµNDEZ      429000                                                                                                                                                                                                                                                                            
+    169000 MU¥OZ          185900                                                                                                                                                                                                                                                                            
+
+14 filas seleccionadas.
+
+SQL> rem cambio apellido por nombre
+SQL> 
+SQL> select salario, apellido nombreeeeee, salario + (salario*0.1) incremento from emple;
+
+   SALARIO NOMBREEEEE INCREMENTO                                                                                                                                                                                                                                                                            
+---------- ---------- ----------                                                                                                                                                                                                                                                                            
+    104000 SµNCHEZ        114400                                                                                                                                                                                                                                                                            
+    208000 ARROYO         228800                                                                                                                                                                                                                                                                            
+    162500 SALA           178750                                                                                                                                                                                                                                                                            
+    386750 JIMÔNEZ        425425                                                                                                                                                                                                                                                                            
+    162500 MARTÖN         178750                                                                                                                                                                                                                                                                            
+    370500 NEGRO          407550                                                                                                                                                                                                                                                                            
+    318500 CEREZO         350350                                                                                                                                                                                                                                                                            
+    390000 GIL            429000                                                                                                                                                                                                                                                                            
+     50000 REY             55000                                                                                                                                                                                                                                                                            
+    195000 TOVAR          214500                                                                                                                                                                                                                                                                            
+    143000 ALONSO         157300                                                                                                                                                                                                                                                                            
+    123500 JIMENO         135850                                                                                                                                                                                                                                                                            
+    390000 FERNµNDEZ      429000                                                                                                                                                                                                                                                                            
+    169000 MU¥OZ          185900                                                                                                                                                                                                                                                                            
+
+14 filas seleccionadas.
+
+SQL> select salario, apellido nombre, salario + (salario/12) salario_menusal from emple;
+
+   SALARIO NOMBRE     SALARIO_MENUSAL                                                                                                                                                                                                                                                                       
+---------- ---------- ---------------                                                                                                                                                                                                                                                                       
+    104000 SµNCHEZ         112666,667                                                                                                                                                                                                                                                                       
+    208000 ARROYO          225333,333                                                                                                                                                                                                                                                                       
+    162500 SALA            176041,667                                                                                                                                                                                                                                                                       
+    386750 JIMÔNEZ         418979,167                                                                                                                                                                                                                                                                       
+    162500 MARTÖN          176041,667                                                                                                                                                                                                                                                                       
+    370500 NEGRO               401375                                                                                                                                                                                                                                                                       
+    318500 CEREZO          345041,667                                                                                                                                                                                                                                                                       
+    390000 GIL                 422500                                                                                                                                                                                                                                                                       
+     50000 REY             54166,6667                                                                                                                                                                                                                                                                       
+    195000 TOVAR               211250                                                                                                                                                                                                                                                                       
+    143000 ALONSO          154916,667                                                                                                                                                                                                                                                                       
+    123500 JIMENO          133791,667                                                                                                                                                                                                                                                                       
+    390000 FERNµNDEZ           422500                                                                                                                                                                                                                                                                       
+    169000 MU¥OZ           183083,333                                                                                                                                                                                                                                                                       
+
+14 filas seleccionadas.
+
+SQL> apellido nombre, salario, (salario/12) salario_menusal from emple;
+SP2-0734: inicio "apellido n..." de comando desconocido - resto de la línea ignorado.
+SQL> select apellido nombre, salario, (salario/12) salario_menusal from emple;
+
+NOMBRE        SALARIO SALARIO_MENUSAL                                                                                                                                                                                                                                                                       
+---------- ---------- ---------------                                                                                                                                                                                                                                                                       
+SµNCHEZ        104000      8666,66667                                                                                                                                                                                                                                                                       
+ARROYO         208000      17333,3333                                                                                                                                                                                                                                                                       
+SALA           162500      13541,6667                                                                                                                                                                                                                                                                       
+JIMÔNEZ        386750      32229,1667                                                                                                                                                                                                                                                                       
+MARTÖN         162500      13541,6667                                                                                                                                                                                                                                                                       
+NEGRO          370500           30875                                                                                                                                                                                                                                                                       
+CEREZO         318500      26541,6667                                                                                                                                                                                                                                                                       
+GIL            390000           32500                                                                                                                                                                                                                                                                       
+REY             50000      4166,66667                                                                                                                                                                                                                                                                       
+TOVAR          195000           16250                                                                                                                                                                                                                                                                       
+ALONSO         143000      11916,6667                                                                                                                                                                                                                                                                       
+JIMENO         123500      10291,6667                                                                                                                                                                                                                                                                       
+FERNµNDEZ      390000           32500                                                                                                                                                                                                                                                                       
+MU¥OZ          169000      14083,3333                                                                                                                                                                                                                                                                       
+
+14 filas seleccionadas.
+
+SQL> rem pruebo el like
+SQL> select * from emple where apellido like ='S';
+select * from emple where apellido like ='S'
+                                        *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select apellido nombre, salario where salario > 100000;
+select apellido nombre, salario where salario > 100000
+                                *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> select apellido nombre, salario from emple where salario > 100000;
+
+NOMBRE        SALARIO                                                                                                                                                                                                                                                                                       
+---------- ----------                                                                                                                                                                                                                                                                                       
+SµNCHEZ        104000                                                                                                                                                                                                                                                                                       
+ARROYO         208000                                                                                                                                                                                                                                                                                       
+SALA           162500                                                                                                                                                                                                                                                                                       
+JIMÔNEZ        386750                                                                                                                                                                                                                                                                                       
+MARTÖN         162500                                                                                                                                                                                                                                                                                       
+NEGRO          370500                                                                                                                                                                                                                                                                                       
+CEREZO         318500                                                                                                                                                                                                                                                                                       
+GIL            390000                                                                                                                                                                                                                                                                                       
+TOVAR          195000                                                                                                                                                                                                                                                                                       
+ALONSO         143000                                                                                                                                                                                                                                                                                       
+JIMENO         123500                                                                                                                                                                                                                                                                                       
+FERNµNDEZ      390000                                                                                                                                                                                                                                                                                       
+MU¥OZ          169000                                                                                                                                                                                                                                                                                       
+
+13 filas seleccionadas.
+
+SQL> select apellido nombre, salario from emple where salario > 300000;
+
+NOMBRE        SALARIO                                                                                                                                                                                                                                                                                       
+---------- ----------                                                                                                                                                                                                                                                                                       
+JIMÔNEZ        386750                                                                                                                                                                                                                                                                                       
+NEGRO          370500                                                                                                                                                                                                                                                                                       
+CEREZO         318500                                                                                                                                                                                                                                                                                       
+GIL            390000                                                                                                                                                                                                                                                                                       
+FERNµNDEZ      390000                                                                                                                                                                                                                                                                                       
+
+SQL> rem solo se muestran los que ganan mas de 300.000
+SQL> select apellido nombre, salario, (salario/12) salario_menusal from emple where (salario/12) > 30000;
+
+NOMBRE        SALARIO SALARIO_MENUSAL                                                                                                                                                                                                                                                                       
+---------- ---------- ---------------                                                                                                                                                                                                                                                                       
+JIMÔNEZ        386750      32229,1667                                                                                                                                                                                                                                                                       
+NEGRO          370500           30875                                                                                                                                                                                                                                                                       
+GIL            390000           32500                                                                                                                                                                                                                                                                       
+FERNµNDEZ      390000           32500                                                                                                                                                                                                                                                                       
+
+SQL> select apellido nombre, salario, (salario/12) salario_menusal from emple where (salario/12) > 30000 order by apellido;
+
+NOMBRE        SALARIO SALARIO_MENUSAL                                                                                                                                                                                                                                                                       
+---------- ---------- ---------------                                                                                                                                                                                                                                                                       
+FERNµNDEZ      390000           32500                                                                                                                                                                                                                                                                       
+GIL            390000           32500                                                                                                                                                                                                                                                                       
+JIMÔNEZ        386750      32229,1667                                                                                                                                                                                                                                                                       
+NEGRO          370500           30875                                                                                                                                                                                                                                                                       
+
+SQL> rem order by el atributo por el cual los quiero ordenar
+SQL> select apellido nombre, salario, (salario/12) salario_menusal from emple where (salario/12) > 30000 order by apellido desc;
+
+NOMBRE        SALARIO SALARIO_MENUSAL                                                                                                                                                                                                                                                                       
+---------- ---------- ---------------                                                                                                                                                                                                                                                                       
+NEGRO          370500           30875                                                                                                                                                                                                                                                                       
+JIMÔNEZ        386750      32229,1667                                                                                                                                                                                                                                                                       
+GIL            390000           32500                                                                                                                                                                                                                                                                       
+FERNµNDEZ      390000           32500                                                                                                                                                                                                                                                                       
+
+SQL> rem el desc es para hacerlo descendente
+SQL> select apellido nombre, salario, (salario/12) salario_menusal from emple where (salario/12) > 30000 order by salario desc;
+
+NOMBRE        SALARIO SALARIO_MENUSAL                                                                                                                                                                                                                                                                       
+---------- ---------- ---------------                                                                                                                                                                                                                                                                       
+FERNµNDEZ      390000           32500                                                                                                                                                                                                                                                                       
+GIL            390000           32500                                                                                                                                                                                                                                                                       
+JIMÔNEZ        386750      32229,1667                                                                                                                                                                                                                                                                       
+NEGRO          370500           30875                                                                                                                                                                                                                                                                       
+
+SQL> rem order by con order bue te ordena los dos conceptos
+SQL> rem ver a fernandez y a gil
+SQL> select apellido nombre, salario, (salario/12) salario_menusal from emple where (salario/12) > 30000 order by salario desc order by apellido desc;
+select apellido nombre, salario, (salario/12) salario_menusal from emple where (salario/12) > 30000 order by salario desc order by apellido desc
+                                                                                                                          *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> select apellido nombre, salario, (salario/12) salario_menusal from emple where (salario/12) > 30000 order by salario desc apellido desc;
+select apellido nombre, salario, (salario/12) salario_menusal from emple where (salario/12) > 30000 order by salario desc apellido desc
+                                                                                                                          *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> select apellido nombre, salario, (salario/12) salario_menusal from emple where (salario/12) > 30000 order by salario desc, apellido desc;
+
+NOMBRE        SALARIO SALARIO_MENUSAL                                                                                                                                                                                                                                                                       
+---------- ---------- ---------------                                                                                                                                                                                                                                                                       
+GIL            390000           32500                                                                                                                                                                                                                                                                       
+FERNµNDEZ      390000           32500                                                                                                                                                                                                                                                                       
+JIMÔNEZ        386750      32229,1667                                                                                                                                                                                                                                                                       
+NEGRO          370500           30875                                                                                                                                                                                                                                                                       
+
+SQL> rem listo por hoy
+SQL> spool off

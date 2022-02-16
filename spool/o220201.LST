@@ -1,0 +1,324 @@
+SQL> rem hoja de ejercicios 2
+SQL> rem tabla alumnos 2
+SQL> select * from alumnos2;
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    123456 Juan Miguel Soler Bakero                           Murcia                                             10/10/95 Gran V¡a 2 4a                                               1 ESO                15                                                                                               
+    654321 Laura G¢mez Fern ndez                              Lorca                                              10/05/94 Junterones 10 5B                                            2 ESO                25                                                                                               
+    765432 Beatriz Mart¡nez Hern ndez                         Murcia                                             05/05/93 Plaza Mayor 6 3B                                            3 ESO                 5                                                                                               
+    987654 Diego Mart¡n Llorente                              Alhama de Murcia                                   03/06/90 Diego de la Cierva 5 7A                                     1 BACHILLER          34                                                                                               
+    445544 Juan Francisco Cano Riquelme                       Murcia                                             01/07/92 Plaza de Belluga 3 4A                                       4 ESO                13                                                                                               
+    223322 Raquel Riquelme Rubio                              Lorca                                              23/11/90 San Juan 14 3B                                              1 BACHILLER           7                                                                                               
+   9988877 Cristina S nchez Bermejo                           Murcia                                             19/03/95 Torre de Romo 7                                             1 ESO                 1                                                                                               
+    334455 Pedro Jes£s Rodr¡guez Soler                        Alhama de Murcia                                   10/03/94 Camino de Badel 4                                           2 ESO                11                                                                                               
+    334400 Javier Ram nez Rodr¡guez                           Murcia                                             27/05/93 Gran V¡a 4 3A                                               3 ESO                 0                                                                                               
+    993322 Gema Rubio Colero                                  Lorca                                              09/09/92 Plaza Fuensanta 5 7A                                        1 BACHILLER          19                                                                                               
+    554411 Joaqu¡n Hern ndez Gonz lez                         Lorca                                              12/12/91 Junterones 4 5A                                             2 BACHILLER          14                                                                                               
+
+11 filas seleccionadas.
+
+SQL> rem -- 1) Muestra todos los datos de todos los alumnos.
+SQL> select * from alumnos2;
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    123456 Juan Miguel Soler Bakero                           Murcia                                             10/10/95 Gran V¡a 2 4a                                               1 ESO                15                                                                                               
+    654321 Laura G¢mez Fern ndez                              Lorca                                              10/05/94 Junterones 10 5B                                            2 ESO                25                                                                                               
+    765432 Beatriz Mart¡nez Hern ndez                         Murcia                                             05/05/93 Plaza Mayor 6 3B                                            3 ESO                 5                                                                                               
+    987654 Diego Mart¡n Llorente                              Alhama de Murcia                                   03/06/90 Diego de la Cierva 5 7A                                     1 BACHILLER          34                                                                                               
+    445544 Juan Francisco Cano Riquelme                       Murcia                                             01/07/92 Plaza de Belluga 3 4A                                       4 ESO                13                                                                                               
+    223322 Raquel Riquelme Rubio                              Lorca                                              23/11/90 San Juan 14 3B                                              1 BACHILLER           7                                                                                               
+   9988877 Cristina S nchez Bermejo                           Murcia                                             19/03/95 Torre de Romo 7                                             1 ESO                 1                                                                                               
+    334455 Pedro Jes£s Rodr¡guez Soler                        Alhama de Murcia                                   10/03/94 Camino de Badel 4                                           2 ESO                11                                                                                               
+    334400 Javier Ram nez Rodr¡guez                           Murcia                                             27/05/93 Gran V¡a 4 3A                                               3 ESO                 0                                                                                               
+    993322 Gema Rubio Colero                                  Lorca                                              09/09/92 Plaza Fuensanta 5 7A                                        1 BACHILLER          19                                                                                               
+    554411 Joaqu¡n Hern ndez Gonz lez                         Lorca                                              12/12/91 Junterones 4 5A                                             2 BACHILLER          14                                                                                               
+
+11 filas seleccionadas.
+
+SQL> rem -- 2) Muestra el nombre , localidad y fecha de nacimiento de todos los alumnos.
+SQL> select nombre, localidad, fecha_na from alumnos2;
+select nombre, localidad, fecha_na from alumnos2
+                          *
+ERROR en línea 1:
+ORA-00904: "FECHA_NA": identificador no válido 
+
+
+SQL> select nombre, localidad, fecha_nac from alumnos2;
+
+NOMBRE                                             LOCALIDAD                                          FECHA_NA                                                                                                                                                                                              
+-------------------------------------------------- -------------------------------------------------- --------                                                                                                                                                                                              
+Juan Miguel Soler Bakero                           Murcia                                             10/10/95                                                                                                                                                                                              
+Laura G¢mez Fern ndez                              Lorca                                              10/05/94                                                                                                                                                                                              
+Beatriz Mart¡nez Hern ndez                         Murcia                                             05/05/93                                                                                                                                                                                              
+Diego Mart¡n Llorente                              Alhama de Murcia                                   03/06/90                                                                                                                                                                                              
+Juan Francisco Cano Riquelme                       Murcia                                             01/07/92                                                                                                                                                                                              
+Raquel Riquelme Rubio                              Lorca                                              23/11/90                                                                                                                                                                                              
+Cristina S nchez Bermejo                           Murcia                                             19/03/95                                                                                                                                                                                              
+Pedro Jes£s Rodr¡guez Soler                        Alhama de Murcia                                   10/03/94                                                                                                                                                                                              
+Javier Ram nez Rodr¡guez                           Murcia                                             27/05/93                                                                                                                                                                                              
+Gema Rubio Colero                                  Lorca                                              09/09/92                                                                                                                                                                                              
+Joaqu¡n Hern ndez Gonz lez                         Lorca                                              12/12/91                                                                                                                                                                                              
+
+11 filas seleccionadas.
+
+SQL> rem -- 3) Muestra el nombre de todos los alumnos. En el resultado de la consulta, la columna "Nombre" debe aparecer con la etiqueta "Nombre y apellidos" (ALIAS DE COLUMNAS).
+SQL> select nombre nombre_y_apellidos from alumnos;
+select nombre nombre_y_apellidos from alumnos
+       *
+ERROR en línea 1:
+ORA-00904: "NOMBRE": identificador no válido 
+
+
+SQL> select nombre nombre_y_apellidos from alumnos2;
+
+NOMBRE_Y_APELLIDOS                                                                                                                                                                                                                                                                                          
+--------------------------------------------------                                                                                                                                                                                                                                                          
+Juan Miguel Soler Bakero                                                                                                                                                                                                                                                                                    
+Laura G¢mez Fern ndez                                                                                                                                                                                                                                                                                       
+Beatriz Mart¡nez Hern ndez                                                                                                                                                                                                                                                                                  
+Diego Mart¡n Llorente                                                                                                                                                                                                                                                                                       
+Juan Francisco Cano Riquelme                                                                                                                                                                                                                                                                                
+Raquel Riquelme Rubio                                                                                                                                                                                                                                                                                       
+Cristina S nchez Bermejo                                                                                                                                                                                                                                                                                    
+Pedro Jes£s Rodr¡guez Soler                                                                                                                                                                                                                                                                                 
+Javier Ram nez Rodr¡guez                                                                                                                                                                                                                                                                                    
+Gema Rubio Colero                                                                                                                                                                                                                                                                                           
+Joaqu¡n Hern ndez Gonz lez                                                                                                                                                                                                                                                                                  
+
+11 filas seleccionadas.
+
+SQL> rem -- 4) Obt‚n el nombre y el n£mero de faltas multiplicado por 2 de todos los alumnos (COLUMNAS CALCULADAS). En el resultado de la consulta, la columna faltas debe aparecer con la etiqueta "Faltas de asistencia" (ALIAS DE COLUMNAS)
+SQL> select nombre, faltas faltas de asistencia, faltas*2 doble de faltas from alumnos2;
+select nombre, faltas faltas de asistencia, faltas*2 doble de faltas from alumnos2
+                             *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> select nombre, faltas faltas_de_asistencia, faltas*2 doble_de_faltas from alumnos2;
+
+NOMBRE                                             FALTAS_DE_ASISTENCIA DOBLE_DE_FALTAS                                                                                                                                                                                                                     
+-------------------------------------------------- -------------------- ---------------                                                                                                                                                                                                                     
+Juan Miguel Soler Bakero                                             15              30                                                                                                                                                                                                                     
+Laura G¢mez Fern ndez                                                25              50                                                                                                                                                                                                                     
+Beatriz Mart¡nez Hern ndez                                            5              10                                                                                                                                                                                                                     
+Diego Mart¡n Llorente                                                34              68                                                                                                                                                                                                                     
+Juan Francisco Cano Riquelme                                         13              26                                                                                                                                                                                                                     
+Raquel Riquelme Rubio                                                 7              14                                                                                                                                                                                                                     
+Cristina S nchez Bermejo                                              1               2                                                                                                                                                                                                                     
+Pedro Jes£s Rodr¡guez Soler                                          11              22                                                                                                                                                                                                                     
+Javier Ram nez Rodr¡guez                                              0               0                                                                                                                                                                                                                     
+Gema Rubio Colero                                                    19              38                                                                                                                                                                                                                     
+Joaqu¡n Hern ndez Gonz lez                                           14              28                                                                                                                                                                                                                     
+
+11 filas seleccionadas.
+
+SQL> rem -- 5) Consulta los datos de los alumnos que son de Lorca.
+SQL> select * from alumnos2 where localidad='LORCA';
+
+ninguna fila seleccionada
+
+SQL> select * from alumnos2 where localidad='Lorca';
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    654321 Laura G¢mez Fern ndez                              Lorca                                              10/05/94 Junterones 10 5B                                            2 ESO                25                                                                                               
+    223322 Raquel Riquelme Rubio                              Lorca                                              23/11/90 San Juan 14 3B                                              1 BACHILLER           7                                                                                               
+    993322 Gema Rubio Colero                                  Lorca                                              09/09/92 Plaza Fuensanta 5 7A                                        1 BACHILLER          19                                                                                               
+    554411 Joaqu¡n Hern ndez Gonz lez                         Lorca                                              12/12/91 Junterones 4 5A                                             2 BACHILLER          14                                                                                               
+
+SQL> rem -- 6) Obt‚n los datos de los alumnos que son de Murcia o Alhama de Murcia.
+SQL> select * from alumnos2 where localidad='Murcia' OR localidad='Alhama de Murcia';
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    123456 Juan Miguel Soler Bakero                           Murcia                                             10/10/95 Gran V¡a 2 4a                                               1 ESO                15                                                                                               
+    765432 Beatriz Mart¡nez Hern ndez                         Murcia                                             05/05/93 Plaza Mayor 6 3B                                            3 ESO                 5                                                                                               
+    987654 Diego Mart¡n Llorente                              Alhama de Murcia                                   03/06/90 Diego de la Cierva 5 7A                                     1 BACHILLER          34                                                                                               
+    445544 Juan Francisco Cano Riquelme                       Murcia                                             01/07/92 Plaza de Belluga 3 4A                                       4 ESO                13                                                                                               
+   9988877 Cristina S nchez Bermejo                           Murcia                                             19/03/95 Torre de Romo 7                                             1 ESO                 1                                                                                               
+    334455 Pedro Jes£s Rodr¡guez Soler                        Alhama de Murcia                                   10/03/94 Camino de Badel 4                                           2 ESO                11                                                                                               
+    334400 Javier Ram nez Rodr¡guez                           Murcia                                             27/05/93 Gran V¡a 4 3A                                               3 ESO                 0                                                                                               
+
+7 filas seleccionadas.
+
+SQL> rem -- 7) Obt‚n los datos de los alumnos que son de Murcia y est n en el primer curso de E.S.O.
+SQL> select * from alumnos2 where localidad='Murcia' AND curso=1;
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    123456 Juan Miguel Soler Bakero                           Murcia                                             10/10/95 Gran V¡a 2 4a                                               1 ESO                15                                                                                               
+   9988877 Cristina S nchez Bermejo                           Murcia                                             19/03/95 Torre de Romo 7                                             1 ESO                 1                                                                                               
+
+SQL> rem -- 8) Muestra los alumnos que son de Lorca, est n en segundo curso de Bachillerato y tienen m s de 10 faltas.
+SQL> select * from alumnos2 where localidad='Lorca' AND curso=2 AND faltas>10;
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    654321 Laura G¢mez Fern ndez                              Lorca                                              10/05/94 Junterones 10 5B                                            2 ESO                25                                                                                               
+    554411 Joaqu¡n Hern ndez Gonz lez                         Lorca                                              12/12/91 Junterones 4 5A                                             2 BACHILLER          14                                                                                               
+
+SQL> rem -- 9) Obt‚n los datos de aquellos alumnos que son de Murcia ordenados por nombre.
+SQL> select * from alumnos2 where localidad='Murcia' order by nombre;
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    765432 Beatriz Mart¡nez Hern ndez                         Murcia                                             05/05/93 Plaza Mayor 6 3B                                            3 ESO                 5                                                                                               
+   9988877 Cristina S nchez Bermejo                           Murcia                                             19/03/95 Torre de Romo 7                                             1 ESO                 1                                                                                               
+    334400 Javier Ram nez Rodr¡guez                           Murcia                                             27/05/93 Gran V¡a 4 3A                                               3 ESO                 0                                                                                               
+    445544 Juan Francisco Cano Riquelme                       Murcia                                             01/07/92 Plaza de Belluga 3 4A                                       4 ESO                13                                                                                               
+    123456 Juan Miguel Soler Bakero                           Murcia                                             10/10/95 Gran V¡a 2 4a                                               1 ESO                15                                                                                               
+
+SQL> rem -- 10) Obt‚n los datos de todos los alumnos ordenados por nivel, y dentro de cada nivel por curso.
+SQL> select * from alumnos2 order by nivel, curso;
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    223322 Raquel Riquelme Rubio                              Lorca                                              23/11/90 San Juan 14 3B                                              1 BACHILLER           7                                                                                               
+    993322 Gema Rubio Colero                                  Lorca                                              09/09/92 Plaza Fuensanta 5 7A                                        1 BACHILLER          19                                                                                               
+    987654 Diego Mart¡n Llorente                              Alhama de Murcia                                   03/06/90 Diego de la Cierva 5 7A                                     1 BACHILLER          34                                                                                               
+    554411 Joaqu¡n Hern ndez Gonz lez                         Lorca                                              12/12/91 Junterones 4 5A                                             2 BACHILLER          14                                                                                               
+   9988877 Cristina S nchez Bermejo                           Murcia                                             19/03/95 Torre de Romo 7                                             1 ESO                 1                                                                                               
+    123456 Juan Miguel Soler Bakero                           Murcia                                             10/10/95 Gran V¡a 2 4a                                               1 ESO                15                                                                                               
+    334455 Pedro Jes£s Rodr¡guez Soler                        Alhama de Murcia                                   10/03/94 Camino de Badel 4                                           2 ESO                11                                                                                               
+    654321 Laura G¢mez Fern ndez                              Lorca                                              10/05/94 Junterones 10 5B                                            2 ESO                25                                                                                               
+    334400 Javier Ram nez Rodr¡guez                           Murcia                                             27/05/93 Gran V¡a 4 3A                                               3 ESO                 0                                                                                               
+    765432 Beatriz Mart¡nez Hern ndez                         Murcia                                             05/05/93 Plaza Mayor 6 3B                                            3 ESO                 5                                                                                               
+    445544 Juan Francisco Cano Riquelme                       Murcia                                             01/07/92 Plaza de Belluga 3 4A                                       4 ESO                13                                                                                               
+
+11 filas seleccionadas.
+
+SQL> rem -- 11) Muestra los datos de aquellos alumnos que tengan m s de 10 faltas en primer o segundo curso.
+SQL> select * from alumnos2 where (curso=1 or curso=2) AND faltas>10;
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    123456 Juan Miguel Soler Bakero                           Murcia                                             10/10/95 Gran V¡a 2 4a                                               1 ESO                15                                                                                               
+    654321 Laura G¢mez Fern ndez                              Lorca                                              10/05/94 Junterones 10 5B                                            2 ESO                25                                                                                               
+    987654 Diego Mart¡n Llorente                              Alhama de Murcia                                   03/06/90 Diego de la Cierva 5 7A                                     1 BACHILLER          34                                                                                               
+    334455 Pedro Jes£s Rodr¡guez Soler                        Alhama de Murcia                                   10/03/94 Camino de Badel 4                                           2 ESO                11                                                                                               
+    993322 Gema Rubio Colero                                  Lorca                                              09/09/92 Plaza Fuensanta 5 7A                                        1 BACHILLER          19                                                                                               
+    554411 Joaqu¡n Hern ndez Gonz lez                         Lorca                                              12/12/91 Junterones 4 5A                                             2 BACHILLER          14                                                                                               
+
+6 filas seleccionadas.
+
+SQL> rem  12) Muestra los datos de todos aquellos alumnos que tengan menos de 10 faltas en 3 o 4 curso y adem s sean de Murcia.
+SQL> select * from alumnos2 where (curso=3 or curso=4) AND faltas<10 AND localidad='Murcia';
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    765432 Beatriz Mart¡nez Hern ndez                         Murcia                                             05/05/93 Plaza Mayor 6 3B                                            3 ESO                 5                                                                                               
+    334400 Javier Ram nez Rodr¡guez                           Murcia                                             27/05/93 Gran V¡a 4 3A                                               3 ESO                 0                                                                                               
+
+SQL> rem -- 13) Obt‚n con una consulta todos los cursos que hay sin repeticiones (DISTINCT).
+SQL> select distinct cursos from alumnos2;
+select distinct cursos from alumnos2
+                *
+ERROR en línea 1:
+ORA-00904: "CURSOS": identificador no válido 
+
+
+SQL> select distinct curso from alumnos2;
+
+     CURSO                                                                                                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                  
+         1                                                                                                                                                                                                                                                                                                  
+         2                                                                                                                                                                                                                                                                                                  
+         4                                                                                                                                                                                                                                                                                                  
+         3                                                                                                                                                                                                                                                                                                  
+
+SQL> rem -- 14) Obt‚n los datos de los alumnos que no tengan 10 faltas en 1o de E.S.O.
+SQL> select * from alumnos2 where faltas <> 10 and curso!=1;
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    654321 Laura G¢mez Fern ndez                              Lorca                                              10/05/94 Junterones 10 5B                                            2 ESO                25                                                                                               
+    765432 Beatriz Mart¡nez Hern ndez                         Murcia                                             05/05/93 Plaza Mayor 6 3B                                            3 ESO                 5                                                                                               
+    445544 Juan Francisco Cano Riquelme                       Murcia                                             01/07/92 Plaza de Belluga 3 4A                                       4 ESO                13                                                                                               
+    334455 Pedro Jes£s Rodr¡guez Soler                        Alhama de Murcia                                   10/03/94 Camino de Badel 4                                           2 ESO                11                                                                                               
+    334400 Javier Ram nez Rodr¡guez                           Murcia                                             27/05/93 Gran V¡a 4 3A                                               3 ESO                 0                                                                                               
+    554411 Joaqu¡n Hern ndez Gonz lez                         Lorca                                              12/12/91 Junterones 4 5A                                             2 BACHILLER          14                                                                                               
+
+6 filas seleccionadas.
+
+SQL> rem -- 15) Muestra los datos de aquellos alumnos cuyo nombre empiece por la letra 'B'.
+SQL> 
+SQL> select * from alumnos2 where  nombre like 'B%';
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    765432 Beatriz Mart¡nez Hern ndez                         Murcia                                             05/05/93 Plaza Mayor 6 3B                                            3 ESO                 5                                                                                               
+
+SQL> rem -- 16) Con una consulta obt‚n los alumnos que son de Murcia y cuyo nombre termina con una letra 'O'.
+SQL> select * from alumnos2 where localidad='Murcia' nombre like '%O';
+select * from alumnos2 where localidad='Murcia' nombre like '%O'
+                                                *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> select * from alumnos2 where localidad='Murcia' and nombre like '%O';
+
+ninguna fila seleccionada
+
+SQL> rem -- 17) Muestra los datos de todos aquellos alumnos que est n en 1o curso de E.S.O. Y tienen una letra 'U' en la segunda posici¢n del nombre.
+SQL> select * from alumnos2 where curso=1 and nombre like '_U%';
+
+ninguna fila seleccionada
+
+SQL> rem -- 18) Obt‚n los datos de los alumnos cuya columna "Faltas" es nula.
+SQL> select * from alumnos2 where faltas is null;
+
+ninguna fila seleccionada
+
+SQL> rem -- 19) Muestra los datos de aquellos alumnos que tienen entre 10 y 20 faltas (BETWEEN). Ordena el resultado por nombre.
+SQL> select ^
+  2  ;
+select ^
+       *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select * from alumnos2 where faltas between 10 and 20 order by nombre;
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    993322 Gema Rubio Colero                                  Lorca                                              09/09/92 Plaza Fuensanta 5 7A                                        1 BACHILLER          19                                                                                               
+    554411 Joaqu¡n Hern ndez Gonz lez                         Lorca                                              12/12/91 Junterones 4 5A                                             2 BACHILLER          14                                                                                               
+    445544 Juan Francisco Cano Riquelme                       Murcia                                             01/07/92 Plaza de Belluga 3 4A                                       4 ESO                13                                                                                               
+    123456 Juan Miguel Soler Bakero                           Murcia                                             10/10/95 Gran V¡a 2 4a                                               1 ESO                15                                                                                               
+    334455 Pedro Jes£s Rodr¡guez Soler                        Alhama de Murcia                                   10/03/94 Camino de Badel 4                                           2 ESO                11                                                                                               
+
+SQL> rem -- 20) Muestra los datos de los alumnos que tienen entre 10 y 20 faltas y adem s son de Murcia.
+SQL> select * from alumnos2 where faltas between 10 and 20 and localidad='Murcia';
+
+EXPEDIENTE NOMBRE                                             LOCALIDAD                                          FECHA_NA DIRECCION                                               CURSO NIVEL          FALTAS                                                                                               
+---------- -------------------------------------------------- -------------------------------------------------- -------- -------------------------------------------------- ---------- ---------- ----------                                                                                               
+    123456 Juan Miguel Soler Bakero                           Murcia                                             10/10/95 Gran V¡a 2 4a                                               1 ESO                15                                                                                               
+    445544 Juan Francisco Cano Riquelme                       Murcia                                             01/07/92 Plaza de Belluga 3 4A                                       4 ESO                13                                                                                               
+
+
+
+
+
+
+
+
+REM SUBCONSULTASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+
+
+
+SQL> > select apellido, salario, salario/12 "salario menusal" from emple where salario > (select avg(salario) from emple);
+
+APELLIDO      SALARIO salario menusal
+---------- ---------- ---------------
+JIMÈNEZ        386750      32229,1667
+NEGRO          370500           30875
+CEREZO         318500      26541,6667
+GIL            390000           32500
+FERNÁNDEZ      390000           32500
+

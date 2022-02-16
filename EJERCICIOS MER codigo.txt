@@ -1,0 +1,25 @@
+- Cada proyecto estará identificado por su nombre
+
+- Los proyectos serán financiados por instituciones de las cuales almacenaremos nombre (es único), dirección y contacto:
+	- Un proyecto puede ser financiado por una o mas instituciones y cada insitución puede financiar más de un proyecto siendo importante la fecha y la cantidad de proyectos financiados.
+
+- Cada proyecto puede producir artículos de los cuales nos interesa saber su número de artículo, su título y sus autor/es.
+	(cada artículo corresponde a un solo proyecto pero un proyecto puede o no producir artículos) 
+
+- Estos artículos tratan una o más materias de las cuales nos interesa saber su código_UNESCO y su nombre.
+
+- Los proyectos tambien versan sobre una o mas materias.
+
+---------
+
+- Por otro lado, hay empleados (nos interesa saber su DNI, nombre, categoría, teléfono (puede tener hasta 2) y despacho)
+- A su vez, el empleado puede ser o no supervisor de otro empleado y podrá ser o no supervisado por otros empleados.  
+- Los empleados trabajan todo el tiempo en al menos 1 proyecto pero no lo hacen en mas de 3 a la vez. Puede haber más de un empleado trabajando en un mimso proyecto.
+- Además, los empleados pueden o no investigar sobre otros proyectos pero no podrán hacerlo con más de 3 proyectos a la vez.
+
+
+
+
+
+SALAS X CLASE X PROFESORES
+	
