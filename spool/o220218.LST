@@ -1,0 +1,345 @@
+SQL> rem REM 7.- A partir de las tablas EMPLE y DEPART, visualizar el n£mero de departamento y el nombre de departamento que tenga m s empleados cuyo oficio sea 'EMPLEADO'
+SQL> desc emple
+ Nombre                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ EMP_NO                                                                                                                                                                        NOT NULL NUMBER(4)
+ APELLIDO                                                                                                                                                                               VARCHAR2(10)
+ OFICIO                                                                                                                                                                                 VARCHAR2(10)
+ DIR                                                                                                                                                                                    NUMBER(4)
+ FECHA_ALT                                                                                                                                                                              DATE
+ SALARIO                                                                                                                                                                                NUMBER(10)
+ COMISION                                                                                                                                                                               NUMBER(10)
+ DEPT_NO                                                                                                                                                                                NUMBER(2)
+
+SQL> set linesize 150
+SQL> set pagesize 150
+SQL> select * from emple
+  2  ;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                 
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                 
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                 
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                 
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                 
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                 
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                 
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                 
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                 
+      7788 GIL        ANALISTA         7566 09/11/81     390000                    20                                                                 
+      7839 REY        PRESIDENTE            17/11/81      50000                    10                                                                 
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                 
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                 
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                 
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                    20                                                                 
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                    10                                                                 
+
+14 filas seleccionadas.
+
+SQL> rem REM 7.- A partir de las tablas EMPLE y DEPART, visualizar el n£mero de departamento y el nombre de departamento que tenga m s empleados cuyo oficio sea 'EMPLEADO'
+SQL> select * from depart;
+
+   DEPT_NO DNOMBRE        LOC                                                                                                                         
+---------- -------------- --------------                                                                                                              
+        10 CONTABILIDAD   SEVILLA                                                                                                                     
+        20 INVESTIGACIàN  MADRID                                                                                                                      
+        30 VENTAS         BARCELONA                                                                                                                   
+        40 PRODUCCIàN     BILBAO                                                                                                                      
+
+SQL> desc dept
+ERROR:
+ORA-04043: el objeto dept no existe 
+
+
+SQL> desc depart
+ Nombre                                                                              ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ DEPT_NO                                                                             NOT NULL NUMBER(2)
+ DNOMBRE                                                                                      VARCHAR2(14)
+ LOC                                                                                          VARCHAR2(14)
+
+SQL> select depart.dept_no departamento, depart.dnombre from depart where
+  2  
+SQL> select dept_no, oficio, apellido from emple where oficio='EMPLEADO'
+  2  ;
+
+   DEPT_NO OFICIO     APELLIDO                                                                                                                        
+---------- ---------- ----------                                                                                                                      
+        20 EMPLEADO   SµNCHEZ                                                                                                                         
+        20 EMPLEADO   ALONSO                                                                                                                          
+        30 EMPLEADO   JIMENO                                                                                                                          
+        10 EMPLEADO   MU¥OZ                                                                                                                           
+
+SQL> select dept_no, oficio, apellido from emple where oficio='EMPLEADO' group by dept_no;
+select dept_no, oficio, apellido from emple where oficio='EMPLEADO' group by dept_no
+                *
+ERROR en línea 1:
+ORA-00979: no es una expresión GROUP BY 
+
+
+SQL> select dept_no, oficio, apellido from emple where oficio='EMPLEADO' group by dept_no;
+select dept_no, oficio, apellido from emple where oficio='EMPLEADO' group by dept_no
+                *
+ERROR en línea 1:
+ORA-00979: no es una expresión GROUP BY 
+
+
+SQL> select dept_no, oficio, apellido from emple where oficio='EMPLEADO' group by dept_no;
+select dept_no, oficio, apellido from emple where oficio='EMPLEADO' group by dept_no
+                *
+ERROR en línea 1:
+ORA-00979: no es una expresión GROUP BY 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL> select dept_no, count(dept_no), oficio, apellido from emple where oficio='EMPLEADO';
+select dept_no, count(dept_no), oficio, apellido from emple where oficio='EMPLEADO'
+       *
+ERROR en línea 1:
+ORA-00937: la función de grupo no es de grupo único 
+
+
+SQL> select dept_no, count(*), oficio, apellido from emple where oficio='EMPLEADO';
+select dept_no, count(*), oficio, apellido from emple where oficio='EMPLEADO'
+       *
+ERROR en línea 1:
+ORA-00937: la función de grupo no es de grupo único 
+
+
+SQL> select dept_no, oficio, apellido from emple where oficio='EMPLEADO' group by dept_no;
+select dept_no, oficio, apellido from emple where oficio='EMPLEADO' group by dept_no
+                *
+ERROR en línea 1:
+ORA-00979: no es una expresión GROUP BY 
+
+
+SQL> select dept_no, oficio, apellido from emple where oficio='EMPLEADO'
+  2  ;
+
+   DEPT_NO OFICIO     APELLIDO                                                                                                                        
+---------- ---------- ----------                                                                                                                      
+        20 EMPLEADO   SµNCHEZ                                                                                                                         
+        20 EMPLEADO   ALONSO                                                                                                                          
+        30 EMPLEADO   JIMENO                                                                                                                          
+        10 EMPLEADO   MU¥OZ                                                                                                                           
+
+SQL> select count(dept_no), oficio, apellido from emple where oficio='EMPLEADO';
+select count(dept_no), oficio, apellido from emple where oficio='EMPLEADO'
+                       *
+ERROR en línea 1:
+ORA-00937: la función de grupo no es de grupo único 
+
+
+SQL> select count(dept_no) from emple where oficio='EMPLEADO';
+
+COUNT(DEPT_NO)                                                                                                                                        
+--------------                                                                                                                                        
+             4                                                                                                                                        
+
+SQL> select count(dept_no) from emple where oficio='EMPLEADO' group by dept_no;
+
+COUNT(DEPT_NO)                                                                                                                                        
+--------------                                                                                                                                        
+             1                                                                                                                                        
+             2                                                                                                                                        
+             1                                                                                                                                        
+
+SQL> select dept_no, count(dept_no) from emple where oficio='EMPLEADO' group by dept_no;
+
+   DEPT_NO COUNT(DEPT_NO)                                                                                                                             
+---------- --------------                                                                                                                             
+        30              1                                                                                                                             
+        20              2                                                                                                                             
+        10              1                                                                                                                             
+
+SQL> select dept_no, max(count(dept_no)) from emple where oficio='EMPLEADO' group by dept_no;
+select dept_no, max(count(dept_no)) from emple where oficio='EMPLEADO' group by dept_no
+       *
+ERROR en línea 1:
+ORA-00937: la función de grupo no es de grupo único 
+
+
+SQL> select top 1 dept_no, count(dept_no) from emple where oficio='EMPLEADO' group by dept_no order by count(dept_no);
+select top 1 dept_no, count(dept_no) from emple where oficio='EMPLEADO' group by dept_no order by count(dept_no)
+           *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> select max(select dept_no,count(dept_no) from emple where oficio='EMPLEADO' group by dept_no) from emple;
+select max(select dept_no,count(dept_no) from emple where oficio='EMPLEADO' group by dept_no) from emple
+           *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select max(select dept_no,count(dept_no) from emple where oficio='EMPLEADO' group by dept_no) from depart;
+select max(select dept_no,count(dept_no) from emple where oficio='EMPLEADO' group by dept_no) from depart
+           *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select dept_no from depart where dept_no in(select max(select dept_no,count(dept_no) from emple where oficio='EMPLEADO' group by dept_no) from depart group by dept_no));
+select dept_no from depart where dept_no in(select max(select dept_no,count(dept_no) from emple where oficio='EMPLEADO' group by dept_no) from depart group by dept_no))
+                                                       *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select dept_no from depart where dept_no in(select max(select dept_no,count(dept_no) from emple where oficio='EMPLEADO' group by dept_no) from depart group by dept_no) group by dept_no);
+select dept_no from depart where dept_no in(select max(select dept_no,count(dept_no) from emple where oficio='EMPLEADO' group by dept_no) from depart group by dept_no) group by dept_no)
+                                                       *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select max(
+  2  select count(dept_no) from emple where oficio='EMPLEADO' group by dept_no
+  3  ) from emple;
+select count(dept_no) from emple where oficio='EMPLEADO' group by dept_no
+*
+ERROR en línea 2:
+ORA-00936: falta una expresión 
+
+
+SQL> select count(dept_no) from emple where oficio='EMPLEADO';
+
+COUNT(DEPT_NO)                                                                                                                                        
+--------------                                                                                                                                        
+             4                                                                                                                                        
+
+SQL> select dept_no, count(dept_no) from emple where oficio='EMPLEADO' group by dept_no;
+
+   DEPT_NO COUNT(DEPT_NO)                                                                                                                             
+---------- --------------                                                                                                                             
+        30              1                                                                                                                             
+        20              2                                                                                                                             
+        10              1                                                                                                                             
+
+SQL> select dept_no, count(dept_no) hola from emple where oficio='EMPLEADO' group by dept_no order by hola;
+
+   DEPT_NO       HOLA                                                                                                                                 
+---------- ----------                                                                                                                                 
+        30          1                                                                                                                                 
+        10          1                                                                                                                                 
+        20          2                                                                                                                                 
+
+SQL> select dept_no, count(dept_no) hola from emple where oficio='EMPLEADO' group by dept_no order by hola desc;
+
+   DEPT_NO       HOLA                                                                                                                                 
+---------- ----------                                                                                                                                 
+        20          2                                                                                                                                 
+        10          1                                                                                                                                 
+        30          1                                                                                                                                 
+
+SQL> select max(select dept_no, count(dept_no) hola from emple where oficio='EMPLEADO' group by dept_no order by hola desc) from depart;
+select max(select dept_no, count(dept_no) hola from emple where oficio='EMPLEADO' group by dept_no order by hola desc) from depart
+           *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select max(select dept_no, count(dept_no) hola from emple where oficio='EMPLEADO' group by dept_no order by hola desc) maxi from depart where dept_no = maxi;
+select max(select dept_no, count(dept_no) hola from emple where oficio='EMPLEADO' group by dept_no order by hola desc) maxi from depart where dept_no = maxi
+           *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select dept_no, max(select dept_no, count(dept_no) hola from emple where oficio='EMPLEADO' group by dept_no order by hola desc) maxi from depart where dept_no = maxi;
+select dept_no, max(select dept_no, count(dept_no) hola from emple where oficio='EMPLEADO' group by dept_no order by hola desc) maxi from depart where dept_no = maxi
+                    *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> select count(dept_no) from emple where oficio='EMPLEADO';
+
+COUNT(DEPT_NO)                                                                                                                                        
+--------------                                                                                                                                        
+             4                                                                                                                                        
+
+SQL> select count(dept_no) from emple where oficio='EMPLEADO' group by dept_no
+  2  ;
+
+COUNT(DEPT_NO)                                                                                                                                        
+--------------                                                                                                                                        
+             1                                                                                                                                        
+             2                                                                                                                                        
+             1                                                                                                                                        
+
+SQL> select dept_no, count(dept_no) hola from emple where oficio='EMPLEADO' group by dept_no order by hola desc;
+
+   DEPT_NO       HOLA                                                                                                                                 
+---------- ----------                                                                                                                                 
+        20          2                                                                                                                                 
+        10          1                                                                                                                                 
+        30          1                                                                                                                                 
+
+SQL> select dept_no, count(dept_no) cant_empleados from emple where oficio='EMPLEADO' group by dept_no order by hola desc;
+select dept_no, count(dept_no) cant_empleados from emple where oficio='EMPLEADO' group by dept_no order by hola desc
+                                                                                                           *
+ERROR en línea 1:
+ORA-00904: "HOLA": identificador no válido 
+
+
+SQL> select dept_no, count(dept_no) cant_empleados from emple where oficio='EMPLEADO' group by dept_no order by cant_empleados
+  2  ;
+
+   DEPT_NO CANT_EMPLEADOS                                                                                                                             
+---------- --------------                                                                                                                             
+        30              1                                                                                                                             
+        10              1                                                                                                                             
+        20              2                                                                                                                             
+
+SQL> rem elegi uno mas facil boludo
+SQL> rem elegi uno mas facil boludo
+SQL> rem elegi uno mas facil boludo
+SQL> rem elegi uno mas facil boludo
+SQL> 
+SQL> ;
+  1  select dept_no, count(dept_no) cant_empleados from emple where oficio='EMPLEADO' group by dept_no order by cant_empleados
+  2* 
+SQL> ;
+  1  select dept_no, count(dept_no) cant_empleados from emple where oficio='EMPLEADO' group by dept_no order by cant_empleados
+  2* 
+SQL> 
+SQL> rem REM 6.- A partir de la tabla emple, visualizar cuantos apellidos de los empleados empiezan por la letra 'A'
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> 
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> 
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aa  aa  aaaa aaaaa  aaaaaaaa  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aa  aa  aaa a aaaa  aaaaaa  aa  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aa      aaa a aaaa  aaaaaa      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aa  aa  aaa a aaaa  aaaaaa  aa  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aa  aa  aaaa aaaaa     aa  aaaa  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> rem aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+SQL> spool off

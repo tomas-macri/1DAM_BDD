@@ -1,0 +1,210 @@
+SQL> select * from poblaciones;
+
+ninguna fila seleccionada
+
+SQL> desc poblaciones
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ ID_POB                                    NOT NULL NUMBER(5)
+ NOMB_POB                                           VARCHAR2(35)
+ HAB_POB                                            NUMBER(7)
+ EXT_POB                                            NUMBER(3)
+ N_PROVINCIAS                                       VARCHAR2(20)
+
+SQL> rem borrar hasta aca ^
+SQL> 
+SQL> INSERT INTO POBLACIONES VALUES (0001, 'MADRID', 3305408, 604, 'MADRID');
+
+1 fila creada.
+
+SQL> INSERT INTO POBLACIONES VALUES (0002, 'ARANJUEZ', 59833, 201, 'MADRID');
+
+1 fila creada.
+
+SQL> INSERT INTO POBLACIONES VALUES (0003, 'CARTAGENA', 213943, 558, 'MURCIA');
+
+1 fila creada.
+
+SQL> INSERT INTO POBLACIONES VALUES (0004, 'MURCIA', 447182, 881, 'MURCIA');
+
+1 fila creada.
+
+SQL> rem borrar hasta aca ^
+SQL> rem borrar hasta aca ^
+SQL> rem borrar hasta aca ^
+SQL> rem borrar hasta aca ^
+SQL> select * from poblaciones;
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB            
+---------- ----------------------------------- ---------- ----------            
+N_PROVINCIAS                                                                    
+--------------------                                                            
+         1 MADRID                                 3305408        604            
+MADRID                                                                          
+                                                                                
+         2 ARANJUEZ                                 59833        201            
+MADRID                                                                          
+                                                                                
+         3 CARTAGENA                               213943        558            
+MURCIA                                                                          
+                                                                                
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB            
+---------- ----------------------------------- ---------- ----------            
+N_PROVINCIAS                                                                    
+--------------------                                                            
+         4 MURCIA                                  447182        881            
+MURCIA                                                                          
+                                                                                
+
+SQL> rem borrar hasta aca ^
+SQL> rem borrar hasta aca ^
+SQL> rem borrar hasta aca ^
+SQL> 
+SQL> set linesize 300
+SQL> set pagesize 300
+SQL> rem borrar hasta aca ^
+SQL> rem borrar hasta aca ^
+SQL> rem borrar hasta aca ^
+SQL> rem borrar hasta aca ^
+SQL> INSERT INTO POBLACIONES VALUES (0003, 'CARTAGENA', 213943, 558, 'MURCIA');
+INSERT INTO POBLACIONES VALUES (0003, 'CARTAGENA', 213943, 558, 'MURCIA')
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004011) violada 
+
+
+SQL> rem borrar hasta aca ^
+SQL> rem borrar hasta aca ^
+SQL> rem borrar hasta aca ^
+SQL> select * from poblaciones;
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
+         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
+         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
+         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
+
+SQL> INSERT INTO POBLACIONES VALUES (5, 'BARCELONA', 1636732, 102, 'BARCELONA');
+
+1 fila creada.
+
+SQL> INSERT INTO POBLACIONES VALUES (6, 'CASTELLDEFELS', 66375, 13, 'BARCELONA');
+
+1 fila creada.
+
+SQL> select * from poblaciones;
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
+         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
+         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
+         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
+         5 BARCELONA                              1636732        102 BARCELONA                                                                                                                                                                                                                              
+         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                              
+
+6 filas seleccionadas.
+
+SQL> INSERT INTO POBLACIONES VALUES (0006, 'SEVILLA', 688711, 140, 'SEVILLA');
+INSERT INTO POBLACIONES VALUES (0006, 'SEVILLA', 688711, 140, 'SEVILLA')
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004011) violada 
+
+
+SQL> INSERT INTO POBLACIONES VALUES (0007, 'SEVILLA', 688711, 140, 'SEVILLA');
+
+1 fila creada.
+
+SQL> INSERT INTO POBLACIONES VALUES (0008, 'UTRERA', 52617, 684, 'SEVILLA');
+
+1 fila creada.
+
+SQL> INSERT INTO POBLACIONES VALUES (0009, 'VALLAOLID', 298866, 198, 'VALLAOLID');
+INSERT INTO POBLACIONES VALUES (0009, 'VALLAOLID', 298866, 198, 'VALLAOLID')
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004012) violada - clave principal no encontrada 
+
+
+SQL> INSERT INTO POBLACIONES VALUES (0010, 'VALLAOLID', 298866, 198, 'VALLAOLID');
+INSERT INTO POBLACIONES VALUES (0010, 'VALLAOLID', 298866, 198, 'VALLAOLID')
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004012) violada - clave principal no encontrada 
+
+
+SQL> INSERT INTO POBLACIONES VALUES (0010, 'VALLAOLID', 298866, 198, 'VALLADOLID');
+
+1 fila creada.
+
+SQL> DELETE * FROM POBLACIONES WHERE NOMB_POB = 'VALLAOLID';
+DELETE * FROM POBLACIONES WHERE NOMB_POB = 'VALLAOLID'
+       *
+ERROR en línea 1:
+ORA-00903: nombre de tabla no válido 
+
+
+SQL> DELETE * FROM POBLACIONES WHERE NOMB_POB = 'VALLAOLID';
+DELETE * FROM POBLACIONES WHERE NOMB_POB = 'VALLAOLID'
+       *
+ERROR en línea 1:
+ORA-00903: nombre de tabla no válido 
+
+
+SQL> UPDATE POBLACIONES SET NOMB_POB = 'VALLADOLID' WHERE NOMBRE = 'VALLAOLID';
+UPDATE POBLACIONES SET NOMB_POB = 'VALLADOLID' WHERE NOMBRE = 'VALLAOLID'
+                                                     *
+ERROR en línea 1:
+ORA-00904: "NOMBRE": identificador no válido 
+
+
+SQL> UPDATE POBLACIONES SET NOMB_POB = 'VALLADOLID' WHERE NOMB_POB = 'VALLAOLID';
+
+1 fila actualizada.
+
+SQL> select * from poblaciones;
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
+         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
+         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
+         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
+         5 BARCELONA                              1636732        102 BARCELONA                                                                                                                                                                                                                              
+         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                              
+         7 SEVILLA                                 688711        140 SEVILLA                                                                                                                                                                                                                                
+         8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                
+        10 VALLADOLID                              298866        198 VALLADOLID                                                                                                                                                                                                                             
+
+9 filas seleccionadas.
+
+SQL> INSERT INTO POBLACIONES VALUES (0011, 'TORDESILLAS', 8858, 142, 'VALLADOLID');
+
+1 fila creada.
+
+SQL> select * from poblaciones;
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
+         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
+         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
+         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
+         5 BARCELONA                              1636732        102 BARCELONA                                                                                                                                                                                                                              
+         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                              
+         7 SEVILLA                                 688711        140 SEVILLA                                                                                                                                                                                                                                
+         8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                
+        10 VALLADOLID                              298866        198 VALLADOLID                                                                                                                                                                                                                             
+        11 TORDESILLAS                               8858        142 VALLADOLID                                                                                                                                                                                                                             
+
+10 filas seleccionadas.
+
+SQL> rem tabla poblaciones terminada
+SQL> rem tabla poblaciones terminada
+SQL> rem tabla poblaciones terminada
+SQL> rem tabla poblaciones terminada
+SQL> 
+SQL> spool off
