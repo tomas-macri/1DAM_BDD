@@ -1,355 +1,144 @@
-SQL> rem Se desea llevar un control acerca de la provisi¢n de distintos productos a las distintas sedes de FIT & US.- De cada sede se almacenar  su ID, su tama¤o (en m2), su tel‚fono, su direcci¢n (la cual est  compuesta poruna calle, un n£mero y un c¢digo postal).- Cada sede estar  ubicada en una poblaci¢n las cuales pueden poseer una o m s de las mismas (solo se almacenar  la poblaci¢n si hay al menos una sede de FIT & US en ella).- De cada poblaci¢n nos interesa saber su ID, su nombre, la cantidad de habitantes y la extensi¢n de la misma (en km2).- A su vez, cada poblaci¢n se encontrar  en una provincia la cual se identifica con su nombre y se almacenan la cantidad de habitantes y su extensi¢n (en km2)- De los proveedores nos interesa saber su ID, nombre, tel‚fono y direcci¢n (la cual, al igual que las sedes, est  compuesta por una calle, un n£mero y un c¢digo postal). Tambien se desea saber en que provincia est  ubicado dicho proveedor (cada provincia puede o no tener proveedores y todos los proveedores estar n ubicados en una sola provincia).- Los productos pueden ser £nicamente de uno de estos tres tipos: M quinas, Accesorios o Merchandising. De todos los productos almacenaremos su ID, su coste por unidad, su nombre y una descripci¢n detallada del mismo.- Adem s, todos los accesorios tendr n un color y podr n ser (o no) mancuernas o esterillas. De las mancuernas se almacenar  su peso y de las esterillas su ancho y su largo.- Los productos de merchandising ser n obligatoriamente de la marca FIT & US o de empresas asociadas.- Las m quinas podr n ser (o no) bicicletas o cintas de correr. En caso de que sean bicicletas se guardar  su estilo (el¡pticas, reclinadas o de spinning) y en caso de que sea una cinta se guardar  el largo y el ancho de la misma).- Se desea saber los proveedores que surten a las distintas sedes y que productos proporcionan a la misma. Adem s, se desea saber si el producto es proporcionado de forma exclusiva por el proveedor.
-SQL> 
-SQL> 
-SQL> 
-SQL> 
+SQL> desc maquinas
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ ID_PROD_MAQ                                        NUMBER(5)
+ COSTE_UD_MAQ                                       NUMBER(4)
+ NOMB_PROD_MAQ                                      VARCHAR2(50)
+ DESC_PROD_MAQ                                      VARCHAR2(300)
+ TIPO                                               VARCHAR2(20)
+ LARGO                                              NUMBER(4)
+ ANCHO                                              NUMBER(4)
+
 SQL> set linesize 300
 SQL> set pagesize 300
 SQL> 
-SQL> rem creacion de tablas
+SQL> rem llenamos esta tabla
+SQL> rem llenamos esta tabla
+SQL> rem llenamos esta tabla
 SQL> 
-SQL> rem tabla Provincias
-SQL> 
-SQL> 
-SQL> CREATE TABLE PROVINCIAS (
-  2  N_PROVINCIA VARCHAR2(20) primary key,
-  3  EXT_PROV NUMBER(5),
-  4  HAB_PROV NUMBER(7)
-  5  );
-
-Tabla creada.
-
-SQL> INSERT INTO PROVINCIAS VALUES ('MURCIA', 11313, 1516055);
+SQL> INSERT INTO MAQUINAS VALUES (1, 1500, 'CAMINADORA', 'LA CAMINADORA NUMERO 1 DEL PAIS', 'CAMINADORA', 180, 100);
 
 1 fila creada.
 
-SQL> INSERT INTO PROVINCIAS VALUES ('MADRID', 8030, 6661949);
+SQL> INSERT INTO MAQUINAS VALUES (2, 2500, 'BICICLETA', 'LA MEJOR BICI DE LA HISTORIA',  'BICICLETA', 140, 60);
 
 1 fila creada.
 
-SQL> INSERT INTO PROVINCIAS VALUES ('BARCELONA', 7726, 5664579);
-
-1 fila creada.
-
-SQL> INSERT INTO PROVINCIAS VALUES ('VALLADOLID', 8111, 520385);
-
-1 fila creada.
-
-SQL> INSERT INTO PROVINCIAS VALUES ('SEVILLA', 14036, 688711);
-
-1 fila creada.
-
-SQL> REM ASI QUEDA LA TABLA PROVINCIAS
-SQL> SELECT * FROM PROVINCIAS;
-
-N_PROVINCIA            EXT_PROV   HAB_PROV                                                                                                                                                                                                                                                                  
--------------------- ---------- ----------                                                                                                                                                                                                                                                                  
-MURCIA                    11313    1516055                                                                                                                                                                                                                                                                  
-MADRID                     8030    6661949                                                                                                                                                                                                                                                                  
-BARCELONA                  7726    5664579                                                                                                                                                                                                                                                                  
-VALLADOLID                 8111     520385                                                                                                                                                                                                                                                                  
-SEVILLA                   14036     688711                                                                                                                                                                                                                                                                  
-
-SQL> 
-SQL> 
-SQL> 
-SQL> REM TABLA POBLACIONES
-SQL> 
-SQL> CREATE TABLE POBLACIONES (
-  2  ID_POB NUMBER(5) primary key,
-  3  NOMB_POB VARCHAR2(35),
-  4  HAB_POB NUMBER(7),
-  5  EXT_POB NUMBER(3)
-  6  );
-
-Tabla creada.
-
-SQL> REM CREAR CAMPOS POBLACIONES
-SQL> 
-SQL> SPOOL OFF
-
-15/02
-
-SQL> rem ayer creamos la tabla poblaciones pero esta vacia
-SQL> REM TABLA POBLACIONES
-SQL> CREATE TABLE POBLACIONES (
-  2  ID_POB NUMBER(5) primary key,
-  3  NOMB_POB VARCHAR2(35),
-  4  HAB_POB NUMBER(7),
-  5  EXT_POB NUMBER(3),
-  6  N_PROVINCIAS VARCHAR2(20),
-  7  foreign key (N_PROVINCIAS) references provincias
-  8  );
-
-Tabla creada.
-
-SQL> REM TABLA POBLACIONES
-SQL> 
-SQL> INSERT INTO POBLACIONES VALUES (0001, 'MADRID', 3305408, 604, 'MADRID');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (0002, 'ARANJUEZ', 59833, 201, 'MADRID');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (0003, 'CARTAGENA', 213943, 558, 'MURCIA');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (0003, 'MURCIA', 447182, 881, 'MURCIA');
-INSERT INTO POBLACIONES VALUES (0003, 'MURCIA', 447182, 881, 'MURCIA')
-*
-ERROR en línea 1:
-ORA-00001: restricción única (TMACRI.SYS_C004011) violada 
-
-
-SQL> INSERT INTO POBLACIONES VALUES (0004, 'MURCIA', 447182, 881, 'MURCIA');
-
-1 fila creada.
-
-SQL> rem cargadas algunas poblaciones de comunidades quedan barcelona, sevilla y vallaolid
-SQL> spool off
-
-
-
-
-SQL> select * from poblaciones;
-
-    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
----------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
-         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
-         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
-         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
-         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
-
-SQL> INSERT INTO POBLACIONES VALUES (5, 'BARCELONA', 1636732, 102, 'BARCELONA');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (6, 'CASTELLDEFELS', 66375, 13, 'BARCELONA');
-
-1 fila creada.
-
-SQL> select * from poblaciones;
-
-    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
----------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
-         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
-         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
-         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
-         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
-         5 BARCELONA                              1636732        102 BARCELONA                                                                                                                                                                                                                              
-         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                              
-
-6 filas seleccionadas.
-
-SQL> INSERT INTO POBLACIONES VALUES (0007, 'SEVILLA', 688711, 140, 'SEVILLA');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (0008, 'UTRERA', 52617, 684, 'SEVILLA');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (0010, 'VALLAOLID', 298866, 198, 'VALLADOLID');
-
-1 fila creada.
-
-SQL> select * from poblaciones;
-
-    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
----------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
-         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
-         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
-         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
-         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
-         5 BARCELONA                              1636732        102 BARCELONA                                                                                                                                                                                                                              
-         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                              
-         7 SEVILLA                                 688711        140 SEVILLA                                                                                                                                                                                                                                
-         8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                
-        10 VALLADOLID                              298866        198 VALLADOLID                                                                                                                                                                                                                             
-
-9 filas seleccionadas.
-
-SQL> INSERT INTO POBLACIONES VALUES (0011, 'TORDESILLAS', 8858, 142, 'VALLADOLID');
-
-1 fila creada.
-
-SQL> select * from poblaciones;
-
-    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
----------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
-         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
-         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
-         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
-         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
-         5 BARCELONA                              1636732        102 BARCELONA                                                                                                                                                                                                                              
-         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                              
-         7 SEVILLA                                 688711        140 SEVILLA                                                                                                                                                                                                                                
-         8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                
-        10 VALLADOLID                              298866        198 VALLADOLID                                                                                                                                                                                                                             
-        11 TORDESILLAS                               8858        142 VALLADOLID                                                                                                                                                                                                                             
-
-10 filas seleccionadas.
-
-SQL> rem tabla poblaciones terminada
-SQL> rem tabla poblaciones terminada
-SQL> rem tabla poblaciones terminada
-SQL> rem tabla poblaciones terminada
-SQL> 
-SQL> spool off
-
-SQL> CREATE TABLE SEDES (
-  2  ID_SEDE NUMBER(6) primary key,
-  3  TEL_SEDE VARCHAR2(9),
-  4  CALLE VARCHAR2(30),
-  5  NUMERO NUMBER(3),
-  6  CP NUMBER(5),
-  7  TAMANO NUMBER(4),
-  8  ID_POB NUMBER(5),
-  9  foreign key (ID_POB) references POBLACIONES
- 10  );
-
-Tabla creada.
-
-SQL> rem tenemos la tabla sedes
-SQL> 
-SQL> INSERT INTO SEDES VALUES (1, '945625321', 'Valencia', 14, 28300, 286, 2);
-
-1 fila creada.
-
-SQL> INSERT INTO SEDES VALUES (2, '945325984', 'Alcala', 227, 28028, 156, 1);
-	
-1 fila creada.
-
-SQL> INSERT INTO SEDES VALUES (2, '9454865', 'la Concha', 8, 28300, 86, 2);
-INSERT INTO SEDES VALUES (2, '9454865', 'la Concha', 8, 28300, 86, 2)
-*
-ERROR en línea 1:
-ORA-00001: restricción única (TMACRI.SYS_C004013) violada 
-
-
-SQL> INSERT INTO SEDES VALUES (3, '9454865', 'la Concha', 8, 28300, 86, 2);
-
-1 fila creada.
-
-SQL> INSERT INTO SEDES VALUES (4, '975643222', 'Valencia', 466, 08013, 166, 5);
-
-1 fila creada.
-
-SQL> update SEDES SET TEL_SEDE='945486533' WHERE ID_SEDE = 3;
+SQL> UPDATE MAQUINAS SET NOMB_PROD_MAQ = 'CAMINADORA JRKX-2000' WHERE ID_PROD_MAQ = 1;
 
 1 fila actualizada.
 
-SQL>  select * from SEDES;
+SQL> UPDATE MAQUINAS SET NOMB_PROD_MAQ = 'VOLABA SMART BIKE' AND COSTE_UD_MAQ = 549 WHERE ID_PROD_MAQ = 2;
+UPDATE MAQUINAS SET NOMB_PROD_MAQ = 'VOLABA SMART BIKE' AND COSTE_UD_MAQ = 549 WHERE ID_PROD_MAQ = 2
+                                                        *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
 
-   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                             
----------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                             
-         1 945625321 Valencia                               14      28300        286          2                                                                                                                                                                                                             
-         2 945325984 Alcala                                227      28028        156          1                                                                                                                                                                                                             
-         3 945486533 la Concha                               8      28300         86          2                                                                                                                                                                                                             
-         4 975643222 Valencia                              466       8013        166          5                                                                                                                                                                                                             
 
-SQL> INSERT INTO SEDES VALUES (5, '975612489', 'Ardilla', 5, 41010, 202, 7);
+SQL> UPDATE MAQUINAS SET NOMB_PROD_MAQ = 'VOLABA SMART BIKE', COSTE_UD_MAQ = 549 WHERE ID_PROD_MAQ = 2;
+
+1 fila actualizada.
+
+SQL> SELECT * FROM MAQUINAS;
+
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                                                                                                                                                                                                                                                      
+----------- ------------ --------------------------------------------------                                                                                                                                                                                                                                 
+DESC_PROD_MAQ                                                                                                                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TIPO                      LARGO      ANCHO                                                                                                                                                                                                                                                                  
+-------------------- ---------- ----------                                                                                                                                                                                                                                                                  
+          1         1500 CAMINADORA JRKX-2000                                                                                                                                                                                                                                                               
+LA CAMINADORA NUMERO 1 DEL PAIS                                                                                                                                                                                                                                                                             
+CAMINADORA                  180        100                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                            
+          2          549 VOLABA SMART BIKE                                                                                                                                                                                                                                                                  
+LA MEJOR BICI DE LA HISTORIA                                                                                                                                                                                                                                                                                
+BICICLETA                   140         60                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                            
+
+SQL> set linesize 300
+SQL> set linesize 300
+SQL> set pagesize 300
+SQL> SELECT * FROM MAQUINAS;
+
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                                                                                                                                                                                                                                                      
+----------- ------------ --------------------------------------------------                                                                                                                                                                                                                                 
+DESC_PROD_MAQ                                                                                                                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TIPO                      LARGO      ANCHO                                                                                                                                                                                                                                                                  
+-------------------- ---------- ----------                                                                                                                                                                                                                                                                  
+          1         1500 CAMINADORA JRKX-2000                                                                                                                                                                                                                                                               
+LA CAMINADORA NUMERO 1 DEL PAIS                                                                                                                                                                                                                                                                             
+CAMINADORA                  180        100                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                            
+          2          549 VOLABA SMART BIKE                                                                                                                                                                                                                                                                  
+LA MEJOR BICI DE LA HISTORIA                                                                                                                                                                                                                                                                                
+BICICLETA                   140         60                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                            
+
+SQL> set linesize 1500
+SQL> set pagesize 1500
+SQL> SELECT * FROM MAQUINAS;
+
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ                                                                                                                                                                                                                                                                                                TIPO                      LARGO      ANCHO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          1         1500 CAMINADORA JRKX-2000                               LA CAMINADORA NUMERO 1 DEL PAIS                                                                                                                                                                                                                                                                              CAMINADORA                  180        100                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          2          549 VOLABA SMART BIKE                                  LA MEJOR BICI DE LA HISTORIA                                                                                                                                                                                                                                                                                 BICICLETA                   140         60                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+SQL> INSERT INTO MAQUINAS VALUES (2, 2500, 'TECHNOGYM ELLIPTICAL', 'TECHNOGYM ELLIPTICAL ES LA éNICA ELÖPTICA COMPACTA DEL MERCADO QUE OFRECE UN ENTRENAMIENTO TOTAL BODY. EJERCITA TODO EL CUERPO CON MOVIMIENTOS NATURALES Y CàMODOS, Y CON MÖNIMO IMPACTO PARA LAS ARTICULACIONES.',  'ELIPTICA', 160, 120);
 
 1 fila creada.
 
-SQL>  select * from SEDES;
+SQL> INSERT INTO MAQUINAS VALUES (2, 700, 'NORDICTRACK RX 800 REMO DE AIRE PLEGABLE', 'TE PERMITIRµ REALIZAR DUROS ENTRENAMIENTOS DÖA TRAS DÖA CON TOTAL SEGURIDAD Y CONFORT.', 'REMO', 180, 60);
 
-   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                             
----------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                             
-         1 945625321 Valencia                               14      28300        286          2                                                                                                                                                                                                             
-         2 945325984 Alcala                                227      28028        156          1                                                                                                                                                                                                             
-         3 945486533 la Concha                               8      28300         86          2                                                                                                                                                                                                             
-         4 975643222 Valencia                              466       8013        166          5                                                                                                                                                                                                             
-         5 975612489 Ardilla                                 5      41010        202          7                                                                                                                                                                                                             
+1 fila creada.
 
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> 
-SQL> rem algunas sedes cargadas
-SQL> 
-SQL> 
-SQL> 
-SQL> 
-SQL> 
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
+SQL> SELECT * FROM MAQUINAS
+  2  ;
 
-SQL> CREATE TABLE PROVEEDORES (
-  2  ID_PROV NUMBER(4) primary key,
-  3  N_PROV VARCHAR2(30),
-  4  TEL_PROV VARCHAR2(9),
-  5  CALLE VARCHAR2(30),
-  6  NUMERO NUMBER(3),
-  7  CP NUMBER(5),
-  8  N_PROVINCIA VARCHAR2(20),
-  9  foreign key (N_PROVINCIA) references provincias
- 10  );
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ                                                                                                                                                                                                                                                                                                TIPO                      LARGO      ANCHO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          1         1500 CAMINADORA JRKX-2000                               LA CAMINADORA NUMERO 1 DEL PAIS                                                                                                                                                                                                                                                                              CAMINADORA                  180        100                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          2          549 VOLABA SMART BIKE                                  LA MEJOR BICI DE LA HISTORIA                                                                                                                                                                                                                                                                                 BICICLETA                   140         60                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          2         2500 TECHNOGYM ELLIPTICAL                               TECHNOGYM ELLIPTICAL ES LA éNICA ELÖPTICA COMPACTA DEL MERCADO QUE OFRECE UN ENTRENAMIENTO TOTAL BODY. EJERCITA TODO EL CUERPO CON MOVIMIENTOS NATURALES Y CàMODOS, Y CON MÖNIMO IMPACTO PARA LAS ARTICULACIONES.                                                                                            ELIPTICA                    160        120                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          2          700 NORDICTRACK RX 800 REMO DE AIRE PLEGABLE           TE PERMITIRµ REALIZAR DUROS ENTRENAMIENTOS DÖA TRAS DÖA CON TOTAL SEGURIDAD Y CONFORT.                                                                                                                                                                                                                       REMO                        180         60                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+SQL> 
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> REM BORRO TABLA Y VUELVO A CREAR PORQUE NO TIENE PK
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> DROP TABLE MAQUINAS;
+
+Tabla borrada.
+
+SQL> DROP TABLE ACCESORIOS;
+
+Tabla borrada.
+
+SQL> DROP TABLE mERCHANDISING;
+
+Tabla borrada.
+
+SQL> CREATE TABLE MAQUINAS(ID_PROD_MAQ NUMBER(5) primary key, COSTE_UD_MAQ NUMBER(4), NOMB_PROD_MAQ VARCHAR2(50), DESC_PROD_MAQ VARCHAR2(300), TIPO VARCHAR2(20), LARGO NUMBER(4), ANCHO NUMBER(4));
 
 Tabla creada.
 
-SQL> INSERT INTO PROVEEDORES VALUES (1,'Mancuernas Gonzalez', '912201812', 'San Norberto', 4, 28021, 'MADRID');
-
-1 fila creada.
-
-SQL> INSERT INTO PROVEEDORES VALUES (2,'Maquinas Pepe', '915346684', 'Callejon de la Galinda', 10, 41810, 'SEVILLA');
-
-1 fila creada.
-
-SQL> INSERT INTO PROVEEDORES VALUES (3,'Camisetas Sanchez', '943892754', 'San Pedro', 3, 30610, 'MURCIA');
-
-1 fila creada.
-
-SQL> INSERT INTO PROVEEDORES VALUES (4,'Bicicletas Gomez', '935684698', 'Carrer Industria', 1, 08279, 'BARCELONA');
-
-1 fila creada.
-
-SQL> INSERT INTO PROVEEDORES VALUES (5,'Botellas Rajoy', '965251235', 'Catedral', 3, 47002, 'VALLADOLID');
-
-1 fila creada.
-
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> 
-SQL> rem cierro spool
-SQL> spool off
-
-
-SQL> CREATE TABLE MAQUINAS(ID_PROD_MAQ NUMBER(5) primary key, COSTE_UD_MAQ NUMBER(4), NOMB_PROD_MAQ VARCHAR2(50), DESC_PROD_MAQ VARCHAR2(300), TIPO VARCHAR2(20) CHECK (TIPO IN ('BICICLETA','CAMINADORA', 'MUSCULACION', 'POLEAS/CABLES', 'OTRO')), LARGO NUMBER(4), ANCHO NUMBER(4));
+SQL> CREATE TABLE ACCESORIOS (ID_PROD_ACC NUMBER(5) primary key, COSTE_UD_ACC NUMBER(4), NOMB_PROD_ACC VARCHAR2(50), DESC_PROD_ACC VARCHAR2(300), COLOR VARCHAR2(10), TIPO VARCHAR2(20), PESO NUMBER(2), ALTO NUMBER(4), ANCHO NUMBER(4));
 
 Tabla creada.
 
@@ -357,29 +146,62 @@ SQL> CREATE TABLE MERCHANDISING(ID_PROD_MERCH NUMBER(5) primary key, COSTE_UD_ME
 
 Tabla creada.
 
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
+SQL> DROP TABLE MAQUINAS;
 
+Tabla borrada.
+
+SQL> CREATE TABLE MAQUINAS(ID_PROD_MAQ NUMBER(5) primary key, COSTE_UD_MAQ NUMBER(4), NOMB_PROD_MAQ VARCHAR2(50), DESC_PROD_MAQ VARCHAR2(300), TIPO VARCHAR2(20) CHECK (TIPO IN ('BICICLETA','CAMINADORA', 'MUSCULACION', 'POLEAS/CABLES', 'OTRO')), LARGO NUMBER(4), ANCHO NUMBER(4));
+
+Tabla creada.
 
 SQL> INSERT INTO MAQUINAS VALUES (1, 499, 'Proform Tour de France CLC SMART Bicicleta Indoor', 'Bicicleta indoor genial que cuenta con una gran pantalla led y un asiento acolchado',  'BICICLETA', 140, 60);
 
 1 fila creada.
 
+SQL> INSERT INTO MAQUINAS VALUES (1, 899, 'NordicTrack C5.5 Bicicleta El¡ptica', 'Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio, 20 niveles de resistencia digital muy silenciosa, o prestaciones como su amplia longitud de zancada de hasta 50 cm que le permite adaptarse a cualquier dimensi¢n de usuario y su sistema de suspensi¢n en los reposapi‚s de gran dimensi¢n.',  'BICICLETA', 140, 60);
+INSERT INTO MAQUINAS VALUES (1, 899, 'NordicTrack C5.5 Bicicleta El¡ptica', 'Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio, 20 niveles de resistencia digital muy silenciosa, o prestaciones como su amplia longitud de zancada de hasta 50 cm que le permite adaptarse a cualquier dimensi¢n de usuario y su sistema de suspensi¢n en los reposapi‚s de gran dimensi¢n.',  'BICICLETA', 140, 60)
+                                                                             *
+ERROR en línea 1:
+ORA-12899: el valor es demasiado grande para la columna "TMACRI"."MAQUINAS"."DESC_PROD_MAQ" (real: 365, máximo: 300) 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL> INSERT INTO MAQUINAS VALUES (1, 899, 'NordicTrack C5.5 Bicicleta El¡ptica', 'Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.',  'BICICLETA', 140, 60);
+INSERT INTO MAQUINAS VALUES (1, 899, 'NordicTrack C5.5 Bicicleta El¡ptica', 'Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.',  'BICICLETA', 140, 60)
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004025) violada 
+
+
 SQL> INSERT INTO MAQUINAS VALUES (2, 899, 'NordicTrack C5.5 Bicicleta El¡ptica', 'Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.',  'BICICLETA', 140, 60);
 
 1 fila creada.
 
+SQL> INSERT INTO MAQUINAS VALUES (3, 2949, 'Life Fitness G4 Multigimnasio con Prensa de Piernas', 'LA AJUSTABILIDAD de la Life Fitness G4 y su ergonom¡a superior le permiten ejercitarse efectiva y c¢modamente. La s¢lida y elegante imagen de la eficiente GS4, unida a la gran variedad de ejercicios, le mantendr n motivado para conseguir sus metas.',  'MUSCULACION', 150, 150);
+INSERT INTO MAQUINAS VALUES (3, 2949, 'Life Fitness G4 Multigimnasio con Prensa de Piernas', 'LA AJUSTABILIDAD de la Life Fitness G4 y su ergonom¡a superior le permiten ejercitarse efectiva y c¢modamente. La s¢lida y elegante imagen de la eficiente GS4, unida a la gran variedad de ejercicios, le mantendr n motivado para conseguir sus metas.',  'MUSCULACION', 150, 150)
+                                      *
+ERROR en línea 1:
+ORA-12899: el valor es demasiado grande para la columna "TMACRI"."MAQUINAS"."NOMB_PROD_MAQ" (real: 51, máximo: 50) 
+
+
 SQL> INSERT INTO MAQUINAS VALUES (3, 2949, 'Life Fitness G4 con Prensa de Piernas', 'LA AJUSTABILIDAD de la Life Fitness G4 y su ergonom¡a superior le permiten ejercitarse efectiva y c¢modamente. La s¢lida y elegante imagen de la eficiente GS4, unida a la gran variedad de ejercicios, le mantendr n motivado para conseguir sus metas.',  'MUSCULACION', 150, 150);
 
 1 fila creada.
+
+SQL> INSERT INTO MAQUINAS VALUES (4, 699, 'NordicTrack RX 800 Remo de Aire Plegable', 'Si lo que est s buscando es un equipamiento de ejercicio s¢lido y a un precio excepcional, NordicTrack RX 800 es la opci¢n perfecta.',  'REMO', 150, 40);
+INSERT INTO MAQUINAS VALUES (4, 699, 'NordicTrack RX 800 Remo de Aire Plegable', 'Si lo que est s buscando es un equipamiento de ejercicio s¢lido y a un precio excepcional, NordicTrack RX 800 es la opci¢n perfecta.',  'REMO', 150, 40)
+*
+ERROR en línea 1:
+ORA-02290: restricción de control (TMACRI.SYS_C004024) violada 
+
+
+SQL> INSERT INTO MAQUINAS VALUES (5, 699, 'NordicTrack RX 800 Remo de Aire Plegable', 'Si lo que est s buscando es un equipamiento de ejercicio s¢lido y a un precio excepcional, NordicTrack RX 800 es la opci¢n perfecta.',  'REMO', 150, 40);
+INSERT INTO MAQUINAS VALUES (5, 699, 'NordicTrack RX 800 Remo de Aire Plegable', 'Si lo que est s buscando es un equipamiento de ejercicio s¢lido y a un precio excepcional, NordicTrack RX 800 es la opci¢n perfecta.',  'REMO', 150, 40)
+*
+ERROR en línea 1:
+ORA-02290: restricción de control (TMACRI.SYS_C004024) violada 
 
 
 SQL> INSERT INTO MAQUINAS VALUES (4, 699, 'NordicTrack RX 800 Remo de Aire Plegable', 'Si lo que est s buscando es un equipamiento de ejercicio s¢lido y a un precio excepcional, NordicTrack RX 800 es la opci¢n perfecta.',  'MUSCULACION', 150, 40);
@@ -390,6 +212,15 @@ SQL> INSERT INTO MAQUINAS VALUES (5, 2499, 'Nordictrack Fusion CST Multi Polea',
 
 1 fila creada.
 
+SQL> SELECT * FROM MAQUINAS;
+
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ                                                                                                                                                                                                                                                                                                TIPO                      LARGO      ANCHO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          1          499 Proform Tour de France CLC SMART Bicicleta Indoor  Bicicleta indoor genial que cuenta con una gran pantalla led y un asiento acolchado                                                                                                                                                                                                                          BICICLETA                   140         60                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          2          899 NordicTrack C5.5 Bicicleta El¡ptica                Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.                                                                                                                                BICICLETA                   140         60                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          3         2949 Life Fitness G4 con Prensa de Piernas              LA AJUSTABILIDAD de la Life Fitness G4 y su ergonom¡a superior le permiten ejercitarse efectiva y c¢modamente. La s¢lida y elegante imagen de la eficiente GS4, unida a la gran variedad de ejercicios, le mantendr n motivado para conseguir sus metas.                                                     MUSCULACION                 150        150                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          4          699 NordicTrack RX 800 Remo de Aire Plegable           Si lo que est s buscando es un equipamiento de ejercicio s¢lido y a un precio excepcional, NordicTrack RX 800 es la opci¢n perfecta.                                                                                                                                                                         MUSCULACION                 150         40                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          5         2499 Nordictrack Fusion CST Multi Polea                 Moderna maquina que cuenta con 8 cables para entrenar cualquier parte del cuerpo.                                                                                                                                                                                                                            POLEAS/CABLES               150        105                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 
 SQL> INSERT INTO MAQUINAS VALUES (6, 679, 'Cadenza Fitness T40 Cinta de Correr', 'Lujosa caminadora que viene con pantalla tactil y es plegable.',  'CAMINADORA', 170, 80);
 
@@ -457,7 +288,44 @@ SQL> INSERT INTO ACCESORIOS VALUES (2, 12, 'Mancuerna de vinilo bodytone 1kg', '
 
 SQL> INSERT INTO ACCESORIOS VALUES (3, 12, 'Mancuerna de vinilo bodytone 5kg', 'Mancuerna de vinilo bodytone 5kg de color verde.', 'Verde', 'MANCUERNA', 2, 15, 30);
 
-1 fila creada.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+1 fila creada.
+
+SQL> INSERT INTO ACCESORIOS VALUES (4, 14, 'Cuerda Reebok Premium Speed', 'Mancuerna de vinilo bodytone 5kg de color verde.', 'Verde', 'MANCUERNA', 2, 15, 30);
+
+1 fila creada.
+
+SQL> delete  * from accesorios where id_prod_acc = 4;
+delete  * from accesorios where id_prod_acc = 4
+        *
+ERROR en línea 1:
+ORA-00903: nombre de tabla no válido 
+
+
+SQL> delete * from accesorios where id_prod_acc = 4;
+delete * from accesorios where id_prod_acc = 4
+       *
+ERROR en línea 1:
+ORA-00903: nombre de tabla no válido 
+
+
+SQL> delete * from ACCESORIOS where id_prod_acc = 4;
+delete * from ACCESORIOS where id_prod_acc = 4
+       *
+ERROR en línea 1:
+ORA-00903: nombre de tabla no válido 
+
+
+SQL> delete from ACCESORIOS where id_prod_acc = 4;
+
+1 fila suprimida.
+
+SQL> select * from accesorios;
+
+ID_PROD_ACC COSTE_UD_ACC NOMB_PROD_ACC                                      DESC_PROD_ACC                                                                                                                                                                                                                                                                                                COLOR      TIPO                       PESO       ALTO      ANCHO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ---------- -------------------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          1           12 Mancuerna de vinilo bodytone 2kg                   Mancuerna de vinilo bodytone 2kg de color azul.                                                                                                                                                                                                                                                              Azul       MANCUERNA                     2         15         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          2           12 Mancuerna de vinilo bodytone 1kg                   Mancuerna de vinilo bodytone 1kg de color naranja.                                                                                                                                                                                                                                                           Naranja    MANCUERNA                     2         15         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          3           12 Mancuerna de vinilo bodytone 5kg                   Mancuerna de vinilo bodytone 5kg de color verde.                                                                                                                                                                                                                                                             Verde      MANCUERNA                     2         15         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 
 SQL> INSERT INTO ACCESORIOS VALUES (4, 14, 'Cuerda Reebok Premium Speed', 'Cuerda muy buena.', null, 'CUERDA', null, null, 200);
 
@@ -515,6 +383,20 @@ ID_PROD_ACC COSTE_UD_ACC NOMB_PROD_ACC                                      DESC
 
 8 filas seleccionadas.
 
+SQL> select * from accesorios;
+
+ID_PROD_ACC COSTE_UD_ACC NOMB_PROD_ACC                                      DESC_PROD_ACC                                                                                                                                                                                                                                                                                                COLOR      TIPO                       PESO       ALTO      ANCHO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ---------- -------------------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          1           12 Mancuerna de vinilo bodytone 2kg                   Mancuerna de vinilo bodytone 2kg de color azul.                                                                                                                                                                                                                                                              Azul       MANCUERNA                     2         15         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          2           12 Mancuerna de vinilo bodytone 1kg                   Mancuerna de vinilo bodytone 1kg de color naranja.                                                                                                                                                                                                                                                           Naranja    MANCUERNA                     2         15         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          3           12 Mancuerna de vinilo bodytone 5kg                   Mancuerna de vinilo bodytone 5kg de color verde.                                                                                                                                                                                                                                                             Verde      MANCUERNA                     2         15         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          4           14 Cuerda Reebok Premium Speed                        Cuerda muy buena.                                                                                                                                                                                                                                                                                                       CUERDA                                            200                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          5            9 Disco Bumper Fraccional 1kg                        Disco Bumper Fraccional blanco de 1kg.                                                                                                                                                                                                                                                                       Blanco     DISCO                         1                    20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          6            9 Disco Bumper Fraccional 2kg                        Disco Bumper Fraccional azul de 2kg.                                                                                                                                                                                                                                                                         Azul       DISCO                         2                    20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          7            9 Disco Bumper Fraccional 3kg                        Disco Bumper Fraccional amarillo de 3kg.                                                                                                                                                                                                                                                                     Amarillo   DISCO                         3                    20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+          8           13 Colchoneta Nbr                                     Colchoneta Nbr azul.                                                                                                                                                                                                                                                                                         Azul       COLCHONETA                                         58                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+8 filas seleccionadas.
 
 SQL> rem fin tabla accesorios
 SQL> rem fin tabla accesorios
@@ -542,6 +424,68 @@ SQL> desc merchandising
  DESC_PROD_MERCH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        VARCHAR2(300)
  PROPIO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 VARCHAR2(2)
 
+SQL> INSERT INTO ACCESORIOS VALUES (1, 18, 'Camiseta FIT&US negra', 'Camiseta FIT&US negra y celeste.', 'SI');
+Introduzca un valor para us: lsl
+Introduzca un valor para us: 1
+antiguo   1: INSERT INTO ACCESORIOS VALUES (1, 18, 'Camiseta FIT&US negra', 'Camiseta FIT&US negra y celeste.', 'SI')
+nuevo   1: INSERT INTO ACCESORIOS VALUES (1, 18, 'Camiseta FITlsl negra', 'Camiseta FIT1 negra y celeste.', 'SI')
+INSERT INTO ACCESORIOS VALUES (1, 18, 'Camiseta FITlsl negra', 'Camiseta FIT1 negra y celeste.', 'SI')
+            *
+ERROR en línea 1:
+ORA-00947: no hay suficientes valores 
+
+
+SQL> INSERT INTO MERCHANDISING VALUES (1, 18, 'Camiseta FIT&US negra', 'Camiseta FIT&US negra y celeste.', 'SI');
+Introduzca un valor para us: EFEWF
+Introduzca un valor para us: 2
+antiguo   1: INSERT INTO MERCHANDISING VALUES (1, 18, 'Camiseta FIT&US negra', 'Camiseta FIT&US negra y celeste.', 'SI')
+nuevo   1: INSERT INTO MERCHANDISING VALUES (1, 18, 'Camiseta FITEFEWF negra', 'Camiseta FIT2 negra y celeste.', 'SI')
+
+1 fila creada.
+
+SQL> SELECT * FROM MERCHANDISING;
+
+ID_PROD_MERCH COSTE_UD_MERCH NOMB_PROD_MERCH                                    DESC_PROD_MERCH                                                                                                                                                                                                                                                                                              PR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+------------- -------------- -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+            1             18 Camiseta FITEFEWF negra                            Camiseta FIT2 negra y celeste.                                                                                                                                                                                                                                                                               SI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+
+SQL> INSERT INTO MERCHANDISING VALUES (2, 18, 'Camiseta FIT&US blanca', 'Camiseta FIT&US blanca y celeste.', 'SI');
+Introduzca un valor para us: &US
+Introduzca un valor para us: &US
+antiguo   1: INSERT INTO MERCHANDISING VALUES (2, 18, 'Camiseta FIT&US blanca', 'Camiseta FIT&US blanca y celeste.', 'SI')
+nuevo   1: INSERT INTO MERCHANDISING VALUES (2, 18, 'Camiseta FIT&US blanca', 'Camiseta FIT&US blanca y celeste.', 'SI')
+
+1 fila creada.
+
+SQL> select * from merchandising;
+
+ID_PROD_MERCH COSTE_UD_MERCH NOMB_PROD_MERCH                                    DESC_PROD_MERCH                                                                                                                                                                                                                                                                                              PR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+------------- -------------- -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+            1             18 Camiseta FITEFEWF negra                            Camiseta FIT2 negra y celeste.                                                                                                                                                                                                                                                                               SI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+            2             18 Camiseta FIT&US blanca                             Camiseta FIT&US blanca y celeste.                                                                                                                                                                                                                                                                            SI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+
+SQL> delete from merchandising;
+
+2 filas suprimidas.
+
+SQL> INSERT INTO MERCHANDISING VALUES (1, 18, 'Camiseta FIT & US blanca', 'Camiseta FIT & US blanca y celeste.', 'SI');
+Introduzca un valor para us: 333
+Introduzca un valor para us: 3
+antiguo   1: INSERT INTO MERCHANDISING VALUES (1, 18, 'Camiseta FIT & US blanca', 'Camiseta FIT & US blanca y celeste.', 'SI')
+nuevo   1: INSERT INTO MERCHANDISING VALUES (1, 18, 'Camiseta FIT 333 blanca', 'Camiseta FIT 3 blanca y celeste.', 'SI')
+
+1 fila creada.
+
+SQL> delete * from merchandising;
+delete * from merchandising
+       *
+ERROR en línea 1:
+ORA-00903: nombre de tabla no válido 
+
+
+SQL> delete from merchandising;
+
+1 fila suprimida.
 
 SQL> INSERT INTO MERCHANDISING VALUES (1, 18, 'Camiseta FIT-US NEGRA', 'Camiseta FIT-US negra y celeste.', 'SI');
 
@@ -645,7 +589,36 @@ SQL> rem creamos tabla proveer
 SQL> rem creamos tabla proveer
 SQL> rem creamos tabla proveer
 SQL> rem creamos tabla proveer
-SQL>
+SQL> 
+SQL> CREATE TABLE PROVEER (
+  2  ID_PROD_MAQ,
+  3  ;:;
+;:
+*
+ERROR en línea 3:
+ORA-00911: carácter no válido 
+
+
+SQL> CREATE TABLE PROVEER (
+  2  ID_PROD_MAQ NUMBER(5),
+  3  ID_PROD_ACC NUMBER(5),
+  4  ID_PROD_MERCH NUMBER(5),
+  5  ID_PROV NUMBER(4),
+  6  ID_SEDE NUMBER(6),
+  7  EXCLUSIVO VARCHAR2(2) CHECK (EXCLUSIVO IN('SI','NO')),
+  8  primary key (ID_PROD_MAQ, ID_PROD_ACC, ID_PROD_MERCH, ID_PROV, ID_SEDE),
+  9  foreign key (ID_PROD_MAQ) references MAQUINAS,
+ 10  foreign key (ID_PROD_ACC) references ACCESORIOS,
+ 11  foreign key (ID_PROD_MERCH) references MERCHANDISING,
+ 12  foreign key (ID_PROV) references PROVEEDORES,
+ 13  foreign key (ID_SEDES) references SEDES
+ 14  );
+foreign key (ID_SEDES) references SEDES
+             *
+ERROR en línea 13:
+ORA-00904: "ID_SEDES": identificador no válido 
+
+
 SQL> CREATE TABLE PROVEER (
   2  ID_PROD_MAQ NUMBER(5),
   3  ID_PROD_ACC NUMBER(5),
@@ -673,6 +646,53 @@ SQL> DESC PROVEER
  ID_SEDE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       NOT NULL NUMBER(6)
  EXCLUSIVO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              VARCHAR2(2)
 
+SQL> INSERT INTO PROVEER (1,,,1,1);
+INSERT INTO PROVEER (1,,,1,1)
+                     *
+ERROR en línea 1:
+ORA-00928: falta la palabra clave SELECT 
+
+
+SQL> INSERT INTO PROVEER VALUES (1,,,1,1);
+INSERT INTO PROVEER VALUES (1,,,1,1)
+                              *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> INSERT INTO PROVEER VALUES (1,NULL,NULL,1,1);
+INSERT INTO PROVEER VALUES (1,NULL,NULL,1,1)
+            *
+ERROR en línea 1:
+ORA-00947: no hay suficientes valores 
+
+
+SQL> INSERT INTO PROVEER VALUES (1,NULL,NULL,2,1, 'NO');
+INSERT INTO PROVEER VALUES (1,NULL,NULL,2,1, 'NO')
+                              *
+ERROR en línea 1:
+ORA-01400: no se puede realizar una inserción NULL en ("TMACRI"."PROVEER"."ID_PROD_ACC") 
+
+
+SQL> INSERT INTO PROVEER VALUES (1,,,2,1, 'NO');
+INSERT INTO PROVEER VALUES (1,,,2,1, 'NO')
+                              *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> INSERT INTO PROVEER VALUES (1, , ,2,1, 'NO');
+INSERT INTO PROVEER VALUES (1, , ,2,1, 'NO')
+                               *
+ERROR en línea 1:
+ORA-00936: falta una expresión 
+
+
+SQL> INSERT INTO PROVEER VALUES (1,0 ,0 ,2,1, 'NO');
+INSERT INTO PROVEER VALUES (1,0 ,0 ,2,1, 'NO')
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004032) violada - clave principal no encontrada 
 
 
 SQL> REM CREAR UN PROD, ACC, MERCH CON ID 100 CON VALORES NULL PARA USAR EN PROVEER
@@ -692,8 +712,3 @@ SQL> REM CREAR UN PROD, ACC, MERCH CON ID 100 CON VALORES NULL PARA USAR EN PROV
 SQL> 
 SQL> 
 SQL> SPOOL OFF
-
-
-
-
-

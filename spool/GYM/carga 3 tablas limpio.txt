@@ -1,353 +1,3 @@
-SQL> rem Se desea llevar un control acerca de la provisi¢n de distintos productos a las distintas sedes de FIT & US.- De cada sede se almacenar  su ID, su tama¤o (en m2), su tel‚fono, su direcci¢n (la cual est  compuesta poruna calle, un n£mero y un c¢digo postal).- Cada sede estar  ubicada en una poblaci¢n las cuales pueden poseer una o m s de las mismas (solo se almacenar  la poblaci¢n si hay al menos una sede de FIT & US en ella).- De cada poblaci¢n nos interesa saber su ID, su nombre, la cantidad de habitantes y la extensi¢n de la misma (en km2).- A su vez, cada poblaci¢n se encontrar  en una provincia la cual se identifica con su nombre y se almacenan la cantidad de habitantes y su extensi¢n (en km2)- De los proveedores nos interesa saber su ID, nombre, tel‚fono y direcci¢n (la cual, al igual que las sedes, est  compuesta por una calle, un n£mero y un c¢digo postal). Tambien se desea saber en que provincia est  ubicado dicho proveedor (cada provincia puede o no tener proveedores y todos los proveedores estar n ubicados en una sola provincia).- Los productos pueden ser £nicamente de uno de estos tres tipos: M quinas, Accesorios o Merchandising. De todos los productos almacenaremos su ID, su coste por unidad, su nombre y una descripci¢n detallada del mismo.- Adem s, todos los accesorios tendr n un color y podr n ser (o no) mancuernas o esterillas. De las mancuernas se almacenar  su peso y de las esterillas su ancho y su largo.- Los productos de merchandising ser n obligatoriamente de la marca FIT & US o de empresas asociadas.- Las m quinas podr n ser (o no) bicicletas o cintas de correr. En caso de que sean bicicletas se guardar  su estilo (el¡pticas, reclinadas o de spinning) y en caso de que sea una cinta se guardar  el largo y el ancho de la misma).- Se desea saber los proveedores que surten a las distintas sedes y que productos proporcionan a la misma. Adem s, se desea saber si el producto es proporcionado de forma exclusiva por el proveedor.
-SQL> 
-SQL> 
-SQL> 
-SQL> 
-SQL> set linesize 300
-SQL> set pagesize 300
-SQL> 
-SQL> rem creacion de tablas
-SQL> 
-SQL> rem tabla Provincias
-SQL> 
-SQL> 
-SQL> CREATE TABLE PROVINCIAS (
-  2  N_PROVINCIA VARCHAR2(20) primary key,
-  3  EXT_PROV NUMBER(5),
-  4  HAB_PROV NUMBER(7)
-  5  );
-
-Tabla creada.
-
-SQL> INSERT INTO PROVINCIAS VALUES ('MURCIA', 11313, 1516055);
-
-1 fila creada.
-
-SQL> INSERT INTO PROVINCIAS VALUES ('MADRID', 8030, 6661949);
-
-1 fila creada.
-
-SQL> INSERT INTO PROVINCIAS VALUES ('BARCELONA', 7726, 5664579);
-
-1 fila creada.
-
-SQL> INSERT INTO PROVINCIAS VALUES ('VALLADOLID', 8111, 520385);
-
-1 fila creada.
-
-SQL> INSERT INTO PROVINCIAS VALUES ('SEVILLA', 14036, 688711);
-
-1 fila creada.
-
-SQL> REM ASI QUEDA LA TABLA PROVINCIAS
-SQL> SELECT * FROM PROVINCIAS;
-
-N_PROVINCIA            EXT_PROV   HAB_PROV                                                                                                                                                                                                                                                                  
--------------------- ---------- ----------                                                                                                                                                                                                                                                                  
-MURCIA                    11313    1516055                                                                                                                                                                                                                                                                  
-MADRID                     8030    6661949                                                                                                                                                                                                                                                                  
-BARCELONA                  7726    5664579                                                                                                                                                                                                                                                                  
-VALLADOLID                 8111     520385                                                                                                                                                                                                                                                                  
-SEVILLA                   14036     688711                                                                                                                                                                                                                                                                  
-
-SQL> 
-SQL> 
-SQL> 
-SQL> REM TABLA POBLACIONES
-SQL> 
-SQL> CREATE TABLE POBLACIONES (
-  2  ID_POB NUMBER(5) primary key,
-  3  NOMB_POB VARCHAR2(35),
-  4  HAB_POB NUMBER(7),
-  5  EXT_POB NUMBER(3)
-  6  );
-
-Tabla creada.
-
-SQL> REM CREAR CAMPOS POBLACIONES
-SQL> 
-SQL> SPOOL OFF
-
-15/02
-
-SQL> rem ayer creamos la tabla poblaciones pero esta vacia
-SQL> REM TABLA POBLACIONES
-SQL> CREATE TABLE POBLACIONES (
-  2  ID_POB NUMBER(5) primary key,
-  3  NOMB_POB VARCHAR2(35),
-  4  HAB_POB NUMBER(7),
-  5  EXT_POB NUMBER(3),
-  6  N_PROVINCIAS VARCHAR2(20),
-  7  foreign key (N_PROVINCIAS) references provincias
-  8  );
-
-Tabla creada.
-
-SQL> REM TABLA POBLACIONES
-SQL> 
-SQL> INSERT INTO POBLACIONES VALUES (0001, 'MADRID', 3305408, 604, 'MADRID');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (0002, 'ARANJUEZ', 59833, 201, 'MADRID');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (0003, 'CARTAGENA', 213943, 558, 'MURCIA');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (0003, 'MURCIA', 447182, 881, 'MURCIA');
-INSERT INTO POBLACIONES VALUES (0003, 'MURCIA', 447182, 881, 'MURCIA')
-*
-ERROR en línea 1:
-ORA-00001: restricción única (TMACRI.SYS_C004011) violada 
-
-
-SQL> INSERT INTO POBLACIONES VALUES (0004, 'MURCIA', 447182, 881, 'MURCIA');
-
-1 fila creada.
-
-SQL> rem cargadas algunas poblaciones de comunidades quedan barcelona, sevilla y vallaolid
-SQL> spool off
-
-
-
-
-SQL> select * from poblaciones;
-
-    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
----------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
-         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
-         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
-         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
-         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
-
-SQL> INSERT INTO POBLACIONES VALUES (5, 'BARCELONA', 1636732, 102, 'BARCELONA');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (6, 'CASTELLDEFELS', 66375, 13, 'BARCELONA');
-
-1 fila creada.
-
-SQL> select * from poblaciones;
-
-    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
----------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
-         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
-         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
-         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
-         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
-         5 BARCELONA                              1636732        102 BARCELONA                                                                                                                                                                                                                              
-         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                              
-
-6 filas seleccionadas.
-
-SQL> INSERT INTO POBLACIONES VALUES (0007, 'SEVILLA', 688711, 140, 'SEVILLA');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (0008, 'UTRERA', 52617, 684, 'SEVILLA');
-
-1 fila creada.
-
-SQL> INSERT INTO POBLACIONES VALUES (0010, 'VALLAOLID', 298866, 198, 'VALLADOLID');
-
-1 fila creada.
-
-SQL> select * from poblaciones;
-
-    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
----------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
-         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
-         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
-         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
-         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
-         5 BARCELONA                              1636732        102 BARCELONA                                                                                                                                                                                                                              
-         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                              
-         7 SEVILLA                                 688711        140 SEVILLA                                                                                                                                                                                                                                
-         8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                
-        10 VALLADOLID                              298866        198 VALLADOLID                                                                                                                                                                                                                             
-
-9 filas seleccionadas.
-
-SQL> INSERT INTO POBLACIONES VALUES (0011, 'TORDESILLAS', 8858, 142, 'VALLADOLID');
-
-1 fila creada.
-
-SQL> select * from poblaciones;
-
-    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                           
----------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                   
-         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                 
-         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                 
-         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                 
-         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                 
-         5 BARCELONA                              1636732        102 BARCELONA                                                                                                                                                                                                                              
-         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                              
-         7 SEVILLA                                 688711        140 SEVILLA                                                                                                                                                                                                                                
-         8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                
-        10 VALLADOLID                              298866        198 VALLADOLID                                                                                                                                                                                                                             
-        11 TORDESILLAS                               8858        142 VALLADOLID                                                                                                                                                                                                                             
-
-10 filas seleccionadas.
-
-SQL> rem tabla poblaciones terminada
-SQL> rem tabla poblaciones terminada
-SQL> rem tabla poblaciones terminada
-SQL> rem tabla poblaciones terminada
-SQL> 
-SQL> spool off
-
-SQL> CREATE TABLE SEDES (
-  2  ID_SEDE NUMBER(6) primary key,
-  3  TEL_SEDE VARCHAR2(9),
-  4  CALLE VARCHAR2(30),
-  5  NUMERO NUMBER(3),
-  6  CP NUMBER(5),
-  7  TAMANO NUMBER(4),
-  8  ID_POB NUMBER(5),
-  9  foreign key (ID_POB) references POBLACIONES
- 10  );
-
-Tabla creada.
-
-SQL> rem tenemos la tabla sedes
-SQL> 
-SQL> INSERT INTO SEDES VALUES (1, '945625321', 'Valencia', 14, 28300, 286, 2);
-
-1 fila creada.
-
-SQL> INSERT INTO SEDES VALUES (2, '945325984', 'Alcala', 227, 28028, 156, 1);
-	
-1 fila creada.
-
-SQL> INSERT INTO SEDES VALUES (2, '9454865', 'la Concha', 8, 28300, 86, 2);
-INSERT INTO SEDES VALUES (2, '9454865', 'la Concha', 8, 28300, 86, 2)
-*
-ERROR en línea 1:
-ORA-00001: restricción única (TMACRI.SYS_C004013) violada 
-
-
-SQL> INSERT INTO SEDES VALUES (3, '9454865', 'la Concha', 8, 28300, 86, 2);
-
-1 fila creada.
-
-SQL> INSERT INTO SEDES VALUES (4, '975643222', 'Valencia', 466, 08013, 166, 5);
-
-1 fila creada.
-
-SQL> update SEDES SET TEL_SEDE='945486533' WHERE ID_SEDE = 3;
-
-1 fila actualizada.
-
-SQL>  select * from SEDES;
-
-   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                             
----------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                             
-         1 945625321 Valencia                               14      28300        286          2                                                                                                                                                                                                             
-         2 945325984 Alcala                                227      28028        156          1                                                                                                                                                                                                             
-         3 945486533 la Concha                               8      28300         86          2                                                                                                                                                                                                             
-         4 975643222 Valencia                              466       8013        166          5                                                                                                                                                                                                             
-
-SQL> INSERT INTO SEDES VALUES (5, '975612489', 'Ardilla', 5, 41010, 202, 7);
-
-1 fila creada.
-
-SQL>  select * from SEDES;
-
-   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                             
----------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                             
-         1 945625321 Valencia                               14      28300        286          2                                                                                                                                                                                                             
-         2 945325984 Alcala                                227      28028        156          1                                                                                                                                                                                                             
-         3 945486533 la Concha                               8      28300         86          2                                                                                                                                                                                                             
-         4 975643222 Valencia                              466       8013        166          5                                                                                                                                                                                                             
-         5 975612489 Ardilla                                 5      41010        202          7                                                                                                                                                                                                             
-
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> rem algunas sedes cargadas
-SQL> 
-SQL> rem algunas sedes cargadas
-SQL> 
-SQL> 
-SQL> 
-SQL> 
-SQL> 
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROOVEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-SQL> rem TABLA PROVEEDORES
-
-SQL> CREATE TABLE PROVEEDORES (
-  2  ID_PROV NUMBER(4) primary key,
-  3  N_PROV VARCHAR2(30),
-  4  TEL_PROV VARCHAR2(9),
-  5  CALLE VARCHAR2(30),
-  6  NUMERO NUMBER(3),
-  7  CP NUMBER(5),
-  8  N_PROVINCIA VARCHAR2(20),
-  9  foreign key (N_PROVINCIA) references provincias
- 10  );
-
-Tabla creada.
-
-SQL> INSERT INTO PROVEEDORES VALUES (1,'Mancuernas Gonzalez', '912201812', 'San Norberto', 4, 28021, 'MADRID');
-
-1 fila creada.
-
-SQL> INSERT INTO PROVEEDORES VALUES (2,'Maquinas Pepe', '915346684', 'Callejon de la Galinda', 10, 41810, 'SEVILLA');
-
-1 fila creada.
-
-SQL> INSERT INTO PROVEEDORES VALUES (3,'Camisetas Sanchez', '943892754', 'San Pedro', 3, 30610, 'MURCIA');
-
-1 fila creada.
-
-SQL> INSERT INTO PROVEEDORES VALUES (4,'Bicicletas Gomez', '935684698', 'Carrer Industria', 1, 08279, 'BARCELONA');
-
-1 fila creada.
-
-SQL> INSERT INTO PROVEEDORES VALUES (5,'Botellas Rajoy', '965251235', 'Catedral', 3, 47002, 'VALLADOLID');
-
-1 fila creada.
-
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> rem fin tabla proveedores
-SQL> 
-SQL> rem cierro spool
-SQL> spool off
-
 
 SQL> CREATE TABLE MAQUINAS(ID_PROD_MAQ NUMBER(5) primary key, COSTE_UD_MAQ NUMBER(4), NOMB_PROD_MAQ VARCHAR2(50), DESC_PROD_MAQ VARCHAR2(300), TIPO VARCHAR2(20) CHECK (TIPO IN ('BICICLETA','CAMINADORA', 'MUSCULACION', 'POLEAS/CABLES', 'OTRO')), LARGO NUMBER(4), ANCHO NUMBER(4));
 
@@ -357,32 +7,21 @@ SQL> CREATE TABLE MERCHANDISING(ID_PROD_MERCH NUMBER(5) primary key, COSTE_UD_ME
 
 Tabla creada.
 
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-SQL> REM TABLAS CREADAS
-
 
 SQL> INSERT INTO MAQUINAS VALUES (1, 499, 'Proform Tour de France CLC SMART Bicicleta Indoor', 'Bicicleta indoor genial que cuenta con una gran pantalla led y un asiento acolchado',  'BICICLETA', 140, 60);
 
 1 fila creada.
 
-SQL> INSERT INTO MAQUINAS VALUES (2, 899, 'NordicTrack C5.5 Bicicleta El¡ptica', 'Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.',  'BICICLETA', 140, 60);
+SQL> INSERT INTO MAQUINAS VALUES (2, 899, 'NordicTrack C5.5 Bicicleta ElÂ¡ptica', 'Bicicleta eliptica que cuenta con un sistema de inclinaciÂ¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.',  'BICICLETA', 140, 60);
 
 1 fila creada.
 
-SQL> INSERT INTO MAQUINAS VALUES (3, 2949, 'Life Fitness G4 con Prensa de Piernas', 'LA AJUSTABILIDAD de la Life Fitness G4 y su ergonom¡a superior le permiten ejercitarse efectiva y c¢modamente. La s¢lida y elegante imagen de la eficiente GS4, unida a la gran variedad de ejercicios, le mantendr n motivado para conseguir sus metas.',  'MUSCULACION', 150, 150);
+SQL> INSERT INTO MAQUINAS VALUES (3, 2949, 'Life Fitness G4 con Prensa de Piernas', 'LA AJUSTABILIDAD de la Life Fitness G4 y su ergonomÂ¡a superior le permiten ejercitarse efectiva y cÂ¢modamente. La sÂ¢lida y elegante imagen de la eficiente GS4, unida a la gran variedad de ejercicios, le mantendrÂ n motivado para conseguir sus metas.',  'MUSCULACION', 150, 150);
 
 1 fila creada.
 
 
-SQL> INSERT INTO MAQUINAS VALUES (4, 699, 'NordicTrack RX 800 Remo de Aire Plegable', 'Si lo que est s buscando es un equipamiento de ejercicio s¢lido y a un precio excepcional, NordicTrack RX 800 es la opci¢n perfecta.',  'MUSCULACION', 150, 40);
+SQL> INSERT INTO MAQUINAS VALUES (4, 699, 'NordicTrack RX 800 Remo de Aire Plegable', 'Si lo que estÂ s buscando es un equipamiento de ejercicio sÂ¢lido y a un precio excepcional, NordicTrack RX 800 es la opciÂ¢n perfecta.',  'MUSCULACION', 150, 40);
 
 1 fila creada.
 
@@ -400,9 +39,9 @@ SQL> select * from maquinas;
 ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ                                                                                                                                                                                                                                                                                                TIPO                      LARGO      ANCHO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 ----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
           1          499 Proform Tour de France CLC SMART Bicicleta Indoor  Bicicleta indoor genial que cuenta con una gran pantalla led y un asiento acolchado                                                                                                                                                                                                                          BICICLETA                   140         60                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-          2          899 NordicTrack C5.5 Bicicleta El¡ptica                Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.                                                                                                                                BICICLETA                   140         60                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-          3         2949 Life Fitness G4 con Prensa de Piernas              LA AJUSTABILIDAD de la Life Fitness G4 y su ergonom¡a superior le permiten ejercitarse efectiva y c¢modamente. La s¢lida y elegante imagen de la eficiente GS4, unida a la gran variedad de ejercicios, le mantendr n motivado para conseguir sus metas.                                                     MUSCULACION                 150        150                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-          4          699 NordicTrack RX 800 Remo de Aire Plegable           Si lo que est s buscando es un equipamiento de ejercicio s¢lido y a un precio excepcional, NordicTrack RX 800 es la opci¢n perfecta.                                                                                                                                                                         MUSCULACION                 150         40                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          2          899 NordicTrack C5.5 Bicicleta ElÂ¡ptica                Bicicleta eliptica que cuenta con un sistema de inclinaciÂ¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.                                                                                                                                BICICLETA                   140         60                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          3         2949 Life Fitness G4 con Prensa de Piernas              LA AJUSTABILIDAD de la Life Fitness G4 y su ergonomÂ¡a superior le permiten ejercitarse efectiva y cÂ¢modamente. La sÂ¢lida y elegante imagen de la eficiente GS4, unida a la gran variedad de ejercicios, le mantendrÂ n motivado para conseguir sus metas.                                                     MUSCULACION                 150        150                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          4          699 NordicTrack RX 800 Remo de Aire Plegable           Si lo que estÂ s buscando es un equipamiento de ejercicio sÂ¢lido y a un precio excepcional, NordicTrack RX 800 es la opciÂ¢n perfecta.                                                                                                                                                                         MUSCULACION                 150         40                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
           5         2499 Nordictrack Fusion CST Multi Polea                 Moderna maquina que cuenta con 8 cables para entrenar cualquier parte del cuerpo.                                                                                                                                                                                                                            POLEAS/CABLES               150        105                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
           6          679 Cadenza Fitness T40 Cinta de Correr                Lujosa caminadora que viene con pantalla tactil y es plegable.                                                                                                                                                                                                                                               CAMINADORA                  170         80                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 
@@ -427,7 +66,7 @@ SQL> rem carga accesorios
 SQL> rem carga accesorios
 SQL> 
 SQL> desc accesorios;
- Nombre                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ¿Nulo?   Tipo
+ Nombre                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Â¿Nulo?   Tipo
  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  ID_PROD_ACC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   NOT NULL NUMBER(5)
  COSTE_UD_ACC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           NUMBER(4)
@@ -534,7 +173,7 @@ SQL>
 SQL> 
 SQL> 
 SQL> desc merchandising
- Nombre                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ¿Nulo?   Tipo
+ Nombre                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Â¿Nulo?   Tipo
  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  ID_PROD_MERCH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 NOT NULL NUMBER(5)
  COSTE_UD_MERCH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         NUMBER(4)
@@ -664,7 +303,7 @@ SQL> CREATE TABLE PROVEER (
 Tabla creada.
 
 SQL> DESC PROVEER
- Nombre                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ¿Nulo?   Tipo
+ Nombre                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Â¿Nulo?   Tipo
  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  ID_PROD_MAQ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   NOT NULL NUMBER(5)
  ID_PROD_ACC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   NOT NULL NUMBER(5)
@@ -692,8 +331,3 @@ SQL> REM CREAR UN PROD, ACC, MERCH CON ID 100 CON VALORES NULL PARA USAR EN PROV
 SQL> 
 SQL> 
 SQL> SPOOL OFF
-
-
-
-
-
