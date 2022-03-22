@@ -692,6 +692,79 @@ SQL> REM CREAR UN PROD, ACC, MERCH CON ID 100 CON VALORES NULL PARA USAR EN PROV
 SQL> 
 SQL> 
 SQL> SPOOL OFF
+SQL> INSERT INTO MERCHANDISING VALUES (100, NULL, NULL, NULL, NULL);
+SQL> INSERT INTO ACCESORIOS VALUES (100, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+SQL> INSERT INTO MAQUINAS VALUES (100, NULL, NULL, NULL, NULL, NULL, NULL);
+SQL> DESC PROVEER
+ Nombre                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ¿Nulo?   Tipo
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ID_PROD_MAQ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   NOT NULL NUMBER(5)
+ ID_PROD_ACC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   NOT NULL NUMBER(5)
+ ID_PROD_MERCH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 NOT NULL NUMBER(5)
+ ID_PROV                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       NOT NULL NUMBER(4)
+ ID_SEDE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       NOT NULL NUMBER(6)
+ EXCLUSIVO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              VARCHAR2(2)
+
+SQL> INSERT INTO PROVEER VALUES(1,100,100,2,1,'NO');
+
+1 fila creada.
+
+SQL> SELECT * FROM PROVEER;
+
+ID_PROD_MAQ ID_PROD_ACC ID_PROD_MERCH    ID_PROV    ID_SEDE EX                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+----------- ----------- ------------- ---------- ---------- --                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+          1         100           100          2          1 NO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+SQL> SPOOL OFF
+SQL> INSERT INTO PROVEER VALUES(1, 100, 100, 2, 1, 'NO');
+SQL> INSERT INTO PROVEER VALUES(100, 3, 100, 1, 2, 'SI');
+SQL> INSERT INTO PROVEER VALUES(100, 2, 100, 1, 2, 'SI');
+SQL> INSERT INTO PROVEER VALUES(100, 1, 100, 1, 2, 'SI');
+SQL> INSERT INTO PROVEER VALUES(100, 1, 100, 1, 1, 'NO');
+SQL> INSERT INTO PROVEER VALUES(100, 2, 100, 1, 1, 'NO');
+SQL> INSERT INTO PROVEER VALUES(100, 3, 100, 1, 1, 'NO');
+SQL> select * from proveer;
+
+ID_PROD_MAQ ID_PROD_ACC ID_PROD_MERCH    ID_PROV    ID_SEDE EX
+----------- ----------- ------------- ---------- ---------- --
+          1         100           100          2          1 NO
+        100           3           100          1          2 SI
+        100           2           100          1          2 SI
+        100           1           100          1          2 SI
+        100           1           100          1          1 NO
+        100           2           100          1          1 NO
+        100           3           100          1          1 NO
+
+7 filas seleccionadas.
+
+SQL> rem tabla proveer terminada
+SQL> rem tabla proveer terminada
+SQL> rem tabla proveer terminada
+SQL> rem tabla proveer terminada
+SQL> rem tabla proveer terminada
+SQL> 
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> FIN PRIMER MER
+SQL> REM holi
+SQL> REM MARINA no pongas caritas en el nombre del spool -M
+SQL> REM MARINA no pongas caritas en el nombre del spool -M
+SQL> REM MARINA no pongas caritas en el nombre del spool -M
+SQL> REM MARINA no pongas caritas en el nombre del spool -M
+SQL> REM MARINA no pongas caritas en el nombre del spool -M
 
 
 
