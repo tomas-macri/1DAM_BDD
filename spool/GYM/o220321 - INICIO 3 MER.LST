@@ -1,0 +1,101 @@
+SQL> CREATE TABLE SALAS(N_SALA number(3) primary key, TAMANO number(3), CAPACIDAD number(3)); 
+
+SQL> INSERT INTO SALAS VALUES(1, 50, 20);
+
+1 fila creada.
+
+SQL> INSERT INTO SALAS VALUES(2, 52, 25);
+
+1 fila creada.
+
+SQL> INSERT INTO SALAS VALUES(3, 82, 55);
+
+1 fila creada.
+
+SQL> INSERT INTO SALAS VALUES(4, 150, 200);
+
+1 fila creada.
+
+SQL> INSERT INTO SALAS VALUES(5, 20, 5);
+
+1 fila creada.
+
+SQL> INSERT INTO SALAS VALUES(6, 35, 12);
+
+1 fila creada.
+
+SQL> SELECT * FROM SALAS;
+
+    N_SALA     TAMANO  CAPACIDAD                                                
+---------- ---------- ----------                                                
+         1         50         20                                                
+         2         52         25                                                
+         3         82         55                                                
+         4        150        200                                                
+         5         20          5                                                
+         6         35         12                                                
+
+6 filas seleccionadas.
+
+SQL> REM VER EL TEMA DARSE CON MERCEDES
+SQL> REM VER EL TEMA DARSE CON MERCEDES
+SQL> REM VER EL TEMA DARSE CON MERCEDES
+SQL> REM VER EL TEMA DARSE CON MERCEDES
+SQL> REM VER EL TEMA DARSE CON MERCEDES
+SQL> REM VER EL TEMA DARSE CON MERCEDES
+SQL> 
+SQL> REM VER EL TEMA DARSE CON MERCEDES
+SQL> SELECT * FROM SALAS;
+
+    N_SALA     TAMANO  CAPACIDAD                                                
+---------- ---------- ----------                                                
+         1         50         20                                                
+         2         52         25                                                
+         3         82         55                                                
+         4        150        200                                                
+         5         20          5                                                
+         6         35         12                                                
+
+6 filas seleccionadas.
+
+SQL> INSERT INTO SALAS VALUES(7,204, 246);
+
+1 fila creada.
+
+SQL> INSERT INTO SALAS VALUES(8, 64, 43);
+
+1 fila creada.
+
+SQL> INSERT INTO SALAS VALUES(8, 76, 59);
+INSERT INTO SALAS VALUES(8, 76, 59)
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004035) violada 
+
+
+SQL> INSERT INTO SALAS VALUES(9, 76, 59);
+
+1 fila creada.
+
+SQL> INSERT INTO SALAS VALUES(10, 100, 50);
+
+1 fila creada.
+
+SQL> SELECT * FROM SALAS;
+
+    N_SALA     TAMANO  CAPACIDAD                                                
+---------- ---------- ----------                                                
+         1         50         20                                                
+         2         52         25                                                
+         3         82         55                                                
+         4        150        200                                                
+         5         20          5                                                
+         6         35         12                                                
+         7        204        246                                                
+         8         64         43                                                
+         9         76         59                                                
+        10        100         50                                                
+
+10 filas seleccionadas.
+
+SQL> SPOOL OFF

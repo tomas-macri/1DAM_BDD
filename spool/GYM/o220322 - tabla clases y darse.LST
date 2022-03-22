@@ -1,0 +1,476 @@
+SQL> CREATE TABLE CLASES(
+  2  	ID_CLASE number(6) primary key,
+  3  	FECHA datetime,
+  4  	TIPO varchar2(20) CHECK (TIPO IN('SPINNING', 'ZUMBA'))
+  5  );
+	FECHA datetime,
+	      *
+ERROR en línea 3:
+ORA-00902: tipo de dato no válido 
+
+
+SQL> CREATE TABLE CLASES(
+  2  	ID_CLASE number(6) primary key,
+  3  	FECHA varchar2(10),
+  4  	HORA number(4),
+  5  	TIPO varchar2(20) CHECK (TIPO IN('SPINNING', 'ZUMBA'))
+  6  );
+
+Tabla creada.
+
+SQL> INSERT INTO CLASES VALUES(1, '17/05/2021/05/19'
+  2  ;
+
+*
+ERROR en línea 2:
+ORA-00917: falta la coma 
+
+
+SQL> INSERT INTO CLASES VALUES(1, '2021/05/17', 1230, 'SPINNING');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES(2, '2021/07/09', 1630, 'ZUMBA');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES(2, '2021/12/14', 2230, 'ZUMBA');
+INSERT INTO CLASES VALUES(2, '2021/12/14', 2230, 'ZUMBA')
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004037) violada 
+
+
+SQL> INSERT INTO CLASES VALUES(3, '2021/12/14', 2230, 'ZUMBA');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES(4, '2022/22/03', 930, 'SPINNING');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (5, '2022/22/03', 1130, 'SPINNING');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (6, '2022/22/03', 1330, 'SPINNING');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (7, '2022/22/03', 1530, 'SPINNING');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (7, '2022/22/03', 1730, 'SPINNING');
+INSERT INTO CLASES VALUES (7, '2022/22/03', 1730, 'SPINNING')
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004037) violada 
+
+
+SQL> INSERT INTO CLASES VALUES (8, '2022/22/03', 1730, 'SPINNING');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (9, '2022/22/03', 1930, 'SPINNING');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (10, '2022/22/03', 2130, 'SPINNING');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (11, '2022/22/03', 830, 'ZUMBA');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (12, '2022/22/03', 1030, 'ZUMBA');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (13, '2022/22/03', 1230, 'ZUMBA');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (13, '2022/22/03', 1230, 'ZUMBA');
+INSERT INTO CLASES VALUES (13, '2022/22/03', 1230, 'ZUMBA')
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004037) violada 
+
+
+SQL> INSERT INTO CLASES VALUES (14, '2022/22/03', 1430, 'ZUMBA');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (15, '2022/22/03', 1630, 'ZUMBA');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (16, '2022/22/03', 1830, 'ZUMBA');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (17, '2022/22/03', 2030, 'ZUMBA');
+
+1 fila creada.
+
+SQL> INSERT INTO CLASES VALUES (18, '2022/22/03', 2230, 'ZUMBA');
+
+1 fila creada.
+
+SQL> SELECT * FROM CLASES;
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+         1 2021/05/17       1230 SPINNING                                       
+         2 2021/07/09       1630 ZUMBA                                          
+         3 2021/12/14       2230 ZUMBA                                          
+         4 2022/22/03        930 SPINNING                                       
+         5 2022/22/03       1130 SPINNING                                       
+         6 2022/22/03       1330 SPINNING                                       
+         7 2022/22/03       1530 SPINNING                                       
+         8 2022/22/03       1730 SPINNING                                       
+         9 2022/22/03       1930 SPINNING                                       
+        10 2022/22/03       2130 SPINNING                                       
+        11 2022/22/03        830 ZUMBA                                          
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+        12 2022/22/03       1030 ZUMBA                                          
+        13 2022/22/03       1230 ZUMBA                                          
+        14 2022/22/03       1430 ZUMBA                                          
+        15 2022/22/03       1630 ZUMBA                                          
+        16 2022/22/03       1830 ZUMBA                                          
+        17 2022/22/03       2030 ZUMBA                                          
+        18 2022/22/03       2230 ZUMBA                                          
+
+18 filas seleccionadas.
+
+SQL> UPDATE CLASES SET FECHA='2022/03/22' WHERE FECHA='2022/22/03';
+
+15 filas actualizadas.
+
+SQL> 
+SQL>  INSERT INTO CLASES VALUES(19, '2022/24/03', 930, 'ZUMBA');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (20, '2022/24/03', 1130, 'ZUMBA');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (21, '2022/24/03', 1330, 'ZUMBA');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (22, '2022/24/03', 1530, 'ZUMBA');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (23, '2022/24/03', 1730, 'ZUMBA');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (24, '2022/24/03', 1930, 'ZUMBA');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (25, '2022/24/03', 2130, 'ZUMBA');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (26, '2022/24/03', 830, 'SPINNNING');
+ INSERT INTO CLASES VALUES (26, '2022/24/03', 830, 'SPINNNING')
+*
+ERROR en línea 1:
+ORA-02290: restricción de control (TMACRI.SYS_C004036) violada 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (27, '2022/24/03', 1030, 'SPINNNING');
+ INSERT INTO CLASES VALUES (27, '2022/24/03', 1030, 'SPINNNING')
+*
+ERROR en línea 1:
+ORA-02290: restricción de control (TMACRI.SYS_C004036) violada 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (28, '2022/24/03', 1230, 'SPINNNING');
+ INSERT INTO CLASES VALUES (28, '2022/24/03', 1230, 'SPINNNING')
+*
+ERROR en línea 1:
+ORA-02290: restricción de control (TMACRI.SYS_C004036) violada 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (29, '2022/24/03', 1430, 'SPINNNING');
+ INSERT INTO CLASES VALUES (29, '2022/24/03', 1430, 'SPINNNING')
+*
+ERROR en línea 1:
+ORA-02290: restricción de control (TMACRI.SYS_C004036) violada 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (30, '2022/24/03', 1630, 'SPINNNING');
+ INSERT INTO CLASES VALUES (30, '2022/24/03', 1630, 'SPINNNING')
+*
+ERROR en línea 1:
+ORA-02290: restricción de control (TMACRI.SYS_C004036) violada 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (31, '2022/24/03', 1830, 'SPINNNING');
+ INSERT INTO CLASES VALUES (31, '2022/24/03', 1830, 'SPINNNING')
+*
+ERROR en línea 1:
+ORA-02290: restricción de control (TMACRI.SYS_C004036) violada 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (32, '2022/24/03', 2030, 'SPINNNING');
+ INSERT INTO CLASES VALUES (32, '2022/24/03', 2030, 'SPINNNING')
+*
+ERROR en línea 1:
+ORA-02290: restricción de control (TMACRI.SYS_C004036) violada 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (33, '2022/24/03', 2230, 'SPINNNING');
+ INSERT INTO CLASES VALUES (33, '2022/24/03', 2230, 'SPINNNING')
+*
+ERROR en línea 1:
+ORA-02290: restricción de control (TMACRI.SYS_C004036) violada 
+
+
+SQL> INSERT INTO CLASES VALUES (26, '2022/24/03', 830, 'SPINNING');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (27, '2022/24/03', 1030, 'SPINNING');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (28, '2022/24/03', 1230, 'SPINNING');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (29, '2022/24/03', 1430, 'SPINNING');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (30, '2022/24/03', 1630, 'SPINNING');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (31, '2022/24/03', 1830, 'SPINNING');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (32, '2022/24/03', 2030, 'SPINNING');
+
+1 fila creada.
+
+SQL> 
+SQL> 
+SQL> 
+SQL>  INSERT INTO CLASES VALUES (33, '2022/24/03', 2230, 'SPINNING');
+
+1 fila creada.
+
+SQL> SELECT * FROM CLASES;
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+         1 2021/05/17       1230 SPINNING                                       
+         2 2021/07/09       1630 ZUMBA                                          
+         3 2021/12/14       2230 ZUMBA                                          
+         4 2022/03/22        930 SPINNING                                       
+         5 2022/03/22       1130 SPINNING                                       
+         6 2022/03/22       1330 SPINNING                                       
+         7 2022/03/22       1530 SPINNING                                       
+         8 2022/03/22       1730 SPINNING                                       
+         9 2022/03/22       1930 SPINNING                                       
+        10 2022/03/22       2130 SPINNING                                       
+        11 2022/03/22        830 ZUMBA                                          
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+        12 2022/03/22       1030 ZUMBA                                          
+        13 2022/03/22       1230 ZUMBA                                          
+        14 2022/03/22       1430 ZUMBA                                          
+        15 2022/03/22       1630 ZUMBA                                          
+        16 2022/03/22       1830 ZUMBA                                          
+        17 2022/03/22       2030 ZUMBA                                          
+        18 2022/03/22       2230 ZUMBA                                          
+        19 2022/24/03        930 ZUMBA                                          
+        20 2022/24/03       1130 ZUMBA                                          
+        21 2022/24/03       1330 ZUMBA                                          
+        22 2022/24/03       1530 ZUMBA                                          
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+        23 2022/24/03       1730 ZUMBA                                          
+        24 2022/24/03       1930 ZUMBA                                          
+        25 2022/24/03       2130 ZUMBA                                          
+        26 2022/24/03        830 SPINNING                                       
+        27 2022/24/03       1030 SPINNING                                       
+        28 2022/24/03       1230 SPINNING                                       
+        29 2022/24/03       1430 SPINNING                                       
+        30 2022/24/03       1630 SPINNING                                       
+        31 2022/24/03       1830 SPINNING                                       
+        32 2022/24/03       2030 SPINNING                                       
+        33 2022/24/03       2230 SPINNING                                       
+
+33 filas seleccionadas.
+
+SQL> UPDATE CLASES SET FECHA='2022/04/24' WHERE FECHA='2022/24/03';
+
+15 filas actualizadas.
+
+SQL> SELECT * FROM CLASES;
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+         1 2021/05/17       1230 SPINNING                                       
+         2 2021/07/09       1630 ZUMBA                                          
+         3 2021/12/14       2230 ZUMBA                                          
+         4 2022/03/22        930 SPINNING                                       
+         5 2022/03/22       1130 SPINNING                                       
+         6 2022/03/22       1330 SPINNING                                       
+         7 2022/03/22       1530 SPINNING                                       
+         8 2022/03/22       1730 SPINNING                                       
+         9 2022/03/22       1930 SPINNING                                       
+        10 2022/03/22       2130 SPINNING                                       
+        11 2022/03/22        830 ZUMBA                                          
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+        12 2022/03/22       1030 ZUMBA                                          
+        13 2022/03/22       1230 ZUMBA                                          
+        14 2022/03/22       1430 ZUMBA                                          
+        15 2022/03/22       1630 ZUMBA                                          
+        16 2022/03/22       1830 ZUMBA                                          
+        17 2022/03/22       2030 ZUMBA                                          
+        18 2022/03/22       2230 ZUMBA                                          
+        19 2022/04/24        930 ZUMBA                                          
+        20 2022/04/24       1130 ZUMBA                                          
+        21 2022/04/24       1330 ZUMBA                                          
+        22 2022/04/24       1530 ZUMBA                                          
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+        23 2022/04/24       1730 ZUMBA                                          
+        24 2022/04/24       1930 ZUMBA                                          
+        25 2022/04/24       2130 ZUMBA                                          
+        26 2022/04/24        830 SPINNING                                       
+        27 2022/04/24       1030 SPINNING                                       
+        28 2022/04/24       1230 SPINNING                                       
+        29 2022/04/24       1430 SPINNING                                       
+        30 2022/04/24       1630 SPINNING                                       
+        31 2022/04/24       1830 SPINNING                                       
+        32 2022/04/24       2030 SPINNING                                       
+        33 2022/04/24       2230 SPINNING                                       
+
+33 filas seleccionadas.
+
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> rem cargamos tabla darse
+SQL> 
+SQL> rem cargamos tabla darse
+SQL> 
+SQL> create table DARSE(
+  2  ID_CLASE NUMBER(6),
+  3  N_SALA NUMBER(3),
+  4  foreign key (ID_CLASE) references SALAS,
+  5  foreign key (ID_CLASE) refzxc svz;;;asaSerences CLASES,
+  6  ;
+foreign key (ID_CLASE) refzxc svz;;;asaSerences CLASES,
+                       *
+ERROR en línea 5:
+ORA-00905: falta una palabra clave 
+
+
+SQL> create table DARSE(
+  2  ID_CLASE number(6),
+  3  N_SALA number(3),
+  4  foreign key (ID_CLASE) references CLASES,
+  5  foreign key (N_SALA) references SALAS,
+  6  primary key (ID_CLASE, N_SALA)
+  7  );
+
+Tabla creada.
+
+SQL> spool off
