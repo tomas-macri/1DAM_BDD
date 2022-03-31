@@ -1,0 +1,125 @@
+SQL> INSERT INTO SOCIOS VALUES(12,'13597127A', 'MADELEINE','GOMEZ', 'MOREIRA', 'mgomez@yahoo.com', '383638907', 'CALIFORNIA', 8, 64983,1);
+
+1 fila creada.
+
+SQL> select * from socios;
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                                                                                                 TELEFONO   CALLE                                                  NUMERO         CP     ID_POB                                                                                                                         
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ----------                                                                                                                         
+         1 Y7451932S TOMAS                VEGA                 ORTEGA               tvega@gmail.com                                                                                      660046009  SUECIA                                                     44      28022          2                                                                                                                         
+         2 43594630Z CARLOS               DA VINCI             PAVAROTTI            cdavinci@gmail.com                                                                                   364814653  SEVILLA                                                    88      46892          6                                                                                                                         
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6                                                                                                                         
+         4 68792565F CARLA                MESSI                RONALDO              cmessi@gmail.com                                                                                     793324108  ARGENTINA                                                  86      36950          4                                                                                                                         
+         5 13644098S ALEXA                MARTINEZ             ORTEGA               amartinez@gmail.com                                                                                  347186593  PADRE NUESTRO                                              13        300          7                                                                                                                         
+         6 14516978C PAULA                EDERY                                     pedery@gmail.com                                                                                     604826822  CALLEJON                                                  853      66038          8                                                                                                                         
+         9 Y4635879C ENRIQUE              MARTINEZ                                  emartinez@hotmail.com                                                                                514378378  NAIROBI                                                    81      41620         10                                                                                                                         
+        11 78975461X ALBERTO              FERNANDEZ                                 afernandez@yahoo.com                                                                                 646503181  CHINA                                                      69      28022          4                                                                                                                         
+        13 49863105Z ALFONSO              ORTEGA               SILLERO              aortega@yahoo.com                                                                                    360462957  NORUEGA                                                    10      46432          3                                                                                                                         
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1                                                                                                                         
+        15 Y5689843M OSCAR                NOVILLO              CAMACHO              onovillo@yahoo.com                                                                                   355745640  UGANDA                                                     22      36569          1                                                                                                                         
+        16 84695325W JUAN                 GARRIDO                                   jgarrido@gmail.com                                                                                   227652163  ALCALA                                                    256      28020          6                                                                                                                         
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com                                                                                     383638907  CALIFORNIA                                                  8      64983          1                                                                                                                         
+
+13 filas seleccionadas.
+
+SQL> 
+SQL> CREATE TABLE SOCIOS(
+  2     N_SOCIO number(7) primary key,
+  3     DNI varchar2(9),
+  4     NOMBRE varchar2(20),
+  5     APELLIDO varchar2(20),
+  6     SEG_APELLIDO varchar2(20),
+  7     MAIL varchar2(100),
+  8     TELEFONO varchar2(10),
+  9     CALLE varchar2(50),
+ 10     NUMERO number(3),
+ 11     CP number(5),
+ 12     LICENCIA number(6),
+ 13     ESTILO varchar2(7) CHECK (ESTILO IN ('ZUMBA','SPINNING')),
+ 14     ID_POB number(5),
+ 15     foreign key (ID_POB) references POBLACIONES);
+CREATE TABLE SOCIOS(
+             *
+ERROR en línea 1:
+ORA-00955: este nombre ya lo está utilizando otro objeto existente 
+
+
+SQL> CREATE TABLE PROFESORES(
+  2     N_PROFESOR number(7) primary key,
+  3     DNI varchar2(9),
+  4     NOMBRE varchar2(20),
+  5     APELLIDO varchar2(20),
+  6     SEG_APELLIDO varchar2(20),
+  7     MAIL varchar2(100),
+  8     TELEFONO varchar2(10),
+  9     CALLE varchar2(50),
+ 10     NUMERO number(3),
+ 11     CP number(5),
+ 12     LICENCIA number(6),
+ 13     ESTILO varchar2(7) CHECK (ESTILO IN ('ZUMBA','SPINNING')),
+ 14     ID_POB number(5),
+ 15     foreign key (ID_POB) references POBLACIONES);
+
+Tabla creada.
+
+SQL> INSERT INTO PROFESORES VALUES(4,'50065349J', 'DANIEL','NAVARRO', 'MONTERO', 'dnavarro@gmail.com', '648462568', 'DOMINGO', 12, 28300, 656359, 'ZUMBA', 1);
+
+1 fila creada.
+
+SQL> SELECT * FROM PROFESORES;
+
+N_PROFESOR DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                                                                                                 TELEFONO   CALLE                                                  NUMERO         CP   LICENCIA ESTILO      ID_POB                                                                                                      
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- ------- ----------                                                                                                      
+         4 50065349J DANIEL               NAVARRO              MONTERO              dnavarro@gmail.com                                                                                   648462568  DOMINGO                                                    12      28300     656359 ZUMBA            1                                                                                                      
+
+SQL> UPDATE PROFESORES SET N_PROFESOR = 1;
+
+1 fila actualizada.
+
+SQL> SELECT * FROM PROFESORES;
+
+N_PROFESOR DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                                                                                                 TELEFONO   CALLE                                                  NUMERO         CP   LICENCIA ESTILO      ID_POB                                                                                                      
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- ------- ----------                                                                                                      
+         1 50065349J DANIEL               NAVARRO              MONTERO              dnavarro@gmail.com                                                                                   648462568  DOMINGO                                                    12      28300     656359 ZUMBA            1                                                                                                      
+
+SQL> SELECT * FROM POBLACIONES;
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                                                                                                                               
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                       
+         1 MADRID                                 3305408        604 MADRID                                                                                                                                                                                                                                                                                                                                     
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                                                                                                                     
+         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                                                                                                                     
+         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                                                                                                                     
+         5 BARCELONA                              1636732        102 BARCELONA                                                                                                                                                                                                                                                                                                                                  
+         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                                                                                                                                  
+         7 SEVILLA                                 688711        140 SEVILLA                                                                                                                                                                                                                                                                                                                                    
+         8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                                                                                                                    
+        10 VALLAOLID                               298866        198 VALLADOLID                                                                                                                                                                                                                                                                                                                                 
+
+9 filas seleccionadas.
+
+SQL> 
+SQL> INSERT INTO PROFESORES VALUES(2,'67497836R', 'MARINA','DIAZ', 'HERNANDO', 'mdiazhernando@gmail.com', '358369526', 'AGUILERA', 15, 28300, 682945, 'SPINNING', 4);
+INSERT INTO PROFESORES VALUES(2,'67497836R', 'MARINA','DIAZ', 'HERNANDO', 'mdiazhernando@gmail.com', '358369526', 'AGUILERA', 15, 28300, 682945, 'SPINNING', 4)
+                                                                                                                                                 *
+ERROR en línea 1:
+ORA-12899: el valor es demasiado grande para la columna "TMACRI"."PROFESORES"."ESTILO" (real: 8, máximo: 7) 
+
+
+SQL> INSERT INTO PROFESORES VALUES(3,'92373905F', 'ANGELA','OLIVA', 'JIMIENEZ', 'aoliva@gmail.com', '629490361', 'SANMIGUEL', 32, 28300, 673823, 'ZUMBA', 5);
+
+1 fila creada.
+
+SQL> INSERT INTO PROFESORES VALUES(4,'84736492H', 'HELENA','ROMAN', 'PULIDO', 'hroman@gmail.com', '636830511', 'GIRASOLES', 2, 28540, 649321, 'ZUMBA', 7);
+
+1 fila creada.
+
+SQL> INSERT INTO PROFESORES VALUES(5,'95494729K', 'ROCIO','MOSQUERA', 'HERRERO', 'rmosquera@gmail.com', '649349364', 'ALTAMIRA', 33, 28300, 672294, 'SPINNING', 8);
+INSERT INTO PROFESORES VALUES(5,'95494729K', 'ROCIO','MOSQUERA', 'HERRERO', 'rmosquera@gmail.com', '649349364', 'ALTAMIRA', 33, 28300, 672294, 'SPINNING', 8)
+                                                                                                                                               *
+ERROR en línea 1:
+ORA-12899: el valor es demasiado grande para la columna "TMACRI"."PROFESORES"."ESTILO" (real: 8, máximo: 7) 
+
+
+SQL> REM CANCELARRRRRRRRRRR
+SQL> SPOOL OFF
