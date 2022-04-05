@@ -223,13 +223,6 @@ SQL> INSERT INTO SEDES VALUES (2, '945325984', 'Alcala', 227, 28028, 156, 1);
 	
 1 fila creada.
 
-SQL> INSERT INTO SEDES VALUES (2, '9454865', 'la Concha', 8, 28300, 86, 2);
-INSERT INTO SEDES VALUES (2, '9454865', 'la Concha', 8, 28300, 86, 2)
-*
-ERROR en línea 1:
-ORA-00001: restricción única (TMACRI.SYS_C004013) violada 
-
-
 SQL> INSERT INTO SEDES VALUES (3, '9454865', 'la Concha', 8, 28300, 86, 2);
 
 1 fila creada.
@@ -252,6 +245,10 @@ SQL>  select * from SEDES;
          4 975643222 Valencia                              466       8013        166          5                                                                                                                                                                                                             
 
 SQL> INSERT INTO SEDES VALUES (5, '975612489', 'Ardilla', 5, 41010, 202, 7);
+
+1 fila creada.
+
+SQL> insert into sedes values(6,956321546, 'Angel', 60, 36598, 30, 8);
 
 1 fila creada.
 

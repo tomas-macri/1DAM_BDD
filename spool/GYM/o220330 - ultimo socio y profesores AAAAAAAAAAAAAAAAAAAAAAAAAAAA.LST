@@ -123,3 +123,55 @@ ORA-12899: el valor es demasiado grande para la columna "TMACRI"."PROFESORES"."E
 
 SQL> REM CANCELARRRRRRRRRRR
 SQL> SPOOL OFF
+
+SQL> drop table profesores;
+
+Tabla borrada.
+
+SQL>  CREATE TABLE PROFESORES(
+  2        N_PROFESOR number(7) primary key,
+  3        DNI varchar2(9),
+  4        NOMBRE varchar2(20),
+  5        APELLIDO varchar2(20),
+  6        SEG_APELLIDO varchar2(20),
+  7        MAIL varchar2(100),
+  8        TELEFONO varchar2(10),
+  9        CALLE varchar2(50),
+ 10        NUMERO number(3),
+ 11        CP number(5),
+ 12        LICENCIA number(6),
+ 13        ESTILO varchar2(8) CHECK (ESTILO IN ('ZUMBA','SPINNING')),
+ 14        ID_POB number(5),
+ 15        foreign key (ID_POB) references POBLACIONES);
+
+Tabla creada.
+
+SQL> INSERT INTO PROFESORES VALUES(4,'50065349J', 'DANIEL','NAVARRO', 'MONTERO', 'dnavarro@gmail.com', '648462568', 'DOMINGO', 12, 28300, 656359, 'ZUMBA', 1);
+
+1 fila creada.
+
+SQL>
+SQL> INSERT INTO PROFESORES VALUES(2,'67497836R', 'MARINA','DIAZ', 'HERNANDO', 'mdiazhernando@gmail.com', '358369526', 'AGUILERA', 15, 28300, 682945, 'SPINNING', 4);
+
+1 fila creada.
+
+SQL> INSERT INTO PROFESORES VALUES(3,'92373905F', 'ANGELA','OLIVA', 'JIMIENEZ', 'aoliva@gmail.com', '629490361', 'SANMIGUEL', 32, 28300, 673823, 'ZUMBA', 5);
+
+1 fila creada.
+
+SQL> INSERT INTO PROFESORES VALUES(4,'84736492H', 'HELENA','ROMAN', 'PULIDO', 'hroman@gmail.com', '636830511', 'GIRASOLES', 2, 28540, 649321, 'ZUMBA', 7);
+INSERT INTO PROFESORES VALUES(4,'84736492H', 'HELENA','ROMAN', 'PULIDO', 'hroman@gmail.com', '636830511', 'GIRASOLES', 2, 28540, 649321, 'ZUMBA', 7)
+*
+ERROR en lÝnea 1:
+ORA-00001: restricci¾n ·nica (TMACRI.SYS_C004048) violada
+
+
+SQL> INSERT INTO PROFESORES VALUES(5,'95494729K', 'ROCIO','MOSQUERA', 'HERRERO', 'rmosquera@gmail.com', '649349364', 'ALTAMIRA', 33, 28300, 672294, 'SPINNING', 8);
+
+1 fila creada.
+
+SQL> INSERT INTO PROFESORES VALUES(6,'73936305L', 'ELENA','MONTOYA', 'VILLEGAS', 'emontoya@gmail.com', '688374953', 'SANTIAGO', 27, 28300, 633566, 'SPINNING', 6);
+
+1 fila creada.
+
+SQL> select * from profesores;
