@@ -97,22 +97,11 @@ SQL> INSERT INTO POBLACIONES VALUES (0003, 'CARTAGENA', 213943, 558, 'MURCIA');
 
 1 fila creada.
 
-SQL> INSERT INTO POBLACIONES VALUES (0003, 'MURCIA', 447182, 881, 'MURCIA');
-INSERT INTO POBLACIONES VALUES (0003, 'MURCIA', 447182, 881, 'MURCIA')
-*
-ERROR en línea 1:
-ORA-00001: restricción única (TMACRI.SYS_C004011) violada 
-
-
 SQL> INSERT INTO POBLACIONES VALUES (0004, 'MURCIA', 447182, 881, 'MURCIA');
 
 1 fila creada.
 
 SQL> rem cargadas algunas poblaciones de comunidades quedan barcelona, sevilla y vallaolid
-SQL> spool off
-
-
-
 
 SQL> select * from poblaciones;
 

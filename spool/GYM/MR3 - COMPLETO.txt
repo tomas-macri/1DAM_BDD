@@ -827,13 +827,6 @@ SQL> SELECT * FROM CLASES;
 
 33 filas seleccionadas.
 
-SQL>  INSERT INTO SOCIOS VALUES(7,'16139488X', 'SUSANA','VEGA', 'GONZALEZ', 'svega@hotmail.com', '821403819', 'RIO', 359, 99252,10);10);
- INSERT INTO SOCIOS VALUES(7,'16139488X', 'SUSANA','VEGA', 'GONZALEZ', 'svega@hotmail.com', '821403819', 'RIO', 359, 99252,10);10)
-                                                                                                                              *
-ERROR en l�nea 1:
-ORA-00911: car�cter no v�lido
-SQL> INSERT INTO SOCIOS VALUES(8,'69873567B', 'MONICA','BIANCO', 'PEREZ', 'mbianco@hotmail.com', '299217214', 'OSLO', 30, 64203,8);
-
 1 fila creada.
 
 SQL>  INSERT INTO SOCIOS VALUES(7,'16139488X', 'SUSANA','VEGA', 'GONZALEZ', 'svega@hotmail.com', '821403819', 'RIO', 359, 99252,10);
@@ -877,68 +870,15 @@ SQL> INSERT INTO ASISTIR VALUES(11,11);
 
 SQL> INSERT INTO ASISTIR VALUES(7,24);
 INSERT INTO ASISTIR VALUES(7,24)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(7,26);
-INSERT INTO ASISTIR VALUES(7,26)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(2,2);
 
 1 fila creada.
 
 SQL> INSERT INTO ASISTIR VALUES(11,30);
 INSERT INTO ASISTIR VALUES(11,30)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(15,18);
-INSERT INTO ASISTIR VALUES(15,18)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(15,18);
-INSERT INTO ASISTIR VALUES(15,18)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(8,27);
-INSERT INTO ASISTIR VALUES(8,27)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(12,28);
-INSERT INTO ASISTIR VALUES(12,28)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(8,31);
-INSERT INTO ASISTIR VALUES(8,31)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(7,9);
 
 1 fila creada.
 
 SQL> INSERT INTO ASISTIR VALUES(12,17);
-INSERT INTO ASISTIR VALUES(12,17)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(13,21);
-INSERT INTO ASISTIR VALUES(13,21)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(15,18);
-INSERT INTO ASISTIR VALUES(15,18)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(4,7);
 
 1 fila creada.
 
@@ -963,11 +903,6 @@ SQL> INSERT INTO ASISTIR VALUES(7,4);
 1 fila creada.
 
 SQL> INSERT INTO ASISTIR VALUES(2,32);
-INSERT INTO ASISTIR VALUES(2,32)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(15,15);
 
 1 fila creada.
 
@@ -985,10 +920,6 @@ SQL> INSERT INTO ASISTIR VALUES(12,6);
 
 SQL> INSERT INTO ASISTIR VALUES(14,26);
 INSERT INTO ASISTIR VALUES(14,26)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(15,4);
 
 1 fila creada.
 
@@ -1084,15 +1015,6 @@ SQL> SELECT * FROM ASISTIR;
 
 SQL> INSERT INTO ASISTIR VALUES(3,29);
 INSERT INTO ASISTIR VALUES(3,29)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(16,22);
-INSERT INTO ASISTIR VALUES(16,22)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(1,9);
 
 1 fila creada.
 
@@ -1108,50 +1030,17 @@ SQL> INSERT INTO ASISTIR VALUES(5,11);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(4,22);
-INSERT INTO ASISTIR VALUES(4,22)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(12,20);
-INSERT INTO ASISTIR VALUES(12,20)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(14,22);
-INSERT INTO ASISTIR VALUES(14,22)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(13,25);
-INSERT INTO ASISTIR VALUES(13,25)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(6,4);
 
 1 fila creada.
 
 SQL> INSERT INTO ASISTIR VALUES(10,20);
 INSERT INTO ASISTIR VALUES(10,20)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(7,9);
-INSERT INTO ASISTIR VALUES(7,9)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(9,9);
 
 1 fila creada.
 
 SQL> INSERT INTO ASISTIR VALUES(15,33);
 INSERT INTO ASISTIR VALUES(15,33)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(7,3);
 
 1 fila creada.
 
@@ -1161,30 +1050,6 @@ SQL> INSERT INTO ASISTIR VALUES(14,9);
 
 SQL> INSERT INTO ASISTIR VALUES(11,25);
 INSERT INTO ASISTIR VALUES(11,25)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(1,18);
-INSERT INTO ASISTIR VALUES(1,18)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(15,19);
-INSERT INTO ASISTIR VALUES(15,19)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(1,31);
-INSERT INTO ASISTIR VALUES(1,31)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(16,28);
-INSERT INTO ASISTIR VALUES(16,28)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(14,7);
 
 1 fila creada.
 
@@ -1194,15 +1059,6 @@ SQL> INSERT INTO ASISTIR VALUES(13,6);
 
 SQL> INSERT INTO ASISTIR VALUES(1,27);
 INSERT INTO ASISTIR VALUES(1,27)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(12,27);
-INSERT INTO ASISTIR VALUES(12,27)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(1,2);
 
 1 fila creada.
 
@@ -1211,31 +1067,6 @@ SQL> INSERT INTO ASISTIR VALUES(11,13);
 1 fila creada.
 
 SQL> INSERT INTO ASISTIR VALUES(16,1);
-INSERT INTO ASISTIR VALUES(16,1)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(12,26);
-INSERT INTO ASISTIR VALUES(12,26)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(2,30);
-INSERT INTO ASISTIR VALUES(2,30)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(9,27);
-INSERT INTO ASISTIR VALUES(9,27)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(4,28);
-INSERT INTO ASISTIR VALUES(4,28)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(1,4);
 
 1 fila creada.
 
@@ -1244,30 +1075,6 @@ SQL> INSERT INTO ASISTIR VALUES(4,13);
 1 fila creada.
 
 SQL> INSERT INTO ASISTIR VALUES(11,23);
-INSERT INTO ASISTIR VALUES(11,23)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(13,20);
-INSERT INTO ASISTIR VALUES(13,20)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(5,15);
-
-1 fila creada.
-
-SQL> INSERT INTO ASISTIR VALUES(15,23);
-INSERT INTO ASISTIR VALUES(15,23)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(10,29);
-INSERT INTO ASISTIR VALUES(10,29)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(14,11);
 
 1 fila creada.
 
@@ -1276,16 +1083,6 @@ SQL> INSERT INTO ASISTIR VALUES(15,6);
 1 fila creada.
 
 SQL> INSERT INTO ASISTIR VALUES(5,29);
-INSERT INTO ASISTIR VALUES(5,29)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(2,32);
-INSERT INTO ASISTIR VALUES(2,32)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(13,8);
 
 1 fila creada.
 
@@ -1298,10 +1095,7 @@ SQL> INSERT INTO ASISTIR VALUES(9,16);
 1 fila creada.
 
 SQL> INSERT INTO ASISTIR VALUES(4,31);
-INSERT INTO ASISTIR VALUES(4,31)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
+
 SQL> INSERT INTO ASISTIR VALUES(8,4);
 
 1 fila creada.
@@ -1311,19 +1105,11 @@ SQL> INSERT INTO ASISTIR VALUES(2,14);
 1 fila creada.
 
 SQL> INSERT INTO ASISTIR VALUES(10,28);
-INSERT INTO ASISTIR VALUES(10,28)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
+
 SQL> INSERT INTO ASISTIR VALUES(15,5);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(11,31);
-INSERT INTO ASISTIR VALUES(11,31)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> SELECT * FROM ASISTIR;
 
   ID_CLASE    N_SOCIO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
@@ -1370,16 +1156,6 @@ SQL> SELECT * FROM ASISTIR;
 
 39 filas seleccionadas.
 
-SQL> INSERT INTO ASISTIR VALUES(9,17);
-INSERT INTO ASISTIR VALUES(9,17)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(3,28);
-INSERT INTO ASISTIR VALUES(3,28)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(5,16);
 
 1 fila creada.
@@ -1392,16 +1168,6 @@ SQL> INSERT INTO ASISTIR VALUES(13,9);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(3,31);
-INSERT INTO ASISTIR VALUES(3,31)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(4,23);
-INSERT INTO ASISTIR VALUES(4,23)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(9,1);
 
 1 fila creada.
@@ -1410,60 +1176,11 @@ SQL> INSERT INTO ASISTIR VALUES(11,15);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(11,15);
-INSERT INTO ASISTIR VALUES(11,15)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(6,19);
-INSERT INTO ASISTIR VALUES(6,19)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(15,6);
-INSERT INTO ASISTIR VALUES(15,6)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(9,22);
-INSERT INTO ASISTIR VALUES(9,22)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(6,6);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(16,20);
-INSERT INTO ASISTIR VALUES(16,20)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(11,28);
-INSERT INTO ASISTIR VALUES(11,28)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(12,3);
-
-1 fila creada.
-
-SQL> INSERT INTO ASISTIR VALUES(2,31);
-INSERT INTO ASISTIR VALUES(2,31)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(11,26);
-INSERT INTO ASISTIR VALUES(11,26)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(12,30);
-INSERT INTO ASISTIR VALUES(12,30)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(8,3);
 
 1 fila creada.
 
@@ -1471,20 +1188,10 @@ SQL> INSERT INTO ASISTIR VALUES(13,1);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(3,32);
-INSERT INTO ASISTIR VALUES(3,32)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(11,6);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(15,20);
-INSERT INTO ASISTIR VALUES(15,20)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(10,14);
 
 1 fila creada.
@@ -1497,11 +1204,6 @@ SQL> INSERT INTO ASISTIR VALUES(10,12);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(14,9);
-INSERT INTO ASISTIR VALUES(14,9)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
 SQL> INSERT INTO ASISTIR VALUES(9,4);
 
 1 fila creada.
@@ -1510,45 +1212,10 @@ SQL> INSERT INTO ASISTIR VALUES(5,9);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(15,33);
-INSERT INTO ASISTIR VALUES(15,33)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(1,13);
-INSERT INTO ASISTIR VALUES(1,13)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
 SQL> INSERT INTO ASISTIR VALUES(3,9);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(5,29);
-INSERT INTO ASISTIR VALUES(5,29)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(6,25);
-INSERT INTO ASISTIR VALUES(6,25)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(2,19);
-INSERT INTO ASISTIR VALUES(2,19)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(1,33);
-INSERT INTO ASISTIR VALUES(1,33)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(15,6);
-INSERT INTO ASISTIR VALUES(15,6)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
 SQL> INSERT INTO ASISTIR VALUES(15,14);
 
 1 fila creada.
@@ -1557,66 +1224,6 @@ SQL> INSERT INTO ASISTIR VALUES(10,7);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(16,28);
-INSERT INTO ASISTIR VALUES(16,28)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(2,22);
-INSERT INTO ASISTIR VALUES(2,22)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(1,17);
-INSERT INTO ASISTIR VALUES(1,17)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(14,31);
-INSERT INTO ASISTIR VALUES(14,31)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(3,20);
-INSERT INTO ASISTIR VALUES(3,20)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(2,20);
-INSERT INTO ASISTIR VALUES(2,20)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(5,33);
-INSERT INTO ASISTIR VALUES(5,33)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(3,27);
-INSERT INTO ASISTIR VALUES(3,27)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(5,27);
-INSERT INTO ASISTIR VALUES(5,27)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(5,24);
-INSERT INTO ASISTIR VALUES(5,24)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(16,18);
-INSERT INTO ASISTIR VALUES(16,18)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(13,20);
-INSERT INTO ASISTIR VALUES(13,20)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(4,10);
 
 1 fila creada.
@@ -1625,16 +1232,6 @@ SQL> INSERT INTO ASISTIR VALUES(13,5);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(13,9);
-INSERT INTO ASISTIR VALUES(13,9)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(13,25);
-INSERT INTO ASISTIR VALUES(13,25)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(9,3);
 
 1 fila creada.
@@ -1643,21 +1240,6 @@ SQL> INSERT INTO ASISTIR VALUES(7,13);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(11,30);
-INSERT INTO ASISTIR VALUES(11,30)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(9,25);
-INSERT INTO ASISTIR VALUES(9,25)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(12,19);
-INSERT INTO ASISTIR VALUES(12,19)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(16,5);
 
 1 fila creada.
@@ -1666,68 +1248,14 @@ SQL> INSERT INTO ASISTIR VALUES(15,8);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(2,17);
-INSERT INTO ASISTIR VALUES(2,17)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(11,4);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(16,28);
-INSERT INTO ASISTIR VALUES(16,28)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(15,26);
-INSERT INTO ASISTIR VALUES(15,26)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(15,8);
-INSERT INTO ASISTIR VALUES(15,8)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(12,29);
-INSERT INTO ASISTIR VALUES(12,29)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(13,17);
-INSERT INTO ASISTIR VALUES(13,17)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(13,8);
-INSERT INTO ASISTIR VALUES(13,8)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
 SQL> INSERT INTO ASISTIR VALUES(14,3);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(7,25);
-INSERT INTO ASISTIR VALUES(7,25)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(5,15);
-INSERT INTO ASISTIR VALUES(5,15)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(13,2);
-
-1 fila creada.
-
-SQL> INSERT INTO ASISTIR VALUES(13,17);
-INSERT INTO ASISTIR VALUES(13,17)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(6,7);
 
 1 fila creada.
@@ -1736,31 +1264,6 @@ SQL> INSERT INTO ASISTIR VALUES(3,13);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(12,24);
-INSERT INTO ASISTIR VALUES(12,24)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(2,24);
-INSERT INTO ASISTIR VALUES(2,24)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(7,4);
-INSERT INTO ASISTIR VALUES(7,4)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(16,28);
-INSERT INTO ASISTIR VALUES(16,28)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(2,4);
-INSERT INTO ASISTIR VALUES(2,4)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
 SQL> INSERT INTO ASISTIR VALUES(6,14);
 
 1 fila creada.
@@ -1777,30 +1280,10 @@ SQL> INSERT INTO ASISTIR VALUES(16,13);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(16,1);
-INSERT INTO ASISTIR VALUES(16,1)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
 SQL> INSERT INTO ASISTIR VALUES(12,12);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(9,17);
-INSERT INTO ASISTIR VALUES(9,17)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(7,22);
-INSERT INTO ASISTIR VALUES(7,22)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(12,6);
-INSERT INTO ASISTIR VALUES(12,6)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
 SQL> INSERT INTO ASISTIR VALUES(8,5);
 
 1 fila creada.
@@ -1809,98 +1292,18 @@ SQL> INSERT INTO ASISTIR VALUES(9,8);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(15,23);
-INSERT INTO ASISTIR VALUES(15,23)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(8,7);
-INSERT INTO ASISTIR VALUES(8,7)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(1,25);
-INSERT INTO ASISTIR VALUES(1,25)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(1,24);
-INSERT INTO ASISTIR VALUES(1,24)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(11,28);
-INSERT INTO ASISTIR VALUES(11,28)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(5,27);
-INSERT INTO ASISTIR VALUES(5,27)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(13,1);
-INSERT INTO ASISTIR VALUES(13,1)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(6,7);
-INSERT INTO ASISTIR VALUES(6,7)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
 SQL> INSERT INTO ASISTIR VALUES(2,5);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(6,31);
-INSERT INTO ASISTIR VALUES(6,31)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(16,29);
-INSERT INTO ASISTIR VALUES(16,29)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(16,21);
-INSERT INTO ASISTIR VALUES(16,21)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(16,20);
-INSERT INTO ASISTIR VALUES(16,20)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(12,9);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(15,18);
-INSERT INTO ASISTIR VALUES(15,18)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(15,13);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(5,24);
-INSERT INTO ASISTIR VALUES(5,24)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(13,30);
-INSERT INTO ASISTIR VALUES(13,30)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(1,33);
-INSERT INTO ASISTIR VALUES(1,33)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(5,10);
 
 1 fila creada.
@@ -1913,21 +1316,6 @@ SQL> INSERT INTO ASISTIR VALUES(10,3);
 
 1 fila creada.
 
-SQL> INSERT INTO ASISTIR VALUES(6,22);
-INSERT INTO ASISTIR VALUES(6,22)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
-SQL> INSERT INTO ASISTIR VALUES(5,16);
-INSERT INTO ASISTIR VALUES(5,16)
-*
-ERROR en l�nea 1:
-ORA-00001: restricci�n �nica (TMACRI.SYS_C004050) violada
-SQL> INSERT INTO ASISTIR VALUES(15,32);
-INSERT INTO ASISTIR VALUES(15,32)
-*
-ERROR en l�nea 1:
-ORA-02291: restricci�n de integridad (TMACRI.SYS_C004052) violada - clave principal no encontrada
 SQL> INSERT INTO ASISTIR VALUES(6,9);
 
 1 fila creada.
