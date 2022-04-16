@@ -1,0 +1,162 @@
+SQL> INSERT INTO PROVEER VALUES(2, 100, 100, 4, 3, 'NO');
+
+1 fila creada.
+
+SQL> INSERT INTO PROVEER VALUES(5, 100, 100, 4, 3, 'NO');
+
+1 fila creada.
+
+SQL> INSERT INTO PROVEER VALUES(3, 100, 100, 4, 3, 'NO');
+
+1 fila creada.
+
+SQL> INSERT INTO PROVEER VALUES(3, 100, 100, 2, 2, 'SI');
+
+1 fila creada.
+
+SQL> INSERT INTO PROVEER VALUES(3, 100, 100, 2, 1, 'SI');
+
+1 fila creada.
+
+SQL> INSERT INTO PROVEER VALUES(3, 100, 100, 2, 3, 'SI');
+
+1 fila creada.
+
+SQL> SELECT * FROM PROVEER;
+
+ID_PROD_MAQ ID_PROD_ACC ID_PROD_MERCH    ID_PROV    ID_SEDE EX                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+----------- ----------- ------------- ---------- ---------- --                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          1         100           100          2          1 NO                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+        100           3           100          1          2 SI                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+        100           2           100          1          2 SI                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+        100           1           100          1          2 SI                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+        100           1           100          1          1 NO                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+        100           2           100          1          1 NO                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+        100           3           100          1          1 NO                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          2         100           100          4          3 NO                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          5         100           100          4          3 NO                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          3         100           100          4          3 NO                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          3         100           100          2          2 SI                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          3         100           100          2          1 SI                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          3         100           100          2          3 SI                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+13 filas seleccionadas.
+
+SQL> SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROV_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND TIPO='BICICLETA';
+SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROV_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND TIPO='BICICLETA'
+                                                                      *
+ERROR en línea 1:
+ORA-00904: "PROVEER"."ID_PROV_MAQ": identificador no válido 
+
+
+SQL> SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROD_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND TIPO='BICICLETA';
+
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ                                                                                                                                                                                                                                                                                                TIPO                      LARGO      ANCHO                                                                                 
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------                                                                                 
+          1          499 Proform Tour de France CLC SMART Bicicleta Indoor  Bicicleta indoor genial que cuenta con una gran pantalla led y un asiento acolchado                                                                                                                                                                                                                          BICICLETA                   140         60                                                                                 
+          2          899 NordicTrack C5.5 Bicicleta El­ptica                Bicicleta eliptica que cuenta con un sistema de inclinaci½n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.                                                                                                                                BICICLETA                   140         60                                                                                 
+
+SQL> SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROV_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND PROVEER.ID_PROV_SEDE=2 AND TIPO='BICICLETA';
+SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROV_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND PROVEER.ID_PROV_SEDE=2 AND TIPO='BICICLETA'
+                                                                                                                             *
+ERROR en línea 1:
+ORA-00904: "PROVEER"."ID_PROV_SEDE": identificador no válido 
+
+
+SQL> SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROV_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND PROVEER.ID_SEDE=2 AND TIPO='BICICLETA';
+SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROV_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND PROVEER.ID_SEDE=2 AND TIPO='BICICLETA'
+                                                                      *
+ERROR en línea 1:
+ORA-00904: "PROVEER"."ID_PROV_MAQ": identificador no válido 
+
+
+SQL> SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROD_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND PROVEER.ID_SEDE=2 AND TIPO='BICICLETA';
+
+ninguna fila seleccionada
+
+SQL> SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROD_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND PROVEER.ID_SEDE=3 AND TIPO='BICICLETA';
+
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ                                                                                                                                                                                                                                                                                                TIPO                      LARGO      ANCHO                                                                                 
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------                                                                                 
+          2          899 NordicTrack C5.5 Bicicleta El­ptica                Bicicleta eliptica que cuenta con un sistema de inclinaci½n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.                                                                                                                                BICICLETA                   140         60                                                                                 
+
+SQL> SELECT * FROM SEDES WHERE ID_SEDE = (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) = (SELECT MIN(COUNT(ID_SEDE)) FROM PROVEER GROUP BY ID_SEDE));
+SELECT * FROM SEDES WHERE ID_SEDE = (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) = (SELECT MIN(COUNT(ID_SEDE)) FROM PROVEER GROUP BY ID_SEDE))
+                                     *
+ERROR en línea 1:
+ORA-01427: la subconsulta de una sola fila devuelve más de una fila 
+
+
+SQL> SELECT * FROM SEDES WHERE ID_SEDE = (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MIN(COUNT(ID_SEDE)) FROM PROVEER GROUP BY ID_SEDE));
+SELECT * FROM SEDES WHERE ID_SEDE = (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MIN(COUNT(ID_SEDE)) FROM PROVEER GROUP BY ID_SEDE))
+                                     *
+ERROR en línea 1:
+ORA-01427: la subconsulta de una sola fila devuelve más de una fila 
+
+
+SQL> SELECT * FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MIN(COUNT(ID_SEDE)) FROM PROVEER GROUP BY ID_SEDE));
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
+         2 945325984 Alcala                                227      28028        156          1                                                                                                                                                                                                                                                                                                                                                                                                                     
+         3 945486533 la Concha                               8      28300         86          2                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> SELECT * FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MIN(COUNT(ID_SEDE)) FROM PROVEER WHERE EX='SI' GROUP BY ID_SEDE));
+SELECT * FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MIN(COUNT(ID_SEDE)) FROM PROVEER WHERE EX='SI' GROUP BY ID_SEDE))
+                                                                                                                                                           *
+ERROR en línea 1:
+ORA-00904: "EX": identificador no válido 
+
+
+SQL> SELECT * FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MIN(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO='SI' GROUP BY ID_SEDE));
+
+ninguna fila seleccionada
+
+SQL> SELECT * FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MIN(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO='NO' GROUP BY ID_SEDE));
+
+ninguna fila seleccionada
+
+SQL> SELECT * FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MAXCOUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO='NO' GROUP BY ID_SEDE));
+SELECT * FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MAXCOUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO='NO' GROUP BY ID_SEDE))
+                                                                                                                                     *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> SELECT * FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MAX(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO='NO' GROUP BY ID_SEDE));
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
+         2 945325984 Alcala                                227      28028        156          1                                                                                                                                                                                                                                                                                                                                                                                                                     
+         3 945486533 la Concha                               8      28300         86          2                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> INSERT INTO PROVEER VALUES(100, 100, 1, 2, 3, 'NO');
+
+1 fila creada.
+
+SQL> SELECT * FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MAX(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO='NO' GROUP BY ID_SEDE));
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
+         2 945325984 Alcala                                227      28028        156          1                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> SELECT * FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE) IN (SELECT MAX(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO='SI' GROUP BY ID_SEDE));
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
+         2 945325984 Alcala                                227      28028        156          1                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> SELECT MAX(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO='SI' GROUP BY ID_SEDE;
+
+MAX(COUNT(ID_SEDE))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+-------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                  4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+
+SQL> SELECT ID_SEDE, MAX(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO='SI' GROUP BY ID_SEDE;
+SELECT ID_SEDE, MAX(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO='SI' GROUP BY ID_SEDE
+       *
+ERROR en línea 1:
+ORA-00937: la función de grupo no es de grupo único 
+
+
+SQL> SPOOL OFF

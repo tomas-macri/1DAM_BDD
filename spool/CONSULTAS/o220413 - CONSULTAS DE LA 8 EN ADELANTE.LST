@@ -1,0 +1,73 @@
+SQL> 
+SQL> rem 8. Las poblaciones que tengan menos de 1.000.000 de habitantes y que pertenecen a una provincia con m s de 1.000.000 de habitantes ordenadas por cantidad de habitantes ascendentemente.
+SQL> 
+SQL> SELECT * FROM POBLACIONES WHERE HAB_POB < 1000000 AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > 1000000)  ORDER BY HAB_POB;
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                                                                                                                               
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                       
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                                                                                                                     
+         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                                                                                                                                  
+         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                                                                                                                     
+         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                                                                                                                     
+
+SQL> 
+SQL> rem 9. La poblaci¢n con menos habitantes entre las poblaciones que tengan menos de 1.000.000 de habitantes y que pertenecen a una provincia con m s de 1.000.000 de habitantes.
+SQL> 
+SQL> SELECT * FROM  POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB=(SELECT MIN(HAB_POB) FROM POBLACIONES WHERE HAB_POB < 1000000 AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > 1000000)));
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                                                                                                                               
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                       
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                                                                                                                     
+
+SQL> 
+SQL> rem 10.  Los proveedores de Madrid.
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE N_PROVINCIA LIKE 'MADRID';
+ 
+    ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                            
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                   
+          1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
+ 
+SQL>  
+SQL> rem 11. Los proveedores que hayan provisto a una sede cuyo c¢digo postal tenga 5 d¡gitos y comience por 28.
+SQL>   
+ 
+SQL> SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE CP >  27999 AND CP < 29000));
+ 
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                            
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                   
+          1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
+          2 Maquinas Pepe                  915346684 Callejon de la Galinda                 10      41810 SEVILLA                                                                                                                                                                                                                                                                                                
+ 
+ 
+
+SQL> rem 12. Los proveedores que hayan provisto a una sede ubicada en Aranjuez.
+SQL>   
+SQL> SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB = 'ARANJUEZ')));
+ 
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                            
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                   
+          1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
+          2 Maquinas Pepe                  915346684 Callejon de la Galinda                 10      41810 SEVILLA                                                                                                                                                                                                                                                                                                
+ 
+ 
+SQL> rem 13. Los proveedores de Madrid que hayan provisto a una sede que esta en la calle Alcala.
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE N_PROVINCIA LIKE 'MADRID' AND ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE CALLE LIKE 'Alcala'));
+
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                            
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                   
+         1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
+
+
+
+SQL> 14. La información del proveedor que provee a más sedes.
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE ID_PROV = (SELECT ID_PROV FROM PROVEER GROUP BY ID_PROV HAVING COUNT(ID_PROV) = (SELECT MAX(COUNT(ID_PROV)) FROM PROVEER GROUP BY ID_PROV)); 
+
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                            
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                   
+         1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
+
+SQL> 
+	
