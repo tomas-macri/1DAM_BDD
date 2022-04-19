@@ -1,0 +1,1190 @@
+SQL> rem CONSULTAS - MARINA VEGA ORTEGA
+SQL> 
+SQL> rem 1 - ID de los profesores que dan zumba en la sala 3
+SQL> 
+SQL> SELECT ID_PROF FORM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3,
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE, CLASE.TIPO=PROFESOR.ESTILO;
+SELECT ID_PROF FORM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3,
+                    *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> DARSE.ID_CLASE=CLASE.ID_CLASE, CLASE.TIPO=PROFESOR.ESTILO;
+SP2-0734: inicio "DARSE.ID_C..." de comando desconocido - resto de la línea ignorado.
+SQL> SELECT ID_PROF FORM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3,
+  2  SELECT ID_PROF FORM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3,
+  3  DARSE.ID_CLASE=CLASE.ID_CLASE, CLASE.TIPO=PROFESOR.ESTILO;
+SELECT ID_PROF FORM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3,
+                    *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3,
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE, CLASE.TIPO=PROFESOR.ESTILO;
+SELECT ID_PROF FROM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3,
+                                                                   *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> SELECT ID_PROF FORM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE, CLASE.TIPO=PROFESOR.ESTILO;
+SELECT ID_PROF FORM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3 AND
+                    *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE, CLASE.TIPO=PROFESOR.ESTILO;
+DARSE.ID_CLASE=CLASE.ID_CLASE, CLASE.TIPO=PROFESOR.ESTILO
+                             *
+ERROR en línea 2:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> SELECT ID_PROF FORM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESOR.ESTILO;
+SELECT ID_PROF FORM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3 AND
+                    *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESOR.ESTILO;
+SELECT ID_PROF FROM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3 AND
+                                *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+SQL> SELECT ID_PROF FORM PROFESORES, CLASES, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESOR.ESTILO;
+SELECT ID_PROF FORM PROFESORES, CLASES, DARSE WHERE DARSE.ID_SALA= 3 AND
+                    *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASES, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESOR.ESTILO;
+DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESOR.ESTILO
+                                             *
+ERROR en línea 2:
+ORA-00904: "PROFESOR"."ESTILO": identificador no válido 
+
+
+SQL> SELECT ID_PROF FORM PROFESORES, CLASES, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESORES.ESTILO;
+SELECT ID_PROF FORM PROFESORES, CLASES, DARSE WHERE DARSE.ID_SALA= 3 AND
+                    *
+ERROR en línea 1:
+ORA-00923: palabra clave FROM no encontrada donde se esperaba 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASES, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESOR.ESTILO;
+DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESOR.ESTILO
+                                             *
+ERROR en línea 2:
+ORA-00904: "PROFESOR"."ESTILO": identificador no válido 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESORES.ESTILO;
+SELECT ID_PROF FROM PROFESORES, CLASE, DARSE WHERE DARSE.ID_SALA= 3 AND
+                                *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASES, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESORES.ESTILO;
+DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESORES.ESTILO
+                                  *
+ERROR en línea 2:
+ORA-00904: "CLASE"."TIPO": identificador no válido 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASES, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=PROFESORES.ESTILO;
+SELECT ID_PROF FROM PROFESORES, CLASES, DARSE WHERE DARSE.ID_SALA= 3 AND
+                                                    *
+ERROR en línea 1:
+ORA-00904: "DARSE"."ID_SALA": identificador no válido 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASES, DARSE WHERE DARSE.ID_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESORES.ESTILO;
+DARSE.ID_CLASE=CLASE.ID_CLASE AND CLASE.TIPO=PROFESORES.ESTILO
+                                  *
+ERROR en línea 2:
+ORA-00904: "CLASE"."TIPO": identificador no válido 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASES, DARSE WHERE DARSE.N_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=PROFESORES.ESTILO;
+SELECT ID_PROF FROM PROFESORES, CLASES, DARSE WHERE DARSE.N_SALA= 3 AND
+       *
+ERROR en línea 1:
+ORA-00904: "ID_PROF": identificador no válido 
+
+
+SQL> SELECT ID_PROF FROM PROFESORES, CLASES, DARSE WHERE DARSE.N_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=PROFESORES.ESTILO;
+SELECT ID_PROF FROM PROFESORES, CLASES, DARSE WHERE DARSE.N_SALA= 3 AND
+       *
+ERROR en línea 1:
+ORA-00904: "ID_PROF": identificador no válido 
+
+
+SQL> SELECT N_PROFESOR FROM PROFESORES, CLASES, DARSE WHERE DARSE.N_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=PROFESORES.ESTILO;
+
+N_PROFESOR                                                                      
+----------                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+         2                                                                      
+         2                                                                      
+         2                                                                      
+         2                                                                      
+         3                                                                      
+         3                                                                      
+         3                                                                      
+
+N_PROFESOR                                                                      
+----------                                                                      
+         3                                                                      
+         4                                                                      
+         4                                                                      
+         5                                                                      
+         5                                                                      
+         6                                                                      
+         6                                                                      
+
+18 filas seleccionadas.
+
+SQL> SELECT DISTINCT N_PROFESOR FROM PROFESORES, CLASES, DARSE WHERE DARSE.N_SALA= 3 AND
+  2  DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=PROFESORES.ESTILO;
+
+N_PROFESOR                                                                      
+----------                                                                      
+         1                                                                      
+         6                                                                      
+         2                                                                      
+         4                                                                      
+         5                                                                      
+         3                                                                      
+
+6 filas seleccionadas.
+
+SQL> REM CORREO ELECTRàNICO DE LOS SOCIOS QUE ASISTEN A LA CLASE 1
+SQL> 
+SQL> SELECT SOCIO.EMAIL FROM SOCIOS AND ASISTIR WHERE ID_CLASE = 1 AND ASISTIR.N_SOCIO=SOCIO.N_SOCIO;
+SELECT SOCIO.EMAIL FROM SOCIOS AND ASISTIR WHERE ID_CLASE = 1 AND ASISTIR.N_SOCIO=SOCIO.N_SOCIO
+                               *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> SELECT SOCIO.EMAIL FROM SOCIOS AND ASISTIR WHERE ID_CLASE = 1 AND ASISTIR.N_SOCIO=SOCIO.N_SOCIO;
+SELECT SOCIO.EMAIL FROM SOCIOS AND ASISTIR WHERE ID_CLASE = 1 AND ASISTIR.N_SOCIO=SOCIO.N_SOCIO
+                               *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> SELECT SOCIO.EMAIL FROM SOCIOS AND ASISTIR WHERE ID_CLASE = 1 AND ASISTIR.N_SOCIO=SOCIO.N_SOCIO;
+SELECT SOCIO.EMAIL FROM SOCIOS AND ASISTIR WHERE ID_CLASE = 1 AND ASISTIR.N_SOCIO=SOCIO.N_SOCIO
+                               *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> SELECT SOCIOS.EMAIL FROM SOCIOS, ASISTIR WHERE ID_CLASE=1 AND ASISTIR.N_SOCIO=SOCIO.N_SOCIO;
+SELECT SOCIOS.EMAIL FROM SOCIOS, ASISTIR WHERE ID_CLASE=1 AND ASISTIR.N_SOCIO=SOCIO.N_SOCIO
+                                                                              *
+ERROR en línea 1:
+ORA-00904: "SOCIO"."N_SOCIO": identificador no válido 
+
+
+SQL> SELECT SOCIOS.EMAIL FROM SOCIOS, ASISTIR WHERE ID_CLASE=1 AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO;
+SELECT SOCIOS.EMAIL FROM SOCIOS, ASISTIR WHERE ID_CLASE=1 AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO
+       *
+ERROR en línea 1:
+ORA-00904: "SOCIOS"."EMAIL": identificador no válido 
+
+
+SQL> REM CORREO ELECTRàNICO DE LOS SOCIOS QUE ASISTEN A LA CLASE 1
+SQL> 
+SQL> SELECT SOCIOS.MAIL FROM SOCIOS AND ASISTIR WHERE ID_CLASE = 1 AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO;
+SELECT SOCIOS.MAIL FROM SOCIOS AND ASISTIR WHERE ID_CLASE = 1 AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO
+                               *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> REM CORREO ELECTRàNICO DE LOS SOCIOS QUE ASISTEN A LA CLASE 1
+SQL> 
+SQL> SELECT SOCIOS.MAIL FROM SOCIOS, ASISTIR WHERE ID_CLASE = 1 AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO;
+
+MAIL                                                                            
+--------------------------------------------------------------------------------
+cdavinci@gmail.com                                                              
+cmessi@gmail.com                                                                
+emartinez@hotmail.com                                                           
+afernandez@yahoo.com                                                            
+aortega@yahoo.com                                                               
+onovillo@yahoo.com                                                              
+
+6 filas seleccionadas.
+
+SQL> REM ID_POBLACION DE LOS PROFESORES QUE IMPARTEN CLASE EN EL AULA 5
+SQL> 
+SQL> SELECT ID_POBLACION FROM PROFESORES, DARSE WHERE DARSE.N_PROFESOR=PROFESORES.N_PROFESOR AND DARSE.ID_CLASE=5;
+SELECT ID_POBLACION FROM PROFESORES, DARSE WHERE DARSE.N_PROFESOR=PROFESORES.N_PROFESOR AND DARSE.ID_CLASE=5
+                                                 *
+ERROR en línea 1:
+ORA-00904: "DARSE"."N_PROFESOR": identificador no válido 
+
+
+SQL> REM ID_POBLACION DE LOS PROFESORES QUE IMPARTEN CLASE EN EL AULA 5
+SQL> 
+SQL> SELECT ID_POBLACION FROM PROFESORES, DARSE WHERE DARSE.N_PROFESOR=PROFESORES.N_PROFESOR AND DARSE.ID_CLASE=5;
+SELECT ID_POBLACION FROM PROFESORES, DARSE WHERE DARSE.N_PROFESOR=PROFESORES.N_PROFESOR AND DARSE.ID_CLASE=5
+                                                 *
+ERROR en línea 1:
+ORA-00904: "DARSE"."N_PROFESOR": identificador no válido 
+
+
+SQL> REM ID_POBLACION DE LOS PROFESORES QUE IMPARTEN CLASE EN EL AULA 5
+SQL> 
+SQL> SELECT ID_POBLACION FROM PROFESORES, DAR_ZUMBA, DAR_SPINNING WHERE DAR_SPINNING.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_SPINNING.ID_CLASE=5 AND DAR_ZUMBA.ID_CLASE=5;
+SELECT ID_POBLACION FROM PROFESORES, DAR_ZUMBA, DAR_SPINNING WHERE DAR_SPINNING.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_SPINNING.ID_CLASE=5 AND DAR_ZUMBA.ID_CLASE=5
+       *
+ERROR en línea 1:
+ORA-00904: "ID_POBLACION": identificador no válido 
+
+
+SQL> REM ID_POB DE LOS PROFESORES QUE IMPARTEN CLASE EN EL AULA 5
+SQL> 
+SQL> SELECT ID_POB FROM PROFESORES, DAR_ZUMBA, DAR_SPINNING WHERE DAR_SPINNING.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_SPINNING.ID_CLASE=5 AND DAR_ZUMBA.ID_CLASE=5;
+
+ninguna fila seleccionada
+
+SQL> REM ID_POB DE LOS PROFESORES QUE IMPARTEN CLASE EN EL AULA 5
+SQL> 
+SQL> SELECT ID_POB FROM PROFESORES, DAR_ZUMBA, DAR_SPINNING WHERE DAR_SPINNING.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_SPINNING.ID_CLASE=5 OR DAR_ZUMBA.ID_CLASE=5;REM ID_POB DE LOS PROFESORES QUE IMPARTEN CLASE EN EL AULA 5
+  2  
+SQL> SELECT ID_POB FROM PROFESORES, DAR_ZUMBA, DAR_SPINNING WHERE DAR_SPINNING.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_SPINNING.ID_CLASE=5 OR DAR_ZUMBA.ID_CLASE=5;
+
+ninguna fila seleccionada
+
+SQL> REM ID_POB DE LOS PROFESORES QUE IMPARTEN CLASE EN EL AULA 5
+SQL> 
+SQL> SELECT ID_POB FROM PROFESORES, DAR_ZUMBA, DAR_SPINNING WHERE DAR_SPINNING.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_SPINNING.ID_CLASE=5 OR DAR_ZUMBA.ID_CLASE=5;
+
+ninguna fila seleccionada
+
+SQL> REM ID_POB DE LOS PROFESORES DE ZUMBA QUE IMPARTEN CLASE EN EL AULA 5
+SQL> 
+SQL> SELECT ID_POB FROM PROFESORES, DAR_ZUMBA WHERE DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.ID_CLASE=5;
+
+ninguna fila seleccionada
+
+SQL> SELECT * FROM DAR ZUMBA;
+SELECT * FROM DAR ZUMBA
+              *
+ERROR en línea 1:
+ORA-00942: la tabla o vista no existe 
+
+
+SQL> SELECT * FROM DAR_ZUMBA;
+
+ninguna fila seleccionada
+
+SQL> SELECT * FROM DAR_SPINNING;
+
+ninguna fila seleccionada
+
+SQL> SELECT TABLE_NAME FROM USER_TABLES;
+
+TABLE_NAME                                                                      
+------------------------------                                                  
+DEPART                                                                          
+EMPLE                                                                           
+SALAS                                                                           
+CLASES                                                                          
+DARSE                                                                           
+KK                                                                              
+MEABURRO                                                                        
+LIBRERIA                                                                        
+PROVEER                                                                         
+MERCHANDISING                                                                   
+MAQUINAS                                                                        
+
+TABLE_NAME                                                                      
+------------------------------                                                  
+ACCESORIOS                                                                      
+SEDES                                                                           
+PROVEEDORES                                                                     
+POBLACIONES                                                                     
+PERSONAS                                                                        
+ALUMNOS2                                                                        
+PROFESORES                                                                      
+ASISTIR                                                                         
+DAR_ZUMBA                                                                       
+DAR_SPINNING                                                                    
+SOCIOS                                                                          
+
+TABLE_NAME                                                                      
+------------------------------                                                  
+PROVINCIAS                                                                      
+ALUMNOS                                                                         
+ASIGNATURAS                                                                     
+NOTAS                                                                           
+
+26 filas seleccionadas.
+
+SQL> SELECT * FROM ASISTIR;
+
+  ID_CLASE    N_SOCIO                                                           
+---------- ----------                                                           
+         1          2                                                           
+         1          4                                                           
+         1          9                                                           
+         1         11                                                           
+         1         13                                                           
+         1         15                                                           
+         2          2                                                           
+         2          4                                                           
+         2          5                                                           
+         2         14                                                           
+         2         16                                                           
+
+  ID_CLASE    N_SOCIO                                                           
+---------- ----------                                                           
+         3          9                                                           
+         3         13                                                           
+         4          7                                                           
+         4         10                                                           
+         4         13                                                           
+         5          2                                                           
+         5          5                                                           
+         5          9                                                           
+         5         10                                                           
+         5         11                                                           
+         5         15                                                           
+
+  ID_CLASE    N_SOCIO                                                           
+---------- ----------                                                           
+         5         16                                                           
+         6          4                                                           
+         6          6                                                           
+         6          7                                                           
+         6          9                                                           
+         6         14                                                           
+         7          3                                                           
+         7          4                                                           
+         7          9                                                           
+         7         13                                                           
+         7         14                                                           
+
+  ID_CLASE    N_SOCIO                                                           
+---------- ----------                                                           
+         8          3                                                           
+         8          4                                                           
+         8          5                                                           
+         8          7                                                           
+         9          1                                                           
+         9          3                                                           
+         9          4                                                           
+         9          8                                                           
+         9          9                                                           
+         9         14                                                           
+         9         16                                                           
+
+  ID_CLASE    N_SOCIO                                                           
+---------- ----------                                                           
+        10          3                                                           
+        10          7                                                           
+        10         12                                                           
+        10         14                                                           
+        11          4                                                           
+        11          5                                                           
+        11          6                                                           
+        11         11                                                           
+        11         13                                                           
+        11         15                                                           
+        12          3                                                           
+
+  ID_CLASE    N_SOCIO                                                           
+---------- ----------                                                           
+        12          6                                                           
+        12          9                                                           
+        12         12                                                           
+        13          1                                                           
+        13          2                                                           
+        13          5                                                           
+        13          6                                                           
+        13          8                                                           
+        13          9                                                           
+        13         16                                                           
+        14          1                                                           
+
+  ID_CLASE    N_SOCIO                                                           
+---------- ----------                                                           
+        14          3                                                           
+        14          4                                                           
+        14          7                                                           
+        14          9                                                           
+        14         11                                                           
+        15          2                                                           
+        15          4                                                           
+        15          5                                                           
+        15          6                                                           
+        15          8                                                           
+        15         13                                                           
+
+  ID_CLASE    N_SOCIO                                                           
+---------- ----------                                                           
+        15         14                                                           
+        15         15                                                           
+        15         16                                                           
+        16          1                                                           
+        16          5                                                           
+        16         13                                                           
+
+83 filas seleccionadas.
+
+SQL> INSERT INTO DAR_ZUMBA VALUES(11,7);
+INSERT INTO DAR_ZUMBA VALUES(11,7)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(9,7);
+ INSERT INTO DAR_ZUMBA VALUES(9,7)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(14,8);
+ INSERT INTO DAR_ZUMBA VALUES(14,8)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(5,12);
+ INSERT INTO DAR_ZUMBA VALUES(5,12)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(1,9);
+ INSERT INTO DAR_ZUMBA VALUES(1,9)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(12,9);
+ INSERT INTO DAR_ZUMBA VALUES(12,9)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(7,7);
+ INSERT INTO DAR_ZUMBA VALUES(7,7)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(10,9);
+ INSERT INTO DAR_ZUMBA VALUES(10,9)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(8,9);
+ INSERT INTO DAR_ZUMBA VALUES(8,9)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(6,7);
+ INSERT INTO DAR_ZUMBA VALUES(6,7)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(16,7);
+ INSERT INTO DAR_ZUMBA VALUES(16,7)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(13,8);
+ INSERT INTO DAR_ZUMBA VALUES(13,8)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(15,8);
+ INSERT INTO DAR_ZUMBA VALUES(15,8)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(3,10);
+ INSERT INTO DAR_ZUMBA VALUES(3,10)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(2,8);
+ INSERT INTO DAR_ZUMBA VALUES(2,8)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(4,9);
+ INSERT INTO DAR_ZUMBA VALUES(4,9)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(17, 11);
+ INSERT INTO DAR_ZUMBA VALUES(17, 11)
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004055) violada - clave 
+principal no encontrada 
+
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(19,4);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(23,2);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(20,4);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(32,3);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(29,2);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(31,5);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(27,6);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(18,3);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(26,4);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(25,6);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(33,4);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(24,2);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(28,5);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(22,4);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(30,6);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_SPINNING VALUES(21,4);
+
+1 fila creada.
+
+SQL> SELECT ID_POB FROM PROFESORES, DAR_ZUMBA WHERE DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.ID_CLASE=5;
+
+ninguna fila seleccionada
+
+SQL> 
+SQL> SELECT * FROM DAR_ZUMBA;
+
+ninguna fila seleccionada
+
+SQL> DESC DAR_ZUMBA
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ ID_CLASE                                  NOT NULL NUMBER(6)
+ N_PROFESOR                                         NUMBER(7)
+
+SQL> SELECT * FROM CLASES;
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+         1 2021/05/17       1230 SPINNING                                       
+         2 2021/07/09       1630 ZUMBA                                          
+         3 2021/12/14       2230 ZUMBA                                          
+         4 2022/03/22        930 SPINNING                                       
+         5 2022/03/22       1130 SPINNING                                       
+         6 2022/03/22       1330 SPINNING                                       
+         7 2022/03/22       1530 SPINNING                                       
+         8 2022/03/22       1730 SPINNING                                       
+         9 2022/03/22       1930 SPINNING                                       
+        10 2022/03/22       2130 SPINNING                                       
+        11 2022/03/22        830 ZUMBA                                          
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+        12 2022/03/22       1030 ZUMBA                                          
+        13 2022/03/22       1230 ZUMBA                                          
+        14 2022/03/22       1430 ZUMBA                                          
+        15 2022/03/22       1630 ZUMBA                                          
+        16 2022/03/22       1830 ZUMBA                                          
+        17 2022/03/22       2030 ZUMBA                                          
+        18 2022/03/22       2230 ZUMBA                                          
+        19 2022/04/24        930 ZUMBA                                          
+        20 2022/04/24       1130 ZUMBA                                          
+        21 2022/04/24       1330 ZUMBA                                          
+        22 2022/04/24       1530 ZUMBA                                          
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+        23 2022/04/24       1730 ZUMBA                                          
+        24 2022/04/24       1930 ZUMBA                                          
+        25 2022/04/24       2130 ZUMBA                                          
+        26 2022/04/24        830 SPINNING                                       
+        27 2022/04/24       1030 SPINNING                                       
+        28 2022/04/24       1230 SPINNING                                       
+        29 2022/04/24       1430 SPINNING                                       
+        30 2022/04/24       1630 SPINNING                                       
+        31 2022/04/24       1830 SPINNING                                       
+        32 2022/04/24       2030 SPINNING                                       
+        33 2022/04/24       2230 SPINNING                                       
+
+33 filas seleccionadas.
+
+SQL> SELECT * FROM PROFESORES;
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+         1 50065349J DANIEL               NAVARRO                               
+MONTERO                                                                         
+dnavarro@gmail.com                                                              
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+648462568  DOMINGO                                                    12        
+     28300     656359 ZUMBA             1                                       
+                                                                                
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+         2 67497836R MARINA               DIAZ                                  
+HERNANDO                                                                        
+mdiazhernando@gmail.com                                                         
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+358369526  AGUILERA                                                   15        
+     28300     682945 ZUMBA             4                                       
+                                                                                
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+         3 92373905F ANGELA               OLIVA                                 
+JIMIENEZ                                                                        
+aoliva@gmail.com                                                                
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+629490361  SANMIGUEL                                                  32        
+     28300     673823 ZUMBA             5                                       
+                                                                                
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+         4 84736492H HELENA               ROMAN                                 
+PULIDO                                                                          
+hroman@gmail.com                                                                
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+636830511  GIRASOLES                                                   2        
+     28540     649321 SPINNING          7                                       
+                                                                                
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+         5 95494729K ROCIO                MOSQUERA                              
+HERRERO                                                                         
+rmosquera@gmail.com                                                             
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+649349364  ALTAMIRA                                                   33        
+     28300     672294 SPINNING          8                                       
+                                                                                
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+         6 73936305L ELENA                MONTOYA                               
+VILLEGAS                                                                        
+emontoya@gmail.com                                                              
+
+N_PROFESOR DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP   LICENCIA ESTILO       ID_POB                                       
+---------- ---------- -------- ----------                                       
+688374953  SANTIAGO                                                   27        
+     28300     633566 SPINNING          6                                       
+                                                                                
+
+6 filas seleccionadas.
+
+SQL> SET PAGESIZE
+SQL> SET PAGESIZE 400
+SQL> SET LINESIZE 400
+SQL> SELECT * FROM PROFESORES;
+
+N_PROFESOR DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                                                                                                 TELEFONO   CALLE                                                  NUMERO         CP   LICENCIA ESTILO       ID_POB                                                                                                     
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- -------- ----------                                                                                                     
+         1 50065349J DANIEL               NAVARRO              MONTERO              dnavarro@gmail.com                                                                                   648462568  DOMINGO                                                    12      28300     656359 ZUMBA             1                                                                                                     
+         2 67497836R MARINA               DIAZ                 HERNANDO             mdiazhernando@gmail.com                                                                              358369526  AGUILERA                                                   15      28300     682945 ZUMBA             4                                                                                                     
+         3 92373905F ANGELA               OLIVA                JIMIENEZ             aoliva@gmail.com                                                                                     629490361  SANMIGUEL                                                  32      28300     673823 ZUMBA             5                                                                                                     
+         4 84736492H HELENA               ROMAN                PULIDO               hroman@gmail.com                                                                                     636830511  GIRASOLES                                                   2      28540     649321 SPINNING          7                                                                                                     
+         5 95494729K ROCIO                MOSQUERA             HERRERO              rmosquera@gmail.com                                                                                  649349364  ALTAMIRA                                                   33      28300     672294 SPINNING          8                                                                                                     
+         6 73936305L ELENA                MONTOYA              VILLEGAS             emontoya@gmail.com                                                                                   688374953  SANTIAGO                                                   27      28300     633566 SPINNING          6                                                                                                     
+
+6 filas seleccionadas.
+
+SQL> 
+SQL> DELETE * FROM PROFESORES;
+DELETE * FROM PROFESORES
+       *
+ERROR en línea 1:
+ORA-00903: nombre de tabla no válido 
+
+
+SQL> DELETE  FROM PROFESORES;
+DELETE  FROM PROFESORES
+*
+ERROR en línea 1:
+ORA-02292: restricción de integridad (TMACRI.SYS_C004058) violada - registro secundario encontrado 
+
+
+SQL>  INSERT INTO PROFESORES VALUES(1,'50065349J', 'DANIEL','NAVARRO', 'MONTERO', 'dnavarro@gmail.com', '648462568', 'DOMINGO', 12, 28300, 656359, 'SPINNING', 1);
+ INSERT INTO PROFESORES VALUES(1,'50065349J', 'DANIEL','NAVARRO', 'MONTERO', 'dnavarro@gmail.com', '648462568', 'DOMINGO', 12, 28300, 656359, 'SPINNING', 1)
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004048) violada 
+
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(2,'67497836R', 'MARINA','DIAZ', 'HERNANDO', 'mdiazhernando@gmail.com', '358369526', 'AGUILERA', 15, 28300, 682945, 'SPINNING', 4);
+ INSERT INTO PROFESORES VALUES(2,'67497836R', 'MARINA','DIAZ', 'HERNANDO', 'mdiazhernando@gmail.com', '358369526', 'AGUILERA', 15, 28300, 682945, 'SPINNING', 4)
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004048) violada 
+
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(3,'92373905F', 'ANGELA','OLIVA', 'JIMIENEZ', 'aoliva@gmail.com', '629490361', 'SANMIGUEL', 32, 28300, 673823, 'SPINNING', 5);
+ INSERT INTO PROFESORES VALUES(3,'92373905F', 'ANGELA','OLIVA', 'JIMIENEZ', 'aoliva@gmail.com', '629490361', 'SANMIGUEL', 32, 28300, 673823, 'SPINNING', 5)
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004048) violada 
+
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(4,'84736492H', 'HELENA','ROMAN', 'PULIDO', 'hroman@gmail.com', '636830511', 'GIRASOLES', 2, 28540, 649321, 'SPINNING', 7);
+ INSERT INTO PROFESORES VALUES(4,'84736492H', 'HELENA','ROMAN', 'PULIDO', 'hroman@gmail.com', '636830511', 'GIRASOLES', 2, 28540, 649321, 'SPINNING', 7)
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004048) violada 
+
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(5,'95494729K', 'ROCIO','MOSQUERA', 'HERRERO', 'rmosquera@gmail.com', '649349364', 'ALTAMIRA', 33, 28300, 672294, 'SPINNING', 8);
+ INSERT INTO PROFESORES VALUES(5,'95494729K', 'ROCIO','MOSQUERA', 'HERRERO', 'rmosquera@gmail.com', '649349364', 'ALTAMIRA', 33, 28300, 672294, 'SPINNING', 8)
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004048) violada 
+
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(6,'73936305L', 'ELENA','MONTOYA', 'VILLEGAS', 'emontoya@gmail.com', '688374953', 'SANTIAGO', 27, 28300, 633566, 'SPINNING', 6);
+ INSERT INTO PROFESORES VALUES(6,'73936305L', 'ELENA','MONTOYA', 'VILLEGAS', 'emontoya@gmail.com', '688374953', 'SANTIAGO', 27, 28300, 633566, 'SPINNING', 6)
+*
+ERROR en línea 1:
+ORA-00001: restricción única (TMACRI.SYS_C004048) violada 
+
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(7,'74965085H', 'MARIA','OSUNA', 'GALISTEO', 'mosuna@gmail.com', '638648832', 'BENITO', 1, 28300, 654993, 'ZUMBA', 2);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(8,'73964598I', 'SERGIO','NAVAS', NULL, 'snavas@gmail.com', '648340902', 'MIRASIERRA', 4, 28765, 678774, 'ZUMBA', 6);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(9,'73965552T', 'MANUEL','GALLEGO', 'HERRERA', 'mgallego@gmail.com', '679882394', 'ATOCHA', 65, 28004, 676384, 'ZUMBA', 6);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(10,'74934284P', 'ALEJANDRO', 'ALONSO', 'ORIHUELA', 'aalonso@gmail.com', '693779843', 'VERDE', 16, 28005, 687453, 'ZUMBA', 3);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(11,'73842338E', 'JULIA','MARTINEZ', 'ATIENZA', 'jatienza@gmail.com', '678343309', 'CAMPOAMOR', 35, 28004, 657789, 'ZUMBA', 5);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO PROFESORES VALUES(12,'73823984R', 'LUCIA','ALVAR', 'ORTEGA', 'lalvar@gmail.com', '655892302', 'FOSO', 13, 28300, 678455, 'ZUMBA', 1);
+
+1 fila creada.
+
+SQL> SELECT * FROM PROFESORES;
+
+N_PROFESOR DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                                                                                                 TELEFONO   CALLE                                                  NUMERO         CP   LICENCIA ESTILO       ID_POB                                                                                                     
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- -------- ----------                                                                                                     
+         7 74965085H MARIA                OSUNA                GALISTEO             mosuna@gmail.com                                                                                     638648832  BENITO                                                      1      28300     654993 ZUMBA             2                                                                                                     
+         8 73964598I SERGIO               NAVAS                                     snavas@gmail.com                                                                                     648340902  MIRASIERRA                                                  4      28765     678774 ZUMBA             6                                                                                                     
+         9 73965552T MANUEL               GALLEGO              HERRERA              mgallego@gmail.com                                                                                   679882394  ATOCHA                                                     65      28004     676384 ZUMBA             6                                                                                                     
+        10 74934284P ALEJANDRO            ALONSO               ORIHUELA             aalonso@gmail.com                                                                                    693779843  VERDE                                                      16      28005     687453 ZUMBA             3                                                                                                     
+        11 73842338E JULIA                MARTINEZ             ATIENZA              jatienza@gmail.com                                                                                   678343309  CAMPOAMOR                                                  35      28004     657789 ZUMBA             5                                                                                                     
+        12 73823984R LUCIA                ALVAR                ORTEGA               lalvar@gmail.com                                                                                     655892302  FOSO                                                       13      28300     678455 ZUMBA             1                                                                                                     
+         1 50065349J DANIEL               NAVARRO              MONTERO              dnavarro@gmail.com                                                                                   648462568  DOMINGO                                                    12      28300     656359 ZUMBA             1                                                                                                     
+         2 67497836R MARINA               DIAZ                 HERNANDO             mdiazhernando@gmail.com                                                                              358369526  AGUILERA                                                   15      28300     682945 ZUMBA             4                                                                                                     
+         3 92373905F ANGELA               OLIVA                JIMIENEZ             aoliva@gmail.com                                                                                     629490361  SANMIGUEL                                                  32      28300     673823 ZUMBA             5                                                                                                     
+         4 84736492H HELENA               ROMAN                PULIDO               hroman@gmail.com                                                                                     636830511  GIRASOLES                                                   2      28540     649321 SPINNING          7                                                                                                     
+         5 95494729K ROCIO                MOSQUERA             HERRERO              rmosquera@gmail.com                                                                                  649349364  ALTAMIRA                                                   33      28300     672294 SPINNING          8                                                                                                     
+         6 73936305L ELENA                MONTOYA              VILLEGAS             emontoya@gmail.com                                                                                   688374953  SANTIAGO                                                   27      28300     633566 SPINNING          6                                                                                                     
+
+12 filas seleccionadas.
+
+SQL> UPDATE PROFESORES SER ESTILO='SPINNING' WHERE N_PROFESOR<=6;
+UPDATE PROFESORES SER ESTILO='SPINNING' WHERE N_PROFESOR<=6
+                      *
+ERROR en línea 1:
+ORA-00971: falta la palabra clave SET 
+
+
+SQL> UPDATE PROFESORES SET ESTILO='SPINNING' WHERE N_PROFESOR<=6;
+
+6 filas actualizadas.
+
+SQL> INSERT INTO DAR_ZUMBA VALUES(11,7);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(9,7);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(14,8);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(5,12);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(1,9);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(12,9);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(7,7);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(10,9);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(8,9);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(6,7);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(16,7);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(13,8);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(15,8);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(3,10);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(2,8);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(4,9);
+
+1 fila creada.
+
+SQL> 
+SQL>  INSERT INTO DAR_ZUMBA VALUES(17, 11);
+
+1 fila creada.
+
+SQL> SELECT * FROM DAR_ZUMBA;
+
+  ID_CLASE N_PROFESOR                                                                                                                                                                                                                                                                                                                                                                                           
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                           
+        11          7                                                                                                                                                                                                                                                                                                                                                                                           
+         9          7                                                                                                                                                                                                                                                                                                                                                                                           
+        14          8                                                                                                                                                                                                                                                                                                                                                                                           
+         5         12                                                                                                                                                                                                                                                                                                                                                                                           
+         1          9                                                                                                                                                                                                                                                                                                                                                                                           
+        12          9                                                                                                                                                                                                                                                                                                                                                                                           
+         7          7                                                                                                                                                                                                                                                                                                                                                                                           
+        10          9                                                                                                                                                                                                                                                                                                                                                                                           
+         8          9                                                                                                                                                                                                                                                                                                                                                                                           
+         6          7                                                                                                                                                                                                                                                                                                                                                                                           
+        16          7                                                                                                                                                                                                                                                                                                                                                                                           
+        13          8                                                                                                                                                                                                                                                                                                                                                                                           
+        15          8                                                                                                                                                                                                                                                                                                                                                                                           
+         3         10                                                                                                                                                                                                                                                                                                                                                                                           
+         2          8                                                                                                                                                                                                                                                                                                                                                                                           
+         4          9                                                                                                                                                                                                                                                                                                                                                                                           
+        17         11                                                                                                                                                                                                                                                                                                                                                                                           
+
+17 filas seleccionadas.
+
+SQL>  INSERT INTO DAR_SPINNING VALUES(24,2);SELECT ID_POB FROM PROFESORES, DAR_ZUMBA WHERE DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.ID_CLASE=5;
+ INSERT INTO DAR_SPINNING VALUES(24,2);SELECT ID_POB FROM PROFESORES, DAR_ZUMBA WHERE DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.ID_CLASE=5
+                                      *
+ERROR en línea 1:
+ORA-00911: carácter no válido 
+
+
+SQL> SELECT ID_POB FROM PROFESORES, DAR_ZUMBA WHERE DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.ID_CLASE=5;
+
+    ID_POB                                                                                                                                                                                                                                                                                                                                                                                                      
+----------                                                                                                                                                                                                                                                                                                                                                                                                      
+         1                                                                                                                                                                                                                                                                                                                                                                                                      
+
+SQL> spool off
