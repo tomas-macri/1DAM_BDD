@@ -1,0 +1,247 @@
+
+rem Se desea llevar un control acerca de la provisi¢n de distintos productos a las distintas sedes de FIT & US.- De cada sede se almacenar  su ID, su tama¤o (en m2), su tel‚fono, su direcci¢n (la cual est  compuesta poruna calle, un n£mero y un c¢digo postal).- Cada sede estar  ubicada en una poblaci¢n las cuales pueden poseer una o m s de las mismas (solo se almacenar  la poblaci¢n si hay al menos una sede de FIT & US en ella).- De cada poblaci¢n nos interesa saber su ID, su nombre, la cantidad de habitantes y la extensi¢n de la misma (en km2).- A su vez, cada poblaci¢n se encontrar  en una provincia la cual se identifica con su nombre y se almacenan la cantidad de habitantes y su extensi¢n (en km2)- De los proveedores nos interesa saber su ID, nombre, tel‚fono y direcci¢n (la cual, al igual que las sedes, est  compuesta por una calle, un n£mero y un c¢digo postal). Tambien se desea saber en que provincia est  ubicado dicho proveedor (cada provincia puede o no tener proveedores y todos los proveedores estar n ubicados en una sola provincia).- Los productos pueden ser £nicamente de uno de estos tres tipos: M quinas, Accesorios o Merchandising. De todos los productos almacenaremos su ID, su coste por unidad, su nombre y una descripci¢n detallada del mismo.- Adem s, todos los accesorios tendr n un color y podr n ser (o no) mancuernas o esterillas. De las mancuernas se almacenar  su peso y de las esterillas su ancho y su largo.- Los productos de merchandising ser n obligatoriamente de la marca FIT & US o de empresas asociadas.- Las m quinas podr n ser (o no) bicicletas o cintas de correr. En caso de que sean bicicletas se guardar  su estilo (el¡pticas, reclinadas o de spinning) y en caso de que sea una cinta se guardar  el largo y el ancho de la misma).- Se desea saber los proveedores que surten a las distintas sedes y que productos proporcionan a la misma. Adem s, se desea saber si el producto es proporcionado de forma exclusiva por el proveedor.
+ 
+ 
+ 
+ 
+ rem creacion de tablas
+ 
+ rem tabla Provincias
+ 
+ 
+ CREATE TABLE PROVINCIAS (
+   N_PROVINCIA VARCHAR2(20) primary key,
+   EXT_PROV NUMBER(5),
+   HAB_PROV NUMBER(7)
+   );
+
+
+ INSERT INTO PROVINCIAS VALUES ('MURCIA', 11313, 1516055);
+
+ INSERT INTO PROVINCIAS VALUES ('MADRID', 8030, 6661949);
+
+ INSERT INTO PROVINCIAS VALUES ('BARCELONA', 7726, 5664579);
+
+ INSERT INTO PROVINCIAS VALUES ('VALLADOLID', 8111, 520385);
+
+ INSERT INTO PROVINCIAS VALUES ('SEVILLA', 14036, 688711);
+ 
+
+
+ REM TABLA POBLACIONES
+ CREATE TABLE POBLACIONES (
+  ID_POB NUMBER(5) primary key,
+  NOMB_POB VARCHAR2(35),
+  HAB_POB NUMBER(7),
+  EXT_POB NUMBER(3),
+  N_PROVINCIAS VARCHAR2(20),
+  foreign key (N_PROVINCIAS) references provincias
+  );
+
+
+ REM TABLA POBLACIONES
+ 
+ INSERT INTO POBLACIONES VALUES (1, 'MADRID', 3305408, 604, 'MADRID');
+
+ INSERT INTO POBLACIONES VALUES (2, 'ARANJUEZ', 59833, 201, 'MADRID');
+
+ INSERT INTO POBLACIONES VALUES (3, 'CARTAGENA', 213943, 558, 'MURCIA');
+
+ INSERT INTO POBLACIONES VALUES (4, 'MURCIA', 447182, 881, 'MURCIA');
+
+ INSERT INTO POBLACIONES VALUES (5, 'BARCELONA', 1636732, 102, 'BARCELONA');
+
+ INSERT INTO POBLACIONES VALUES (6, 'CASTELLDEFELS', 66375, 13, 'BARCELONA');
+
+ INSERT INTO POBLACIONES VALUES (7, 'SEVILLA', 688711, 140, 'SEVILLA');
+
+ INSERT INTO POBLACIONES VALUES (8, 'UTRERA', 52617, 684, 'SEVILLA');
+
+ INSERT INTO POBLACIONES VALUES (10, 'VALLAOLID', 298866, 198, 'VALLADOLID');
+
+ INSERT INTO POBLACIONES VALUES (0011, 'TORDESILLAS', 8858, 142, 'VALLADOLID');
+
+ rem tabla poblaciones terminada
+
+
+ CREATE TABLE SEDES (
+  ID_SEDE NUMBER(6) primary key,
+  TEL_SEDE VARCHAR2(9),
+  CALLE VARCHAR2(30),
+  NUMERO NUMBER(3),
+  CP NUMBER(5),
+  TAMANO NUMBER(4),
+  ID_POB NUMBER(5),
+  foreign key (ID_POB) references POBLACIONES
+  );
+
+ rem tenemos la tabla sedes
+ 
+ INSERT INTO SEDES VALUES (1, '945625321', 'Valencia', 14, 28300, 286, 2);
+
+ INSERT INTO SEDES VALUES (2, '945325984', 'Alcala', 227, 28028, 156, 1);
+
+ INSERT INTO SEDES VALUES (3, '945486533', 'la Concha', 8, 28300, 86, 2);
+
+ INSERT INTO SEDES VALUES (4, '975643222', 'Valencia', 466, 08013, 166, 5);
+
+ INSERT INTO SEDES VALUES (5, '975612489', 'Ardilla', 5, 41010, 202, 7);
+
+ INSERT INTO SEDES VALUES (6, '956321546', 'Angel', 60, 36598, 30, 8);
+
+
+ rem sedes cargadas
+ 
+ 
+ rem TABLA PROVEEDORES
+
+ CREATE TABLE PROVEEDORES (
+  ID_PROV NUMBER(4) primary key,
+  N_PROV VARCHAR2(30),
+  TEL_PROV VARCHAR2(9),
+  CALLE VARCHAR2(30),
+  NUMERO NUMBER(3),
+  CP NUMBER(5),
+  N_PROVINCIA VARCHAR2(20),
+  foreign key (N_PROVINCIA) references provincias
+  );
+
+ INSERT INTO PROVEEDORES VALUES (1,'Mancuernas Gonzalez', '912201812', 'San Norberto', 4, 28021, 'MADRID');
+
+ INSERT INTO PROVEEDORES VALUES (2,'Maquinas Pepe', '915346684', 'Callejon de la Galinda', 10, 41810, 'SEVILLA');
+
+ INSERT INTO PROVEEDORES VALUES (3,'Camisetas Sanchez', '943892754', 'San Pedro', 3, 30610, 'MURCIA');
+
+ INSERT INTO PROVEEDORES VALUES (4,'Bicicletas Gomez', '935684698', 'Carrer Industria', 1, 08279, 'BARCELONA');
+
+ INSERT INTO PROVEEDORES VALUES (5,'Botellas Rajoy', '965251235', 'Catedral', 3, 47002, 'VALLADOLID');
+ rem fin tabla proveedores
+ 
+ REM Tabla maquinas, merchandising y accesorios
+ CREATE TABLE MAQUINAS(ID_PROD_MAQ NUMBER(5) primary key, COSTE_UD_MAQ NUMBER(4), NOMB_PROD_MAQ VARCHAR2(50), DESC_PROD_MAQ VARCHAR2(300), TIPO VARCHAR2(20) CHECK (TIPO IN ('BICICLETA','CAMINADORA', 'MUSCULACION', 'POLEAS/CABLES', 'OTRO')), LARGO NUMBER(4), ANCHO NUMBER(4));
+
+ CREATE TABLE MERCHANDISING(ID_PROD_MERCH NUMBER(5) primary key, COSTE_UD_MERCH NUMBER(4), NOMB_PROD_MERCH VARCHAR2(50), DESC_PROD_MERCH VARCHAR2(300), PROPIO VARCHAR2(2) CHECK (PROPIO IN('SI','NO')));
+
+ CREATE TABLE ACCESORIOS (ID_PROD_ACC NUMBER(5) primary key, COSTE_UD_ACC NUMBER(4), NOMB_PROD_ACC VARCHAR2(50), DESC_PROD_ACC VARCHAR2(300), COLOR VARCHAR2(10), TIPO VARCHAR2(20) CHECK(TIPO IN('MANCUERNA','DISCO', 'MANERAL', 'COLCHONETA', 'CUERDA', 'OTRO')), PESO NUMBER(2), ALTO NUMBER(4), ANCHO NUMBER(4));
+
+ rem cargo maquinas
+
+ INSERT INTO MAQUINAS VALUES (1, 499, 'Proform Tour de France CLC SMART Bicicleta Indoor', 'Bicicleta indoor genial que cuenta con una gran pantalla led y un asiento acolchado',  'BICICLETA', 140, 60);
+
+ INSERT INTO MAQUINAS VALUES (2, 899, 'NordicTrack C5.5 Bicicleta El¡ptica', 'Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.',  'BICICLETA', 140, 60);
+
+ INSERT INTO MAQUINAS VALUES (3, 2949, 'Life Fitness G4 con Prensa de Piernas', 'LA AJUSTABILIDAD de la Life Fitness G4 y su ergonom¡a superior le permiten ejercitarse efectiva y c¢modamente. La s¢lida y elegante imagen de la eficiente GS4, unida a la gran variedad de ejercicios, le mantendr n motivado para conseguir sus metas.',  'MUSCULACION', 150, 150);
+
+ INSERT INTO MAQUINAS VALUES (4, 699, 'NordicTrack RX 800 Remo de Aire Plegable', 'Si lo que est s buscando es un equipamiento de ejercicio s¢lido y a un precio excepcional, NordicTrack RX 800 es la opci¢n perfecta.',  'MUSCULACION', 150, 40);
+
+ INSERT INTO MAQUINAS VALUES (5, 2499, 'Nordictrack Fusion CST Multi Polea', 'Moderna maquina que cuenta con 8 cables para entrenar cualquier parte del cuerpo.',  'POLEAS/CABLES', 150, 105);
+
+ INSERT INTO MAQUINAS VALUES (6, 679, 'Cadenza Fitness T40 Cinta de Correr', 'Lujosa caminadora que viene con pantalla tactil y es plegable.',  'CAMINADORA', 170, 80);
+
+ rem fin carga maquinas
+ 
+ rem carga accesorios
+
+ INSERT INTO ACCESORIOS VALUES (1, 12, 'Mancuerna de vinilo bodytone 2kg', 'Mancuerna de vinilo bodytone 2kg de color azul.', 'Azul', 'MANCUERNA', 2, 15, 30);
+
+ INSERT INTO ACCESORIOS VALUES (2, 12, 'Mancuerna de vinilo bodytone 1kg', 'Mancuerna de vinilo bodytone 1kg de color naranja.', 'Naranja', 'MANCUERNA', 2, 15, 30);
+
+ INSERT INTO ACCESORIOS VALUES (3, 12, 'Mancuerna de vinilo bodytone 5kg', 'Mancuerna de vinilo bodytone 5kg de color verde.', 'Verde', 'MANCUERNA', 2, 15, 30);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
+ INSERT INTO ACCESORIOS VALUES (4, 14, 'Cuerda Reebok Premium Speed', 'Cuerda muy buena.', null, 'CUERDA', null, null, 200);
+
+ INSERT INTO ACCESORIOS VALUES (5, 9, 'Disco Bumper Fraccional 1kg', 'Disco Bumper Fraccional blanco de 1kg.', 'Blanco', 'DISCO', 1, null, 20);
+
+ INSERT INTO ACCESORIOS VALUES (6, 9, 'Disco Bumper Fraccional 2kg', 'Disco Bumper Fraccional azul de 2kg.', 'Azul', 'DISCO', 2, null, 20);
+
+ INSERT INTO ACCESORIOS VALUES (7, 9, 'Disco Bumper Fraccional 3kg', 'Disco Bumper Fraccional amarillo de 3kg.', 'Amarillo', 'DISCO', 3, null, 20);
+
+ INSERT INTO ACCESORIOS VALUES (8, 13, 'Colchoneta Nbr', 'Colchoneta Nbr azul.', 'Azul', 'COLCHONETA', null, null, 58);
+
+ rem fin tabla accesorios
+
+ rem carga merchandising
+
+ INSERT INTO MERCHANDISING VALUES (1, 18, 'Camiseta FIT-US NEGRA', 'Camiseta FIT-US negra y celeste.', 'SI');
+
+ INSERT INTO MERCHANDISING VALUES (2, 18, 'Camiseta FIT-US BLANCA', 'Camiseta FIT-US blanca y celeste.', 'SI');
+
+ INSERT INTO MERCHANDISING VALUES (3, 4, 'Lacasitos 240gr', 'Paquete de lacacitos x240gr', 'NO');
+
+ INSERT INTO MERCHANDISING VALUES (4, 15, 'Pantalon para la bici FIT-US negro', 'Pantalon para la bici FIT-US negro', 'SI');
+
+ INSERT INTO MERCHANDISING VALUES (5, 15, 'Pantalon para la bici FIT-US blanco', 'Pantalon para la bici FIT-US blanco', 'SI');
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+ rem articulos para la tabla proveer
+
+ INSERT INTO MERCHANDISING VALUES (100, NULL, NULL, NULL, NULL);
+
+ INSERT INTO ACCESORIOS VALUES (100, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+ INSERT INTO MAQUINAS VALUES (100, NULL, NULL, NULL, NULL, NULL, NULL);
+
+ rem fin carga de las tres tablas
+ 
+ rem creamos tabla proveer
+
+ CREATE TABLE PROVEER (
+  ID_PROD_MAQ NUMBER(5),
+  ID_PROD_ACC NUMBER(5),
+  ID_PROD_MERCH NUMBER(5),
+  ID_PROV NUMBER(4),
+  ID_SEDE NUMBER(6),
+  EXCLUSIVO VARCHAR2(2) CHECK (EXCLUSIVO IN('SI','NO')),
+  primary key (ID_PROD_MAQ, ID_PROD_ACC, ID_PROD_MERCH, ID_PROV, ID_SEDE),
+  foreign key (ID_PROD_MAQ) references MAQUINAS,
+  foreign key (ID_PROD_ACC) references ACCESORIOS,
+   foreign key (ID_PROD_MERCH) references MERCHANDISING,
+  foreign key (ID_PROV) references PROVEEDORES,
+  foreign key (ID_SEDE) references SEDES
+  );
+
+
+ INSERT INTO PROVEER VALUES(1, 100, 100, 2, 1, 'NO');
+
+ INSERT INTO PROVEER VALUES(100, 3, 100, 1, 2, 'SI');
+
+ INSERT INTO PROVEER VALUES(100, 2, 100, 1, 2, 'SI');
+
+ INSERT INTO PROVEER VALUES(100, 1, 100, 1, 2, 'SI');
+
+ INSERT INTO PROVEER VALUES(100, 1, 100, 1, 1, 'NO');
+
+ INSERT INTO PROVEER VALUES(100, 2, 100, 1, 1, 'NO');
+
+ INSERT INTO PROVEER VALUES(100, 3, 100, 1, 1, 'NO');
+
+ INSERT INTO PROVEER VALUES(2, 100, 100, 4, 3, 'NO');
+
+ INSERT INTO PROVEER VALUES(5, 100, 100, 4, 3, 'NO');
+
+ INSERT INTO PROVEER VALUES(3, 100, 100, 4, 3, 'NO');
+
+ INSERT INTO PROVEER VALUES(3, 100, 100, 2, 2, 'SI');
+
+ INSERT INTO PROVEER VALUES(3, 100, 100, 2, 1, 'SI');
+
+ INSERT INTO PROVEER VALUES(3, 100, 100, 2, 3, 'SI');
+
+ INSERT INTO PROVEER VALUES(100, 100, 1, 2, 3, 'NO');
+
+ INSERT INTO PROVEER VALUES(2, 100, 100, 4, 3, 'NO');
+
+ INSERT INTO PROVEER VALUES(5, 100, 100, 4, 3, 'NO');
+
+ INSERT INTO PROVEER VALUES(3, 100, 100, 4, 3, 'NO');
+
+ INSERT INTO PROVEER VALUES(3, 100, 100, 2, 2, 'SI');
+
+ INSERT INTO PROVEER VALUES(3, 100, 100, 2, 1, 'SI');
+
+ INSERT INTO PROVEER VALUES(3, 100, 100, 2, 3, 'SI');
+
+ INSERT INTO PROVEER VALUES(100, 100, 1, 2, 3, 'NO');
+
+ rem tabla proveer terminada
+ 
+ rem FIN PRIMER MER
