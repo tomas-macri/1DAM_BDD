@@ -1,0 +1,264 @@
+SQL> 
+SQL> REM TAMA¥O CLASES EN LA QUE SE DA ZUMBA
+SQL> SELECT TAMANO FROM SALAS, DARSE, CLASES WHERE SALAS.N_SALAS=DARSE.N_SALAS AND DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=ZUMBA;
+SELECT TAMANO FROM SALAS, DARSE, CLASES WHERE SALAS.N_SALAS=DARSE.N_SALAS AND DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=ZUMBA
+                                                                                                                             *
+ERROR en línea 1:
+ORA-00904: "ZUMBA": identificador no válido 
+
+
+SQL> SELECT TAMANO FROM SALAS, DARSE, CLASES WHERE SALAS.N_SALAS=DARSE.N_SALAS AND DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO='ZUMBA';
+SELECT TAMANO FROM SALAS, DARSE, CLASES WHERE SALAS.N_SALAS=DARSE.N_SALAS AND DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO='ZUMBA'
+                                                            *
+ERROR en línea 1:
+ORA-00904: "DARSE"."N_SALAS": identificador no válido 
+
+
+SQL> SELECT TAMANO FROM SALAS, DARSE, CLASES WHERE SALAS.N_SALA=DARSE.N_SALA AND DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO='ZUMBA';
+
+    TAMANO                                                                      
+----------                                                                      
+        50                                                                      
+        50                                                                      
+        50                                                                      
+        82                                                                      
+        82                                                                      
+        82                                                                      
+        82                                                                      
+       150                                                                      
+        20                                                                      
+        20                                                                      
+        35                                                                      
+
+    TAMANO                                                                      
+----------                                                                      
+       204                                                                      
+       204                                                                      
+        64                                                                      
+        64                                                                      
+        76                                                                      
+        76                                                                      
+
+17 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> REM Id de salas que se usan en abril
+SQL> 
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE FECHA='**/04/**';
+SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE FECHA='**/04/**'
+                                                                      *
+ERROR en línea 1:
+ORA-00933: comando SQL no terminado correctamente 
+
+
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE AND FECHA='**/04/**';
+
+ninguna fila seleccionada
+
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE AND FECHA='*/04/*';
+
+ninguna fila seleccionada
+
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE AND FECHA='*/04/*';
+
+ninguna fila seleccionada
+
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE AND FECHA='____/04/__';
+
+ninguna fila seleccionada
+
+SQL> SELECT * FROM DARSE;
+
+  ID_CLASE     N_SALA                                                           
+---------- ----------                                                           
+         1          8                                                           
+         2          3                                                           
+         3          8                                                           
+         4          4                                                           
+         5          2                                                           
+         6         10                                                           
+         7          1                                                           
+         8          1                                                           
+         9          3                                                           
+        10         10                                                           
+        11          8                                                           
+
+  ID_CLASE     N_SALA                                                           
+---------- ----------                                                           
+        12          3                                                           
+        13          1                                                           
+        14          7                                                           
+        15          5                                                           
+        16          1                                                           
+        17          5                                                           
+        18          9                                                           
+        19          3                                                           
+        20          9                                                           
+        21          1                                                           
+        22          3                                                           
+
+  ID_CLASE     N_SALA                                                           
+---------- ----------                                                           
+        23          6                                                           
+        24          4                                                           
+        25          7                                                           
+        26          7                                                           
+        27          2                                                           
+        28          4                                                           
+        29         10                                                           
+        30          3                                                           
+        31          5                                                           
+        32          4                                                           
+        33          9                                                           
+
+33 filas seleccionadas.
+
+SQL> SELECT * FROM CLASES;
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+         1 2021/05/17       1230 SPINNING                                       
+         2 2021/07/09       1630 ZUMBA                                          
+         3 2021/12/14       2230 ZUMBA                                          
+         4 2022/03/22        930 SPINNING                                       
+         5 2022/03/22       1130 SPINNING                                       
+         6 2022/03/22       1330 SPINNING                                       
+         7 2022/03/22       1530 SPINNING                                       
+         8 2022/03/22       1730 SPINNING                                       
+         9 2022/03/22       1930 SPINNING                                       
+        10 2022/03/22       2130 SPINNING                                       
+        11 2022/03/22        830 ZUMBA                                          
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+        12 2022/03/22       1030 ZUMBA                                          
+        13 2022/03/22       1230 ZUMBA                                          
+        14 2022/03/22       1430 ZUMBA                                          
+        15 2022/03/22       1630 ZUMBA                                          
+        16 2022/03/22       1830 ZUMBA                                          
+        17 2022/03/22       2030 ZUMBA                                          
+        18 2022/03/22       2230 ZUMBA                                          
+        19 2022/04/24        930 ZUMBA                                          
+        20 2022/04/24       1130 ZUMBA                                          
+        21 2022/04/24       1330 ZUMBA                                          
+        22 2022/04/24       1530 ZUMBA                                          
+
+  ID_CLASE FECHA            HORA TIPO                                           
+---------- ---------- ---------- --------------------                           
+        23 2022/04/24       1730 ZUMBA                                          
+        24 2022/04/24       1930 ZUMBA                                          
+        25 2022/04/24       2130 ZUMBA                                          
+        26 2022/04/24        830 SPINNING                                       
+        27 2022/04/24       1030 SPINNING                                       
+        28 2022/04/24       1230 SPINNING                                       
+        29 2022/04/24       1430 SPINNING                                       
+        30 2022/04/24       1630 SPINNING                                       
+        31 2022/04/24       1830 SPINNING                                       
+        32 2022/04/24       2030 SPINNING                                       
+        33 2022/04/24       2230 SPINNING                                       
+
+33 filas seleccionadas.
+
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE AND FECHA LIKE '*/04/*';
+
+ninguna fila seleccionada
+
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE AND FECHA LIKE '____/04/__';
+
+    N_SALA                                                                      
+----------                                                                      
+         3                                                                      
+         9                                                                      
+         1                                                                      
+         3                                                                      
+         6                                                                      
+         4                                                                      
+         7                                                                      
+         7                                                                      
+         2                                                                      
+         4                                                                      
+        10                                                                      
+
+    N_SALA                                                                      
+----------                                                                      
+         3                                                                      
+         5                                                                      
+         4                                                                      
+         9                                                                      
+
+15 filas seleccionadas.
+
+SQL> 
+SQL> REM Clases que se hayan dado en marzo
+SQL> 
+SQL> SELECT N_SALA FROM CLASES, DARSE WHERE CLASES.ID_CLASE=DARSE.ID_CLASE AND DARSE.FECHA ='%/03/%';
+SELECT N_SALA FROM CLASES, DARSE WHERE CLASES.ID_CLASE=DARSE.ID_CLASE AND DARSE.FECHA ='%/03/%'
+                                                                          *
+ERROR en línea 1:
+ORA-00904: "DARSE"."FECHA": identificador no válido 
+
+
+SQL> SELECT N_SALA FROM CLASES, DARSE WHERE CLASES.ID_CLASE=DARSE.ID_CLASE AND CLASES.FECHA ='%/03/%';
+
+ninguna fila seleccionada
+
+SQL> SELECT N_SALA FROM CLASES, DARSE WHERE CLASES.ID_CLASE=DARSE.ID_CLASE AND CLASES.FECHA LIKE '%/03/%';
+
+    N_SALA                                                                      
+----------                                                                      
+         4                                                                      
+         2                                                                      
+        10                                                                      
+         1                                                                      
+         1                                                                      
+         3                                                                      
+        10                                                                      
+         8                                                                      
+         3                                                                      
+         1                                                                      
+         7                                                                      
+
+    N_SALA                                                                      
+----------                                                                      
+         5                                                                      
+         1                                                                      
+         5                                                                      
+         9                                                                      
+
+15 filas seleccionadas.
+
+SQL> REM Id de salas que se usan en abril
+SQL> REM Id de salas que se usan en abril
+SQL> REM Id de salas que se usan en abril
+SQL> REM Id de salas que se usan en abril
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE AND FECHA='%/04/%';
+
+ninguna fila seleccionada
+
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE AND FECHA LIKE '%/04/%';
+
+    N_SALA                                                                      
+----------                                                                      
+         3                                                                      
+         9                                                                      
+         1                                                                      
+         3                                                                      
+         6                                                                      
+         4                                                                      
+         7                                                                      
+         7                                                                      
+         2                                                                      
+         4                                                                      
+        10                                                                      
+
+    N_SALA                                                                      
+----------                                                                      
+         3                                                                      
+         5                                                                      
+         4                                                                      
+         9                                                                      
+
+15 filas seleccionadas.
+
+SQL> SPOOL OFF
