@@ -1,0 +1,248 @@
+SQL> rem 1. Todas las poblaciones de las provincias con una extensi¢n mayor que 10.000 km2.
+SQL> 
+SQL> select * from poblaciones where N_PROVINCIAS in (select N_PROVINCIA from provincias where EXT_PROV > 10000);
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                                                                                                                                                                                                                                   
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                                                                                                                           
+         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                                                                                                                                                                                                                         
+         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                                                                                                                                                                                                                         
+         7 SEVILLA                                 688711        140 SEVILLA                                                                                                                                                                                                                                                                                                                                                                                                                                        
+         8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
+SQL> rem 2. Todas las sedes de las de la poblaci¢n 'UTRERA'.
+SQL> 
+SQL> select * from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and NOMB_POB = 'UTRERA';
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB     ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                                                                                                                                   
+---------- --------- ------------------------------ ---------- ---------- ---------- ---------- ---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                           
+         6 956321546 Angel                                  60      36598         30          8          8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                                                                                                                        
+
+SQL> rem ESTA CONSULTA ESTµ MAL PORQUE TAMBIEN DEVUELVE LOS DATOS DE LAS POBLACIONES (ESTO SE DEBE AL SELECT *). LAS POSIBLES SOLUCIONES SEERÖAN:
+SQL> 
+SQL> rem 2.1 Todas las sedes de las de la poblaci¢n 'UTRERA'.
+SQL> 
+SQL> select ID_SEDE, TEL_SEDE, CALLE, NUMERO, CP, TAMANO, sedes.ID_POB from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and NOMB_POB = 'UTRERA';
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
+         6 956321546 Angel                                  60      36598         30          8                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> rem 2.2 Todas las sedes de las de la poblaci¢n 'UTRERA'.
+SQL> 
+SQL> select sedes.* from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and NOMB_POB = 'UTRERA';
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
+         6 956321546 Angel                                  60      36598         30          8                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> 
+SQL> rem 5. La direcci¢n de las sedes de la provincia de Madrid
+SQL> 
+SQL> select CALLE, NUMERO, CP from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and N_PROVINCIAS = 'MADRID';
+
+CALLE                              NUMERO         CP                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+------------------------------ ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+Valencia                               14      28300                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+Alcala                                227      28028                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+la Concha                               8      28300                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+SQL> 
+SQL> rem 6. Los datos de la sede m s grande
+SQL> 
+SQL> select * from sedes where tamano = (select max(tamano) from sedes);
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
+         1 945625321 Valencia                               14      28300        286          2                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> 
+SQL> rem 7. La m quina m s barata
+SQL> 
+SQL> select * from maquinas where COSTE_UD_MAQ = (select min(COSTE_UD_MAQ) from maquinas);
+
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ                                                                                                                                                                                                                                                                                                TIPO                      LARGO      ANCHO                                                                                 
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------                                                                                 
+          1          499 Proform Tour de France CLC SMART Bicicleta Indoor  Bicicleta indoor genial que cuenta con una gran pantalla led y un asiento acolchado   
+
+SQL> 
+SQL> rem 8. Las poblaciones que tengan menos de 1.000.000 de habitantes y que pertenecen a una provincia con m s de 1.000.000 de habitantes ordenadas por cantidad de habitantes ascendentemente.
+SQL> 
+SQL> SELECT * FROM POBLACIONES WHERE HAB_POB < 1000000 AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > 1000000)  ORDER BY HAB_POB;
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                                                                                                                               
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                       
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                                                                                                                     
+         6 CASTELLDEFELS                            66375         13 BARCELONA                                                                                                                                                                                                                                                                                                                                  
+         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                                                                                                                     
+         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                                                                                                                     
+
+SQL> 
+SQL> rem 9. La poblaci¢n con menos habitantes entre las poblaciones que tengan menos de 1.000.000 de habitantes y que pertenecen a una provincia con m s de 1.000.000 de habitantes.
+SQL> 
+SQL> SELECT * FROM  POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB=(SELECT MIN(HAB_POB) FROM POBLACIONES WHERE HAB_POB < 1000000 AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > 1000000)));
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                                                                                                                               
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                       
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                                                                                                                     
+
+SQL> 
+SQL> rem 10.  Los proveedores de Madrid.
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE N_PROVINCIA LIKE 'MADRID';
+ 
+    ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                            
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                   
+          1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
+ 
+SQL>  
+SQL> rem 11. Los proveedores que hayan provisto a una sede cuyo c¢digo postal tenga 5 d¡gitos y comience por 28.
+SQL>   
+ 
+SQL> SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE CP >  27999 AND CP < 29000));
+ 
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                            
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                   
+          1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
+          2 Maquinas Pepe                  915346684 Callejon de la Galinda                 10      41810 SEVILLA                                                                                                                                                                                                                                                                                                
+ 
+ 
+
+SQL> rem 12. Los proveedores que hayan provisto a una sede ubicada en Aranjuez.
+SQL>   
+SQL> SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB = 'ARANJUEZ')));
+ 
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                            
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                   
+          1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
+          2 Maquinas Pepe                  915346684 Callejon de la Galinda                 10      41810 SEVILLA                                                                                                                                                                                                                                                                                                
+ 
+ 
+SQL> rem 13. Los proveedores de Madrid que hayan provisto a una sede que esta en la calle Alcala.
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE N_PROVINCIA LIKE 'MADRID' AND ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE CALLE LIKE 'Alcala'));
+
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                            
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                   
+         1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
+
+
+
+SQL> 14. La información del proveedor que provee a más sedes.
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE ID_PROV = (SELECT ID_PROV FROM PROVEER GROUP BY ID_PROV HAVING COUNT(ID_PROV) = (SELECT MAX(COUNT(ID_PROV)) FROM PROVEER GROUP BY ID_PROV)); 
+
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                            
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                   
+         1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
+
+SQL>
+SQL> rem 15. Todas las bicicletas compradas por la sede 3.
+SQL> 
+SQL> SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROD_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND PROVEER.ID_SEDE=3 AND MAQUINAS.TIPO='BICICLETA';
+
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ                                                                                                                                                                                                                                                                                                TIPO                      LARGO      ANCHO                                                                                 
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------                                                                                 
+          2          899 NordicTrack C5.5 Bicicleta El¡ptica                Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.                                                                                                                                BICICLETA                   140         60                                                                                 
+
+SQL> 
+SQL> rem 16. La informaci¢n de la poblaci¢n que tiene m s sedes
+SQL> 
+SQL> SELECT * FROM POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM SEDES GROUP BY ID_POB HAVING ID_POB=(SELECT ID_POB FROM SEDES GROUP BY ID_POB HAVING COUNT (ID_POB) = (SELECT MAX(COUNT(ID_POB)) FROM SEDES GROUP BY ID_POB)));
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                                                                                                                                                                                                                                   
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                                                                                                                           
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                                                                                                                                                                                                                         
+
+SQL> 
+SQL> rem 17. El precio medio de todas las m quinas de musculacion y mostrar el campo como "promedio precio musculacion".
+SQL> 
+SQL> SELECT AVG(COSTE_UD_MAQ) FROM MAQUINAS  WHERE TIPO='MUSCULACION';
+
+AVG(COSTE_UD_MAQ)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+-----------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+             1824                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+SQL> 
+SQL> rem 18. Los productos de Merchandising que tengan un precio menor que el accesorio 'Mancuerna de vinilo bodytone 1kg'
+SQL> 
+SQL> SELECT * FROM MERCHANDISING WHERE COSTE_UD_MERCH < (SELECT COSTE_UD_ACC FROM ACCESORIOS WHERE NOMB_PROD_ACC LIKE 'Mancuerna de vinilo bodytone 1kg');
+
+ID_PROD_MERCH COSTE_UD_MERCH NOMB_PROD_MERCH                                    DESC_PROD_MERCH                                                                                                                                                                                                                                                                                              PR                                                                                                                     
+------------- -------------- -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --                                                                                                                     
+            3              4 Lacasitos 240gr                                    Paquete de lacacitos x240gr                                                                                                                                                                                                                                                                                  NO                                                                                                                     
+
+SQL> 
+SQL> 
+SQL> rem 19. Las sedes de Madrid (provincia) que están en una calle cuyo nombre contenga una única palabra.
+SQL> 
+SQL> SELECT S.* FROM SEDES S, POBLACIONES P WHERE S.ID_POB = P.ID_POB AND S.CALLE NOT LIKE '% %' AND P.N_PROVINCIAS = 'MADRID';
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
+         1 945625321 Valencia                               14      28300        286          2                                                                                                                                                                                                                                                                                                                                                                                                                     
+         2 945325984 Alcala                                227      28028        156          1                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> 
+SQL> rem 20. Las sedes que se encuentran en la poblaci¢n m s densamente poblada (densidad = habitantes/extensi¢n)
+SQL> 
+SQL> SELECT * FROM SEDES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB/EXT_POB =(SELECT MAX(HAB_POB/EXT_POB) FROM POBLACIONES));
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
+         4 975643222 Valencia                              466       8013        166          5                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> 
+SQL> rem 21. Las poblaciones ubicadas en una provincia con una densidad de poblaci¢n menores que la media (densidad = habitantes/extensi¢n)
+SQL> 
+SQL> SELECT * FROM POBLACIONES WHERE N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV/EXT_PROV IN (SELECT (HAB_PROV/EXT_PROV) FROM PROVINCIAS WHERE HAB_PROV/EXT_PROV < (SELECT AVG(HAB_PROV/EXT_PROV) FROM PROVINCIAS)));
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                                                                                                                                                                                                                                   
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                                                                                                                           
+         3 CARTAGENA                               213943        558 MURCIA                                                                                                                                                                                                                                                                                                                                                                                                                                         
+         4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                                                                                                                                                                                                                         
+         7 SEVILLA                                 688711        140 SEVILLA                                                                                                                                                                                                                                                                                                                                                                                                                                        
+         8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        10 VALLAOLID                               298866        198 VALLADOLID                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> 
+SQL> 
+SQL> rem 22. La direcci¢n de la sede que es provista de m s productos de forma exclusiva
+SQL> 
+SQL> SELECT CALLE, NUMERO, CP FROM SEDES WHERE ID_SEDE= (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE)= (SELECT MAX(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO= 'SI' GROUP BY ID_SEDE));
+
+CALLE                              NUMERO         CP                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+------------------------------ ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+Alcala                                227      28028                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+SQL> 
+SQL> 
+SQL> rem 23. Los proveedores cuyo tel‚fono comience por 91
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE TEL_PROV LIKE '91%';
+
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA                                                                                                                                                                                                                                                                                                                                                                                                
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                                                                                       
+         1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                                                                                                                     
+         2 Maquinas Pepe                  915346684 Callejon de la Galinda                 10      41810 SEVILLA                                                                                                                                                                                                                                                                                                                                                                                                    
+
+SQL> 
+SQL> rem 24. El accesorio con la descripci¢n m s corta
+SQL> 
+SQL> SELECT * FROM ACCESORIOS WHERE LENGTH(DESC_PROD_ACC) = (SELECT MIN(LENGTH(DESC_PROD_ACC)) FROM ACCESORIOS);
+
+ID_PROD_ACC COSTE_UD_ACC NOMB_PROD_ACC                                      DESC_PROD_ACC                                                                                                                                                                                                                                                                                                COLOR      TIPO                       PESO       ALTO      ANCHO                                                           
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ---------- -------------------- ---------- ---------- ----------                                                           
+          4           14 Cuerda Reebok Premium Speed                        Cuerda muy buena.                                                                                                                                                                                                                                                                                                       CUERDA                                            200                                                           
+
+SQL> 
+SQL> 
+SQL> 
+SQL> rem 25. Las sedes que hayan sido provistas de un producto de merchandising propio de la marca FIT&US
+SQL> 
+SQL> SELECT * FROM SEDES WHERE ID_SEDE IN(SELECT P.ID_SEDE FROM PROVEER P, MERCHANDISING M WHERE P.ID_PROD_MERCH <> 100 AND P.ID_PROD_MERCH = M.ID_PROD_MERCH AND M.PROPIO='SI');
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
+         3 945486533 la Concha                               8      28300         86          2                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+
