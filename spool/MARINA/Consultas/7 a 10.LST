@@ -1,0 +1,1526 @@
+SQL> REM 7 - TELFONO DE LOS SOCIOS QUE HAN ASISTIDO A LAS CLASES DE ZUMBA EN MAYO
+SQL> 
+SQL> SELECT SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, DARSE WHERE DARSE.ID_CLASE = ASISTIR.ID_CLASE AND SOCIOS.ID_SOCIO=ASISTIR.ID_SOCIO AND DARSE.FECHA='____/05/__';
+SELECT SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, DARSE WHERE DARSE.ID_CLASE = ASISTIR.ID_CLASE AND SOCIOS.ID_SOCIO=ASISTIR.ID_SOCIO AND DARSE.FECHA='____/05/__'
+                                                                                                                                    *
+ERROR en línea 1:
+ORA-00904: "DARSE"."FECHA": identificador no válido 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, CLASES WHERE DARSE.ID_CLASE=ASISTIR.ID_CLASE AND SOCIOS.ID_SOCIO=ASISTIR.ID_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.FECHA='____/05/__';
+SELECT SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, CLASES WHERE DARSE.ID_CLASE=ASISTIR.ID_CLASE AND SOCIOS.ID_SOCIO=ASISTIR.ID_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.FECHA='____/05/__'
+                                                                                                              *
+ERROR en línea 1:
+ORA-00904: "ASISTIR"."ID_SOCIO": identificador no válido 
+
+
+SQL> SELECT SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, CLASES WHERE DARSE.ID_CLASE=ASISTIR.ID_CLASE AND SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.FECHA='____/05/__';
+SELECT SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, CLASES WHERE DARSE.ID_CLASE=ASISTIR.ID_CLASE AND SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.FECHA='____/05/__'
+                                                          *
+ERROR en línea 1:
+ORA-00904: "DARSE"."ID_CLASE": identificador no válido 
+
+
+SQL> DESC DARSE;
+ Nombre                                    ¿Nulo?   Tipo
+ ----------------------------------------- -------- ----------------------------
+ ID_CLASE                                  NOT NULL NUMBER(6)
+ N_SALA                                    NOT NULL NUMBER(3)
+
+SQL> SELECT SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, CLASES WHERE SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.FECHA='____/05/__';
+
+ninguna fila seleccionada
+
+SQL> SELECT SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, CLASES WHERE SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.FECHA='____/04/__';
+
+ninguna fila seleccionada
+
+SQL> SELECT SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, CLASES WHERE SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.FECHA LIKE '____/05/__';
+
+TELEFONO                                                                        
+----------                                                                      
+646503181                                                                       
+360462957                                                                       
+355745640                                                                       
+
+SQL> 
+SQL> 
+SQL> REM 8 - CORREO DE SOCIOS QUE ASISTIERON A CLASES A LAS 1830
+SQL> 
+SQL> SELECT SOCIOS.CORREO FROM SOCIOS, ASISTIR, CLASES WHERE ASISTIR.ID_CLASE=CLASES.ID_CLASE AND SOCIOS.ID_SOCIOS=ASISTIR.ID_SOCIOS AND HORA=1830;
+SELECT SOCIOS.CORREO FROM SOCIOS, ASISTIR, CLASES WHERE ASISTIR.ID_CLASE=CLASES.ID_CLASE AND SOCIOS.ID_SOCIOS=ASISTIR.ID_SOCIOS AND HORA=1830
+                                                                                                              *
+ERROR en línea 1:
+ORA-00904: "ASISTIR"."ID_SOCIOS": identificador no válido 
+
+
+SQL> 
+SQL> SELECT SOCIOS.CORREO FROM SOCIOS, ASISTIR, CLASES WHERE ASISTIR.ID_CLASE=CLASES.ID_CLASE AND SOCIOS.N_SOCIO=ASISTIR.N_SOCIOS AND HORA=1830;
+SELECT SOCIOS.CORREO FROM SOCIOS, ASISTIR, CLASES WHERE ASISTIR.ID_CLASE=CLASES.ID_CLASE AND SOCIOS.N_SOCIO=ASISTIR.N_SOCIOS AND HORA=1830
+                                                                                                            *
+ERROR en línea 1:
+ORA-00904: "ASISTIR"."N_SOCIOS": identificador no válido 
+
+
+SQL> SELECT SOCIOS.CORREO FROM SOCIOS, ASISTIR, CLASES WHERE ASISTIR.ID_CLASE=CLASES.ID_CLASE AND SOCIOS.N_SOCIO=ASISTIR.N_SOCIOS AND HORA=1830;
+SELECT SOCIOS.CORREO FROM SOCIOS, ASISTIR, CLASES WHERE ASISTIR.ID_CLASE=CLASES.ID_CLASE AND SOCIOS.N_SOCIO=ASISTIR.N_SOCIOS AND HORA=1830
+                                                                                                            *
+ERROR en línea 1:
+ORA-00904: "ASISTIR"."N_SOCIOS": identificador no válido 
+
+
+SQL> SELECT SOCIOS.CORREO FROM SOCIOS, ASISTIR, CLASES WHERE ASISTIR.ID_CLASE=CLASES.ID_CLASE AND SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND HORA=1830;
+SELECT SOCIOS.CORREO FROM SOCIOS, ASISTIR, CLASES WHERE ASISTIR.ID_CLASE=CLASES.ID_CLASE AND SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND HORA=1830
+       *
+ERROR en línea 1:
+ORA-00904: "SOCIOS"."CORREO": identificador no válido 
+
+
+SQL> SELECT SOCIOS.MAIL FROM SOCIOS, ASISTIR, CLASES WHERE ASISTIR.ID_CLASE=CLASES.ID_CLASE AND SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND HORA=1830;
+
+MAIL                                                                            
+--------------------------------------------------------------------------------
+tvega@gmail.com                                                                 
+amartinez@gmail.com                                                             
+aortega@yahoo.com                                                               
+
+SQL> 
+SQL> 
+SQL> REM 9 - SALAS UTILIZADAS A LAS 1130 EN ABRIL
+SQL> 
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE CLASES.ID_CLASE=DARSE.ID_CLASE AND CLASES.HORA=1130 AND CLASES.FECHA='%/04%;
+ERROR:
+ORA-01756: la cadena entrecomillada no está terminada correctamente 
+
+
+SQL> 
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE CLASES.ID_CLASE=DARSE.ID_CLASE AND CLASES.HORA=1130 AND CLASES.FECHA='%/04%';
+
+ninguna fila seleccionada
+
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE CLASES.ID_CLASE=DARSE.ID_CLASE AND CLASES.HORA=1130 AND CLASES.FECHA LIKE '%/04%';
+
+    N_SALA                                                                      
+----------                                                                      
+         9                                                                      
+
+SQL> 
+SQL> 
+SQL> REM 10 - INFORMACIàN DE SOCIOS CUYO NOMBRE EMPIEZA POR "M", QUE ASISTIERON A ZUMBA EN MARZO
+SQL> 
+SQL> SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.ID_SOCIO=SOCIOS.ID_SOCIO AND CLASES.FECHA='%/03/%'AND SOCIOS.NOMBRRE='M%';
+SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.ID_SOCIO=SOCIOS.ID_SOCIO AND CLASES.FECHA='%/03/%'AND SOCIOS.NOMBRRE='M%'
+                                                                                                                                               *
+ERROR en línea 1:
+ORA-00904: "SOCIOS"."NOMBRRE": identificador no válido 
+
+
+SQL> SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.ID_SOCIO=SOCIOS.ID_SOCIO AND CLASES.FECHA='%/03/%'AND SOCIOS.NOMBRE='M%';
+SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.ID_SOCIO=SOCIOS.ID_SOCIO AND CLASES.FECHA='%/03/%'AND SOCIOS.NOMBRE='M%'
+                                                                                                  *
+ERROR en línea 1:
+ORA-00904: "SOCIOS"."ID_SOCIO": identificador no válido 
+
+
+SQL> SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND CLASES.FECHA LIKE '%/03/%' AND SOCIOS.NOMBRE='M%';
+
+ninguna fila seleccionada
+
+SQL> SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND CLASES.FECHA LIKE '%/03/%' AND SOCIOS.NOMBRE LIKE 'M%';
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+        14 46934489P MERCEDES             CUBILLO                               
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+MENAYO                                                                          
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mcubillo@yahoo.com                                                              
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+848887557  URUGUAY                                                    11        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     46792          1          6         14          6 2022/03/22       1330    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+        14 46934489P MERCEDES             CUBILLO                               
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+MENAYO                                                                          
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mcubillo@yahoo.com                                                              
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+848887557  URUGUAY                                                    11        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     46792          1          7         14          7 2022/03/22       1530    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+         3 43082463T MARTA                SERRAT                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+SABINA                                                                          
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mserrat@gmail.com                                                               
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+217954856  ARANDANO                                                  864        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     28003          6          9          3          9 2022/03/22       1930    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+         8 69873567B MONICA               BIANCO                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+PEREZ                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mbianco@hotmail.com                                                             
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+299217214  OSLO                                                       30        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     64203          8          9          8          9 2022/03/22       1930    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+        14 46934489P MERCEDES             CUBILLO                               
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+MENAYO                                                                          
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mcubillo@yahoo.com                                                              
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+848887557  URUGUAY                                                    11        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     46792          1          9         14          9 2022/03/22       1930    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+         3 43082463T MARTA                SERRAT                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+SABINA                                                                          
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mserrat@gmail.com                                                               
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+217954856  ARANDANO                                                  864        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     28003          6         10          3         10 2022/03/22       2130    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+        12 13597127A MADELEINE            GOMEZ                                 
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+MOREIRA                                                                         
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mgomez@yahoo.com                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+383638907  CALIFORNIA                                                  8        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     64983          1         10         12         10 2022/03/22       2130    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+        14 46934489P MERCEDES             CUBILLO                               
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+MENAYO                                                                          
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mcubillo@yahoo.com                                                              
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+848887557  URUGUAY                                                    11        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     46792          1         10         14         10 2022/03/22       2130    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+         3 43082463T MARTA                SERRAT                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+SABINA                                                                          
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mserrat@gmail.com                                                               
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+217954856  ARANDANO                                                  864        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     28003          6         12          3         12 2022/03/22       1030    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+        12 13597127A MADELEINE            GOMEZ                                 
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+MOREIRA                                                                         
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mgomez@yahoo.com                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+383638907  CALIFORNIA                                                  8        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     64983          1         12         12         12 2022/03/22       1030    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+         3 43082463T MARTA                SERRAT                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+SABINA                                                                          
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mserrat@gmail.com                                                               
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+217954856  ARANDANO                                                  864        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     28003          6         14          3         14 2022/03/22       1430    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+         8 69873567B MONICA               BIANCO                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+PEREZ                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mbianco@hotmail.com                                                             
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+299217214  OSLO                                                       30        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     64203          8         15          8         15 2022/03/22       1630    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+        14 46934489P MERCEDES             CUBILLO                               
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+MENAYO                                                                          
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+mcubillo@yahoo.com                                                              
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+848887557  URUGUAY                                                    11        
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+     46792          1         15         14         15 2022/03/22       1630    
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+ZUMBA                                                                           
+
+   N_SOCIO DNI       NOMBRE               APELLIDO                              
+---------- --------- -------------------- --------------------                  
+SEG_APELLIDO                                                                    
+--------------------                                                            
+MAIL                                                                            
+--------------------------------------------------------------------------------
+TELEFONO   CALLE                                                  NUMERO        
+---------- -------------------------------------------------- ----------        
+        CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA    
+---------- ---------- ---------- ---------- ---------- ---------- ----------    
+TIPO                                                                            
+--------------------                                                            
+                                                                                
+
+13 filas seleccionadas.
+
+SQL> SET PAGESIZE 300
+SQL> SET LINESIZE 300
+SQL> SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND CLASES.FECHA LIKE '%/03/%' AND SOCIOS.NOMBRE LIKE 'M%';
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                                                                                                 TELEFONO   CALLE                                                  NUMERO         CP     ID_POB   ID_CLASE          
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- ----------          
+   N_SOCIO   ID_CLASE FECHA            HORA TIPO                                                                                                                                                                                                                                                            
+---------- ---------- ---------- ---------- --------------------                                                                                                                                                                                                                                            
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          6          
+        14          6 2022/03/22       1330 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          7          
+        14          7 2022/03/22       1530 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6          9          
+         3          9 2022/03/22       1930 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com                                                                                  299217214  OSLO                                                       30      64203          8          9          
+         8          9 2022/03/22       1930 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          9          
+        14          9 2022/03/22       1930 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         10          
+         3         10 2022/03/22       2130 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com                                                                                     383638907  CALIFORNIA                                                  8      64983          1         10          
+        12         10 2022/03/22       2130 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1         10          
+        14         10 2022/03/22       2130 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         12          
+         3         12 2022/03/22       1030 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com                                                                                     383638907  CALIFORNIA                                                  8      64983          1         12          
+        12         12 2022/03/22       1030 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         14          
+         3         14 2022/03/22       1430 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com                                                                                  299217214  OSLO                                                       30      64203          8         15          
+         8         15 2022/03/22       1630 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1         15          
+        14         15 2022/03/22       1630 ZUMBA                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+
+13 filas seleccionadas.
+
+SQL> SET PAGESIZE 500
+SQL> SET LINESIZE 500
+SQL> SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND CLASES.FECHA LIKE '%/03/%' AND SOCIOS.NOMBRE LIKE 'M%';
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                                                                                                 TELEFONO   CALLE                                                  NUMERO         CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA TIPO                                                                                                                                                                 
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- --------------------                                                                                                                                                 
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          6         14          6 2022/03/22       1330 ZUMBA                                                                                                                                                                
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          7         14          7 2022/03/22       1530 ZUMBA                                                                                                                                                                
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6          9          3          9 2022/03/22       1930 ZUMBA                                                                                                                                                                
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com                                                                                  299217214  OSLO                                                       30      64203          8          9          8          9 2022/03/22       1930 ZUMBA                                                                                                                                                                
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          9         14          9 2022/03/22       1930 ZUMBA                                                                                                                                                                
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         10          3         10 2022/03/22       2130 ZUMBA                                                                                                                                                                
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com                                                                                     383638907  CALIFORNIA                                                  8      64983          1         10         12         10 2022/03/22       2130 ZUMBA                                                                                                                                                                
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1         10         14         10 2022/03/22       2130 ZUMBA                                                                                                                                                                
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         12          3         12 2022/03/22       1030 ZUMBA                                                                                                                                                                
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com                                                                                     383638907  CALIFORNIA                                                  8      64983          1         12         12         12 2022/03/22       1030 ZUMBA                                                                                                                                                                
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         14          3         14 2022/03/22       1430 ZUMBA                                                                                                                                                                
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com                                                                                  299217214  OSLO                                                       30      64203          8         15          8         15 2022/03/22       1630 ZUMBA                                                                                                                                                                
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1         15         14         15 2022/03/22       1630 ZUMBA                                                                                                                                                                
+
+13 filas seleccionadas.
+
+SQL> SET PAGESIZE 600
+SQL> SET LINESIZE 600
+SQL> SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND CLASES.FECHA LIKE '%/03/%' AND SOCIOS.NOMBRE LIKE 'M%';
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                                                                                                 TELEFONO   CALLE                                                  NUMERO         CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA TIPO                                                                                                                                                                                                                                                                     
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- --------------------                                                                                                                                                                                                                                                     
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          6         14          6 2022/03/22       1330 ZUMBA                                                                                                                                                                                                                                                                    
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          7         14          7 2022/03/22       1530 ZUMBA                                                                                                                                                                                                                                                                    
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6          9          3          9 2022/03/22       1930 ZUMBA                                                                                                                                                                                                                                                                    
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com                                                                                  299217214  OSLO                                                       30      64203          8          9          8          9 2022/03/22       1930 ZUMBA                                                                                                                                                                                                                                                                    
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          9         14          9 2022/03/22       1930 ZUMBA                                                                                                                                                                                                                                                                    
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         10          3         10 2022/03/22       2130 ZUMBA                                                                                                                                                                                                                                                                    
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com                                                                                     383638907  CALIFORNIA                                                  8      64983          1         10         12         10 2022/03/22       2130 ZUMBA                                                                                                                                                                                                                                                                    
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1         10         14         10 2022/03/22       2130 ZUMBA                                                                                                                                                                                                                                                                    
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         12          3         12 2022/03/22       1030 ZUMBA                                                                                                                                                                                                                                                                    
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com                                                                                     383638907  CALIFORNIA                                                  8      64983          1         12         12         12 2022/03/22       1030 ZUMBA                                                                                                                                                                                                                                                                    
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         14          3         14 2022/03/22       1430 ZUMBA                                                                                                                                                                                                                                                                    
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com                                                                                  299217214  OSLO                                                       30      64203          8         15          8         15 2022/03/22       1630 ZUMBA                                                                                                                                                                                                                                                                    
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1         15         14         15 2022/03/22       1630 ZUMBA                                                                                                                                                                                                                                                                    
+
+13 filas seleccionadas.
+
+SQL> SET PAGESIZE 800
+SQL> SET LINESIZE 800
+SQL> SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND CLASES.FECHA LIKE '%/03/%' AND SOCIOS.NOMBRE LIKE 'M%';
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                                                                                                 TELEFONO   CALLE                                                  NUMERO         CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA TIPO                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          6         14          6 2022/03/22       1330 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          7         14          7 2022/03/22       1530 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6          9          3          9 2022/03/22       1930 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com                                                                                  299217214  OSLO                                                       30      64203          8          9          8          9 2022/03/22       1930 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1          9         14          9 2022/03/22       1930 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         10          3         10 2022/03/22       2130 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com                                                                                     383638907  CALIFORNIA                                                  8      64983          1         10         12         10 2022/03/22       2130 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1         10         14         10 2022/03/22       2130 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         12          3         12 2022/03/22       1030 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com                                                                                     383638907  CALIFORNIA                                                  8      64983          1         12         12         12 2022/03/22       1030 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com                                                                                    217954856  ARANDANO                                                  864      28003          6         14          3         14 2022/03/22       1430 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com                                                                                  299217214  OSLO                                                       30      64203          8         15          8         15 2022/03/22       1630 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com                                                                                   848887557  URUGUAY                                                    11      46792          1         15         14         15 2022/03/22       1630 ZUMBA                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+13 filas seleccionadas.
+
+SQL> spool off
