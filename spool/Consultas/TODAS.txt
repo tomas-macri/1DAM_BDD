@@ -1,4 +1,4 @@
-SQL> rem 1. Todas las poblaciones de las provincias con una extensi¢n mayor que 10.000 km2.
+SQL> rem 1. Todas las poblaciones de las provincias con una extensión mayor que 10.000 km2.
 SQL> 
 SQL> select * from poblaciones where N_PROVINCIAS in (select N_PROVINCIA from provincias where EXT_PROV > 10000);
 
@@ -9,7 +9,7 @@ SQL> select * from poblaciones where N_PROVINCIAS in (select N_PROVINCIA from pr
          7 SEVILLA                                 688711        140 SEVILLA                                                                                                                                                                                                                                                                                                                                                                                                                                        
          8 UTRERA                                   52617        684 SEVILLA                                                                                                                                                                                                                                                                                                                                                                                                                                        
 
-SQL> rem 2. Todas las sedes de las de la poblaci¢n 'UTRERA'.
+SQL> rem 2. Todas las sedes de las de la población 'UTRERA'.
 SQL> 
 SQL> select * from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and NOMB_POB = 'UTRERA';
 
@@ -19,7 +19,7 @@ SQL> select * from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB an
 
 SQL> rem ESTA CONSULTA ESTµ MAL PORQUE TAMBIEN DEVUELVE LOS DATOS DE LAS POBLACIONES (ESTO SE DEBE AL SELECT *). LAS POSIBLES SOLUCIONES SEERÖAN:
 SQL> 
-SQL> rem 2.1 Todas las sedes de las de la poblaci¢n 'UTRERA'.
+SQL> rem 2.1 Todas las sedes de las de la población 'UTRERA'.
 SQL> 
 SQL> select ID_SEDE, TEL_SEDE, CALLE, NUMERO, CP, TAMANO, sedes.ID_POB from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and NOMB_POB = 'UTRERA';
 
@@ -27,7 +27,7 @@ SQL> select ID_SEDE, TEL_SEDE, CALLE, NUMERO, CP, TAMANO, sedes.ID_POB from sede
 ---------- --------- ------------------------------ ---------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                     
          6 956321546 Angel                                  60      36598         30          8                                                                                                                                                                                                                                                                                                                                                                                                                     
 
-SQL> rem 2.2 Todas las sedes de las de la poblaci¢n 'UTRERA'.
+SQL> rem 2.2 Todas las sedes de las de la población 'UTRERA'.
 SQL> 
 SQL> select sedes.* from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and NOMB_POB = 'UTRERA';
 
@@ -36,7 +36,7 @@ SQL> select sedes.* from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_
          6 956321546 Angel                                  60      36598         30          8                                                                                                                                                                                                                                                                                                                                                                                                                     
 
 SQL> 
-SQL> rem 5. La direcci¢n de las sedes de la provincia de Madrid
+SQL> rem 5. La dirección de las sedes de la provincia de Madrid
 SQL> 
 SQL> select CALLE, NUMERO, CP from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and N_PROVINCIAS = 'MADRID';
 
@@ -77,7 +77,7 @@ SQL> SELECT * FROM POBLACIONES WHERE HAB_POB < 1000000 AND N_PROVINCIAS IN (SELE
          4 MURCIA                                  447182        881 MURCIA                                                                                                                                                                                                                                                                                                                                     
 
 SQL> 
-SQL> rem 9. La poblaci¢n con menos habitantes entre las poblaciones que tengan menos de 1.000.000 de habitantes y que pertenecen a una provincia con m s de 1.000.000 de habitantes.
+SQL> rem 9. La población con menos habitantes entre las poblaciones que tengan menos de 1.000.000 de habitantes y que pertenecen a una provincia con m s de 1.000.000 de habitantes.
 SQL> 
 SQL> SELECT * FROM  POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB=(SELECT MIN(HAB_POB) FROM POBLACIONES WHERE HAB_POB < 1000000 AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > 1000000)));
 
@@ -95,7 +95,7 @@ SQL> SELECT * FROM PROVEEDORES WHERE N_PROVINCIA LIKE 'MADRID';
           1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                                                                                                                                                                                                                                                                                                 
  
 SQL>  
-SQL> rem 11. Los proveedores que hayan provisto a una sede cuyo c¢digo postal tenga 5 d¡gitos y comience por 28.
+SQL> rem 11. Los proveedores que hayan provisto a una sede cuyo código postal tenga 5 d¡gitos y comience por 28.
 SQL>   
  
 SQL> SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE CP >  27999 AND CP < 29000));
@@ -142,10 +142,10 @@ SQL> SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVE
 
 ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ                                                                                                                                                                                                                                                                                                TIPO                      LARGO      ANCHO                                                                                 
 ----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------                                                                                 
-          2          899 NordicTrack C5.5 Bicicleta El¡ptica                Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.                                                                                                                                BICICLETA                   140         60                                                                                 
+          2          899 NordicTrack C5.5 Bicicleta El¡ptica                Bicicleta eliptica que cuenta con un sistema de inclinación manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.                                                                                                                                BICICLETA                   140         60                                                                                 
 
 SQL> 
-SQL> rem 16. La informaci¢n de la poblaci¢n que tiene m s sedes
+SQL> rem 16. La información de la población que tiene m s sedes
 SQL> 
 SQL> SELECT * FROM POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM SEDES GROUP BY ID_POB HAVING ID_POB=(SELECT ID_POB FROM SEDES GROUP BY ID_POB HAVING COUNT (ID_POB) = (SELECT MAX(COUNT(ID_POB)) FROM SEDES GROUP BY ID_POB)));
 
@@ -183,7 +183,7 @@ SQL> SELECT S.* FROM SEDES S, POBLACIONES P WHERE S.ID_POB = P.ID_POB AND S.CALL
          2 945325984 Alcala                                227      28028        156          1                                                                                                                                                                                                                                                                                                                                                                                                                     
 
 SQL> 
-SQL> rem 20. Las sedes que se encuentran en la poblaci¢n m s densamente poblada (densidad = habitantes/extensi¢n)
+SQL> rem 20. Las sedes que se encuentran en la población m s densamente poblada (densidad = habitantes/extensión)
 SQL> 
 SQL> SELECT * FROM SEDES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB/EXT_POB =(SELECT MAX(HAB_POB/EXT_POB) FROM POBLACIONES));
 
@@ -192,7 +192,7 @@ SQL> SELECT * FROM SEDES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HA
          4 975643222 Valencia                              466       8013        166          5                                                                                                                                                                                                                                                                                                                                                                                                                     
 
 SQL> 
-SQL> rem 21. Las poblaciones ubicadas en una provincia con una densidad de poblaci¢n menores que la media (densidad = habitantes/extensi¢n)
+SQL> rem 21. Las poblaciones ubicadas en una provincia con una densidad de población menores que la media (densidad = habitantes/extensión)
 SQL> 
 SQL> SELECT * FROM POBLACIONES WHERE N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV/EXT_PROV IN (SELECT (HAB_PROV/EXT_PROV) FROM PROVINCIAS WHERE HAB_PROV/EXT_PROV < (SELECT AVG(HAB_PROV/EXT_PROV) FROM PROVINCIAS)));
 
@@ -206,7 +206,7 @@ SQL> SELECT * FROM POBLACIONES WHERE N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PR
 
 SQL> 
 SQL> 
-SQL> rem 22. La direcci¢n de la sede que es provista de m s productos de forma exclusiva
+SQL> rem 22. La dirección de la sede que es provista de m s productos de forma exclusiva
 SQL> 
 SQL> SELECT CALLE, NUMERO, CP FROM SEDES WHERE ID_SEDE= (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE)= (SELECT MAX(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO= 'SI' GROUP BY ID_SEDE));
 
@@ -216,7 +216,7 @@ Alcala                                227      28028
 
 SQL> 
 SQL> 
-SQL> rem 23. Los proveedores cuyo tel‚fono comience por 91
+SQL> rem 23. Los proveedores cuyo teléfono comience por 91
 SQL> 
 SQL> SELECT * FROM PROVEEDORES WHERE TEL_PROV LIKE '91%';
 
@@ -226,7 +226,7 @@ SQL> SELECT * FROM PROVEEDORES WHERE TEL_PROV LIKE '91%';
          2 Maquinas Pepe                  915346684 Callejon de la Galinda                 10      41810 SEVILLA                                                                                                                                                                                                                                                                                                                                                                                                    
 
 SQL> 
-SQL> rem 24. El accesorio con la descripci¢n m s corta
+SQL> rem 24. El accesorio con la descripción m s corta
 SQL> 
 SQL> SELECT * FROM ACCESORIOS WHERE LENGTH(DESC_PROD_ACC) = (SELECT MIN(LENGTH(DESC_PROD_ACC)) FROM ACCESORIOS);
 
