@@ -1,0 +1,51 @@
+38. Los socios de VALLOLID 
+
+select s.* from socios s, poblaciones p where s.id_pob = p.id_pob and nomb_pob = 'VALLAOLID';
+
+39. Los socios que hayan asistido a una clase de ZUMBA en el 2021 ordenados por su nombre
+
+select * from socios where n_socio in (select n_socio from asistir where id_clase in (select id_clase from clases where tipo = 'ZUMBA' AND FECHA LIKE '2021%')) ORDER BY NOMBRE;
+
+40. Los socios de VALLAOLID que hayan asistido a una clase de ZUMBA en el 2021
+
+ select * from socios where n_socio in (select n_socio from asistir where id_clase in (select id_clase from clases where tipo = 'ZUMBA' AND FECHA LIKE '2021%')) AND ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB LIKE 'VALLAOLID');
+
+41. Los datos de los profesores que dieron un número de clases de SPINNING menor que la media
+
+ SELECT * FROM PROFESORES WHERE N_PROFESOR IN (SELECT N_PROFESOR FROM DAR_SPINNING GROUP BY N_PROFESOR HAVING COUNT(N_PROFESOR) < (SELECT AVG(COUNT(N_PROFESOR)) FROM DAR_SPINNING GROUP BY N_PROFESOR));
+
+42. La fecha y hora de las clases de ZUMBA que fueron dadas por un profesor cuya licencia es menor que 660.000
+
+select fecha, hora from clases where id_clase in (select id_clase from dar_zumba where n_profesor in (select n_profesor from profesores where licencia < 660000));
+
+43. La cantidad de profesores que tienen las provincias que contienen una 'A' y el nombre de esas provincias. Ordernar de mayor a menor según por la cantidad y, si cuentan con la misma, por el nombre de la provincia.
+
+select  n_provincias, count(n_provincias) from profesores, poblaciones where profesores.id_pob = poblaciones.id_pob and n_provincias like '%A%' group by n_provincias order by count(n_provincias) desc, n_provincias desc;
+
+44. La dirección de las sedes cuyo código postal esté entre 28000 y 28999 y que sean de ARANJUEZ.
+
+ SELECT calle, numero, cp FROM SEDES where cp between 28000 and 28999 and id_pob = (select id_pob from poblaciones where nomb_pob='ARANJUEZ');
+
+45. El número de profesor, nombre y licencia de los profesores con un número de licencia menor que 650.000
+
+select n_profesor, nombre, licencia from profesores where licencia < 650000; 
+
+46.  La media de cantidad de clases de ZUMBA que se dan por cada profesor
+
+SELECT AVG(COUNT(N_PROFESOR)) FROM DAR_ZUMBA GROUP BY N_PROFESOR;
+
+47. La dirección de las sedes cuyo CP (Código Postal) esté entre 28.000 y 29.899
+
+SELECT calle, numero, cp FROM SEDES where cp between 28000 and 28999;
+
+48. Las provincias con una población mayor a 1.000.000 de habitantes ordenadas de mayor a menor
+
+ select N_PROVINCIA, hab_prov FROM PROVINCIAS WHERE HAB_PROV > 1000000 order by hab_prov desc;
+
+49. El tamaño de la sede más grande
+
+select max(tamano) from sedes;
+
+50. El Nº de profesor, el nombre, el mail y la cantidad de caracteres del mismo de los profesores de zumba
+
+select n_profesor, nombre, mail, length(mail) "largo mail" from profesores where estilo = 'ZUMBA';
