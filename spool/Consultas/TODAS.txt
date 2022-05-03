@@ -1,3 +1,6 @@
+CONSULTAS - TOMÁS MACRI - 1DAM
+
+
 SQL> rem 1. Todas las poblaciones de las provincias con una extensión mayor que 10.000 km2.
 SQL> 
 SQL> select * from poblaciones where N_PROVINCIAS in (select N_PROVINCIA from provincias where EXT_PROV > 10000);
