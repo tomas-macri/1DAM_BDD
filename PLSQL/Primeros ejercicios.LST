@@ -1,0 +1,140 @@
+SQL> SET SERVEROUTPUT ON;
+SQL> BEGIN
+  2  dbms_output.put_line('hola');
+  3  END;
+  4  /
+hola                                                                            
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 
+SQL> rem 2.- Cuenta el n?mero de filas que hay en la tabla emple, deposita el resultado en la variable v_num, y visualiza su contenido.
+SQL> 
+SQL> DECLARE
+  2  N_FILAS NUMBER;
+  3  N_FILAS := select(id_pob from poblaciones where nombre like 'ARANJUEZ':
+  4  ;
+  5  begin
+  6  dbms_output.put_line(N_FILAS);
+  7  END
+  8  ;
+  9  /
+N_FILAS := select(id_pob from poblaciones where nombre like 'ARANJUEZ':
+        *
+ERROR en línea 3:
+ORA-06550: línea 3, columna 9: 
+PLS-00103: Se ha encontrado el símbolo "=" cuando se esperaba uno de los 
+siguientes: 
+constant exception <an identifier> 
+<a double-quoted delimited-identifier> table LONG_ double ref 
+char time timestamp interval date binary national character 
+nchar 
+
+
+SQL> DECLARE
+  2  V_NUM NUMBER;
+  3  V_NUM NUMBER(2);
+  4  BEGIN
+  5  ;
+  6  SELECT COUNT(*) FROM EMPLE
+  7  INTO V_NUM
+  8  ;:;;
+  9  DWeN
+ 10  eND;
+ 11  /
+;
+*
+ERROR en línea 5:
+ORA-06550: línea 5, columna 1: 
+PLS-00103: Se ha encontrado el símbolo ";" cuando se esperaba uno de los 
+siguientes: 
+begin case declare exit for goto if loop mod null pragma 
+raise return select update while with <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> << 
+close current delete fetch lock insert open rollback 
+savepoint set sql execute commit forall merge pipe 
+El símbolo "exit" ha sido sustituido por ";" para continuar. 
+ORA-06550: línea 7, columna 1: 
+PLS-00103: Se ha encontrado el símbolo "INTO" cuando se esperaba uno de los 
+siguientes: 
+. , @ ; for <an identifier> 
+<a double-quoted delimited-identifier> group having intersect 
+minus order partition start subpartition union whe 
+
+
+SQL> DECLARE
+  2  V_NUM NUMBER;
+  3  BEGIN
+  4  SELECT COUNT(*)
+  5  INTO V_NUM
+  6  FROM EMPLE;
+  7  dbms_output.put_line(V_NUM);
+  8  END;
+  9  /
+14                                                                              
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> REM 2 BIEN
+SQL> 
+SQL> REM 3.- poner del 1 al 10 por pantalla
+SQL> 
+SQL> DECLARE
+  2  NUM NUMBER;
+  3  BEGIN
+  4  FOR NUM IN 1..10
+  5  LOOP
+  6  dbms_output.put_line (num);
+  7  END LOOP;
+  8  END;
+  9  /
+1                                                                               
+2                                                                               
+3                                                                               
+4                                                                               
+5                                                                               
+6                                                                               
+7                                                                               
+8                                                                               
+9                                                                               
+10                                                                              
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> REM 3 BIEN
+SQL> 
+SQL> DECLARE
+  2  NUM NUMBER;
+  3  BEGIN
+  4  FOR NUM IN 10..1
+  5  LOOP
+  6  dbms_output.put_line (num);
+  7  END LOOP;
+  8  END;
+  9  /
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> DECLARE
+  2  NUM NUMBER;
+  3  BEGIN
+  4  FOR NUM IN REVERSE 1..10
+  5  LOOP
+  6  dbms_output.put_line (num);
+  7  END LOOP;
+  8  END;
+  9  /
+10                                                                              
+9                                                                               
+8                                                                               
+7                                                                               
+6                                                                               
+5                                                                               
+4                                                                               
+3                                                                               
+2                                                                               
+1                                                                               
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> spool off
