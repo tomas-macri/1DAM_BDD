@@ -1,0 +1,611 @@
+SQL> 
+SQL> rem 5.- la tabla de multiplicar del 1, poniendo es resultado y el desarrollo
+SQL> 
+SQL> SET SERVEROUTPUT ON:
+SP2-0158: opción SET desconocida ":"
+SQL> SET SERVEROUTPUT ON;
+SQL> rem 5.- la tabla de multiplicar del 1, poniendo es resultado y el desarrollo
+SQL> 
+SQL> rem 5.- la tabla de multiplicar del 1, poniendo es resultado y el desarrollo
+SQL> 
+SQL> DECLARE
+  2  cont PLS_INTEGER DEFAULT 0;
+  3  BEGIN
+  4  	FOR cont 1..10
+  5  		LOOP
+  6  			dbms_output.put_line('es resultado ' || cont
+  7  		END LOOP;
+  8  END;
+  9  ;
+ 10  DQQWD
+ 11  /
+	FOR cont 1..10
+	         *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 11: 
+PLS-00103: Se ha encontrado el símbolo "1" cuando se esperaba uno de los 
+siguientes: 
+in 
+El símbolo "in" ha sido sustituido por "1" para continuar. 
+ORA-06550: línea 7, columna 3: 
+PLS-00103: Se ha encontrado el símbolo "END" cuando se esperaba uno de los 
+siguientes: 
+. ( ) , * @ % & | = - + < / > at in is mod remainder not rem 
+=> .. <an exponent (**)> <> or != or ~= >= <= <> and or like 
+LIKE2_ LIKE4_ LIKEC 
+
+
+SQL> DECLARE
+  2  	cont PLS_INTEGER DEFAULT 0;
+  3  BEGIN
+  4  	FOR cont 1..10
+  5  		LOOP
+  6  			dbms_output.put_line('es resultado ' || cont
+  7  /(
+  8  /
+	FOR cont 1..10
+	         *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 11: 
+PLS-00103: Se ha encontrado el símbolo "1" cuando se esperaba uno de los 
+siguientes: 
+in 
+El símbolo "in" ha sido sustituido por "1" para continuar. 
+ORA-06550: línea 7, columna 2: 
+PLS-00103: Se ha encontrado el símbolo "end-of-file" cuando se esperaba uno de 
+los siguientes: 
+( - + case mod new not null others <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> avg 
+count current exists  
+
+
+SQL> DECLARE
+  2  	cont PLS_INTEGER DEFAULT 0;
+  3  BEGIN
+  4  	FOR cont 1..10
+  5  		LOOP
+  6  			dbms_output.put_line('es resultado ' || cont);
+  7  		END LOOP;
+  8  END;
+  9  /
+	FOR cont 1..10
+	         *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 11: 
+PLS-00103: Se ha encontrado el símbolo "1" cuando se esperaba uno de los 
+siguientes: 
+in 
+El símbolo "in" ha sido sustituido por "1" para continuar. 
+
+
+SQL> DECLARE
+  2  	cont PLS_INTEGER DEFAULT 0;
+  3  BEGIN
+  4  	FOR cont IN 1..10
+  5  		LOOP
+  6  			dbms_output.put_line('es resultado ' || cont);
+  7  		END LOOP;
+  8  END;
+  9  /
+es resultado 1                                                                  
+es resultado 2                                                                  
+es resultado 3                                                                  
+es resultado 4                                                                  
+es resultado 5                                                                  
+es resultado 6                                                                  
+es resultado 7                                                                  
+es resultado 8                                                                  
+es resultado 9                                                                  
+es resultado 10                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> 			dbms_output.put_line('es resultado ' || 2*cont);
+SP2-0734: inicio "dbms_outpu..." de comando desconocido - resto de la línea ignorado.
+SQL> DECLARE
+  2  	cont PLS_INTEGER DEFAULT 0;
+  3  BEGIN
+  4  	FOR cont IN 1..10
+  5  		LOOP
+  6  			dbms_output.put_line('es resultado ' || 2*cont);
+  7  		END LOOP;
+  8  END;
+  9  /
+es resultado 2                                                                  
+es resultado 4                                                                  
+es resultado 6                                                                  
+es resultado 8                                                                  
+es resultado 10                                                                 
+es resultado 12                                                                 
+es resultado 14                                                                 
+es resultado 16                                                                 
+es resultado 18                                                                 
+es resultado 20                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> DECLARE
+  2  	cont PLS_INTEGER DEFAULT 0;
+  3  BEGIN
+  4  	FOR cont 1..10
+  5  		LOOP
+  6  			dbms_output.put_line('es resultado ' || 1*cont);
+  7  		END LOOP;
+  8  END;
+  9  /
+	FOR cont 1..10
+	         *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 11: 
+PLS-00103: Se ha encontrado el símbolo "1" cuando se esperaba uno de los 
+siguientes: 
+in 
+El símbolo "in" ha sido sustituido por "1" para continuar. 
+
+
+SQL> DECLARE
+  2  	cont PLS_INTEGER DEFAULT 0;
+  3  BEGIN
+  4  	FOR cont IN 1..10
+  5  		LOOP
+  6  			dbms_output.put_line('es resultado ' || 1*cont);
+  7  		END LOOP;
+  8  END;
+  9  /
+es resultado 1                                                                  
+es resultado 2                                                                  
+es resultado 3                                                                  
+es resultado 4                                                                  
+es resultado 5                                                                  
+es resultado 6                                                                  
+es resultado 7                                                                  
+es resultado 8                                                                  
+es resultado 9                                                                  
+es resultado 10                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> REM 6 6.- el ejercicio anterior son las tablas de multiplicar en cascada
+SQL> 
+SQL> DECLARE
+  2  	cont PLS_INTEGER DEFAULT 0;
+  3  BEGIN
+  4  	FOR cont IN 1..10
+  5  		LOOP
+  6  			FOR num IN 1..3
+  7  				LOOP
+  8  					dbms_output.put_line('es resultado ' || num*cont);
+  9  				END LOOP;
+ 10  		END LOOP;
+ 11  END;
+ 12  /
+es resultado 1                                                                  
+es resultado 2                                                                  
+es resultado 3                                                                  
+es resultado 2                                                                  
+es resultado 4                                                                  
+es resultado 6                                                                  
+es resultado 3                                                                  
+es resultado 6                                                                  
+es resultado 9                                                                  
+es resultado 4                                                                  
+es resultado 8                                                                  
+es resultado 12                                                                 
+es resultado 5                                                                  
+es resultado 10                                                                 
+es resultado 15                                                                 
+es resultado 6                                                                  
+es resultado 12                                                                 
+es resultado 18                                                                 
+es resultado 7                                                                  
+es resultado 14                                                                 
+es resultado 21                                                                 
+es resultado 8                                                                  
+es resultado 16                                                                 
+es resultado 24                                                                 
+es resultado 9                                                                  
+es resultado 18                                                                 
+es resultado 27                                                                 
+es resultado 10                                                                 
+es resultado 20                                                                 
+es resultado 30                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> BEGIN
+  2  	FOR tabla IN 1..10
+  3  		LOOP
+  4  			FOR num IN 1..10
+  5  				LOOP
+  6  					dbms_output.put_line( tabla || ' x ' || num || ' = '  || tabla*num);
+  7  				END LOOP;
+  8  			dbms_output.put_line();
+  9  		END LOOP;
+ 10  END;
+ 11  /
+			dbms_output.put_line();
+			*
+ERROR en línea 8:
+ORA-06550: línea 8, columna 4: 
+PLS-00306: número o tipos de argumentos erróneos al llamar a 'PUT_LINE' 
+ORA-06550: línea 8, columna 4: 
+PL/SQL: Statement ignored 
+
+
+SQL> BEGIN
+  2  	FOR cont IN 1..10
+  3  		LOOP
+  4  			FOR num IN 1..3
+  5  				LOOP
+  6  					dbms_output.put_line('es resultado ' || num*cont);
+  7  				END LOOP;
+  8  			dbms_output.put_line("");
+  9  		END LOOP;
+ 10  END;
+ 11  /
+ERROR:
+ORA-01741: identificador de longitud cero no válido 
+
+
+SQL> BEGIN
+  2  	FOR tabla IN 1..10
+  3  		LOOP
+  4  			FOR num IN 1..10
+  5  				LOOP
+  6  					dbms_output.put_line( tabla || ' x ' || num || ' = '  || tabla*num);
+  7  				END LOOP;
+  8  			dbms_output.put_line("                                ");
+  9  		END LOOP;
+ 10  END;
+ 11  /
+			dbms_output.put_line("                                ");
+			                     *
+ERROR en línea 8:
+ORA-06550: línea 8, columna 25: 
+PLS-00114: el identificador '                              ' es demasiado largo 
+
+
+SQL> BEGIN
+  2  	FOR cont IN 1..10
+  3  		LOOP
+  4  			FOR num IN 1..10
+  5  				/
+			FOR num IN 1..10
+			               *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 19: 
+PLS-00103: Se ha encontrado el símbolo "end-of-file" cuando se esperaba uno de 
+los siguientes: 
+* & - + / at loop mod remainder rem <an exponent (**)> || 
+multiset 
+
+
+SQL> BEGIN
+  2  	FOR tabla IN 1..10
+  3  		LOOP
+  4  			FOR num IN 1..10
+  5  				LOOP
+  6  					dbms_output.put_line( tabla || ' x ' || num || ' = '  || tabla*num);
+  7  				END LOOP;
+  8  			dbms_output.put_line(' ');
+  9  		END LOOP;
+ 10  END;
+ 11  /
+1 x 1 = 1                                                                       
+1 x 2 = 2                                                                       
+1 x 3 = 3                                                                       
+1 x 4 = 4                                                                       
+1 x 5 = 5                                                                       
+1 x 6 = 6                                                                       
+1 x 7 = 7                                                                       
+1 x 8 = 8                                                                       
+1 x 9 = 9                                                                       
+1 x 10 = 10                                                                     
+2 x 1 = 2                                                                       
+2 x 2 = 4                                                                       
+2 x 3 = 6                                                                       
+2 x 4 = 8                                                                       
+2 x 5 = 10                                                                      
+2 x 6 = 12                                                                      
+2 x 7 = 14                                                                      
+2 x 8 = 16                                                                      
+2 x 9 = 18                                                                      
+2 x 10 = 20                                                                     
+3 x 1 = 3                                                                       
+3 x 2 = 6                                                                       
+3 x 3 = 9                                                                       
+3 x 4 = 12                                                                      
+3 x 5 = 15                                                                      
+3 x 6 = 18                                                                      
+3 x 7 = 21                                                                      
+3 x 8 = 24                                                                      
+3 x 9 = 27                                                                      
+3 x 10 = 30                                                                     
+4 x 1 = 4                                                                       
+4 x 2 = 8                                                                       
+4 x 3 = 12                                                                      
+4 x 4 = 16                                                                      
+4 x 5 = 20                                                                      
+4 x 6 = 24                                                                      
+4 x 7 = 28                                                                      
+4 x 8 = 32                                                                      
+4 x 9 = 36                                                                      
+4 x 10 = 40                                                                     
+5 x 1 = 5                                                                       
+5 x 2 = 10                                                                      
+5 x 3 = 15                                                                      
+5 x 4 = 20                                                                      
+5 x 5 = 25                                                                      
+5 x 6 = 30                                                                      
+5 x 7 = 35                                                                      
+5 x 8 = 40                                                                      
+5 x 9 = 45                                                                      
+5 x 10 = 50                                                                     
+6 x 1 = 6                                                                       
+6 x 2 = 12                                                                      
+6 x 3 = 18                                                                      
+6 x 4 = 24                                                                      
+6 x 5 = 30                                                                      
+6 x 6 = 36                                                                      
+6 x 7 = 42                                                                      
+6 x 8 = 48                                                                      
+6 x 9 = 54                                                                      
+6 x 10 = 60                                                                     
+7 x 1 = 7                                                                       
+7 x 2 = 14                                                                      
+7 x 3 = 21                                                                      
+7 x 4 = 28                                                                      
+7 x 5 = 35                                                                      
+7 x 6 = 42                                                                      
+7 x 7 = 49                                                                      
+7 x 8 = 56                                                                      
+7 x 9 = 63                                                                      
+7 x 10 = 70                                                                     
+8 x 1 = 8                                                                       
+8 x 2 = 16                                                                      
+8 x 3 = 24                                                                      
+8 x 4 = 32                                                                      
+8 x 5 = 40                                                                      
+8 x 6 = 48                                                                      
+8 x 7 = 56                                                                      
+8 x 8 = 64                                                                      
+8 x 9 = 72                                                                      
+8 x 10 = 80                                                                     
+9 x 1 = 9                                                                       
+9 x 2 = 18                                                                      
+9 x 3 = 27                                                                      
+9 x 4 = 36                                                                      
+9 x 5 = 45                                                                      
+9 x 6 = 54                                                                      
+9 x 7 = 63                                                                      
+9 x 8 = 72                                                                      
+9 x 9 = 81                                                                      
+9 x 10 = 90                                                                     
+10 x 1 = 10                                                                     
+10 x 2 = 20                                                                     
+10 x 3 = 30                                                                     
+10 x 4 = 40                                                                     
+10 x 5 = 50                                                                     
+10 x 6 = 60                                                                     
+10 x 7 = 70                                                                     
+10 x 8 = 80                                                                     
+10 x 9 = 90                                                                     
+10 x 10 = 100                                                                   
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> rem 6 bien
+SQL> 
+SQL> 
+SQL> 7.- rem si va bien escribir? QUE EL VALOR C ES 0
+SP2-0734: inicio "7.- rem si..." de comando desconocido - resto de la línea ignorado.
+SQL> 
+SQL> rem
+SQL> 7.- rem si va bien escribir? QUE EL VALOR C ES 0
+SP2-0734: inicio "7.- rem si..." de comando desconocido - resto de la línea ignorado.
+SQL> 
+SQL> rem
+SQL> 7.- rem si va bien escribir? QUE EL VALOR C ES 0
+SP2-0734: inicio "7.- rem si..." de comando desconocido - resto de la línea ignorado.
+SQL> rem 7.- rem si va bien escribir? QUE EL VALOR C ES 0
+SQL> DECLARE
+  2  	C VARCHAR2 := 'EL VALOR C ES 0';
+  3  BEGIN
+  4  	dmbs_output.put_line (C);
+  5  END;
+  6  /
+	C VARCHAR2 := 'EL VALOR C ES 0';
+	  *
+ERROR en línea 2:
+ORA-06550: línea 2, columna 4: 
+PLS-00215: Las restricciones de longitud de cadena deben estar en el rango (1 
+.. 32767) 
+ORA-06550: línea 4, columna 2: 
+PLS-00201: el identificador 'DMBS_OUTPUT.PUT_LINE' se debe declarar 
+ORA-06550: línea 4, columna 2: 
+PL/SQL: Statement ignored 
+
+
+SQL> DECLARE
+  2  	C VARCHAR2 := 'EL VALOR C ES 0';
+  3  BEGIN
+  4  	dbms_output.put_line (C);
+  5  END;
+  6  /
+	C VARCHAR2 := 'EL VALOR C ES 0';
+	  *
+ERROR en línea 2:
+ORA-06550: línea 2, columna 4: 
+PLS-00215: Las restricciones de longitud de cadena deben estar en el rango (1 
+.. 32767) 
+
+
+SQL> DECLARE
+  2  	C VARCHAR2(27) := 'EL VALOR C ES 0';
+  3  BEGIN
+  4  	dbms_output.put_line (C);
+  5  END;
+  6  /
+EL VALOR C ES 0                                                                 
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> rem 7 bien
+SQL> 
+SQL> rem 8.- mostrar la fecha actual
+SQL> 
+SQL> BEGIN
+  2  	dbms_output.put_line (CURRENT_DATE);
+  3  END;
+  4  /
+06/05/22                                                                        
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> rem 8
+SQL> rem 8 bien
+SQL> 
+SQL> rem 9.- Crear un programa que calcule la distancia de dos puntos de un plano cartesiano (x,y).
+SQL> Dado los valores, x = (3, 2); y = (5, 8). Mostrar en pantalla la distancia de los puntos x, y.
+SP2-0734: inicio "Dado los v..." de comando desconocido - resto de la línea ignorado.
+SQL> rem9.- Crear un programa que calcule la distancia de dos puntos de un plano cartesiano (x,y).
+SQL> rem Dado los valores, x = (3, 2); y = (5, 8). Mostrar en pantalla la distancia de los puntos x, y.
+SQL> 
+SQL> 
+SQL> 
+SQL> rem 9.- Crear un programa que calcule la distancia de dos puntos de un plano cartesiano (x,y).
+SQL> rem Dado los valores, x = (3, 2); y = (5, 8). Mostrar en pantalla la distancia de los puntos x, y.
+SQL> 
+SQL> DECLARE
+  2  begin
+  3  end
+  4  &
+  5  /
+SP2-0317: falta el nombre de símbolo esperado
+end
+*
+ERROR en línea 3:
+ORA-06550: línea 3, columna 1: 
+PLS-00103: Se ha encontrado el símbolo "END" cuando se esperaba uno de los 
+siguientes: 
+begin case declare exit for goto if loop mod null pragma 
+raise return select update while with <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> << 
+close current delete fetch lock insert open rollback 
+savepoint set sql execute commit forall merge pipe 
+
+
+SQL> DECLARE
+  2  A NUMBER, B NUMBER, C NUMBER, D NUMBER;
+  3  /
+A NUMBER, B NUMBER, C NUMBER, D NUMBER;
+        *
+ERROR en línea 2:
+ORA-06550: línea 2, columna 9: 
+PLS-00103: Se ha encontrado el símbolo "," cuando se esperaba uno de los 
+siguientes: 
+:= . ( @ % ; not null range default character 
+
+
+SQL> DECLARE
+  2  A NUMBER
+  3  B NUMBER
+  4  C NUMBER
+  5  D NUMBER
+  6  /7
+  7  /
+B NUMBER
+*
+ERROR en línea 3:
+ORA-06550: línea 3, columna 1: 
+PLS-00103: Se ha encontrado el símbolo "B" cuando se esperaba uno de los 
+siguientes: 
+:= . ( @ % ; not null range default character 
+
+
+SQL> DECLARE
+  2  A NUMBER;
+  3  B NUMBER;
+  4  C NUMBER;
+  5  D NUMBER;
+  6  BEGIN
+  7  /
+BEGIN
+    *
+ERROR en línea 6:
+ORA-06550: línea 6, columna 5: 
+PLS-00103: Se ha encontrado el símbolo "end-of-file" cuando se esperaba uno de 
+los siguientes: 
+begin case declare exit for goto if loop mod null pragma 
+raise return select update while with <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> << 
+close current delete fetch lock insert open rollback 
+savepoint set sql execute commit forall merge pipe 
+
+
+SQL> rem 9.- Crear un programa que calcule la distancia de dos puntos de un plano cartesiano (x,y).
+SQL> rem Dado los valores, x = (3, 2); y = (5, 8). Mostrar en pantalla la distancia de los puntos x, y.
+SQL> 
+SQL> 
+SQL> DECLARE
+  2  X1 NUMBER := 3;
+  3  X2 NUMBER := 2;
+  4  Y1 NUMBER := 5;
+  5  Y2 NUMBER := 8;
+  6  BEGIN
+  7  	d1
+  8  /
+	d1
+	 *
+ERROR en línea 7:
+ORA-06550: línea 7, columna 3: 
+PLS-00103: Se ha encontrado el símbolo "end-of-file" cuando se esperaba uno de 
+los siguientes: 
+:= . ( @ % ; 
+
+
+SQL> DECLARE
+  2  X1 NUMBER := 3;
+  3  X2 NUMBER := 2;
+  4  Y1 NUMBER := 5;
+  5  Y2 NUMBER := 8;
+  6  D1 NUMBER;
+  7  D2 NUMBER;
+  8  BEGIN
+  9  	D1 := Y1-X1;
+ 10  	D2 := Y2-X2;
+ 11  /
+	D2 := Y2-X2;
+	           *
+ERROR en línea 10:
+ORA-06550: línea 10, columna 13: 
+PLS-00103: Se ha encontrado el símbolo "end-of-file" cuando se esperaba uno de 
+los siguientes: 
+begin case declare end exception exit for goto if loop mod 
+null pragma raise return select update while with 
+<an identifier> <a double-quoted delimited-identifier> 
+<a bind variable> << close current delete fetch lock insert 
+open rollback savepoint set sql execute commit forall merge 
+pipe 
+
+
+SQL> DECLARE
+  2  X1 NUMBER := 3;
+  3  X2 NUMBER := 2;
+  4  Y1 NUMBER := 5;
+  5  Y2 NUMBER := 8;
+  6  D1 NUMBER;
+  7  D2 NUMBER;
+  8  RESULT NUMBER;
+  9  BEGIN
+ 10  	D1 := Y1-X1;
+ 11  	D2 := Y2-X2;
+ 12  	RESULT := SQRT((D1*D1)+(D2*D2));
+ 13  	dbms_output.put_line (RESULT);
+ 14  END;
+ 15  /
+6,32455532033675866399778708886543706744                                        
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> SPOOL OFF
