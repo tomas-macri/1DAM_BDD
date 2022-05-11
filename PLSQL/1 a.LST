@@ -1,0 +1,103 @@
+SQL> 
+SQL> rem para estos ejercicios se utilizaran las tablas emple y depart
+SQL>
+SQL> 
+SQL> rem darle una comision a los trabajadores del departamento de localizado en madrid (PASAR LA COMISION POR PARAMETRO).
+SQL> 
+SQL> CREATE OR REPLACE PROCEDURE DAR_COMISION(valorComision number)
+  2  IS
+  3  BEGIN
+  4  	UPDATE EMPLE SET COMISION = valorComision WHERE DEPT_NO = (SELECT DEPT_NO FROM DEPART WHERE LOC='MADRID');
+  5  END DAR_COMISION;
+  6  /
+
+Procedimiento creado.
+
+SQL> execute DAR_COMISION(4000);
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000       4000         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7566 JIMÔNEZ    DIRECTOR         7839 02/04/81     386750       4000         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7788 GIL        ANALISTA         7566 09/11/81     390000       4000         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7839 REY        PRESIDENTE            17/11/81      50000                    10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000       4000         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000       4000         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7934 MU¥OZ      EMPLEADO         7782 23/01/82     169000                    10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+14 filas seleccionadas.
+
+SQL> rem se cancela es muy facil
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> rem 2 9. La poblaci¢n con menos habitantes entre las poblaciones que tengan menos de 1.000.000 de habitantes y que pertenecen a una provincia con m s de 1.000.000 de habitantes.
+SQL> 
+SQL> rem esto es con las tablas de FIT US
+SQL> 
+SQL> CREATE OR REPLACE PROCEDURE GET_POBLACIONES_HABITANTES(numHabitantes number)
+  2  IN
+  3  BEGIN
+  4  SELECT * FROM  POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB=(SELECT MIN(HAB_POB) FROM POBLACIONES WHERE HAB_POB < numHabitantes AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > numHabitantes)));
+  5  END;
+  6  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> SELECT * FROM  POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB=(SELECT MIN(HAB_POB) FROM POBLACIONES WHERE HAB_POB < 1000000 AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > 1000000)));
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+---------- ----------------------------------- ---------- ---------- --------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         2 ARANJUEZ                                 59833        201 MADRID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+
+SQL> SELECT * FROM  POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB=(SELECT MIN(HAB_POB) FROM POBLACIONES WHERE HAB_POB < 33 AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > 33)));
+
+ninguna fila seleccionada
+
+SQL> execute GET_POBLACIONES_HABITANTES(1000000);
+BEGIN GET_POBLACIONES_HABITANTES(1000000); END;
+
+      *
+ERROR en línea 1:
+ORA-06550: línea 1, columna 7: 
+PLS-00905: el objeto TMACRI.GET_POBLACIONES_HABITANTES no es válido 
+ORA-06550: línea 1, columna 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> CREATE OR REPLACE PROCEDURE GET_POBLACIONES_HABITANTES(numHabitantes number)
+  2  IN
+  3  BEGIN
+  4  SELECT * FROM  POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB=(SELECT MIN(HAB_POB) FROM POBLACIONES WHERE HAB_POB < numHabitantes AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > numHabitantes)));
+  5  END GET_POBLACIONES_HABITANTES;
+  6  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> CREATE OR REPLACE PROCEDURE GET_POBLACIONES_HABITANTES(numHabitantes number)
+  2  DECLARE
+  3  REM A LA MIERDA
+  4  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> DISCONNECT
+Desconectado de Oracle Database 10g Express Edition Release 10.2.0.1.0 - Production
+SQL> SPOOL OFF
