@@ -1,0 +1,120 @@
+SQL> 
+SQL> create or replace procedure funciona()
+  2  IS
+  3  BEGIN
+  4  	SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB = 'ARANJUEZ')));
+  5  END funciona;
+  6  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> execute funciona
+BEGIN funciona; END;
+
+      *
+ERROR en línea 1:
+ORA-06550: línea 1, columna 7: 
+PLS-00905: el objeto TMACRI.FUNCIONA no es válido 
+ORA-06550: línea 1, columna 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> create or replace procedure funciona()
+  2  IS
+  3  BEGIN
+  4  	SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB = 'ARANJUEZ')));
+  5  END;
+  6  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> execute funciona
+BEGIN funciona; END;
+
+      *
+ERROR en línea 1:
+ORA-06550: línea 1, columna 7: 
+PLS-00905: el objeto TMACRI.FUNCIONA no es válido 
+ORA-06550: línea 1, columna 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> tmacri@oracle > show_errors
+SP2-0734: inicio "tmacri@ora..." de comando desconocido - resto de la línea ignorado.
+SQL> select text from dba_errors where name = 'PROCEDURE' and owner = 'tmacri';
+
+ninguna fila seleccionada
+
+SQL> select text from dba_errors where owner = 'tmacri';
+
+ninguna fila seleccionada
+
+SQL> create or replace procedure funciona()
+  2  IS
+  3  BEGIN
+  4  	SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB = 'ARANJUEZ')));
+  5  END;
+  6  
+  7  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> select text from dba_errors where name = 'PROCEDURE' and owner = 'tmacri';
+
+ninguna fila seleccionada
+
+SQL> select text from dba_errors where owner = 'tmacri';
+
+ninguna fila seleccionada
+
+SQL> create or replace procedure funciona()
+  2  IS
+  3  BEGIN
+  4  BEGIN
+  5  FOR thisteam in (select FIRSTNAME,LASTNAME,SUM(PTS)  from PLAYERREGULARSEASON  where TEAM    = 'IND' group by FIRSTNAME, LASTNAME order by SUM(PTS) DESC)
+  6  
+  7  LOOP
+  8  dbms_output.put_line(thisteam.FIRSTNAME|| ' ' || thisteam.LASTNAME || ':' || thisteam.PTS);
+  9  END LOOP;
+ 10  
+ 11  END;
+ 12  IS
+ 13  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> create or replace procedure funciona()
+  2  IS
+  3  BEGIN
+  4  FOR unProv IN (SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB = 'ARANJUEZ'))))
+  5  LOOP
+  6  dbms_output.put_line(unProv.N_PROV);
+  7  END LOOP;
+  8  END;
+  9  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> execute funciona;
+BEGIN funciona; END;
+
+      *
+ERROR en línea 1:
+ORA-06550: línea 1, columna 7: 
+PLS-00905: el objeto TMACRI.FUNCIONA no es válido 
+ORA-06550: línea 1, columna 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> execute funciona();
+BEGIN funciona(); END;
+
+      *
+ERROR en línea 1:
+ORA-06550: línea 1, columna 7: 
+PLS-00905: el objeto TMACRI.FUNCIONA no es válido 
+ORA-06550: línea 1, columna 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> spool off

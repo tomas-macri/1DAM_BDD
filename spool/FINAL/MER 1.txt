@@ -10,7 +10,7 @@ rem Se desea llevar un control acerca de la provisi¢n de distintos productos a 
  
  
  CREATE TABLE PROVINCIAS (
-   N_PROVINCIA VARCHAR2(20) primary key,
+   N_PROVINCIA VARCHAR2(10) primary key,
    EXT_PROV NUMBER(5),
    HAB_PROV NUMBER(7)
    );
@@ -31,10 +31,10 @@ rem Se desea llevar un control acerca de la provisi¢n de distintos productos a 
  REM TABLA POBLACIONES
  CREATE TABLE POBLACIONES (
   ID_POB NUMBER(5) primary key,
-  NOMB_POB VARCHAR2(35),
+  NOMB_POB VARCHAR2(15),
   HAB_POB NUMBER(7),
   EXT_POB NUMBER(3),
-  N_PROVINCIAS VARCHAR2(20),
+  N_PROVINCIAS VARCHAR2(10),
   foreign key (N_PROVINCIAS) references provincias
   );
 
@@ -57,7 +57,7 @@ rem Se desea llevar un control acerca de la provisi¢n de distintos productos a 
 
  INSERT INTO POBLACIONES VALUES (8, 'UTRERA', 52617, 684, 'SEVILLA');
 
- INSERT INTO POBLACIONES VALUES (10, 'VALLAOLID', 298866, 198, 'VALLADOLID');
+ INSERT INTO POBLACIONES VALUES (10, 'VALLADOLID', 298866, 198, 'VALLADOLID');
 
  INSERT INTO POBLACIONES VALUES (0011, 'TORDESILLAS', 8858, 142, 'VALLADOLID');
 
@@ -67,7 +67,7 @@ rem Se desea llevar un control acerca de la provisi¢n de distintos productos a 
  CREATE TABLE SEDES (
   ID_SEDE NUMBER(6) primary key,
   TEL_SEDE VARCHAR2(9),
-  CALLE VARCHAR2(30),
+  CALLE VARCHAR2(10),
   NUMERO NUMBER(3),
   CP NUMBER(5),
   TAMANO NUMBER(4),
@@ -97,12 +97,12 @@ rem Se desea llevar un control acerca de la provisi¢n de distintos productos a 
 
  CREATE TABLE PROVEEDORES (
   ID_PROV NUMBER(4) primary key,
-  N_PROV VARCHAR2(30),
+  N_PROV VARCHAR2(25),
   TEL_PROV VARCHAR2(9),
   CALLE VARCHAR2(30),
   NUMERO NUMBER(3),
   CP NUMBER(5),
-  N_PROVINCIA VARCHAR2(20),
+  N_PROVINCIA VARCHAR2(10),
   foreign key (N_PROVINCIA) references provincias
   );
 
@@ -118,25 +118,25 @@ rem Se desea llevar un control acerca de la provisi¢n de distintos productos a 
  rem fin tabla proveedores
  
  REM Tabla maquinas, merchandising y accesorios
- CREATE TABLE MAQUINAS(ID_PROD_MAQ NUMBER(5) primary key, COSTE_UD_MAQ NUMBER(4), NOMB_PROD_MAQ VARCHAR2(50), DESC_PROD_MAQ VARCHAR2(300), TIPO VARCHAR2(20) CHECK (TIPO IN ('BICICLETA','CAMINADORA', 'MUSCULACION', 'POLEAS/CABLES', 'OTRO')), LARGO NUMBER(4), ANCHO NUMBER(4));
+ CREATE TABLE MAQUINAS(ID_PROD_MAQ NUMBER(5) primary key, COSTE_UD_MAQ NUMBER(4), NOMB_PROD_MAQ VARCHAR2(50), DESC_PROD_MAQ VARCHAR2(120), TIPO VARCHAR2(20) CHECK (TIPO IN ('BICICLETA','CAMINADORA', 'MUSCULACION', 'POLEAS/CABLES', 'OTRO')), LARGO NUMBER(4), ANCHO NUMBER(4));
 
- CREATE TABLE MERCHANDISING(ID_PROD_MERCH NUMBER(5) primary key, COSTE_UD_MERCH NUMBER(4), NOMB_PROD_MERCH VARCHAR2(50), DESC_PROD_MERCH VARCHAR2(300), PROPIO VARCHAR2(2) CHECK (PROPIO IN('SI','NO')));
+ CREATE TABLE MERCHANDISING(ID_PROD_MERCH NUMBER(5) primary key, COSTE_UD_MERCH NUMBER(4), NOMB_PROD_MERCH VARCHAR2(50), DESC_PROD_MERCH VARCHAR2(120), PROPIO VARCHAR2(2) CHECK (PROPIO IN('SI','NO')));
 
- CREATE TABLE ACCESORIOS (ID_PROD_ACC NUMBER(5) primary key, COSTE_UD_ACC NUMBER(4), NOMB_PROD_ACC VARCHAR2(50), DESC_PROD_ACC VARCHAR2(300), COLOR VARCHAR2(10), TIPO VARCHAR2(20) CHECK(TIPO IN('MANCUERNA','DISCO', 'MANERAL', 'COLCHONETA', 'CUERDA', 'OTRO')), PESO NUMBER(2), ALTO NUMBER(4), ANCHO NUMBER(4));
+ CREATE TABLE ACCESORIOS (ID_PROD_ACC NUMBER(5) primary key, COSTE_UD_ACC NUMBER(4), NOMB_PROD_ACC VARCHAR2(50), DESC_PROD_ACC VARCHAR2(120), COLOR VARCHAR2(10), TIPO VARCHAR2(20) CHECK(TIPO IN('MANCUERNA','DISCO', 'MANERAL', 'COLCHONETA', 'CUERDA', 'OTRO')), PESO NUMBER(2), ALTO NUMBER(4), ANCHO NUMBER(4));
 
  rem cargo maquinas
 
- INSERT INTO MAQUINAS VALUES (1, 499, 'Proform Tour de France CLC SMART Bicicleta Indoor', 'Bicicleta indoor genial que cuenta con una gran pantalla led y un asiento acolchado',  'BICICLETA', 140, 60);
+ INSERT INTO MAQUINAS VALUES (1, 499, 'Proform Tour de France CLC SMART Bicicleta Indoor', 'Bicicleta indoor genial',  'BICICLETA', 140, 60);
 
- INSERT INTO MAQUINAS VALUES (2, 899, 'NordicTrack C5.5 Bicicleta El¡ptica', 'Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.',  'BICICLETA', 140, 60);
+ INSERT INTO MAQUINAS VALUES (2, 899, 'NordicTrack C5.5 Bicicleta El¡ptica', 'Bicicleta eliptica que cuenta con un sistema de inclinaci¢n manual',  'BICICLETA', 140, 60);
 
- INSERT INTO MAQUINAS VALUES (3, 2949, 'Life Fitness G4 con Prensa de Piernas', 'LA AJUSTABILIDAD de la Life Fitness G4 y su ergonom¡a superior le permiten ejercitarse efectiva y c¢modamente. La s¢lida y elegante imagen de la eficiente GS4, unida a la gran variedad de ejercicios, le mantendr n motivado para conseguir sus metas.',  'MUSCULACION', 150, 150);
+ INSERT INTO MAQUINAS VALUES (3, 2949, 'Life Fitness G4 con Prensa de Piernas', 'LA AJUSTABILIDAD de la Life Fitness G4 y su ergonom¡a superior le permiten ejercitarse efectiva y c¢modamente.',  'MUSCULACION', 150, 150);
 
- INSERT INTO MAQUINAS VALUES (4, 699, 'NordicTrack RX 800 Remo de Aire Plegable', 'Si lo que est s buscando es un equipamiento de ejercicio s¢lido y a un precio excepcional, NordicTrack RX 800 es la opci¢n perfecta.',  'MUSCULACION', 150, 40);
+ INSERT INTO MAQUINAS VALUES (4, 699, 'NordicTrack RX 800 Remo de Aire Plegable', 'NordicTrack RX 800 es la opci¢n perfecta.',  'MUSCULACION', 150, 40);
 
- INSERT INTO MAQUINAS VALUES (5, 2499, 'Nordictrack Fusion CST Multi Polea', 'Moderna maquina que cuenta con 8 cables para entrenar cualquier parte del cuerpo.',  'POLEAS/CABLES', 150, 105);
+ INSERT INTO MAQUINAS VALUES (5, 2499, 'Nordictrack Fusion CST Multi Polea', 'Moderna maquina que cuenta con 8 cables.',  'POLEAS/CABLES', 150, 105);
 
- INSERT INTO MAQUINAS VALUES (6, 679, 'Cadenza Fitness T40 Cinta de Correr', 'Lujosa caminadora que viene con pantalla tactil y es plegable.',  'CAMINADORA', 170, 80);
+ INSERT INTO MAQUINAS VALUES (6, 679, 'Cadenza Fitness T40 Cinta de Correr', 'Lujosa caminadora.',  'CAMINADORA', 170, 80);
 
  rem fin carga maquinas
  

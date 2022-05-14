@@ -24,7 +24,7 @@
   	ID_CLASE number(6) primary key,
     	FECHA varchar2(10),
     	HORA number(4),
-    	TIPO varchar2(20) CHECK (TIPO IN('SPINNING', 'ZUMBA'))
+    	TIPO varchar2(8) CHECK (TIPO IN('SPINNING', 'ZUMBA'))
     );
 
 
@@ -177,7 +177,7 @@
     NOMBRE varchar2(20),
     APELLIDO varchar2(20),
     SEG_APELLIDO varchar2(20),
-    MAIL varchar2(100),
+    MAIL varchar2(40),
     TELEFONO varchar2(10),
     CALLE varchar2(50),
     NUMERO number(3),
@@ -228,7 +228,7 @@
           NOMBRE varchar2(20),
           APELLIDO varchar2(20),
           SEG_APELLIDO varchar2(20),
-          MAIL varchar2(100),
+          MAIL varchar2(40),
           TELEFONO varchar2(10),
           CALLE varchar2(50),
           NUMERO number(3),
