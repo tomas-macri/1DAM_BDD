@@ -4,10 +4,10 @@ SQL>
 SQL> 
 SQL> rem darle una comision a los trabajadores del departamento de localizado en madrid (PASAR LA COMISION POR PARAMETRO).
 SQL> 
-SQL> CREATE OR REPLACE PROCEDURE DAR_COMISION(valorComision number)
+SQL> CREATE OR REPLACE PROCEDURE DAR_COMISION(valorComision number, loc varchar2)
   2  IS
   3  BEGIN
-  4  	UPDATE EMPLE SET COMISION = valorComision WHERE DEPT_NO = (SELECT DEPT_NO FROM DEPART WHERE LOC='MADRID');
+  4  	UPDATE EMPLE SET COMISION = valorComision WHERE DEPT_NO = (SELECT DEPT_NO FROM DEPART WHERE LOC=loc);
   5  END DAR_COMISION;
   6  /
 

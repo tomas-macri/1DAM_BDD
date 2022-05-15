@@ -1,0 +1,353 @@
+SQL> 
+SQL> rem procedimiento 2
+SQL> 
+SQL> CREATE OR REPLACE
+  2  POCEDURE eliminar_localidad (my_loc VARCHAR2)
+  3  IS
+  4  BEGIN
+  5  DELETE FROM depart
+  6  WHERE my_loc = loc;
+POCEDURE eliminar_localidad (my_loc VARCHAR2)
+*
+ERROR en línea 2:
+ORA-00922: falta la opción o no es válida 
+
+
+SQL> CREATE OR REPLACE
+  2  POCEDURE eliminar_localidad (my_loc VARCHAR2)
+  3  IS
+  4  BEGIN
+  5  DELETE FROM depart
+  6  WHERE my_loc = loc;
+POCEDURE eliminar_localidad (my_loc VARCHAR2)
+*
+ERROR en línea 2:
+ORA-00922: falta la opción o no es válida 
+
+
+SQL> CREATE OR REPLACE
+  2  POCEDURE eliminar_localidad (my_loc VARCHAR2)
+  3  IS
+  4  BEGIN
+  5  DELETE FROM depart
+  6  WHERE my_loc = loc;
+POCEDURE eliminar_localidad (my_loc VARCHAR2)
+*
+ERROR en línea 2:
+ORA-00922: falta la opción o no es válida 
+
+
+SQL> CREATE OR REPLACE
+  2  POCEDURE eliminar_localidad (my_loc VARCHAR2)
+  3  IS
+  4  BEGIN
+  5  DELETE FROM DEPART WHERE loc = my_loc;
+POCEDURE eliminar_localidad (my_loc VARCHAR2)
+*
+ERROR en línea 2:
+ORA-00922: falta la opción o no es válida 
+
+
+SQL> CREATE OR REPLACE
+  2  PROCEDURE eliminar_localidad (my_loc VARCHAR2)
+  3  IS
+  4  BEGIN
+  5  DELETE FROM depart
+  6  WHERE my_loc = loc;
+  7  END;
+  8  /
+
+Procedimiento creado.
+
+SQL> EXECUTE eliminar_localidad ('SEVILLA');
+BEGIN eliminar_localidad ('SEVILLA'); END;
+
+*
+ERROR en línea 1:
+ORA-02292: restricción de integridad (TMACRI.SYS_C004214) violada - registro secundario encontrado 
+ORA-06512: en "TMACRI.ELIMINAR_LOCALIDAD", línea 4 
+ORA-06512: en línea 1 
+
+
+SQL> EXECUTE eliminar_localidad ('BILBAO');
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> SELECT * FROM DEPART;
+
+   DEPT_NO DNOMBRE        LOC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+---------- -------------- --------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+        10 CONTABILIDAD   SEVILLA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+        20 INVESTIGACIàN  MADRID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        30 VENTAS         BARCELONA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> 
+SQL> 
+SQL> 
+SQL> REM procedimiento 3
+SQL> 
+SQL> CREATE OR REPLACE
+  2  PROCEDURE now_with_comision (new_comision NUMBER)
+  3  IS
+  4  result NUMBER(6)
+  5  BEGIN
+  6  UPDATE emple
+  7  SET comision = new_comision
+  8  WHERE comision IS null;
+  9  END now_with_comision;
+ 10  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> CREATE OR REPLACE
+  2  PROCEDURE now_with_comision (new_comision NUMBER)
+  3  IS
+  4  result NUMBER(6);
+  5  BEGIN
+  6  UPDATE emple
+  7  SET comision = new_comision
+  8  WHERE comision IS null;
+  9  END now_with_comision;
+ 10  /
+
+Procedimiento creado.
+
+SQL> execute now_with_comision(100);
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7566 JIMNEZ    DIRECTOR         7839 02/04/81     386750        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500        100         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500        100         10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7788 GIL        ANALISTA         7566 09/11/81     390000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7839 REY        PRESIDENTE            17/11/81      50000        100         10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500        100         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7934 MU¥OZ      VENDEDOR         7782 23/01/82     169000        100         10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+14 filas seleccionadas.
+
+SQL> 
+SQL> rem simple
+SQL> BEGIN
+  2  SELECT * FROM EMPLE;
+  3  ENDm
+  4  /
+ENDm
+   *
+ERROR en línea 3:
+ORA-06550: línea 3, columna 4: 
+PLS-00103: Se ha encontrado el símbolo "end-of-file" cuando se esperaba uno de los siguientes: 
+:= . ( @ % ; 
+
+
+SQL> BEGIN
+  2  SELECT * FROM EMPLE;
+  3  END;
+  4  /
+SELECT * FROM EMPLE;
+*
+ERROR en línea 2:
+ORA-06550: línea 2, columna 1: 
+PLS-00428: se espera una cláusula INTO en esta sentencia SELECT 
+
+
+SQL> BEGIN
+  2  SELECT * INTO RESULT FROM EMPLE;
+  3  END;
+  4  /
+SELECT * INTO RESULT FROM EMPLE;
+              *
+ERROR en línea 2:
+ORA-06550: línea 2, columna 15: 
+PLS-00201: el identificador 'RESULT' se debe declarar 
+ORA-06550: línea 2, columna 22: 
+PL/SQL: ORA-00904: : identificador no válido 
+ORA-06550: línea 2, columna 1: 
+PL/SQL: SQL Statement ignored 
+
+
+SQL> DECLARE
+  2  RESULT VARCHAR2;
+  3  BEGIN
+  4  SELECT NOMBRE FROM EMPLE WHERE NOMBRE LIKE 'C%';
+  5  END;
+  6  /
+RESULT VARCHAR2;
+       *
+ERROR en línea 2:
+ORA-06550: línea 2, columna 8: 
+PLS-00215: Las restricciones de longitud de cadena deben estar en el rango (1 .. 32767) 
+ORA-06550: línea 4, columna 32: 
+PL/SQL: ORA-00904: "NOMBRE": identificador no válido 
+ORA-06550: línea 4, columna 1: 
+PL/SQL: SQL Statement ignored 
+
+
+SQL> DECLARE
+  2  RESULT VARCHAR2;
+  3  BEGIN
+  4  SELECT NOMBRE INTO RESULT FROM EMPLE WHERE NOMBRE LIKE 'C%';
+  5  END;
+  6  /
+RESULT VARCHAR2;
+       *
+ERROR en línea 2:
+ORA-06550: línea 2, columna 8: 
+PLS-00215: Las restricciones de longitud de cadena deben estar en el rango (1 .. 32767) 
+ORA-06550: línea 4, columna 44: 
+PL/SQL: ORA-00904: "NOMBRE": identificador no válido 
+ORA-06550: línea 4, columna 1: 
+PL/SQL: SQL Statement ignored 
+
+
+SQL> DECLARE
+  2  RESULT VARCHAR2;
+  3  BEGIN
+  4  SELECT NOMBRE FROM EMPLE WHERE NOMBRE LIKE 'C%';
+  5  /
+SELECT NOMBRE FROM EMPLE WHERE NOMBRE LIKE 'C%';
+                                               *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 48: 
+PLS-00103: Se ha encontrado el símbolo "end-of-file" cuando se esperaba uno de los siguientes: 
+begin case declare end exception exit for goto if loop mod 
+null pragma raise return select update while with 
+<an identifier> <a double-quoted delimited-identifier> 
+<a bind variable> << close current delete fetch lock insert 
+open rollback savepoint set sql execute commit forall merge 
+pipe 
+
+
+SQL> DECLARE
+  2  RESULT VARCHAR2(20);
+  3  BEGIN
+  4  SELECT NOMBRE FROM EMPLE WHERE NOMBRE LIKE 'C%';
+  5  /
+SELECT NOMBRE FROM EMPLE WHERE NOMBRE LIKE 'C%';
+                                               *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 48: 
+PLS-00103: Se ha encontrado el símbolo "end-of-file" cuando se esperaba uno de los siguientes: 
+begin case declare end exception exit for goto if loop mod 
+null pragma raise return select update while with 
+<an identifier> <a double-quoted delimited-identifier> 
+<a bind variable> << close current delete fetch lock insert 
+open rollback savepoint set sql execute commit forall merge 
+pipe 
+
+
+SQL> DECLARE
+  2  RESULT VARCHAR2(20);
+  3  BEGIN
+  4  SELECT NOMBRE FROM EMPLE WHERE NOMBRE LIKE 'C%';
+  5  END;
+  6  /
+SELECT NOMBRE FROM EMPLE WHERE NOMBRE LIKE 'C%';
+                               *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 32: 
+PL/SQL: ORA-00904: "NOMBRE": identificador no válido 
+ORA-06550: línea 4, columna 1: 
+PL/SQL: SQL Statement ignored 
+
+
+SQL> DECLARE
+  2  RESULT VARCHAR2(20);
+  3  BEGIN
+  4  SELECT NOMBRE FROM EMPLE WHERE APELLIDO LIKE 'C%';
+  5  END;
+  6  /
+SELECT NOMBRE FROM EMPLE WHERE APELLIDO LIKE 'C%';
+       *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 8: 
+PL/SQL: ORA-00904: "NOMBRE": identificador no válido 
+ORA-06550: línea 4, columna 1: 
+PL/SQL: SQL Statement ignored 
+
+
+SQL> DECLARE
+  2  RESULT VARCHAR2(20);
+  3  BEGIN
+  4  SELECT APELLIDO FROM EMPLE WHERE APELLIDO LIKE 'C%';
+  5  END;
+  6  /
+SELECT APELLIDO FROM EMPLE WHERE APELLIDO LIKE 'C%';
+*
+ERROR en línea 4:
+ORA-06550: línea 4, columna 1: 
+PLS-00428: se espera una cláusula INTO en esta sentencia SELECT 
+
+
+SQL> DECLARE
+  2  RESULT VARCHAR2(20);
+  3  BEGIN
+  4  SELECT APELLIDO INTO RESULT FROM EMPLE WHERE APELLIDO LIKE 'C%';
+  5  END;
+  6  /
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> DECLARE
+  2  RESULT VARCHAR2(20);
+  3  BEGIN
+  4  dbms_output.put_line((SELECT NOMBRE FROM EMPLE WHERE APELLIDO LIKE 'C%';))
+  5  end;
+  6  /
+dbms_output.put_line((SELECT NOMBRE FROM EMPLE WHERE APELLIDO LIKE 'C%';))
+                      *
+ERROR en línea 4:
+ORA-06550: línea 4, columna 23: 
+PLS-00103: Se ha encontrado el símbolo "SELECT" cuando se esperaba uno de los siguientes: 
+( - + case mod new not null others <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> avg 
+count current exists max min prior sql stddev sum variance 
+execute forall merge time timestamp interval date 
+<a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an 
+ORA-06550: línea 4, columna 73: 
+PLS-00103: Se ha encontrado el símbolo ")"  
+
+
+SQL> BEGIN
+  2  DELETE FROM emple
+  3  WHERE APELLIDO = 'ARROYO';
+  4  END;
+  5  /
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> SELECT * FROM EMPLE;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7566 JIMNEZ    DIRECTOR         7839 02/04/81     386750        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500        100         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500        100         10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7788 GIL        ANALISTA         7566 09/11/81     390000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7839 REY        PRESIDENTE            17/11/81      50000        100         10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500        100         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7934 MU¥OZ      VENDEDOR         7782 23/01/82     169000        100         10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+13 filas seleccionadas.
+
+SQL> SPOOL OFF

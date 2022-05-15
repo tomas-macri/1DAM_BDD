@@ -1,0 +1,84 @@
+SQL> 
+SQL> rem 4. creamos una funcion que nos devuelva el empleado con mayor comision
+SQL> CREATE OR REPLACE FUNCTION APELLIDO_MAYOR_COMISION
+  2  RETURN VARCHAR2
+  3  IS
+  4  	resultado varchar2(20);
+  5  BEGIN
+  6  	SELECT APELLIDO INTO resultado FROM EMPLE WHERE COMISION = (SELECT MAX(COMISION) FROM EMPLE);
+  7  	RETURN(resultado);
+  8  END;
+  9  /
+
+Función creada.
+
+SQL> SELECT * FROM EMPLE WHERE APELLIDO = APELLIDO_MAYOR_COMISION;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+SQL> 
+SQL> rem 5. ­Bienvenido! Insertamos un nuevo empleado en nuestra tabla
+SQL> 
+SQL> BEGIN
+  2  INSERT INTO EMPLE VALUES(8080, 'MESSI', 7698, '15/05/2022', 100000, 80000, 40);
+  3  END;
+  4  /
+INSERT INTO EMPLE VALUES(8080, 'MESSI', 7698, '15/05/2022', 100000, 80000, 40);
+            *
+ERROR en línea 2:
+ORA-06550: línea 2, columna 13: 
+PL/SQL: ORA-00947: no hay suficientes valores 
+ORA-06550: línea 2, columna 1: 
+PL/SQL: SQL Statement ignored 
+
+
+SQL> BEGIN
+  2  INSERT INTO EMPLE VALUES(8080, 'MESSI', 'VENDEDOR', 7698, '15/05/2022', 100000, 80000, 40);
+  3  END;
+  4  /
+BEGIN
+*
+ERROR en línea 1:
+ORA-02291: restricción de integridad (TMACRI.SYS_C004214) violada - clave principal no encontrada 
+ORA-06512: en línea 2 
+
+
+SQL> BEGIN
+  2  INSERT INTO EMPLE VALUES(8000, 'MESSI', 'VENDEDOR', 7698, '15/05/2022', 100000, 80000, 30);
+  3  END;
+  4  /
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> SELECT * FROM EMPLE;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7566 JIMNEZ    DIRECTOR         7839 02/04/81     386750        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500        100         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500        100         10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7788 GIL        ANALISTA         7566 09/11/81     390000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7839 REY        PRESIDENTE            17/11/81      50000        100         10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500        100         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000        100         20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      7934 MU¥OZ      VENDEDOR         7782 23/01/82     169000        100         10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      8000 MESSI      VENDEDOR         7698 15/05/22     100000      80000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+14 filas seleccionadas.
+
+SQL> SELECT * FROM DEPART;
+
+   DEPT_NO DNOMBRE        LOC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+---------- -------------- --------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+        10 CONTABILIDAD   SEVILLA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+        20 INVESTIGACIàN  MADRID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        30 VENTAS         BARCELONA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> SPOOL OFF

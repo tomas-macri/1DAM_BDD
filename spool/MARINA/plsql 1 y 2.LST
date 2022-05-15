@@ -1,0 +1,262 @@
+SQL> 
+SQL> 
+SQL> CREATE TABLE DEPART (
+  2   DEPT_NO  NUMBER(2) primary key,
+  3   DNOMBRE  VARCHAR2(14),
+  4   LOC      VARCHAR2(14) ) ;
+
+Tabla creada.
+
+SQL> 
+SQL> INSERT INTO DEPART VALUES (10,'CONTABILIDAD','SEVILLA');
+
+1 fila creada.
+
+SQL> INSERT INTO DEPART VALUES (20,'INVESTIGACIàN','MADRID');
+
+1 fila creada.
+
+SQL> INSERT INTO DEPART VALUES (30,'VENTAS','BARCELONA');
+
+1 fila creada.
+
+SQL> INSERT INTO DEPART VALUES (40,'PRODUCCIàN','BILBAO');
+
+1 fila creada.
+
+SQL> INSERT INTO DEPART VALUES (50,'otros',null)
+  2  
+SQL> CREATE TABLE EMPLE (
+  2   EMP_NO    NUMBER(4) primary key,
+  3   APELLIDO  VARCHAR2(10)  ,
+  4   OFICIO    VARCHAR2(10)  ,
+  5   DIR       NUMBER(4) ,
+  6   FECHA_ALT DATE      ,
+  7   SALARIO   NUMBER(10),
+  8   COMISION  NUMBER(10),
+  9   DEPT_NO  NUMBER(2),
+ 10   foreign key (DEPT_NO) references depart);
+
+Tabla creada.
+
+SQL> 
+SQL> INSERT INTO EMPLE VALUES (7369,'SµNCHEZ','EMPLEADO',7902,'17/12/1980',104000,NULL,20);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7499,'ARROYO','VENDEDOR',7698,'20/02/1980',208000,39000,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7521,'SALA','VENDEDOR',7698,'22/02/1981',162500,65000,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7566,'JIMNEZ','DIRECTOR',7839,'02/04/1981',386750,NULL,20);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7654,'MARTÖN','VENDEDOR',7698,'29/09/1981',162500,182000,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7698,'NEGRO','DIRECTOR',7839,'01/05/1981',370500,NULL,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7782,'CEREZO','DIRECTOR',7839,'09/06/1981',318500,NULL,10);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7788,'GIL','ANALISTA',7566,'09/11/1981',390000,NULL,20);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7839,'REY','PRESIDENTE',NULL,'17/11/1981',50000,NULL,10);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7844,'TOVAR','VENDEDOR',7698,'08/09/1981',195000,0,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7876,'ALONSO','EMPLEADO',7788,'23/09/1981',143000,NULL,20);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7900,'JIMENO','EMPLEADO',7698,'03/12/1981',123500,NULL,30);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7902,'FERNµNDEZ','ANALISTA',7566,'03/12/1981',390000,NULL,20);
+
+1 fila creada.
+
+SQL> INSERT INTO EMPLE VALUES (7934,'MU¥OZ','EMPLEADO',7782,'23/01/1982',169000,NULL,10);
+
+1 fila creada.
+
+SQL> 
+SQL> rem consulta funcion
+SQL> 
+SQL> CREATE OR REPLACE
+  2  FUNCTION fn_nombre_empleados
+  3  RETURN varchar2
+  4  IS
+  5  	result varchar2(20);
+  6  BEGIN
+  7  	SELECT apellido, oficio INTO result
+  8  	FROM emple
+  9  	WHERE apellido LIKE 'C%';
+ 10  	return(result);
+ 11  END;
+ 12  /
+
+Advertencia: Función creada con errores de compilación.
+
+SQL> sgie rttots
+SP2-0734: inicio "sgie rttot..." de comando desconocido - resto de la línea ignorado.
+SQL> show errors
+Errores para FUNCTION FN_NOMBRE_EMPLEADOS:
+
+LINE/COL ERROR                                                                  
+-------- -----------------------------------------------------------------      
+6/2      PL/SQL: SQL Statement ignored                                          
+7/2      PL/SQL: ORA-00947: no hay suficientes valores                          
+SQL> CREATE OR REPLACE
+  2  FUNCTION fn_nombre_empleados
+  3  RETURN varchar2
+  4  IS
+  5  	result varchar2(20);
+  6  BEGIN
+  7  	SELECT apellido INTO result
+  8  	FROM emple
+  9  	WHERE apellido LIKE 'C%';
+ 10  	return(result);
+ 11  END;
+ 12  /
+
+Función creada.
+
+SQL> select * from emple where apellido in fn_nombre_empleados;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION      
+---------- ---------- ---------- ---------- -------- ---------- ----------      
+   DEPT_NO                                                                      
+----------                                                                      
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                 
+        10                                                                      
+                                                                                
+
+SQL> set linesize 800
+SQL> set pagesize 800
+SQL> select * from emple where apellido in fn_nombre_empleados;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+SQL> 
+SQL> 
+SQL> 
+SQL> rem 1 prodecure
+SQL> 
+SQL> CREATE OR REPLACE
+  2  PROCEDURE nuevo_nombre_empleo (my_emp_no NUMBER, new_oficio VARCHAR2)
+  3  IS
+  4  	result varchar2(20);
+  5  BEGIN
+  6  	UPDATE emp_no
+  7  	SET oficio = new_oficio
+  8  	WHERE my_emp_no = emp_no
+  9  END nuevo_nombre_empleo;
+ 10  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> show errors
+Errores para PROCEDURE NUEVO_NOMBRE_EMPLEO:
+
+LINE/COL ERROR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+-------- -----------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+5/2      PL/SQL: SQL Statement ignored                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+7/27     PL/SQL: ORA-00933: comando SQL no terminado correctamente                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+8/24     PLS-00103: Se ha encontrado el símbolo "end-of-file" cuando se                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+         esperaba uno de los siguientes:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+         begin case declare end exception exit for goto if loop mod                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+         null pragma raise return select update while with                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+         <an identifier> <a double-quoted delimited-identifier>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+         <a bind variable> << close current delete fetch lock insert                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+         open rollback savepoint set sql execute commit forall merge                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+         pipe                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SQL> CREATE OR REPLACE
+  2  PROCEDURE nuevo_nombre_empleo (my_emp_no NUMBER, new_oficio VARCHAR2)
+  3  IS
+  4  	result varchar2(20);
+  5  BEGIN
+  6  	UPDATE emp_no
+  7  	SET oficio = new_oficio
+  8  	WHERE my_emp_no = emp_no;
+  9  END nuevo_nombre_empleo;
+ 10  /
+
+Advertencia: Procedimiento creado con errores de compilación.
+
+SQL> show errors
+Errores para PROCEDURE NUEVO_NOMBRE_EMPLEO:
+
+LINE/COL ERROR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+-------- -----------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+5/2      PL/SQL: SQL Statement ignored                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+5/9      PL/SQL: ORA-00942: la tabla o vista no existe                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+SQL> CREATE OR REPLACE
+  2  PROCEDURE nuevo_nombre_empleo (my_emp_no NUMBER, new_oficio VARCHAR2)
+  3  IS
+  4  	result varchar2(20);
+  5  BEGIN
+  6  	UPDATE emple
+  7  	SET oficio = new_oficio
+  8  	WHERE my_emp_no = emp_no;
+  9  END nuevo_nombre_empleo;
+ 10  /
+
+Procedimiento creado.
+
+SQL> execute nuevo_nombre_empleo;
+BEGIN nuevo_nombre_empleo; END;
+
+      *
+ERROR en línea 1:
+ORA-06550: línea 1, columna 7: 
+PLS-00306: número o tipos de argumentos erróneos al llamar a 'NUEVO_NOMBRE_EMPLEO' 
+ORA-06550: línea 1, columna 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> execute nuevo_nombre_empleo (7934, 'VENDEDOR');
+
+Procedimiento PL/SQL terminado correctamente.
+
+SQL> select * from emple;
+
+    EMP_NO APELLIDO   OFICIO            DIR FECHA_AL    SALARIO   COMISION    DEPT_NO                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+---------- ---------- ---------- ---------- -------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7369 SµNCHEZ    EMPLEADO         7902 17/12/80     104000                    20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7499 ARROYO     VENDEDOR         7698 20/02/80     208000      39000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7521 SALA       VENDEDOR         7698 22/02/81     162500      65000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7566 JIMNEZ    DIRECTOR         7839 02/04/81     386750                    20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7654 MARTÖN     VENDEDOR         7698 29/09/81     162500     182000         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7698 NEGRO      DIRECTOR         7839 01/05/81     370500                    30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7782 CEREZO     DIRECTOR         7839 09/06/81     318500                    10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7788 GIL        ANALISTA         7566 09/11/81     390000                    20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7839 REY        PRESIDENTE            17/11/81      50000                    10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7844 TOVAR      VENDEDOR         7698 08/09/81     195000          0         30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7876 ALONSO     EMPLEADO         7788 23/09/81     143000                    20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7900 JIMENO     EMPLEADO         7698 03/12/81     123500                    30                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7902 FERNµNDEZ  ANALISTA         7566 03/12/81     390000                    20                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      7934 MU¥OZ      VENDEDOR         7782 23/01/82     169000                    10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+14 filas seleccionadas.
+
+SQL> spool off
