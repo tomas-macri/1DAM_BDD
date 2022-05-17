@@ -1,0 +1,941 @@
+Marina Vega Ortega - 1DAM
+SQL> REM 1 - ID DE LOS PROFESORES QUE DAN ZUMBA EN LA SALA 3
+SQL> 
+SQL> SELECT DISTINCT N_PROFESOR FROM PROFESORES, CLASES, DARSE WHERE DARSE.N_SALA=3 AND DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=PROFESORES.ESTILO;
+
+N_PROFESOR 
+---------- 
+         1 
+         6 
+        11 
+         2 
+         4 
+         5 
+         8 
+         3 
+         7 
+         9 
+        10 
+        12 
+
+12 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 2 - CORREO ELECTRONICO DE LOS SOCIOS QUE ASISTEN A LA CLASE 1
+SQL> 
+SQL> SELECT SOCIOS.MAIL FROM SOCIOS, ASISTIR WHERE ID_CLASE=1 AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO;
+
+MAIL       
+----------------------------------------------------------------------------------------------------
+afernandez@yahoo.com                          
+aortega@yahoo.com  
+onovillo@yahoo.com 
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 3 - ID DE POBLACION DE LOS PROFESORES DE ZUMBA QUE IMPARTEN CLASE EN EL AULA 5
+SQL> SELECT ID_POB FROM PROFESORES, DAR_ZUMBA WHERE DAR_ZUMBA.N_PROFESOR=PROFESORES.N_PROFESOR AND DAR_ZUMBA.ID_CLASE=5;
+
+    ID_POB 
+---------- 
+         1 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 4 - TAMANO DE LAS CLASES EN LAS QUE SE DA ZUMBA
+SQL> 
+SQL> SELECT TAMANO FROM SALAS, DARSE, CLASES WHERE SALAS.N_SALA=DARSE.N_SALA AND DARSE.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO='ZUMBA';
+
+    TAMANO 
+---------- 
+        64 
+        82 
+        64 
+       150 
+        52 
+       100 
+        50 
+        50 
+        82 
+       100 
+        64 
+        82 
+        50 
+       204 
+        20 
+        50 
+        20 
+
+17 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 5 - ID DE SALAS QUE SE USARON EN ABRIL, DOS POSIBLES SOLUCIONES:
+SQL> 
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE AND FECHA LIKE '____/04/__';
+
+    N_SALA 
+---------- 
+         3 
+         9 
+         1 
+         3 
+         6 
+         4 
+         7 
+         7 
+         2 
+         4 
+        10 
+         3 
+         5 
+         4 
+         9 
+
+15 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 6 - ID DE SALAS QUE SE USARON EN ABRIL, SEGUNDA SOLUCIàN:
+SQL> 
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE DARSE.ID_CLASE=CLASES.ID_CLASE AND FECHA LIKE '%/04/%';
+
+    N_SALA 
+---------- 
+         3 
+         9 
+         1 
+         3 
+         6 
+         4 
+         7 
+         7 
+         2 
+         4 
+        10 
+         3 
+         5 
+         4 
+         9 
+
+15 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 7 - TELEFONO DE LOS SOCIOS QUE HAN ASISTIDO A LAS CLASES DE ZUMBA EN MAYO
+SQL> 
+SQL> SELECT SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, CLASES WHERE SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.FECHA LIKE '____/05/__';
+
+TELEFONO   
+---------- 
+646503181  
+360462957  
+355745640  
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 8 - CORREO DE SOCIOS QUE ASISTIERON A CLASES A LAS 1830
+SQL> 
+SQL> SELECT SOCIOS.MAIL FROM SOCIOS, ASISTIR, CLASES WHERE ASISTIR.ID_CLASE=CLASES.ID_CLASE AND SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND HORA=1830;
+
+MAIL       
+----------------------------------------------------------------------------------------------------
+tvega@gmail.com
+amartinez@gmail.com
+aortega@yahoo.com  
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 9 - SALAS UTILIZADAS A LAS 1130 EN ABRIL
+SQL> 
+SQL> SELECT N_SALA FROM DARSE, CLASES WHERE CLASES.ID_CLASE=DARSE.ID_CLASE AND CLASES.HORA=1130 AND CLASES.FECHA LIKE '%/04%';
+
+    N_SALA 
+---------- 
+         9 
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 10 - INFORMACION DE SOCIOS CUYO NOMBRE EMPIEZA POR "M", QUE ASISTIERON A ZUMBA EN MARZO
+SQL> 
+SQL> SELECT * FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND CLASES.FECHA LIKE '%/03/%' AND SOCIOS.NOMBRE LIKE 'M%';
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                TELEFONO   CALLE                       NUMERO         CP     ID_POB   ID_CLASE    N_SOCIO   ID_CLASE FECHA            HORA TIPO  
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- --------------------             
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1          6         14          6 2022/03/22       1330 ZUMBA 
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1          7         14          7 2022/03/22       1530 ZUMBA 
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com   217954856  ARANDANO                       864      28003          6          9          3          9 2022/03/22       1930 ZUMBA 
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com 299217214  OSLO 30      64203          8          9          8          9 2022/03/22       1930 ZUMBA 
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1          9         14          9 2022/03/22       1930 ZUMBA 
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com   217954856  ARANDANO                       864      28003          6         10          3         10 2022/03/22       2130 ZUMBA 
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com    383638907  CALIFORNIA                       8      64983          1         10         12         10 2022/03/22       2130 ZUMBA 
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1         10         14         10 2022/03/22       2130 ZUMBA 
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com   217954856  ARANDANO                       864      28003          6         12          3         12 2022/03/22       1030 ZUMBA 
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com    383638907  CALIFORNIA                       8      64983          1         12         12         12 2022/03/22       1030 ZUMBA 
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com   217954856  ARANDANO                       864      28003          6         14          3         14 2022/03/22       1430 ZUMBA 
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com 299217214  OSLO 30      64203          8         15          8         15 2022/03/22       1630 ZUMBA 
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1         15         14         15 2022/03/22       1630 ZUMBA 
+
+13 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 11 - ESTA CONSULTA ANTERIOR SACARIA LOS RESULTADOS DE TODAS LAS TABLAS QUE SE USAN EN LA BUSQUEDA, PORQUE SE USA EL COMANDO *, UNA POSIBLE SOLUCION SERIA:
+SQL> 
+SQL> SELECT SOCIOS.* FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND CLASES.FECHA LIKE '%/03/%' AND SOCIOS.NOMBRE LIKE 'M%';
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                TELEFONO   CALLE                       NUMERO         CP     ID_POB        
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ----------        
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1        
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1        
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com   217954856  ARANDANO                       864      28003          6        
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com 299217214  OSLO 30      64203          8        
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1        
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com   217954856  ARANDANO                       864      28003          6        
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com    383638907  CALIFORNIA                       8      64983          1        
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1        
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com   217954856  ARANDANO                       864      28003          6        
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com    383638907  CALIFORNIA                       8      64983          1        
+         3 43082463T MARTA                SERRAT               SABINA               mserrat@gmail.com   217954856  ARANDANO                       864      28003          6        
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com 299217214  OSLO 30      64203          8        
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1        
+
+13 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 12 - OTRA POSIBLE SOLUCION:
+SQL> 
+SQL> SELECT CLASES.ID_CLASE, CLASES.FECHA, CLASES.HORA, CLASES.TIPO FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND CLASES.FECHA LIKE '%/03/%' AND SOCIOS.NOMBRE LIKE 'M%';
+
+  ID_CLASE FECHA            HORA TIPO         
+---------- ---------- ---------- --------------------                    
+         6 2022/03/22       1330 ZUMBA        
+         7 2022/03/22       1530 ZUMBA        
+         9 2022/03/22       1930 ZUMBA        
+         9 2022/03/22       1930 ZUMBA        
+         9 2022/03/22       1930 ZUMBA        
+        10 2022/03/22       2130 ZUMBA        
+        10 2022/03/22       2130 ZUMBA        
+        10 2022/03/22       2130 ZUMBA        
+        12 2022/03/22       1030 ZUMBA        
+        12 2022/03/22       1030 ZUMBA        
+        14 2022/03/22       1430 ZUMBA        
+        15 2022/03/22       1630 ZUMBA        
+        15 2022/03/22       1630 ZUMBA        
+
+13 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 13 - NOMBRE COMPLETO DE TODOS LOS PROFESORES QUE HAN DADO ZUMBA POR LA MANANA
+SQL> 
+SQL> SELECT DISTINCT PROFESORES.NOMBRE, PROFESORES.APELLIDO, PROFESORES.SEG_APELLIDO FROM PROFESORES, DAR_ZUMBA, CLASES WHERE CLASES.HORA>800 AND CLASES.HORA<1400 AND PROFESORES.N_PROFESOR=DAR_ZUMBA.N_PROFESOR AND DAR_ZUMBA.ID_CLASE=CLASES.ID_CLASE;
+
+NOMBRE               APELLIDO             SEG_APELLIDO                   
+-------------------- -------------------- --------------------           
+MANUEL               GALLEGO              HERRERA                        
+SERGIO               NAVAS                    
+MARIA                OSUNA                GALISTEO                       
+LUCIA                ALVAR                ORTEGA                         
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 14 - LOS NOMBRES Y TELEFONOS DE LOS SOCIOS QUE HAN ASISTIDO A CLASES DE MARIA
+SQL> 
+SQL> SELECT DISTINCT SOCIOS.NOMBRE, SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, CLASES, PROFESORES WHERE SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=PROFESORES.ESTILO AND PROFESORES.NOMBRE='MARIA';
+
+NOMBRE               TELEFONO                 
+-------------------- ----------               
+ALFONSO              360462957                
+OSCAR                355745640                
+ALBERTO              646503181                
+CARLOS               364814653                
+SUSANA               821403819                
+MERCEDES             848887557                
+TOMAS                660046009                
+JUAN                 227652163                
+MARTA                217954856                
+CARLA                793324108                
+MONICA               299217214                
+JOSE LUIS            595711088                
+ALEXA                347186593                
+ENRIQUE              514378378                
+PAULA                604826822                
+MADELEINE            383638907                
+
+16 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 15 - LOS NOMBRES DE LOS SOCIOS QUE MAS ASISTIERON A CLASES DE MARIA
+SQL> 
+SQL> SELECT SOCIOS.NOMBRE, COUNT(SOCIOS.NOMBRE) FROM SOCIOS, ASISTIR, CLASES, PROFESORES WHERE SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=PROFESORES.ESTILO AND PROFESORES.NOMBRE='MARIA' GROUP BY SOCIOS.NOMBRE HAVING COUNT(SOCIOS.NOMBRE)=(SELECT MAX(COUNT(SOCIOS.NOMBRE)) FROM SOCIOS, ASISTIR, CLASES, PROFESORES WHERE SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO=PROFESORES.ESTILO AND PROFESORES.NOMBRE='MARIA' GROUP BY SOCIOS.NOMBRE);
+
+NOMBRE               COUNT(SOCIOS.NOMBRE)     
+-------------------- --------------------     
+ALFONSO      7     
+ALEXA        7     
+CARLA        7     
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 16 - TELEFONO Y NOMBRE COMPLETO DE TODOS LOS PROFESORES QUE DAN SPINNING EN LA SALA 5
+SQL> 
+SQL> SELECT PROFESORES.TELEFONO, PROFESORES.NOMBRE, PROFESORES.APELLIDO, PROFESORES.SEG_APELLIDO FROM DAR_SPINNING, DARSE, PROFESORES WHERE DARSE.N_SALA=5 AND DARSE.ID_CLASE=DAR_SPINNING.ID_CLASE AND DAR_SPINNING.N_PROFESOR=PROFESORES.N_PROFESOR;
+
+TELEFONO   NOMBRE               APELLIDO             SEG_APELLIDO        
+---------- -------------------- -------------------- --------------------
+649349364  ROCIO                MOSQUERA             HERRERO             
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 17 - TODOS LOS CORREOS, TELEFONOS Y NOMBRES COMPLETOS DE AQUELLOS QUE TENGAN GMAIL (POR UN ERROR EN EL SISTEMA)
+SQL> 
+SQL> SELECT NOMBRE, APELLIDO, SEG_APELLIDO, MAIL FROM SOCIOS WHERE MAIL LIKE '%@gmail%' UNION ALL SELECT NOMBRE, APELLIDO, SEG_APELLIDO, MAIL FROM PROFESORES WHERE MAIL LIKE '%@gmail%';
+
+NOMBRE               APELLIDO             SEG_APELLIDO         MAIL      
+-------------------- -------------------- -------------------- ----------------------------------------------------------------------------------------------------                
+TOMAS                VEGA                 ORTEGA               tvega@gmail.com                      
+CARLOS               DA VINCI             PAVAROTTI            cdavinci@gmail.com                   
+MARTA                SERRAT               SABINA               mserrat@gmail.com                    
+CARLA                MESSI                RONALDO              cmessi@gmail.com                     
+ALEXA                MARTINEZ             ORTEGA               amartinez@gmail.com                  
+PAULA                EDERY          pedery@gmail.com                     
+JUAN                 GARRIDO        jgarrido@gmail.com                   
+DANIEL               NAVARRO              MONTERO              dnavarro@gmail.com                   
+MARINA               DIAZ                 HERNANDO             mdiazhernando@gmail.com              
+ANGELA               OLIVA                JIMIENEZ             aoliva@gmail.com                     
+HELENA               ROMAN                PULIDO               hroman@gmail.com                     
+ROCIO                MOSQUERA             HERRERO              rmosquera@gmail.com                  
+ELENA                MONTOYA              VILLEGAS             emontoya@gmail.com                   
+MARIA                OSUNA                GALISTEO             mosuna@gmail.com                     
+SERGIO               NAVAS          snavas@gmail.com                     
+MANUEL               GALLEGO              HERRERA              mgallego@gmail.com                   
+ALEJANDRO            ALONSO               ORIHUELA             aalonso@gmail.com                    
+JULIA                MARTINEZ             ATIENZA              jatienza@gmail.com                   
+LUCIA                ALVAR                ORTEGA               lalvar@gmail.com                     
+
+19 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 18 - TODOS LOS SOCIOS QUE ASISTAN A ZUMBA DE LA POBLACION 2
+SQL> 
+SQL> SELECT DISTINCT SOCIOS.* FROM SOCIOS, ASISTIR, CLASES WHERE SOCIOS.N_SOCIO=ASISTIR.N_SOCIO AND ASISTIR.ID_CLASE=CLASES.ID_CLASE AND CLASES.TIPO='ZUMBA' AND SOCIOS.ID_POB=2;
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                TELEFONO   CALLE                       NUMERO         CP     ID_POB        
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ----------        
+         1 Y7451932S TOMAS                VEGA                 ORTEGA               tvega@gmail.com     660046009  SUECIA                          44      28022          2        
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 19 - LOS NOMBRES Y CORREOS DE LOS SOCIOS QUE ACUDIERON AL GIMNASIO POR LA MANANA
+SQL> 
+SQL> SELECT DISTINCT SOCIOS.NOMBRE, SOCIOS.APELLIDO, SOCIOS.MAIL FROM SOCIOS, CLASES, ASISTIR WHERE CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND CLASES.HORA>800 AND CLASES.HORA<1400;
+
+NOMBRE               APELLIDO             MAIL
+-------------------- -------------------- ----------------------------------------------------------------------------------------------------          
+ALBERTO              FERNANDEZ            afernandez@yahoo.com           
+OSCAR                NOVILLO              onovillo@yahoo.com             
+ALEXA                MARTINEZ             amartinez@gmail.com            
+CARLA                MESSI                cmessi@gmail.com               
+SUSANA               VEGA                 svega@hotmail.com              
+MADELEINE            GOMEZ                mgomez@yahoo.com               
+JOSE LUIS            GONZALEZ             jlgonzalez@hotmail.com         
+TOMAS                VEGA                 tvega@gmail.com                
+ALFONSO              ORTEGA               aortega@yahoo.com              
+PAULA                EDERY                pedery@gmail.com               
+CARLOS               DA VINCI             cdavinci@gmail.com             
+ENRIQUE              MARTINEZ             emartinez@hotmail.com          
+JUAN                 GARRIDO              jgarrido@gmail.com             
+MERCEDES             CUBILLO              mcubillo@yahoo.com             
+MARTA                SERRAT               mserrat@gmail.com              
+
+15 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 20 - LOS SOCIOS CUYO CORREO SEA YAHOO
+SQL> 
+SQL> SELECT * FROM SOCIOS WHERE MAIL LIKE '%@yahoo%';
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                TELEFONO   CALLE                       NUMERO         CP     ID_POB        
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ----------        
+        11 78975461X ALBERTO              FERNANDEZ      afernandez@yahoo.com646503181  CHINA69      28022          4        
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com    383638907  CALIFORNIA                       8      64983          1        
+        13 49863105Z ALFONSO              ORTEGA               SILLERO              aortega@yahoo.com   360462957  NORUEGA                         10      46432          3        
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com  848887557  URUGUAY                         11      46792          1        
+        15 Y5689843M OSCAR                NOVILLO              CAMACHO              onovillo@yahoo.com  355745640  UGANDA                          22      36569          1        
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 21 - LOS PROFESORES DE SPINNING ORDENADOS POR ID
+SQL> 
+SQL> SELECT DISTINCT PROFESORES.* FROM PROFESORES WHERE ESTILO='SPINNING' ORDER BY PROFESORES.N_PROFESOR;
+
+N_PROFESOR DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                TELEFONO   CALLE                       NUMERO         CP   LICENCIA ESTILO       ID_POB               
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- -------- ----------               
+         1 50065349J DANIEL               NAVARRO              MONTERO              dnavarro@gmail.com  648462568  DOMINGO                         12      28300     656359 SPINNING          1               
+         2 67497836R MARINA               DIAZ                 HERNANDO             mdiazhernando@gmail.com                        358369526  AGUILERA                        15      28300     682945 SPINNING          4               
+         3 92373905F ANGELA               OLIVA                JIMIENEZ             aoliva@gmail.com    629490361  SANMIGUEL                       32      28300     673823 SPINNING          5               
+         4 84736492H HELENA               ROMAN                PULIDO               hroman@gmail.com    636830511  GIRASOLES                        2      28540     649321 SPINNING          7               
+         5 95494729K ROCIO                MOSQUERA             HERRERO              rmosquera@gmail.com 649349364  ALTAMIRA                        33      28300     672294 SPINNING          8               
+         6 73936305L ELENA                MONTOYA              VILLEGAS             emontoya@gmail.com  688374953  SANTIAGO                        27      28300     633566 SPINNING          6               
+
+6 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 22 - CORREO Y NUMERO DE TELEFONO DE TODOS LOS PROFESORES QUE DIERON UNA CLASE O MAS DE ZUMBA
+SQL> 
+SQL> SELECT DISTINCT PROFESORES.TELEFONO, PROFESORES.MAIL FROM PROFESORES, DAR_ZUMBA WHERE PROFESORES.N_PROFESOR=DAR_ZUMBA.N_PROFESOR;
+
+TELEFONO   MAIL    
+---------- ----------------------------------------------------------------------------------------------------              
+655892302  lalvar@gmail.com                   
+693779843  aalonso@gmail.com                  
+678343309  jatienza@gmail.com                 
+638648832  mosuna@gmail.com                   
+648340902  snavas@gmail.com                   
+679882394  mgallego@gmail.com                 
+
+6 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 23 - CALLE DE RESIDENCIA Y CORREO ELECTRONICO DE LOS SOCIOS QUE ACUDIERON A LAS CLASES DE ZUMBA IMPARTIDAS POR LUCIA ALVAR
+SQL> 
+SQL> SELECT SOCIOS.CALLE, SOCIOS.MAIL FROM SOCIOS, ASISTIR, DAR_ZUMBA, PROFESORES WHERE PROFESORES.NOMBRE='LUCIA' AND PROFESORES.APELLIDO='ALVAR' AND PROFESORES.N_PROFESOR=DAR_ZUMBA.N_PROFESOR AND DAR_ZUMBA.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO;
+
+CALLE                   MAIL                  
+-------------------------------------------------- ---------------------------------------------------------------------------------------------------- 
+SEVILLA                 cdavinci@gmail.com    
+PADRE NUESTRO           amartinez@gmail.com   
+NAIROBI                 emartinez@hotmail.com 
+BUENOS AIRES            jlgonzalez@hotmail.com
+CHINA                   afernandez@yahoo.com  
+ALCALA                  jgarrido@gmail.com    
+
+6 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 24 - LICENCIA Y NOMBRE COMPLETO DE LOS PROFESORES ORDENADOS POR NUMERO DE LICENCIA
+SQL> 
+SQL> SELECT LICENCIA, NOMBRE, APELLIDO, SEG_APELLIDO FROM PROFESORES ORDER BY LICENCIA ASC;
+
+  LICENCIA NOMBRE               APELLIDO             SEG_APELLIDO        
+---------- -------------------- -------------------- --------------------
+    633566 ELENA                MONTOYA              VILLEGAS            
+    649321 HELENA               ROMAN                PULIDO              
+    654993 MARIA                OSUNA                GALISTEO            
+    656359 DANIEL               NAVARRO              MONTERO             
+    657789 JULIA                MARTINEZ             ATIENZA             
+    672294 ROCIO                MOSQUERA             HERRERO             
+    673823 ANGELA               OLIVA                JIMIENEZ            
+    676384 MANUEL               GALLEGO              HERRERA             
+    678455 LUCIA                ALVAR                ORTEGA              
+    678774 SERGIO               NAVAS         
+    682945 MARINA               DIAZ                 HERNANDO            
+    687453 ALEJANDRO            ALONSO               ORIHUELA            
+
+12 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 25 - NOMBRE, APELLIDO Y TELEFONO DE SOCIOS QUE CONTENGAN LA LETRA "A" EN EL NOMBRE ORDENADOS DESCENDIENTEMENTE POR NOMBRE
+SQL> 
+SQL> SELECT NOMBRE, APELLIDO, TELEFONO FROM SOCIOS WHERE NOMBRE LIKE '%A%' ORDER BY NOMBRE DESC;
+
+NOMBRE               APELLIDO             TELEFONO                       
+-------------------- -------------------- ----------                     
+TOMAS                VEGA                 660046009                      
+SUSANA               VEGA                 821403819                      
+PAULA                EDERY                604826822                      
+OSCAR                NOVILLO              355745640                      
+MONICA               BIANCO               299217214                      
+MARTA                SERRAT               217954856                      
+MADELEINE            GOMEZ                383638907                      
+JUAN                 GARRIDO              227652163                      
+CARLOS               DA VINCI             364814653                      
+CARLA                MESSI                793324108                      
+ALFONSO              ORTEGA               360462957                      
+ALEXA                MARTINEZ             347186593                      
+ALBERTO              FERNANDEZ            646503181                      
+
+13 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 26 - LOS SOCIOS QUE HAYAN ASISTIDO A CLASE EL 22 DE MARZO QUE NO TENGAN SEGUNDO APELLIDO
+SQL> 
+SQL> SELECT SOCIOS.NOMBRE, SOCIOS.APELLIDO, SOCIOS.SEG_APELLIDO, SOCIOS.TELEFONO FROM SOCIOS, ASISTIR, CLASES WHERE CLASES.FECHA LIKE '2022/03/22' AND CLASES.ID_CLASE=ASISTIR.ID_CLASE AND ASISTIR.N_SOCIO=SOCIOS.N_SOCIO AND SOCIOS.SEG_APELLIDO IS NULL;
+
+NOMBRE               APELLIDO             SEG_APELLIDO         TELEFONO  
+-------------------- -------------------- -------------------- ----------
+ENRIQUE              MARTINEZ       514378378 
+ALBERTO              FERNANDEZ      646503181 
+JUAN                 GARRIDO        227652163 
+PAULA                EDERY          604826822 
+ENRIQUE              MARTINEZ       514378378 
+JUAN                 GARRIDO        227652163 
+PAULA                EDERY          604826822 
+ALBERTO              FERNANDEZ      646503181 
+PAULA                EDERY          604826822 
+ENRIQUE              MARTINEZ       514378378 
+PAULA                EDERY          604826822 
+ENRIQUE              MARTINEZ       514378378 
+JUAN                 GARRIDO        227652163 
+ENRIQUE              MARTINEZ       514378378 
+PAULA                EDERY          604826822 
+JUAN                 GARRIDO        227652163 
+
+16 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 27 - NOMBRE DE LOS PROVEEDORES QUE PROVEEN A SEDES EN ARANJUEZ
+SQL> 
+SQL> SELECT N_PROV NOMBRE FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB='ARANJUEZ')));
+
+NOMBRE     
+------------------------------                
+Mancuernas Gonzalez
+Maquinas Pepe      
+Bicicletas Gomez   
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 28 - NOMBRE Y NUMERO DE LAS CALLES Y CP Y NOMBRE DE LA POBLACION DE LAS SEDES QUE SON PROVISTAS POR "Bicicletas Gomez"
+SQL> 
+SQL> SELECT DISTINCT SEDES.CALLE CALLE, SEDES.NUMERO NUM, SEDES.CP CP FROM SEDES, POBLACIONES WHERE SEDES.ID_POB IN (SELECT DISTINCT POBLACIONES.ID_POB FROM POBLACIONES, PROVEER WHERE PROVEER.ID_SEDE IN (SELECT DISTINCT PROVEER.ID_SEDE FROM PROVEER WHERE PROVEER.ID_PROV IN (SELECT PROVEEDORES.ID_PROV FROM PROVEEDORES WHERE PROVEEDORES.N_PROV='Bicicletas Gomez')));
+
+CALLE      NUM         CP                     
+------------------------------ ---------- ----------                     
+Ardilla      5      41010                     
+Alcala     227      28028                     
+la Concha    8      28300                     
+Valencia    14      28300                     
+Valencia   466       8013                     
+Angel       60      36598                     
+
+6 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 29 - MEDIDAS (ALTO Y ANCHO) DE LOS ACCESORIOS QUE VIENEN DE MADRID
+SQL> 
+SQL> SELECT ALTO, ANCHO FROM ACCESORIOS WHERE ID_PROD_ACC IN (SELECT ID_PROD_ACC FROM PROVEER WHERE ID_PROV = (SELECT ID_PROV FROM PROVEEDORES WHERE N_PROVINCIA='MADRID'));
+
+      ALTO      ANCHO                         
+---------- ----------                         
+        15         30                         
+        15         30                         
+        15         30                         
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 30 - NOMBRE Y TELEFONO DE LOS PROVEEDORES QUE PROVEEN MAQUINAS, Y NOMBRE DE LO QUE PROVEEN
+SQL> 
+SQL> SELECT DISTINCT N_PROV, TEL_PROV, NOMB_PROD_MAQ FROM PROVEEDORES PS, PROVEER P, MAQUINAS M WHERE PS.ID_PROV = P.ID_PROV AND P.ID_PROD_MAQ = M.ID_PROD_MAQ AND P.ID_PROD_MAQ <> 100;
+
+N_PROV                         TEL_PROV  NOMB_PROD_MAQ                   
+------------------------------ --------- --------------------------------------------------         
+Maquinas Pepe                  915346684 Proform Tour de France CLC SMART Bicicleta Indoor          
+Bicicletas Gomez               935684698 NordicTrack C5.5 Bicicleta El­ptica                        
+Bicicletas Gomez               935684698 Life Fitness G4 con Prensa de Piernas                      
+Bicicletas Gomez               935684698 Nordictrack Fusion CST Multi Polea                         
+Maquinas Pepe                  915346684 Life Fitness G4 con Prensa de Piernas                      
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 31 - NUMEROS DE TELEFONO DE TODOS LOS PROVEEDORES CON ID MENOR QUE 4
+SQL> 
+SQL> SELECT TEL_PROV FROM PROVEEDORES WHERE ID_PROV<4;
+
+TEL_PROV   
+---------  
+912201812  
+915346684  
+943892754  
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 32 - TAMANO DE LAS SEDES QUE ESTAN EN POBLACIONES DE UNA EXTENSION MAYOR A 200 KM CUADRADOS QUE ADEMAS SE ENCUENTRAN EN UNA PROVINCIA CON MAS DE 1000000 HABITANTES
+SQL> 
+SQL> SELECT TAMANO FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE N_PROVINCIAS in (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV>1000000) AND EXT_POB>200);
+
+    TAMANO 
+---------- 
+       156 
+        86 
+       286 
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 33 - PROVINCIAS ORDENADAS POR HABITANTES
+SQL> 
+SQL> SELECT * FROM PROVINCIAS WHERE HAB_PROV>10 ORDER BY HAB_PROV;
+
+N_PROVINCIA            EXT_PROV   HAB_PROV    
+-------------------- ---------- ----------    
+VALLADOLID                 8111     520385    
+SEVILLA                   14036     688711    
+MURCIA                    11313    1516055    
+BARCELONA                  7726    5664579    
+MADRID                     8030    6661949    
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 34 - PROVINCIAS EN LAS QUE SE ENCUENTRAN SEDES Y TAMBIEN PROVEEDORES
+SQL> 
+SQL> SELECT N_PROVINCIA FROM PROVINCIAS WHERE N_PROVINCIA IN (SELECT N_PROVINCIA FROM PROVEEDORES) AND N_PROVINCIA IN (SELECT N_PROVINCIAS FROM POBLACIONES WHERE ID_POB IN (SELECT ID_POB FROM SEDES));
+
+N_PROVINCIA
+--------------------                          
+MADRID     
+BARCELONA  
+SEVILLA    
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 35 - NOMBRE DE LAS CALLES Y CP DONDE SE ENCUENTRAN LAS SEDES Y NUMERO DE HABITANTES DE LAS POBLACIONES QUE ESTAN EN MADRID
+SQL> 
+SQL> SELECT SEDES.CALLE, SEDES.CP, HAB_POB FROM SEDES, POBLACIONES WHERE SEDES.ID_POB = POBLACIONES.ID_POB AND POBLACIONES.ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE N_PROVINCIAS='MADRID');
+
+CALLE       CP    HAB_POB                     
+------------------------------ ---------- ----------                     
+Valencia 28300      59833                     
+Alcala   28028    3305408                     
+la Concha28300      59833                     
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 36 - NOMBRE, LARGO Y ANCHO DE LAS MAQUINAS QUE NOS TRAEN DE BARCELONA QUE VAYAN A PARAR A ARANJUEZ
+SQL> 
+SQL> SELECT NOMB_PROD_MAQ, MAQ.LARGO, MAQ.ANCHO FROM MAQUINAS MAQ WHERE ID_PROD_MAQ IN (SELECT ID_PROD_MAQ FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB='ARANJUEZ')) AND ID_PROV IN (SELECT ID_PROV FROM PROVEEDORES WHERE N_PROVINCIA='BARCELONA'));
+
+NOMB_PROD_MAQ                LARGO      ANCHO 
+-------------------------------------------------- ---------- ---------- 
+NordicTrack C5.5 Bicicleta El­ptica                       140         60 
+Nordictrack Fusion CST Multi Polea                        150        105 
+Life Fitness G4 con Prensa de Piernas                     150        150 
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 37 - LISTA DE ACCESORIOS QUE TENGAN MENOS DE 3 PALABRAS EN EL NOMBRE Y QUE PROVENGAN DE MADRID
+SQL> 
+SQL> SELECT NOMB_PROD_ACC FROM ACCESORIOS WHERE ID_PROD_ACC IN (SELECT ID_PROD_ACC FROM PROVEER WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEEDORES WHERE N_PROVINCIA = 'MADRID')) AND NOMB_PROD_ACC LIKE '% % %';
+
+NOMB_PROD_ACC      
+--------------------------------------------------                       
+Mancuerna de vinilo bodytone 2kg              
+Mancuerna de vinilo bodytone 1kg              
+Mancuerna de vinilo bodytone 5kg              
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 38 - ID Y NOMBRE DE LOS PROVEEDORES QUE PROVEEN PRODUCTOS AZULES O CELESTES
+SQL> 
+SQL> SELECT ID_PROV, N_PROV FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_PROD_ACC IN (SELECT ID_PROD_ACC FROM ACCESORIOS WHERE DESC_PROD_ACC LIKE '%celeste%' OR DESC_PROD_ACC LIKE '%azul%' UNION ALL SELECT ID_PROD_MERCH FROM MERCHANDISING WHERE DESC_PROD_MERCH LIKE '%celeste%' OR DESC_PROD_MERCH LIKE '%azul%'));
+
+   ID_PROV N_PROV  
+---------- ------------------------------     
+         1 Mancuernas Gonzalez                
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 39 - DATOS DE SEDES QUE SE ENCUENTRAN EN PROVINCIAS QUE EMPIEZAN POR M
+SQL> 
+SQL> SELECT * FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE N_PROVINCIAS LIKE 'M%');
+
+   ID_SEDE TEL_SEDE  CALLE   NUMERO         CP     TAMANO     ID_POB     
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------     
+         1 945625321 Valencia    14      28300        286          2     
+         2 945325984 Alcala     227      28028        156          1     
+         3 945486533 la Concha    8      28300         86          2     
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 40 - DIRECCIONES COMPLETAS DE LAS SEDES ORDENADAS ALFABETICAMENTE POR LA CALLE EN LA QUE SE ENCUENTRAN
+SQL> 
+SQL> SELECT ID_SEDE, SEDES.CALLE, SEDES.NUMERO, SEDES.CP, POBLACIONES.NOMB_POB, POBLACIONES.N_PROVINCIAS FROM POBLACIONES, SEDES WHERE SEDES.ID_POB = POBLACIONES.ID_POB ORDER BY CALLE ASC;
+
+   ID_SEDE CALLE   NUMERO         CP NOMB_POB N_PROVINCIAS             
+---------- ------------------------------ ---------- ---------- ----------------------------------- --------------------     
+         2 Alcala     227      28028 MADRID   MADRID                   
+         6 Angel       60      36598 UTRERA   SEVILLA                  
+         5 Ardilla      5      41010 SEVILLA  SEVILLA                  
+         3 la Concha    8      28300 ARANJUEZ MADRID                   
+         1 Valencia    14      28300 ARANJUEZ MADRID                   
+         4 Valencia   466       8013 BARCELONABARCELONA                
+
+6 filas seleccionadas.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 41 - PRECIO MEDIO DE CADA MAQUINA QUE HA SIDO PROVISTA
+SQL> 
+SQL> SELECT AVG(MAQUINAS.COSTE_UD_MAQ) FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROD_MAQ AND PROVEER.ID_PROD_MAQ IN (SELECT ID_PROD_MAQ FROM PROVEER WHERE ID_PROD_MAQ != 100);
+
+AVG(MAQUINAS.COSTE_UD_MAQ)                    
+--------------------------                    
+                2241,85714                    
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 42 - PROVEEDORES Y SEDES QUE TIENEN NOMBRES DE CALLES DE MµS DE UNA PALABRA
+SQL> 
+SQL> SELECT CALLE FROM PROVEEDORES WHERE CALLE LIKE '% %' UNION ALL SELECT CALLE FROM SEDES WHERE CALLE LIKE '% %';
+
+CALLE      
+------------------------------                
+San Norberto       
+Callejon de la Galinda                        
+San Pedro  
+Carrer Industria   
+la Concha  
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 43 - NUMERO DE MAQUINAS POR TIPO
+SQL> 
+SQL> SELECT COUNT(TIPO), TIPO FROM MAQUINAS WHERE TIPO IS NOT NULL GROUP BY TIPO;
+
+COUNT(TIPO) TIPO   
+----------- --------------------              
+          1 CAMINADORA                        
+          1 POLEAS/CABLES                     
+          2 BICICLETA                         
+          2 MUSCULACION                       
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 44 - TELEFONOS DE LAS SEDES EN LAS QUE HAY MENOS DE 100000 HABITANTES;
+SQL> 
+SQL> SELECT TEL_SEDE FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB<100000);
+
+TEL_SEDE   
+---------  
+945625321  
+945486533  
+956321546  
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 45 - PRECIO DE LAS CAMISETAS
+SQL> 
+SQL> SELECT COSTE_UD_MERCH, NOMB_PROD_MERCH FROM MERCHANDISING WHERE NOMB_PROD_MERCH LIKE '%Camiseta%';
+
+COSTE_UD_MERCH NOMB_PROD_MERCH                
+-------------- --------------------------------------------------        
+            18 Camiseta FIT-US NEGRA          
+            18 Camiseta FIT-US BLANCA         
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 46 - NOMBRE PROVEEDORES ORDENADOS POR EL NUMERO DE HABITANTES DE SU PROVINCIA
+SQL> 
+SQL> SELECT N_PROV FROM PROVEEDORES, PROVINCIAS WHERE PROVEEDORES.N_PROVINCIA=PROVINCIAS.N_PROVINCIA ORDER BY HAB_PROV, N_PROV DESC;
+
+N_PROV     
+------------------------------                
+Botellas Rajoy     
+Maquinas Pepe      
+Camisetas Sanchez  
+Bicicletas Gomez   
+Mancuernas Gonzalez
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 47 - TELEFONOS DE LAS SEDES A LAS QUE PROVEE 'MANCUERNAS GONZALEZ'
+SQL> 
+SQL> SELECT TEL_SEDE FROM SEDES WHERE ID_SEDE IN (SELECT ID_SEDE FROM PROVEER WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEEDORES WHERE N_PROV LIKE 'Mancuernas Gonzalez'));
+
+TEL_SEDE   
+---------  
+945625321  
+945325984  
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 48 - LOS NOMBRES DE LOS PROVEEDORES QUE HAYAN PROVISTO UNA MAQUINA CON LA LETRA 'F';
+SQL> 
+SQL> SELECT N_PROV FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_PROD_MAQ IN (SELECT ID_PROD_MAQ FROM MAQUINAS WHERE NOMB_PROD_MAQ LIKE '%f%'));
+
+N_PROV     
+------------------------------                
+Maquinas Pepe      
+Bicicletas Gomez   
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 49 - CALLE EN LA QUE SE ENCUENTRA EL PROVEEDOR QUE PROVEE LAS CAMISETAS NEGRAS
+SQL> 
+SQL> SELECT PROVEEDORES.CALLE FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_PROD_MERCH IN (SELECT ID_PROD_MERCH FROM MERCHANDISING WHERE NOMB_PROD_MERCH LIKE 'Camiseta%NEGRA%'));
+
+CALLE      
+------------------------------                
+Callejon de la Galinda                        
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 50 - TODA LA INFORMACION DE LOS LACASITOS
+SQL> 
+SQL> SELECT * FROM MERCHANDISING WHERE NOMB_PROD_MERCH LIKE 'Lacasitos%';
+
+ID_PROD_MERCH COSTE_UD_MERCH NOMB_PROD_MERCH         DESC_PROD_MERCH                PR            
+------------- -------------- -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --            
+            3              4 Lacasitos 240gr         Paquete de lacacitos x240gr    NO            
+
+SQL> SPOOL OFF
