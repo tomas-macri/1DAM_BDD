@@ -1,0 +1,580 @@
+CONSULTAS - TOMÁS MACRI - 1DAM
+
+SQL> rem las consultas están hechas a partir del MER 1 y el MER 3. Las tablas y sus insert se pueden encontrar en TABLAS_INSERTAR\MER 1.txt y TABLAS_INSERTAR\MER 3.txt
+SQL>
+SQL> rem INICIO CONSULTAS 
+SQL> rem 1. Todas las poblaciones de las provincias con una extensión mayor que 10.000 km2.
+SQL> 
+SQL> select * from poblaciones where N_PROVINCIAS in (select N_PROVINCIA from provincias where EXT_PROV > 10000);
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                     
+---------- ----------------------------------- ---------- ---------- --------------------             
+         3 CARTAGENA                               213943        558 MURCIA                           
+         4 MURCIA                                  447182        881 MURCIA                           
+         7 SEVILLA                                 688711        140 SEVILLA                          
+         8 UTRERA                                   52617        684 SEVILLA                          
+
+SQL> rem 2. Todas las sedes de las de la población 'UTRERA'.
+SQL> 
+SQL> select * from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and NOMB_POB = 'UTRERA';
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB     ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                           
+---------- --------- ------------------------------ ---------- ---------- ---------- ---------- ---------- ----------------------------------- ---------- ---------- --------------------                                   
+         6 956321546 Angel                                  60      36598         30          8          8 UTRERA                                   52617        684 SEVILLA
+
+SQL> rem ESTA CONSULTA ESTµ MAL PORQUE TAMBIEN DEVUELVE LOS DATOS DE LAS POBLACIONES (ESTO SE DEBE AL SELECT *). LAS POSIBLES SOLUCIONES SEERÖAN:
+SQL> 
+SQL> rem 2.1 Todas las sedes de las de la población 'UTRERA'.
+SQL> 
+SQL> select ID_SEDE, TEL_SEDE, CALLE, NUMERO, CP, TAMANO, sedes.ID_POB from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and NOMB_POB = 'UTRERA';
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB       
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------       
+         6 956321546 Angel                                  60      36598         30          8       
+
+SQL> rem 2.2 Todas las sedes de las de la población 'UTRERA'.
+SQL> 
+SQL> select sedes.* from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and NOMB_POB = 'UTRERA';
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB       
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------       
+         6 956321546 Angel                                  60      36598         30          8       
+
+SQL> 
+SQL> rem 5. La dirección de las sedes de la provincia de Madrid
+SQL> 
+SQL> select CALLE, NUMERO, CP from sedes, poblaciones where sedes.ID_POB = poblaciones.ID_POB and N_PROVINCIAS = 'MADRID';
+
+CALLE                              NUMERO         CP     
+------------------------------ ---------- ----------     
+Valencia                               14      28300     
+Alcala                                227      28028     
+la Concha                               8      28300     
+
+SQL> 
+SQL> rem 6. Los datos de la sede m s grande
+SQL> 
+SQL> select * from sedes where tamano = (select max(tamano) from sedes);
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB       
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------       
+         1 945625321 Valencia                               14      28300        286          2       
+
+SQL> 
+SQL> rem 7. La m quina m s barata
+SQL> 
+SQL> select * from maquinas where COSTE_UD_MAQ = (select min(COSTE_UD_MAQ) from maquinas);
+
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ        TIPO                      LARGO      ANCHO           
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------           
+          1          499 Proform Tour de France CLC SMART Bicicleta Indoor  Bicicleta indoor genial que cuenta con una gran pantalla led y un asiento acolchado   
+
+SQL> 
+SQL> rem 8. Las poblaciones que tengan menos de 1.000.000 de habitantes y que pertenecen a una provincia con m s de 1.000.000 de habitantes ordenadas por cantidad de habitantes ascendentemente.
+SQL> 
+SQL> SELECT * FROM POBLACIONES WHERE HAB_POB < 1000000 AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > 1000000)  ORDER BY HAB_POB;
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                       
+---------- ----------------------------------- ---------- ---------- --------------------                               
+         2 ARANJUEZ                                 59833        201 MADRID
+         6 CASTELLDEFELS                            66375         13 BARCELONA                                          
+         3 CARTAGENA                               213943        558 MURCIA
+         4 MURCIA                                  447182        881 MURCIA
+
+SQL> 
+SQL> rem 9. La población con menos habitantes entre las poblaciones que tengan menos de 1.000.000 de habitantes y que pertenecen a una provincia con m s de 1.000.000 de habitantes.
+SQL> 
+SQL> SELECT * FROM  POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB=(SELECT MIN(HAB_POB) FROM POBLACIONES WHERE HAB_POB < 1000000 AND N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV > 1000000)));
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                                       
+---------- ----------------------------------- ---------- ---------- --------------------                               
+         2 ARANJUEZ                                 59833        201 MADRID
+
+SQL> 
+SQL> rem 10.  Los proveedores de Madrid.
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE N_PROVINCIA LIKE 'MADRID';
+ 
+    ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA    
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                    
+          1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID         
+ 
+SQL>  
+SQL> rem 11. Los proveedores que hayan provisto a una sede cuyo código postal tenga 5 d¡gitos y comience por 28.
+SQL>   
+ 
+SQL> SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE CP >  27999 AND CP < 29000));
+ 
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA    
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                    
+          1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID         
+          2 Maquinas Pepe                  915346684 Callejon de la Galinda                 10      41810 SEVILLA        
+ 
+ 
+
+SQL> rem 12. Los proveedores que hayan provisto a una sede ubicada en Aranjuez.
+SQL>   
+SQL> SELECT * FROM PROVEEDORES WHERE ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB = 'ARANJUEZ')));
+ 
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA    
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                    
+          1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID         
+          2 Maquinas Pepe                  915346684 Callejon de la Galinda                 10      41810 SEVILLA        
+ 
+ 
+SQL> rem 13. Los proveedores de Madrid que hayan provisto a una sede que esta en la calle Alcala.
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE N_PROVINCIA LIKE 'MADRID' AND ID_PROV IN (SELECT ID_PROV FROM PROVEER WHERE ID_SEDE IN (SELECT ID_SEDE FROM SEDES WHERE CALLE LIKE 'Alcala'));
+
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA    
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                    
+         1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID         
+
+
+
+SQL> 14. La información del proveedor que provee a más sedes.
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE ID_PROV = (SELECT ID_PROV FROM PROVEER GROUP BY ID_PROV HAVING COUNT(ID_PROV) = (SELECT MAX(COUNT(ID_PROV)) FROM PROVEER GROUP BY ID_PROV)); 
+
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA    
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------                    
+         1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID         
+
+SQL>
+SQL> rem 15. Todas las bicicletas compradas por la sede 3.
+SQL> 
+SQL> SELECT MAQUINAS.* FROM MAQUINAS, PROVEER WHERE MAQUINAS.ID_PROD_MAQ = PROVEER.ID_PROD_MAQ AND PROVEER.ID_PROD_MAQ <> 100 AND PROVEER.ID_SEDE=3 AND MAQUINAS.TIPO='BICICLETA';
+
+ID_PROD_MAQ COSTE_UD_MAQ NOMB_PROD_MAQ                                      DESC_PROD_MAQ        TIPO                      LARGO      ANCHO           
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -------------------- ---------- ----------           
+          2          899 NordicTrack C5.5 Bicicleta El¡ptica                Bicicleta eliptica que cuenta con un sistema de inclinación manual para incrementar aun mas la intensidad de su ejercicio y 20 niveles de resistencia digital muy silenciosa.             BICICLETA                   140         60           
+
+SQL> 
+SQL> rem 16. La información de la población que tiene m s sedes
+SQL> 
+SQL> SELECT * FROM POBLACIONES WHERE ID_POB = (SELECT ID_POB FROM SEDES GROUP BY ID_POB HAVING ID_POB=(SELECT ID_POB FROM SEDES GROUP BY ID_POB HAVING COUNT (ID_POB) = (SELECT MAX(COUNT(ID_POB)) FROM SEDES GROUP BY ID_POB)));
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                     
+---------- ----------------------------------- ---------- ---------- --------------------             
+         2 ARANJUEZ                                 59833        201 MADRID                           
+
+SQL> 
+SQL> rem 17. El precio medio de todas las m quinas de musculacion y mostrar el campo como "promedio precio musculacion".
+SQL> 
+SQL> SELECT AVG(COSTE_UD_MAQ) FROM MAQUINAS  WHERE TIPO='MUSCULACION';
+
+AVG(COSTE_UD_MAQ)               
+-----------------               
+             1824               
+
+SQL> 
+SQL> rem 18. Los productos de Merchandising que tengan un precio menor que el accesorio 'Mancuerna de vinilo bodytone 1kg'
+SQL> 
+SQL> SELECT * FROM MERCHANDISING WHERE COSTE_UD_MERCH < (SELECT COSTE_UD_ACC FROM ACCESORIOS WHERE NOMB_PROD_ACC LIKE 'Mancuerna de vinilo bodytone 1kg');
+
+ID_PROD_MERCH COSTE_UD_MERCH NOMB_PROD_MERCH                                    DESC_PROD_MERCH      PR  
+------------- -------------- -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ --  
+            3              4 Lacasitos 240gr                                    Paquete de lacacitos x240gr                   NO  
+
+SQL> 
+SQL> 
+SQL> rem 19. Las sedes de Madrid (provincia) que están en una calle cuyo nombre contenga una única palabra.
+SQL> 
+SQL> SELECT S.* FROM SEDES S, POBLACIONES P WHERE S.ID_POB = P.ID_POB AND S.CALLE NOT LIKE '% %' AND P.N_PROVINCIAS = 'MADRID';
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB       
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------       
+         1 945625321 Valencia                               14      28300        286          2       
+         2 945325984 Alcala                                227      28028        156          1       
+
+SQL> 
+SQL> rem 20. Las sedes que se encuentran en la población m s densamente poblada (densidad = habitantes/extensión)
+SQL> 
+SQL> SELECT * FROM SEDES WHERE ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE HAB_POB/EXT_POB =(SELECT MAX(HAB_POB/EXT_POB) FROM POBLACIONES));
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB       
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------       
+         4 975643222 Valencia                              466       8013        166          5       
+
+SQL> 
+SQL> rem 21. Las poblaciones ubicadas en una provincia con una densidad de población menores que la media (densidad = habitantes/extensión)
+SQL> 
+SQL> SELECT * FROM POBLACIONES WHERE N_PROVINCIAS IN (SELECT N_PROVINCIA FROM PROVINCIAS WHERE HAB_PROV/EXT_PROV IN (SELECT (HAB_PROV/EXT_PROV) FROM PROVINCIAS WHERE HAB_PROV/EXT_PROV < (SELECT AVG(HAB_PROV/EXT_PROV) FROM PROVINCIAS)));
+
+    ID_POB NOMB_POB                               HAB_POB    EXT_POB N_PROVINCIAS                     
+---------- ----------------------------------- ---------- ---------- --------------------             
+         3 CARTAGENA                               213943        558 MURCIA                           
+         4 MURCIA                                  447182        881 MURCIA                           
+         7 SEVILLA                                 688711        140 SEVILLA                          
+         8 UTRERA                                   52617        684 SEVILLA                          
+        10 VALLAOLID                               298866        198 VALLADOLID                       
+
+SQL> 
+SQL> 
+SQL> rem 22. La dirección de la sede que es provista de m s productos de forma exclusiva
+SQL> 
+SQL> SELECT CALLE, NUMERO, CP FROM SEDES WHERE ID_SEDE= (SELECT ID_SEDE FROM PROVEER GROUP BY ID_SEDE HAVING COUNT(ID_SEDE)= (SELECT MAX(COUNT(ID_SEDE)) FROM PROVEER WHERE EXCLUSIVO= 'SI' GROUP BY ID_SEDE));
+
+CALLE                              NUMERO         CP     
+------------------------------ ---------- ----------     
+Alcala                                227      28028     
+
+SQL> 
+SQL> 
+SQL> rem 23. Los proveedores cuyo teléfono comience por 91
+SQL> 
+SQL> SELECT * FROM PROVEEDORES WHERE TEL_PROV LIKE '91%';
+
+   ID_PROV N_PROV                         TEL_PROV  CALLE                              NUMERO         CP N_PROVINCIA           
+---------- ------------------------------ --------- ------------------------------ ---------- ---------- --------------------  
+         1 Mancuernas Gonzalez            912201812 San Norberto                            4      28021 MADRID                
+         2 Maquinas Pepe                  915346684 Callejon de la Galinda                 10      41810 SEVILLA               
+
+SQL> 
+SQL> rem 24. El accesorio con la descripción m s corta
+SQL> 
+SQL> SELECT * FROM ACCESORIOS WHERE LENGTH(DESC_PROD_ACC) = (SELECT MIN(LENGTH(DESC_PROD_ACC)) FROM ACCESORIOS);
+
+ID_PROD_ACC COSTE_UD_ACC NOMB_PROD_ACC                                      DESC_PROD_ACC        COLOR      TIPO                       PESO       ALTO      ANCHO              
+----------- ------------ -------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ---------- -------------------- ---------- ---------- ----------              
+          4           14 Cuerda Reebok Premium Speed                        Cuerda muy buena.               CUERDA                                            200              
+
+SQL> 
+SQL> 
+SQL> 
+SQL> rem 25. Las sedes que hayan sido provistas de un producto de merchandising propio de la marca FIT&US
+SQL> 
+SQL> SELECT * FROM SEDES WHERE ID_SEDE IN(SELECT P.ID_SEDE FROM PROVEER P, MERCHANDISING M WHERE P.ID_PROD_MERCH <> 100 AND P.ID_PROD_MERCH = M.ID_PROD_MERCH AND M.PROPIO='SI');
+
+   ID_SEDE TEL_SEDE  CALLE                              NUMERO         CP     TAMANO     ID_POB       
+---------- --------- ------------------------------ ---------- ---------- ---------- ----------       
+         3 945486533 la Concha                               8      28300         86          2       
+
+SQL> 
+SQL> rem 26. Todos los productos (M quinas, Accesorios y Merchandising) cuyo precio no supere la media de precio de los productos de su mismo tipo
+SQL> 
+SQL> SELECT NOMB_PROD_MAQ "NOMBRE PRODUCTO", COSTE_UD_MAQ "PRECIO PRODUCTO" FROM MAQUINAS WHERE COSTE_UD_MAQ < (SELECT AVG(COSTE_UD_MAQ) FROM MAQUINAS) UNION ALL SELECT NOMB_PROD_ACC, COSTE_UD_ACC FROM ACCESORIOS WHERE COSTE_UD_ACC < (SELECT AVG(COSTE_UD_ACC) FROM ACCESORIOS) UNION ALL SELECT NOMB_PROD_MERCH, COSTE_UD_MERCH FROM MERCHANDISING WHERE COSTE_UD_MERCH < (SELECT AVG(COSTE_UD_MERCH) FROM MERCHANDISING);
+
+NOMBRE PRODUCTO                                    PRECIO PRODUCTO                       
+-------------------------------------------------- ---------------                       
+Proform Tour de France CLC SMART Bicicleta Indoor              499                       
+NordicTrack C5.5 Bicicleta El­ptica                            899                       
+NordicTrack RX 800 Remo de Aire Plegable                       699                       
+Cadenza Fitness T40 Cinta de Correr                            679                       
+Disco Bumper Fraccional 1kg                                      9                       
+Disco Bumper Fraccional 2kg                                      9                       
+Disco Bumper Fraccional 3kg                                      9                       
+Lacasitos 240gr     											 4                       
+
+8 filas seleccionadas.
+
+SQL> rem 27. Las salas con un tama¤o y una capacidad mayor que la media
+SQL> 
+SQL> SELECT * FROM SALAS WHERE TAMANO > (SELECT AVG(TAMANO) FROM SALAS) AND CAPACIDAD > (SELECT AVG(CAPACIDAD) FROM SALAS);
+
+    N_SALA     TAMANO  CAPACIDAD                                
+---------- ---------- ----------                                
+         4        150        200                                
+         7        204        246                                
+
+SQL> 
+SQL> rem 28. Los dominios distintos de mail (@yahoo.com, @hotmail.com, etc.) y la cantidad de socios que utilizan cada uno.  La columna de los dominios debe mostrarse con el nombre de "DOMINIO_MAIL".
+SQL> 
+SQL> SELECT SUBSTR(MAIL,(INSTR(MAIL, '@'))) AS DOMINO_MAIL , COUNT(MAIL) FROM SOCIOS GROUP BY SUBSTR(MAIL, (INSTR(MAIL, '@')));
+
+DOMINO_MAIL                 COUNT(MAIL)     
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -----------     
+@yahoo.com   5     
+@gmail.com   7     
+@hotmail.com 4     
+
+SQL> 
+SQL> 
+SQL> rem 29. Mostrar los dominios de mail que utilizan tanto los socios como los profesores
+SQL> 
+SQL> SELECT SUBSTR(MAIL,(INSTR(MAIL, '@'))) FROM SOCIOS INTERSECT SELECT SUBSTR(MAIL,(INSTR(MAIL, '@'))) FROM PROFESORES;
+
+SUBSTR(MAIL,(INSTR(MAIL,'@')))                                  
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------                 
+@gmail.com      
+
+SQL> 
+SQL> 
+SQL> rem 30. El profesor que dio la clase 3
+SQL> 
+SQL>  SELECT * FROM PROFESORES WHERE N_PROFESOR IN (SELECT N_PROFESOR FROM DAR_SPINNING WHERE ID_CLASE=3 UNION SELECT N_PROFESOR FROM DAR_ZUMBA WHERE ID_CLASE = 3);
+
+N_PROFESOR DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                           TELEFONO   CALLE     NUMERO         CP   LICENCIA ESTILO       ID_POB
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- -------- ----------
+        10 74934284P ALEJANDRO            ALONSO               ORIHUELA             aalonso@gmail.com              693779843  VERDE         16      28005     687453 ZUMBA             3
+
+SQL> 
+SQL> rem 31. La sala con mayor capacidad entre aquellas en las que se dio una clase de ZUMBA
+SQL> 
+SQL> SELECT * FROM SALAS WHERE CAPACIDAD = (SELECT MAX(CAPACIDAD) FROM SALAS WHERE N_SALA IN (SELECT N_SALA FROM DARSE WHERE ID_CLASE IN (SELECT ID_CLASE FROM CLASES WHERE TIPO='ZUMBA')));
+
+    N_SALA     TAMANO  CAPACIDAD                                
+---------- ---------- ----------                                
+         7        204        246                                
+
+SQL> 
+SQL> rem 32. Los datos de el o los socios que asistieron a menor cantidad de clases
+SQL> 
+SQL>  SELECT * FROM SOCIOS WHERE N_SOCIO IN (SELECT N_SOCIO FROM ASISTIR GROUP BY N_SOCIO HAVING COUNT(N_SOCIO) = (SELECT MIN(COUNT(N_SOCIO)) FROM ASISTIR GROUP BY N_SOCIO));
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                           TELEFONO   CALLE     NUMERO         CP     ID_POB                    
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ----------                    
+         2 43594630Z CARLOS               DA VINCI             PAVAROTTI            cdavinci@gmail.com             364814653  SEVILLA       88      46892          6                    
+         8 69873567B MONICA               BIANCO               PEREZ                mbianco@hotmail.com            299217214  OSLO          30      64203          8                    
+        15 Y5689843M OSCAR                NOVILLO              CAMACHO              onovillo@yahoo.com             355745640  UGANDA        22      36569          1                    
+        10 13454981L JOSE LUIS            GONZALEZ             CASARES              jlgonzalez@hotmail.com         595711088  BUENOS AIRES 369      97723          1                    
+        12 13597127A MADELEINE            GOMEZ                MOREIRA              mgomez@yahoo.com               383638907  CALIFORNIA     8      64983          1                    
+
+SQL> 
+SQL> rem 33. Las salas en donde se dio una clase en marzo del 2022
+SQL> 
+SQL>  SELECT * FROM SALAS WHERE N_SALA IN (SELECT N_SALA FROM DARSE WHERE ID_CLASE IN (SELECT ID_CLASE FROM CLASES WHERE FECHA LIKE '2022/03/%' AND TIPO = 'ZUMBA'));
+
+    N_SALA     TAMANO  CAPACIDAD                                
+---------- ---------- ----------                                
+         1         50         20                                
+         2         52         25                                
+         4        150        200                                
+         5         20          5                                
+         8         64         43                                
+         3         82         55                                
+         7        204        246                                
+        10        100         50                                
+
+8 filas seleccionadas.
+
+SQL> 
+SQL> rem 33.2 Otra posible soluci¢n
+SQL> 
+SQL>  SELECT * FROM SALAS WHERE N_SALA IN (SELECT N_SALA FROM DARSE WHERE ID_CLASE IN (SELECT ID_CLASE FROM CLASES WHERE FECHA LIKE '2022/03/__' AND TIPO = 'ZUMBA'));
+
+    N_SALA     TAMANO  CAPACIDAD                                
+---------- ---------- ----------                                
+         1         50         20                                
+         2         52         25                                
+         4        150        200                                
+         5         20          5                                
+         8         64         43                                
+         3         82         55                                
+         7        204        246                                
+        10        100         50                                
+
+8 filas seleccionadas.
+
+SQL> rem 35. Los N§ de profesor, la cantidad de clases que han dado y de que tipo son las mismas
+SQL> 
+SQL> SELECT N_PROFESOR, COUNT(N_PROFESOR) CANT, 'SPINNING' AS TIPO FROM DAR_SPINNING GROUP BY N_PROFESOR UNION ALL  SELECT N_PROFESOR, COUNT(N_PROFESOR), 'ZUMBA' FROM DAR_ZUMBA GROUP BY N_PROFESOR ORDER BY N_PROFESOR;
+
+N_PROFESOR       CANT TIPO                                      
+---------- ---------- --------                                  
+         2          3 SPINNING                                  
+         3          2 SPINNING                                  
+         4          6 SPINNING                                  
+         5          2 SPINNING                                  
+         6          3 SPINNING                                  
+         7          5 ZUMBA                                     
+         8          4 ZUMBA                                     
+         9          5 ZUMBA                                     
+        10          1 ZUMBA                                     
+        11          1 ZUMBA                                     
+        12          1 ZUMBA                                     
+
+11 filas seleccionadas.
+
+SQL> 
+SQL> rem 36. El ID de las clase de tipo 'ZUMBA'
+SQL> 
+SQL> SELECT ID_CLASE FROM CLASES WHERE TIPO = 'ZUMBA';
+
+  ID_CLASE      
+----------      
+         1      
+         2      
+         3      
+         4      
+         5      
+         6      
+         7      
+         8      
+         9      
+        10      
+        11      
+        12      
+        13      
+        14      
+        15      
+        16      
+        17      
+
+17 filas seleccionadas.
+
+SQL> 
+SQL> rem 37. La informaci¢n de los profesores que compartan el segundo apellido con alg£n socio.
+SQL> 
+SQL> SELECT * FROM PROFESORES WHERE SEG_APELLIDO IN (SELECT SEG_APELLIDO FROM SOCIOS);
+
+N_PROFESOR DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                           TELEFONO   CALLE     NUMERO         CP   LICENCIA ESTILO       ID_POB
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- -------- ----------
+        12 73823984R LUCIA                ALVAR                ORTEGA               lalvar@gmail.com               655892302  FOSO          13      28300     678455 ZUMBA             1
+
+SQL> 
+SQL> rem 38. Los socios de VALLOLID
+SQL> rem
+SQL> rem 38. Los socios de la poblacion 'VALLAOLID'
+SQL> 
+SQL> SELECT S.* FROM SOCIOS S, POBLACIONES P WHERE S.ID_POB = P.ID_POB AND NOMB_POB = 'VALLAOLID';
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                           TELEFONO   CALLE     NUMERO         CP     ID_POB                    
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ----------                    
+         7 16139488X SUSANA               VEGA                 GONZALEZ             svega@hotmail.com              821403819  RIO          359      99252         10                    
+         9 Y4635879C ENRIQUE              MARTINEZ                                  emartinez@hotmail.com          514378378  NAIROBI       81      41620         10                    
+
+SQL> 
+SQL> rem 39. Los socios que hayan asistido a una clase de ZUMBA en el 2021 ordenados por su nombre
+SQL> 
+SQL> SELECT * FROM SOCIOS WHERE N_SOCIO IN (SELECT N_SOCIO FROM ASISTIR WHERE ID_CLASE IN (SELECT ID_CLASE FROM CLASES WHERE TIPO = 'ZUMBA' AND FECHA LIKE '2021%')) ORDER BY NOMBRE;
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                           TELEFONO   CALLE     NUMERO         CP     ID_POB                    
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ----------                    
+        11 78975461X ALBERTO              FERNANDEZ                                 afernandez@yahoo.com           646503181  CHINA         69      28022          4                    
+         5 13644098S ALEXA                MARTINEZ             ORTEGA               amartinez@gmail.com            347186593  PADRE NUESTRO 13        300          7                    
+        13 49863105Z ALFONSO              ORTEGA               SILLERO              aortega@yahoo.com              360462957  NORUEGA       10      46432          3                    
+         4 68792565F CARLA                MESSI                RONALDO              cmessi@gmail.com               793324108  ARGENTINA     86      36950          4                    
+         9 Y4635879C ENRIQUE              MARTINEZ                                  emartinez@hotmail.com          514378378  NAIROBI       81      41620         10                    
+        16 84695325W JUAN                 GARRIDO                                   jgarrido@gmail.com             227652163  ALCALA       256      28020          6                    
+        14 46934489P MERCEDES             CUBILLO              MENAYO               mcubillo@yahoo.com             848887557  URUGUAY       11      46792          1                    
+        15 Y5689843M OSCAR                NOVILLO              CAMACHO              onovillo@yahoo.com             355745640  UGANDA        22      36569          1                    
+
+8 filas seleccionadas.
+
+SQL> 
+SQL> rem 40. Los socios de la poblacion 'VALLAOLID' que hayan asistido a una clase de ZUMBA en el 2021
+SQL> 
+SQL> SELECT * FROM SOCIOS WHERE N_SOCIO IN (SELECT N_SOCIO FROM ASISTIR WHERE ID_CLASE IN (SELECT ID_CLASE FROM CLASES WHERE TIPO = 'ZUMBA' AND FECHA LIKE '2021%')) AND ID_POB IN (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB LIKE 'VALLAOLID');
+
+   N_SOCIO DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                           TELEFONO   CALLE     NUMERO         CP     ID_POB                    
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ----------                    
+         9 Y4635879C ENRIQUE              MARTINEZ                                  emartinez@hotmail.com          514378378  NAIROBI       81      41620         10                    
+
+SQL> 
+SQL> rem 41. Los datos de los profesores que dieron un n£mero de clases de SPINNING menor que la media
+SQL> 
+SQL> SELECT * FROM PROFESORES WHERE N_PROFESOR IN (SELECT N_PROFESOR FROM DAR_SPINNING GROUP BY N_PROFESOR HAVING COUNT(N_PROFESOR) < (SELECT AVG(COUNT(N_PROFESOR)) FROM DAR_SPINNING GROUP BY N_PROFESOR));
+
+N_PROFESOR DNI       NOMBRE               APELLIDO             SEG_APELLIDO         MAIL                           TELEFONO   CALLE     NUMERO         CP   LICENCIA ESTILO       ID_POB
+---------- --------- -------------------- -------------------- -------------------- ---------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- ---------- ---------- ---------- -------- ----------
+         6 73936305L ELENA                MONTOYA              VILLEGAS             emontoya@gmail.com             688374953  SANTIAGO      27      28300     633566 SPINNING          6
+         2 67497836R MARINA               DIAZ                 HERNANDO             mdiazhernando@gmail.com        358369526  AGUILERA      15      28300     682945 SPINNING          4
+         5 95494729K ROCIO                MOSQUERA             HERRERO              rmosquera@gmail.com            649349364  ALTAMIRA      33      28300     672294 SPINNING          8
+         3 92373905F ANGELA               OLIVA                JIMIENEZ             aoliva@gmail.com               629490361  SANMIGUEL     32      28300     673823 SPINNING          5
+
+SQL> 
+SQL> rem 42. La fecha y hora de las clases de ZUMBA que fueron dadas por un profesor cuya licencia es menor que 660.000
+SQL> 
+SQL> SELECT FECHA, HORA FROM CLASES WHERE ID_CLASE IN (SELECT ID_CLASE FROM DAR_ZUMBA WHERE N_PROFESOR IN (SELECT N_PROFESOR FROM PROFESORES WHERE LICENCIA < 660000));
+
+FECHA            HORA                                           
+---------- ----------                                           
+2022/03/22        830                                           
+2022/03/22       1330                                           
+2022/03/22       2030                                           
+2022/03/22       1530                                           
+2022/03/22       1930                                           
+2022/03/22       1830                                           
+
+6 filas seleccionadas.
+
+SQL> 
+SQL> rem 43. La cantidad de profesores que tienen las provincias que contienen una 'A' y el nombre de esas provincias. Ordernar de mayor a menor seg£n por la cantidad y, si cuentan con la misma, por el nombre de la provincia.
+SQL> 
+SQL> 
+SQL> SELECT  N_PROVINCIAS, COUNT(N_PROVINCIAS) FROM PROFESORES, POBLACIONES WHERE PROFESORES.ID_POB = POBLACIONES.ID_POB AND N_PROVINCIAS LIKE '%A%' GROUP BY N_PROVINCIAS ORDER BY COUNT(N_PROVINCIAS) DESC, N_PROVINCIAS DESC;
+
+N_PROVINCIAS         COUNT(N_PROVINCIAS)                        
+-------------------- -------------------                        
+BARCELONA                              5                        
+MADRID                                 3                        
+SEVILLA                                2                        
+MURCIA                                 2                        
+
+SQL> 
+SQL> rem 44. La direcci¢n de las sedes cuyo c¢digo postal est‚ entre 28000 y 28999 y que sean de ARANJUEZ.
+SQL> 
+SQL>  SELECT CALLE, NUMERO, CP FROM SEDES WHERE CP BETWEEN 28000 AND 28999 AND ID_POB = (SELECT ID_POB FROM POBLACIONES WHERE NOMB_POB='ARANJUEZ');
+
+CALLE                              NUMERO         CP            
+------------------------------ ---------- ----------            
+Valencia                               14      28300            
+la Concha                               8      28300            
+
+SQL> 
+SQL> rem 45. El n£mero de profesor, nombre y licencia de los profesores con un n£mero de licencia menor que 650.000
+SQL> 
+SQL> SELECT N_PROFESOR, NOMBRE, LICENCIA FROM PROFESORES WHERE LICENCIA < 650000;
+
+N_PROFESOR NOMBRE                 LICENCIA                      
+---------- -------------------- ----------                      
+         4 HELENA                   649321                      
+         6 ELENA                    633566                      
+
+SQL> 
+SQL> rem 46.  La media de cantidad de clases de ZUMBA que se dan por cada profesor
+SQL> 
+SQL> SELECT AVG(COUNT(N_PROFESOR)) FROM DAR_ZUMBA GROUP BY N_PROFESOR;
+
+AVG(COUNT(N_PROFESOR))                                          
+----------------------                                          
+            2,83333333                                          
+
+SQL> rem 47. La direcci¢n de las sedes cuyo CP (C¢digo Postal) est‚ entre 28.000 y 29.899
+SQL> 
+SQL> SELECT CALLE, NUMERO, CP FROM SEDES WHERE CP BETWEEN 28000 AND 28999;
+
+CALLE                              NUMERO         CP            
+------------------------------ ---------- ----------            
+Valencia                               14      28300            
+Alcala                                227      28028            
+la Concha                               8      28300            
+
+SQL> 
+SQL> rem 48. Las provincias con una poblaci¢n mayor a 1.000.000 de habitantes ordenadas de mayor a menor
+SQL> SELECT N_PROVINCIA, HAB_PROV FROM PROVINCIAS WHERE HAB_PROV > 1000000 ORDER BY HAB_PROV DESC;
+
+N_PROVINCIA            HAB_PROV                                 
+-------------------- ----------                                 
+MADRID                  6661949                                 
+BARCELONA               5664579                                 
+MURCIA                  1516055                                 
+
+SQL> rem 49. El tama¤o de la sede m s grande
+SQL> 
+SQL> SELECT MAX(TAMANO) FROM SEDES;
+
+MAX(TAMANO)     
+-----------     
+        286     
+
+SQL> 
+SQL> rem 50. El N§ de profesor, el nombre, el mail y la cantidad de caracteres del mismo de los profesores de zumba
+SQL> 
+SQL> SELECT N_PROFESOR, NOMBRE, MAIL, LENGTH(MAIL) "LARGO MAIL" FROM PROFESORES WHERE ESTILO = 'ZUMBA';
+
+N_PROFESOR NOMBRE               MAIL                           LARGO MAIL                
+---------- -------------------- ---------------------------------------------------------------------------------------------------- ----------                
+         7 MARIA                mosuna@gmail.com                       16                
+         8 SERGIO               snavas@gmail.com                       16                
+         9 MANUEL               mgallego@gmail.com                     18                
+        10 ALEJANDRO            aalonso@gmail.com                      17                
+        11 JULIA                jatienza@gmail.com                     18                
+        12 LUCIA                lalvar@gmail.com                       16                
+
+6 filas seleccionadas.
+
+SQL> spool off
+
+
